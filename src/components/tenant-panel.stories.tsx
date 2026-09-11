@@ -53,15 +53,11 @@ function TenantPanel() {
   // tenant details (mock). Fields are always inputs; Save/Cancel gate on dirty.
   const ORIGINAL = { displayName: 'Acme Motors', plan: 'Enterprise', status: 'Active' }
   const [displayName, setDisplayName] = useState(ORIGINAL.displayName)
-  const [plan, setPlan] = useState(ORIGINAL.plan)
-  const [status, setStatus] = useState(ORIGINAL.status)
-  const dirty =
-    displayName !== ORIGINAL.displayName || plan !== ORIGINAL.plan || status !== ORIGINAL.status
-  const resetDetails = () => {
-    setDisplayName(ORIGINAL.displayName)
-    setPlan(ORIGINAL.plan)
-    setStatus(ORIGINAL.status)
-  }
+  const plan = ORIGINAL.plan
+  const status = ORIGINAL.status
+  // Only display name is editable; plan + status are read-only (like Users).
+  const dirty = displayName !== ORIGINAL.displayName
+  const resetDetails = () => setDisplayName(ORIGINAL.displayName)
 
   // users
   const [users, setUsers] = useState<MockUser[]>(SEED_USERS)
@@ -165,10 +161,10 @@ function TenantPanel() {
                     <Input value={displayName} onChange={(e) => setDisplayName(e.target.value)} />
                   </Field>
                   <Field label="Plan">
-                    <Input value={plan} onChange={(e) => setPlan(e.target.value)} />
+                    <span style={{ fontSize: 14, color: 'var(--ink-primary)' }}>{plan}</span>
                   </Field>
                   <Field label="Status">
-                    <Input value={status} onChange={(e) => setStatus(e.target.value)} />
+                    <span style={{ fontSize: 14, color: 'var(--ink-primary)' }}>{status}</span>
                   </Field>
                   <Field label="Users">
                     <span style={{ fontSize: 14, color: 'var(--ink-primary)' }}>{users.length}</span>
