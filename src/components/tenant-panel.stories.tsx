@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
 import { useState } from 'react'
-import { X, Plus, Trash2, Search } from 'lucide-react'
+import { X, Plus, Trash2, Search, Check } from 'lucide-react'
 import { Button } from './button'
 import { Input } from './input'
 import { Table, TableBody, TableRow, TableCell } from './table'
@@ -66,20 +66,31 @@ function TenantPanel() {
   // users
   const [users, setUsers] = useState<MockUser[]>(SEED_USERS)
   const [userSearch, setUserSearch] = useState('')
-  // (single search: userSearch also filters the add-user suggestions)
-  const [adding, setAdding] = useState(false)
+  // The directory person picked from the search results. The Add button stays
+  // inactive until one is selected; clicking Add then commits it.
+  const [selectedNew, setSelectedNew] = useState<MockUser | null>(null)
 
+  // Existing users shown in the list (filtered by search when nothing typed
+  // matches the directory, the list just filters normally).
   const filtered = users.filter(
     (u) =>
       u.name.toLowerCase().includes(userSearch.toLowerCase()) ||
       u.email.toLowerCase().includes(userSearch.toLowerCase())
   )
+  // Directory people not already added, matching the search. Only surfaced
+  // once the user starts typing.
   const addable = DIRECTORY.filter(
     (d) =>
       !users.some((u) => u.id === d.id) &&
       (d.name.toLowerCase().includes(userSearch.toLowerCase()) ||
         d.email.toLowerCase().includes(userSearch.toLowerCase()))
   )
+  const commitAdd = () => {
+    if (!selectedNew) return
+    setUsers((u) => [...u, selectedNew])
+    setSelectedNew(null)
+    setUserSearch('')
+  }
 
   const tabBtn = (key: 'details' | 'users', label: string) => (
     <button
@@ -167,70 +178,81 @@ function TenantPanel() {
 
               {tab === 'users' && (
                 <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-                  {/* Users toolbar */}
+                  {/* Search (always live) + Add button. Add is inactive until a
+                      person is selected from the results below. */}
                   <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
                     <div style={{ position: 'relative', flex: 1 }}>
                       <Search className="h-4 w-4" style={{ position: 'absolute', left: 10, top: '50%', transform: 'translateY(-50%)', color: 'var(--ink-faint)' }} />
                       <input
                         value={userSearch}
-                        onChange={(e) => setUserSearch(e.target.value)}
-                        placeholder="Search users..."
+                        onChange={(e) => { setUserSearch(e.target.value); setSelectedNew(null); }}
+                        placeholder="Search to find a person to add..."
                         style={{ width: '100%', height: 32, paddingLeft: 32, paddingRight: 10, borderRadius: 'var(--radius)', border: '1px solid var(--border-default)', background: 'var(--card)', fontSize: 13, color: 'var(--ink-primary)', outline: 'none' }}
                       />
                     </div>
-                    <Button size="sm" onClick={() => setAdding((a) => !a)}>
+                    <Button size="sm" disabled={!selectedNew} onClick={commitAdd}>
                       <Plus className="h-4 w-4" /> Add user
                     </Button>
                   </div>
 
-                  {/* Add-user suggestions — driven by the SAME search box above
-                      (no second search). When 'Add user' is active, directory
-                      matches show as a plain suggestion list. */}
-                  {adding && (
+                  {/* Directory matches — clicking selects (does not add). The
+                      selected row is highlighted; Add then commits it. */}
+                  {userSearch && addable.length > 0 && (
                     <div style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-                      <p style={{ margin: '0 0 2px', fontSize: 12, color: 'var(--ink-muted)' }}>
-                        {userSearch ? 'Matching people you can add:' : 'Start typing above to find people to add.'}
+                      <p style={{ margin: '0 0 2px', fontSize: 11, fontWeight: 700, color: 'var(--ink-faint)', textTransform: 'uppercase', letterSpacing: '.05em' }}>
+                        Select a person to add
                       </p>
-                      {userSearch && addable.length === 0 && (
-                        <p style={{ fontSize: 13, color: 'var(--ink-muted)', margin: 4 }}>No matching people.</p>
-                      )}
-                      {userSearch && addable.map((d) => (
-                        <div key={d.id} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 8, padding: '8px 4px', borderBottom: '1px solid var(--border-subtle)' }}>
-                          <div>
-                            <p style={{ margin: 0, fontSize: 13, fontWeight: 500, color: 'var(--ink-primary)' }}>{d.name}</p>
-                            <p style={{ margin: 0, fontSize: 12, color: 'var(--ink-muted)' }}>{d.email}</p>
-                          </div>
-                          <Button size="xs" variant="outline" onClick={() => { setUsers((u) => [...u, d]); }}>
-                            Add
-                          </Button>
-                        </div>
-                      ))}
+                      {addable.map((d) => {
+                        const sel = selectedNew?.id === d.id
+                        return (
+                          <button
+                            key={d.id}
+                            type="button"
+                            onClick={() => setSelectedNew(sel ? null : d)}
+                            style={{
+                              display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 8,
+                              padding: '8px 10px', textAlign: 'left', cursor: 'pointer', width: '100%',
+                              borderRadius: 'var(--radius)',
+                              border: sel ? '1px solid var(--primary)' : '1px solid transparent',
+                              background: sel ? 'var(--accent)' : 'transparent',
+                              outline: 'none',
+                            }}
+                          >
+                            <div>
+                              <p style={{ margin: 0, fontSize: 13, fontWeight: 500, color: 'var(--ink-primary)' }}>{d.name}</p>
+                              <p style={{ margin: 0, fontSize: 12, color: 'var(--ink-muted)' }}>{d.email}</p>
+                            </div>
+                            {sel && <Check className="h-4 w-4" style={{ color: 'var(--primary)' }} aria-hidden />}
+                          </button>
+                        )
+                      })}
                     </div>
                   )}
 
-                  {/* User list — no avatars, no header background */}
-                  {!adding && (
-                    <>
-                      <Table>
-                        <TableBody>
-                          {filtered.map((u) => (
-                            <TableRow key={u.id}>
-                              <TableCell>
-                                <p style={{ margin: 0, fontSize: 13, fontWeight: 500, color: 'var(--ink-primary)' }}>{u.name}</p>
-                                <p style={{ margin: 0, fontSize: 12, color: 'var(--ink-muted)' }}>{u.email}</p>
-                              </TableCell>
-                              <TableCell style={{ textAlign: 'right', width: 44 }}>
-                                <Button size="icon-sm" variant="ghost" aria-label={`Remove ${u.name}`} onClick={() => setUsers((list) => list.filter((x) => x.id !== u.id))}>
-                                  <Trash2 className="h-4 w-4" style={{ color: 'var(--destructive)' }} />
-                                </Button>
-                              </TableCell>
-                            </TableRow>
-                          ))}
-                        </TableBody>
-                      </Table>
-                      {filtered.length === 0 && <p style={{ fontSize: 13, color: 'var(--ink-muted)', textAlign: 'center', padding: 16 }}>No users match your search.</p>}
-                    </>
-                  )}
+                  {/* Current users list — no avatars, no header background */}
+                  <div>
+                    <p style={{ margin: '4px 0 6px', fontSize: 11, fontWeight: 700, color: 'var(--ink-faint)', textTransform: 'uppercase', letterSpacing: '.05em' }}>
+                      {users.length} user{users.length !== 1 ? 's' : ''}
+                    </p>
+                    <Table>
+                      <TableBody>
+                        {filtered.map((u) => (
+                          <TableRow key={u.id}>
+                            <TableCell>
+                              <p style={{ margin: 0, fontSize: 13, fontWeight: 500, color: 'var(--ink-primary)' }}>{u.name}</p>
+                              <p style={{ margin: 0, fontSize: 12, color: 'var(--ink-muted)' }}>{u.email}</p>
+                            </TableCell>
+                            <TableCell style={{ textAlign: 'right', width: 44 }}>
+                              <Button size="icon-sm" variant="ghost" aria-label={`Remove ${u.name}`} onClick={() => setUsers((list) => list.filter((x) => x.id !== u.id))}>
+                                <Trash2 className="h-4 w-4" style={{ color: 'var(--destructive)' }} />
+                              </Button>
+                            </TableCell>
+                          </TableRow>
+                        ))}
+                      </TableBody>
+                    </Table>
+                    {filtered.length === 0 && <p style={{ fontSize: 13, color: 'var(--ink-muted)', textAlign: 'center', padding: 16 }}>No current users match your search.</p>}
+                  </div>
                 </div>
               )}
             </div>
