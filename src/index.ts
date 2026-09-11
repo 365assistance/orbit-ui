@@ -18,6 +18,8 @@ export * from "./components/dialog";
 export * from "./components/empty-state";
 export * from "./components/error-state";
 export * from "./components/field-help";
+export * from "./components/filter-bar";
+export * from "./components/filter-select";
 export * from "./components/input";
 export * from "./components/label";
 export * from "./components/pill";
