@@ -37,6 +37,7 @@ function TooltipTrigger({
 function TooltipContent({
   className,
   sideOffset = 6,
+  collisionPadding = 8,
   children,
   ...props
 }: React.ComponentProps<typeof TooltipPrimitive.Content>) {
@@ -45,6 +46,9 @@ function TooltipContent({
       <TooltipPrimitive.Content
         data-slot="tooltip-content"
         sideOffset={sideOffset}
+        // Keep the tooltip on-screen: Radix flips/shifts it away from edges
+        // instead of rendering off the top of the viewport.
+        collisionPadding={collisionPadding}
         className={cn(
           "z-50 max-w-xs rounded-md px-3 py-2 text-xs leading-snug shadow-md",
           "data-[state=delayed-open]:animate-in data-[state=closed]:animate-out",
