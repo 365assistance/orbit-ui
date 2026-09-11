@@ -1,7 +1,7 @@
 {
   "name": "@365assistance/orbit-ui",
-  "version": "0.1.0",
-  "description": "Orbit UI — the shared React component library for 365 Assistance (Orbit365 design system). Canonical primitives, styled and tokenised, with Storybook as the visual surface.",
+  "version": "0.1.1",
+  "description": "Orbit UI \u2014 the shared React component library for 365 Assistance (Orbit365 design system). Canonical primitives, styled and tokenised, with Storybook as the visual surface.",
   "license": "UNLICENSED",
   "private": false,
   "type": "module",
@@ -32,6 +32,7 @@
   "scripts": {
     "build": "rollup -c && npm run build:css",
     "build:css": "cp src/styles/tokens.css dist/styles.css",
+    "prepare": "npm run build",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "typecheck": "tsc --noEmit"
