@@ -14,7 +14,8 @@
       "import": "./dist/index.esm.js",
       "require": "./dist/index.cjs.js"
     },
-    "./styles.css": "./dist/styles.css"
+    "./styles.css": "./dist/styles.css",
+    "./tokens.css": "./dist/tokens.css"
   },
   "files": [
     "dist"
@@ -31,7 +32,7 @@
   },
   "scripts": {
     "build": "rollup -c && npm run build:css",
-    "build:css": "cp src/styles/tokens.css dist/styles.css",
+    "build:css": "cp src/styles/tokens.css dist/styles.css && cp src/styles/tokens-only.css dist/tokens.css",
     "prepare": "npm run build",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
