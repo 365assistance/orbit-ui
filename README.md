@@ -30,7 +30,15 @@ npm run build-storybook  # static Storybook → storybook-static/
 npm run typecheck        # tsc --noEmit
 ```
 
-## Consuming it (once published)
+## Consuming it
+
+Published to **GitHub Packages** (private, `365assistance` org). Consumers need an `.npmrc` pointing the scope at the GitHub registry:
+
+```
+# .npmrc
+@365assistance:registry=https://npm.pkg.github.com
+//npm.pkg.github.com/:_authToken=${GITHUB_TOKEN}   # a token with read:packages
+```
 
 ```bash
 npm install @365assistance/orbit-ui
@@ -52,6 +60,19 @@ import { Button, Card, Dialog } from '@365assistance/orbit-ui'
 - **Three select-family primitives** (`Select` Radix, `PortalSelect` custom-portalled) carried over as-is. Candidate for consolidation later.
 - **`shadcn` + `tw-animate-css`** are devDeps only, needed so Storybook resolves the token CSS `@import`s.
 
+## Publishing
+
+Publishing is automated via GitHub Actions (`.github/workflows/publish.yml`). The org forbids classic PATs for Packages, so CI uses the built-in `GITHUB_TOKEN`. To cut a release:
+
+```bash
+# bump version in package.json, commit, then:
+git tag vX.Y.Z && git push origin vX.Y.Z
+```
+
+The workflow typechecks, builds, and publishes. (Or run it manually via `workflow_dispatch`.)
+
 ## Status
 
-Scaffold + 24 components + Storybook (6 pilot component stories) building and rendering. **Not yet published** to the `365assistance` org — that step is pending explicit go.
+**Published:** `@365assistance/orbit-ui@0.1.0` (GitHub Packages, private). 24 components, 68 Storybook stories. Storybook live at https://archer.tail045ab7.ts.net/orbit-ui/ .
+
+Next: migrate `orbit-core-ui` to Tailwind v4 + semantic tokens so it can consume this library, then point the tenants page at these primitives.
