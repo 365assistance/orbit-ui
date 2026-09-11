@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
-import { Tooltip, TooltipTrigger, TooltipContent, TooltipProvider } from './tooltip'
+import { Tooltip, TooltipTrigger, TooltipContent } from './tooltip'
 import { Button } from './button'
 
 const meta = {
@@ -13,13 +13,13 @@ type Story = StoryObj<typeof meta>
 
 export const Default: Story = {
   render: () => (
-    <TooltipProvider>
-      <Tooltip>
-        <TooltipTrigger asChild>
-          <Button variant="outline">Hover me</Button>
-        </TooltipTrigger>
-        <TooltipContent>Sends a renewal reminder to this member.</TooltipContent>
-      </Tooltip>
-    </TooltipProvider>
+    // Tooltip already wraps itself in a TooltipProvider internally, so no outer
+    // provider is needed here (nesting providers can break hover/open state).
+    <Tooltip>
+      <TooltipTrigger asChild>
+        <Button variant="outline">Hover me</Button>
+      </TooltipTrigger>
+      <TooltipContent>Sends a renewal reminder to this member.</TooltipContent>
+    </Tooltip>
   ),
 }
