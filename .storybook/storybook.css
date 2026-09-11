@@ -1,0 +1,9 @@
+/* Storybook-only CSS entry.
+   Mirrors renewal-portal/src/index.css so the primitives render exactly as
+   they do in the app: Tailwind v4 + tw-animate-css + the Orbit token layer.
+   This file is NOT part of the published package — it only styles Storybook. */
+@import "tailwindcss";
+@import "tw-animate-css";
+
+/* The full Orbit365 token layer (canonical, copied from renewal-portal). */
+@import "../src/styles/tokens.css";
