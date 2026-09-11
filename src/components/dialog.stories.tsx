@@ -27,7 +27,8 @@ export const Default: Story = {
             You'll keep cover until the end of the current billing period.
           </DialogDescription>
         </DialogHeader>
-        <DialogFooter style={{ display: 'flex', gap: 8, justifyContent: 'flex-end' }}>
+        {/* No inline alignment — DialogFooter right-aligns by default (convention). */}
+        <DialogFooter>
           <DialogClose asChild>
             <Button variant="outline">Keep membership</Button>
           </DialogClose>
