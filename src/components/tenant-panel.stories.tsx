@@ -1,10 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
 import { useState } from 'react'
-import { X, Plus, Trash2, Search, Pencil } from 'lucide-react'
+import { X, Plus, Trash2, Search } from 'lucide-react'
 import { Button } from './button'
-import { Pill } from './pill'
 import { Input } from './input'
-import { Table, TableHeader, TableBody, TableRow, TableHead, TableCell } from './table'
+import { Table, TableBody, TableRow, TableCell } from './table'
 
 /**
  * PROTOTYPE — Tenant panel flow (for review, not a shipped component).
@@ -47,25 +46,28 @@ const DIRECTORY: MockUser[] = [
   { id: '6', name: 'Aisha Khan', email: 'aisha.khan@acme.com', role: 'Admin' },
 ]
 
-function initials(name: string) {
-  return name.split(' ').map((w) => w[0]).join('').toUpperCase().slice(0, 2)
-}
-
 function TenantPanel() {
   const [open, setOpen] = useState(true)
   const [tab, setTab] = useState<'details' | 'users'>('details')
-  const [editing, setEditing] = useState(false)
 
-  // tenant details (mock)
-  const [displayName, setDisplayName] = useState('Acme Motors')
-  const [plan] = useState('Enterprise')
-  const [status] = useState('Active')
+  // tenant details (mock). Fields are always inputs; Save/Cancel gate on dirty.
+  const ORIGINAL = { displayName: 'Acme Motors', plan: 'Enterprise', status: 'Active' }
+  const [displayName, setDisplayName] = useState(ORIGINAL.displayName)
+  const [plan, setPlan] = useState(ORIGINAL.plan)
+  const [status, setStatus] = useState(ORIGINAL.status)
+  const dirty =
+    displayName !== ORIGINAL.displayName || plan !== ORIGINAL.plan || status !== ORIGINAL.status
+  const resetDetails = () => {
+    setDisplayName(ORIGINAL.displayName)
+    setPlan(ORIGINAL.plan)
+    setStatus(ORIGINAL.status)
+  }
 
   // users
   const [users, setUsers] = useState<MockUser[]>(SEED_USERS)
   const [userSearch, setUserSearch] = useState('')
+  // (single search: userSearch also filters the add-user suggestions)
   const [adding, setAdding] = useState(false)
-  const [addSearch, setAddSearch] = useState('')
 
   const filtered = users.filter(
     (u) =>
@@ -75,8 +77,8 @@ function TenantPanel() {
   const addable = DIRECTORY.filter(
     (d) =>
       !users.some((u) => u.id === d.id) &&
-      (d.name.toLowerCase().includes(addSearch.toLowerCase()) ||
-        d.email.toLowerCase().includes(addSearch.toLowerCase()))
+      (d.name.toLowerCase().includes(userSearch.toLowerCase()) ||
+        d.email.toLowerCase().includes(userSearch.toLowerCase()))
   )
 
   const tabBtn = (key: 'details' | 'users', label: string) => (
@@ -128,31 +130,16 @@ function TenantPanel() {
               fontFamily: 'var(--font-sans)',
             }}
           >
-            {/* Header */}
-            <div style={{ padding: '16px 20px', borderBottom: '1px solid var(--border-default)' }}>
+            {/* Header — no avatar, no status/plan pills. Single divider is the
+                tabs' border-bottom (header itself has no separate border). */}
+            <div style={{ padding: '16px 20px 0' }}>
               <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 12 }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-                  <span
-                    style={{
-                      display: 'grid', placeItems: 'center', height: 36, width: 36, borderRadius: 999,
-                      background: 'var(--primary)', color: '#fff', fontSize: 13, fontWeight: 600,
-                    }}
-                  >
-                    {initials(displayName)}
-                  </span>
-                  <div>
-                    <h2 style={{ margin: 0, fontSize: 16, fontWeight: 600, color: 'var(--ink-primary)' }}>{displayName}</h2>
-                    <div style={{ display: 'flex', gap: 6, marginTop: 2 }}>
-                      <Pill variant="success">{status}</Pill>
-                      <Pill variant="brand">{plan}</Pill>
-                    </div>
-                  </div>
-                </div>
+                <h2 style={{ margin: 0, fontSize: 16, fontWeight: 600, color: 'var(--ink-primary)' }}>{displayName}</h2>
                 <button onClick={() => setOpen(false)} aria-label="Close" style={{ background: 'var(--surface-alt)', border: 'none', borderRadius: 'var(--radius)', width: 28, height: 28, display: 'grid', placeItems: 'center', cursor: 'pointer', color: 'var(--ink-muted)' }}>
                   <X className="h-4 w-4" />
                 </button>
               </div>
-              {/* Tabs */}
+              {/* Tabs (the only horizontal divider) */}
               <div style={{ display: 'flex', gap: 20, marginTop: 16, borderBottom: '1px solid var(--border-default)' }}>
                 {tabBtn('details', 'Details')}
                 {tabBtn('users', `Users (${users.length})`)}
@@ -163,21 +150,18 @@ function TenantPanel() {
             <div style={{ flex: 1, overflowY: 'auto', padding: '16px 20px' }}>
               {tab === 'details' && (
                 <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
-                  <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-                    <Button variant="outline" size="sm" onClick={() => setEditing((e) => !e)}>
-                      <Pencil className="h-3.5 w-3.5" /> {editing ? 'Done' : 'Edit'}
-                    </Button>
-                  </div>
                   <Field label="Display name">
-                    {editing ? (
-                      <Input value={displayName} onChange={(e) => setDisplayName(e.target.value)} />
-                    ) : (
-                      <span style={{ fontSize: 14, color: 'var(--ink-primary)' }}>{displayName}</span>
-                    )}
+                    <Input value={displayName} onChange={(e) => setDisplayName(e.target.value)} />
                   </Field>
-                  <Field label="Plan"><span style={{ fontSize: 14, color: 'var(--ink-primary)' }}>{plan}</span></Field>
-                  <Field label="Status"><Pill variant="success">{status}</Pill></Field>
-                  <Field label="Users"><span style={{ fontSize: 14, color: 'var(--ink-primary)' }}>{users.length}</span></Field>
+                  <Field label="Plan">
+                    <Input value={plan} onChange={(e) => setPlan(e.target.value)} />
+                  </Field>
+                  <Field label="Status">
+                    <Input value={status} onChange={(e) => setStatus(e.target.value)} />
+                  </Field>
+                  <Field label="Users">
+                    <span style={{ fontSize: 14, color: 'var(--ink-primary)' }}>{users.length}</span>
+                  </Field>
                 </div>
               )}
 
@@ -199,68 +183,66 @@ function TenantPanel() {
                     </Button>
                   </div>
 
-                  {/* Inline add-user panel (no separate modal) */}
+                  {/* Add-user suggestions — driven by the SAME search box above
+                      (no second search). When 'Add user' is active, directory
+                      matches show as a plain suggestion list. */}
                   {adding && (
-                    <div style={{ border: '1px solid var(--border-default)', borderRadius: 'var(--radius)', background: 'var(--surface-alt)', padding: 12 }}>
-                      <p style={{ margin: '0 0 8px', fontSize: 12, fontWeight: 700, color: 'var(--ink-muted)', textTransform: 'uppercase', letterSpacing: '.05em' }}>Add a user</p>
-                      <input
-                        value={addSearch}
-                        onChange={(e) => setAddSearch(e.target.value)}
-                        placeholder="Search directory by name or email..."
-                        style={{ width: '100%', height: 32, padding: '0 10px', borderRadius: 'var(--radius)', border: '1px solid var(--border-default)', background: 'var(--card)', fontSize: 13, marginBottom: 8, outline: 'none' }}
-                      />
-                      <div style={{ display: 'flex', flexDirection: 'column', gap: 4, maxHeight: 160, overflowY: 'auto' }}>
-                        {addable.length === 0 && <p style={{ fontSize: 13, color: 'var(--ink-muted)', margin: 4 }}>No matching users.</p>}
-                        {addable.map((d) => (
-                          <div key={d.id} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 8, padding: '6px 8px', borderRadius: 'var(--radius)', background: 'var(--card)' }}>
-                            <div>
-                              <p style={{ margin: 0, fontSize: 13, fontWeight: 500, color: 'var(--ink-primary)' }}>{d.name}</p>
-                              <p style={{ margin: 0, fontSize: 12, color: 'var(--ink-muted)' }}>{d.email}</p>
-                            </div>
-                            <Button size="xs" variant="outline" onClick={() => { setUsers((u) => [...u, d]); }}>
-                              Add
-                            </Button>
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+                      <p style={{ margin: '0 0 2px', fontSize: 12, color: 'var(--ink-muted)' }}>
+                        {userSearch ? 'Matching people you can add:' : 'Start typing above to find people to add.'}
+                      </p>
+                      {userSearch && addable.length === 0 && (
+                        <p style={{ fontSize: 13, color: 'var(--ink-muted)', margin: 4 }}>No matching people.</p>
+                      )}
+                      {userSearch && addable.map((d) => (
+                        <div key={d.id} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 8, padding: '8px 4px', borderBottom: '1px solid var(--border-subtle)' }}>
+                          <div>
+                            <p style={{ margin: 0, fontSize: 13, fontWeight: 500, color: 'var(--ink-primary)' }}>{d.name}</p>
+                            <p style={{ margin: 0, fontSize: 12, color: 'var(--ink-muted)' }}>{d.email}</p>
                           </div>
-                        ))}
-                      </div>
+                          <Button size="xs" variant="outline" onClick={() => { setUsers((u) => [...u, d]); }}>
+                            Add
+                          </Button>
+                        </div>
+                      ))}
                     </div>
                   )}
 
-                  {/* User list */}
-                  <Table>
-                    <TableHeader>
-                      <TableRow>
-                        <TableHead>User</TableHead>
-                        <TableHead>Role</TableHead>
-                        <TableHead></TableHead>
-                      </TableRow>
-                    </TableHeader>
-                    <TableBody>
-                      {filtered.map((u) => (
-                        <TableRow key={u.id}>
-                          <TableCell>
-                            <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                              <span style={{ display: 'grid', placeItems: 'center', height: 28, width: 28, borderRadius: 999, background: 'var(--accent)', color: 'var(--primary)', fontSize: 11, fontWeight: 600 }}>{initials(u.name)}</span>
-                              <div>
+                  {/* User list — no avatars, no header background */}
+                  {!adding && (
+                    <>
+                      <Table>
+                        <TableBody>
+                          {filtered.map((u) => (
+                            <TableRow key={u.id}>
+                              <TableCell>
                                 <p style={{ margin: 0, fontSize: 13, fontWeight: 500, color: 'var(--ink-primary)' }}>{u.name}</p>
                                 <p style={{ margin: 0, fontSize: 12, color: 'var(--ink-muted)' }}>{u.email}</p>
-                              </div>
-                            </div>
-                          </TableCell>
-                          <TableCell><Pill variant="neutral">{u.role}</Pill></TableCell>
-                          <TableCell style={{ textAlign: 'right' }}>
-                            <Button size="icon-sm" variant="ghost" aria-label={`Remove ${u.name}`} onClick={() => setUsers((list) => list.filter((x) => x.id !== u.id))}>
-                              <Trash2 className="h-4 w-4" style={{ color: 'var(--destructive)' }} />
-                            </Button>
-                          </TableCell>
-                        </TableRow>
-                      ))}
-                    </TableBody>
-                  </Table>
-                  {filtered.length === 0 && <p style={{ fontSize: 13, color: 'var(--ink-muted)', textAlign: 'center', padding: 16 }}>No users match your search.</p>}
+                              </TableCell>
+                              <TableCell style={{ textAlign: 'right', width: 44 }}>
+                                <Button size="icon-sm" variant="ghost" aria-label={`Remove ${u.name}`} onClick={() => setUsers((list) => list.filter((x) => x.id !== u.id))}>
+                                  <Trash2 className="h-4 w-4" style={{ color: 'var(--destructive)' }} />
+                                </Button>
+                              </TableCell>
+                            </TableRow>
+                          ))}
+                        </TableBody>
+                      </Table>
+                      {filtered.length === 0 && <p style={{ fontSize: 13, color: 'var(--ink-muted)', textAlign: 'center', padding: 16 }}>No users match your search.</p>}
+                    </>
+                  )}
                 </div>
               )}
             </div>
+
+            {/* Footer — Save/Cancel for Details edits. Inactive until a change
+                is made (dirty). Only shown on the Details tab. */}
+            {tab === 'details' && (
+              <div style={{ display: 'flex', justifyContent: 'flex-end', gap: 8, padding: '12px 20px', borderTop: '1px solid var(--border-default)' }}>
+                <Button variant="outline" disabled={!dirty} onClick={resetDetails}>Cancel</Button>
+                <Button disabled={!dirty} onClick={resetDetails}>Save changes</Button>
+              </div>
+            )}
           </div>
         </>
       )}
