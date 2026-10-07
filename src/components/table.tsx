@@ -2,9 +2,20 @@ import * as React from "react"
 
 import { cn } from "@/lib/utils"
 
+// Scoped CSS for the data-grid header band. Keyed off stable data-slot
+// attributes (NOT Tailwind utilities) so the OUTER-corner rounding renders
+// reliably regardless of the JIT scanner. Only the first/last header cell round
+// their outer side; middle cells stay square so the band is ONE continuous bar
+// (not a pill per column). Injected once.
+const TABLE_BAND_CSS = `
+[data-slot="table"] [data-slot="table-head"]:first-child{border-top-left-radius:10px;border-bottom-left-radius:10px}
+[data-slot="table"] [data-slot="table-head"]:last-child{border-top-right-radius:10px;border-bottom-right-radius:10px}
+`
+
 function Table({ className, style, ...props }: React.ComponentProps<"table">) {
   return (
     <div data-slot="table-container" className="relative w-full overflow-x-auto">
+      <style>{TABLE_BAND_CSS}</style>
       <table
         data-slot="table"
         className={cn("w-full caption-bottom text-sm", className)}
@@ -23,10 +34,11 @@ function TableHeader({ className, ...props }: React.ComponentProps<"thead">) {
   return (
     <thead
       data-slot="table-header"
-      // Grey header band rounded on ALL FOUR corners (top + bottom), so the band
-      // reads as a self-contained rounded strip above the rows, matching the
-      // approved data-grid style (Sofia 2026-10-07). No bottom border on the
-      // header row — the rounded band is the separator, not a hairline.
+      // ONE continuous grey band (Sofia 2026-10-07): only the OUTER corners
+      // round — the first header cell rounds its left corners, the last rounds
+      // its right corners, middle cells stay square so they butt together into a
+      // single bar (not a pill per column). rounded-l-lg/rounded-r-lg are
+      // standard utilities that compile reliably here.
       className={cn(className)}
       {...props}
     />
@@ -66,17 +78,14 @@ function TableHead({ className, style, ...props }: React.ComponentProps<"th">) {
         "h-10 bg-gray-100 px-4 text-left align-middle text-xs font-semibold uppercase tracking-wide text-gray-600 [&:has([role=checkbox])]:pr-0",
         className
       )}
-      // Approved data-grid header band (Sofia 2026-10-07): a self-contained
-      // rounded grey strip with an 8px white gap below it so it floats above the
-      // rows. Every th is fully rounded + backgroundClip:padding-box (the key
-      // that makes the grey fill respect the radius under the bottom border);
-      // adjacent cells' inner corners touch, so only the band's four OUTER
-      // corners read as rounded. All inline => JIT- and theme-proof. Proven in
-      // isolation.
+      // Grey header band: 8px white gap below so the bar floats above the rows,
+      // and backgroundClip:padding-box so the grey fill respects the OUTER
+      // corner radius (set on first/last th by TableHeader) under the bottom
+      // border. No per-th borderRadius here — that made every column a separate
+      // pill (Sofia 2026-10-07); the bar must be continuous.
       style={{
         borderBottom: "8px solid #fff",
         backgroundClip: "padding-box",
-        borderRadius: 10,
         ...style,
       }}
       {...props}
