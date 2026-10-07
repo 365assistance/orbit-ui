@@ -19,6 +19,7 @@ export * from "./components/drawer";
 export * from "./components/empty-state";
 export * from "./components/error-state";
 export * from "./components/field-help";
+export * from "./components/form-section";
 export * from "./components/filter-bar";
 export * from "./components/filter-select";
 export * from "./components/input";
