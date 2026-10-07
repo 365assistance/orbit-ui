@@ -4,6 +4,7 @@ import { FormSection } from './form-section'
 import { Button } from './button'
 import { Input } from './input'
 import { Label } from './label'
+import { SegmentedControl } from './SegmentedControl'
 
 const meta = {
   title: 'Patterns/FormSection',
@@ -60,6 +61,46 @@ export const ConfigTab: Story = {
                 <Label style={{ fontWeight: 700 }}>Unsubscribe group</Label>
                 <Input defaultValue="Toyota" />
               </div>
+            </div>
+          </FormSection>
+        </div>
+      )
+    }
+    return <Demo />
+  },
+}
+
+/** headerAccessory example: an Inherit/Override control lives in the section
+ *  HEADER, not floating in the body (client config Branding pattern, Sofia
+ *  2026-10-07). Use the accessory on all sibling sections or none. */
+export const WithHeaderAccessory: Story = {
+  name: 'With header accessory (inherit/override)',
+  render: () => {
+    const Demo = () => {
+      const [open, setOpen] = useState(true)
+      const [mode, setMode] = useState<'inherit' | 'override'>('override')
+      const inheriting = mode === 'inherit'
+      return (
+        <div style={{ maxWidth: 680 }}>
+          <FormSection
+            title="Logo"
+            open={open}
+            onToggle={() => setOpen((o) => !o)}
+            headerAccessory={(
+              <span onClick={(e) => e.stopPropagation()} style={{ display: 'inline-flex', alignItems: 'center', gap: 8 }}>
+                <SegmentedControl<'inherit' | 'override'>
+                  ariaLabel="Inherit or override"
+                  value={mode}
+                  onChange={setMode}
+                  options={[{ value: 'inherit', label: 'Inherit' }, { value: 'override', label: 'Override' }]}
+                />
+              </span>
+            )}
+            footer={<Footer dirty />}
+          >
+            <div style={{ opacity: inheriting ? 0.55 : 1, pointerEvents: inheriting ? 'none' : 'auto', display: 'grid', gap: 6 }}>
+              <Label style={{ fontWeight: 700 }}>Logo file or URL</Label>
+              <Input placeholder="Upload PNG/SVG or paste a URL" />
             </div>
           </FormSection>
         </div>
