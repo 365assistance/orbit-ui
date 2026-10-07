@@ -29,10 +29,12 @@ export interface SegmentedControlProps<T extends string> {
   ariaLabel?: string;
   className?: string;
   style?: CSSProperties;
+  /** When true the control is non-interactive and dimmed. */
+  disabled?: boolean;
 }
 
 export function SegmentedControl<T extends string>({
-  value, onChange, options, size = 'md', ariaLabel, className, style,
+  value, onChange, options, size = 'md', ariaLabel, className, style, disabled = false,
 }: SegmentedControlProps<T>) {
   const pad = size === 'sm' ? '6px 14px' : '6px 16px';
   return (
@@ -50,6 +52,8 @@ export function SegmentedControl<T extends string>({
         borderRadius: 'var(--radius-pill)',
         padding: 3,
         gap: 2,
+        opacity: disabled ? 0.5 : 1,
+        pointerEvents: disabled ? 'none' : undefined,
         ...style,
       }}
     >
@@ -63,6 +67,7 @@ export function SegmentedControl<T extends string>({
             aria-selected={active}
             aria-label={opt.srLabel}
             title={opt.srLabel}
+            disabled={disabled}
             onClick={() => onChange(opt.value)}
             style={{
               padding: pad,
