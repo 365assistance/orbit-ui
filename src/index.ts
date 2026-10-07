@@ -15,6 +15,7 @@ export * from "./components/button";
 export * from "./components/card";
 export * from "./components/date-time-picker";
 export * from "./components/dialog";
+export * from "./components/drawer";
 export * from "./components/empty-state";
 export * from "./components/error-state";
 export * from "./components/field-help";
