@@ -4,7 +4,6 @@ import { FormSection } from './form-section'
 import { Button } from './button'
 import { Input } from './input'
 import { Label } from './label'
-import { SegmentedControl } from './SegmentedControl'
 
 const meta = {
   title: 'Patterns/FormSection',
@@ -70,16 +69,18 @@ export const ConfigTab: Story = {
   },
 }
 
-/** headerAccessory example: an Inherit/Override control lives in the section
- *  HEADER, not floating in the body (client config Branding pattern, Sofia
- *  2026-10-07). Use the accessory on all sibling sections or none. */
-export const WithHeaderAccessory: Story = {
-  name: 'With header accessory (inherit/override)',
+/** Default-vs-customised pattern (client config Branding/Templates, Sofia
+ *  2026-10-07). QUIETEST model: the header shows a muted state word ('Using
+ *  default' / 'Customised') as the accessory — NOT a toggle. Customising and
+ *  reverting happen via a single low-emphasis text link in the body
+ *  ('Customise' / 'Reset to default'). One state, one action, no segmented
+ *  toggle competing with the title. */
+export const DefaultVsCustomised: Story = {
+  name: 'Default vs customised (quiet)',
   render: () => {
     const Demo = () => {
       const [open, setOpen] = useState(true)
-      const [mode, setMode] = useState<'inherit' | 'override'>('override')
-      const inheriting = mode === 'inherit'
+      const [customised, setCustomised] = useState(false)
       return (
         <div style={{ maxWidth: 680 }}>
           <FormSection
@@ -87,20 +88,24 @@ export const WithHeaderAccessory: Story = {
             open={open}
             onToggle={() => setOpen((o) => !o)}
             headerAccessory={(
-              <span onClick={(e) => e.stopPropagation()} style={{ display: 'inline-flex', alignItems: 'center', gap: 8 }}>
-                <SegmentedControl<'inherit' | 'override'>
-                  ariaLabel="Inherit or override"
-                  value={mode}
-                  onChange={setMode}
-                  options={[{ value: 'inherit', label: 'Inherit' }, { value: 'override', label: 'Override' }]}
-                />
+              <span style={{ fontSize: 12, fontWeight: 600, color: 'var(--ink-faint, #8b8798)' }}>
+                {customised ? 'Customised' : 'Using default'}
               </span>
             )}
-            footer={<Footer dirty />}
+            footer={<Footer dirty={customised} />}
           >
-            <div style={{ opacity: inheriting ? 0.55 : 1, pointerEvents: inheriting ? 'none' : 'auto', display: 'grid', gap: 6 }}>
-              <Label style={{ fontWeight: 700 }}>Logo file or URL</Label>
-              <Input placeholder="Upload PNG/SVG or paste a URL" />
+            <div style={{ display: 'grid', gap: 12 }}>
+              <div style={{ opacity: customised ? 1 : 0.55, pointerEvents: customised ? 'auto' : 'none', display: 'grid', gap: 6 }}>
+                <Label style={{ fontWeight: 700 }}>Logo file or URL</Label>
+                <Input placeholder="Upload PNG/SVG or paste a URL" />
+              </div>
+              <button
+                type="button"
+                onClick={() => setCustomised((c) => !c)}
+                style={{ border: 'none', background: 'none', padding: 0, color: 'var(--primary)', fontSize: 12, fontWeight: 700, cursor: 'pointer', textAlign: 'left', width: 'fit-content' }}
+              >
+                {customised ? 'Reset to default' : 'Customise'}
+              </button>
             </div>
           </FormSection>
         </div>
