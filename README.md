@@ -4,6 +4,24 @@ The shared React component library for 365 Assistance — the canonical Orbit365
 
 **Canonical source:** the `renewal-portal` `src/components/ui/` primitives. This library is the one true home; apps consume it instead of keeping their own copies, so what you see in Storybook is exactly what ships.
 
+## Live Storybook
+
+**https://d32eg4kly9znml.cloudfront.net/**
+
+Permanent hosted Storybook (public link, no login). Share this with the team. It auto-updates on every push to `main` (see below).
+
+### How it stays up to date (deploy pipeline)
+
+Push to `main` triggers a GitHub Action that rebuilds and republishes Storybook automatically:
+
+1. Push a change to `main` on `365assistance/orbit-ui`.
+2. GitHub Action (`.github/workflows/deploy-storybook.yml`) runs `build-storybook`.
+3. It authenticates to AWS via GitHub OIDC (short-lived token, no stored keys), assuming the scoped `orbit-ui-storybook-deploy` role.
+4. Syncs the build to S3 (`orbit-ui-storybook-orbit-dev-295435084378`, private, CloudFront-only) and invalidates the CloudFront cache (`E2OFGBMHCJV3RJ`).
+5. The live URL serves the update within a minute or two.
+
+Storybook is a static build, not a live service, so "auto-update" = the Action rebuilds and republishes on each push. Scope is locked down: the deploy role can only write that one bucket and clear that one distribution's cache, only from `main`. Zero cost. Full details: [`docs/STORYBOOK-HOSTING.md`](docs/STORYBOOK-HOSTING.md).
+
 ---
 
 ## What's inside
