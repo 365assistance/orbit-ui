@@ -1,0 +1,68 @@
+name: Deploy Storybook
+
+# Builds Storybook on every push to main and publishes the static build to
+# S3 (orbit-ui-storybook-orbit-dev-295435084378) behind CloudFront
+# (E2OFGBMHCJV3RJ -> https://d32eg4kly9znml.cloudfront.net/).
+#
+# Auth: GitHub OIDC -> AWS IAM role (no long-lived keys).
+# The role ARN must be set as repo variable AWS_DEPLOY_ROLE_ARN once the role
+# exists on the orbit-dev account (IAM is Alan-gated; see IAM brief).
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'src/**'
+      - '.storybook/**'
+      - 'package.json'
+      - 'package-lock.json'
+      - '.github/workflows/deploy-storybook.yml'
+  workflow_dispatch:
+
+permissions:
+  id-token: write   # required for OIDC
+  contents: read
+
+concurrency:
+  group: deploy-storybook
+  cancel-in-progress: true
+
+env:
+  AWS_REGION: ap-southeast-2
+  S3_BUCKET: orbit-ui-storybook-orbit-dev-295435084378
+  CLOUDFRONT_DISTRIBUTION_ID: E2OFGBMHCJV3RJ
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build Storybook
+        run: npm run build-storybook
+
+      - name: Configure AWS credentials (OIDC)
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ vars.AWS_DEPLOY_ROLE_ARN }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Sync to S3
+        run: |
+          aws s3 sync storybook-static/ "s3://${S3_BUCKET}/" --delete
+
+      - name: Invalidate CloudFront
+        run: |
+          aws cloudfront create-invalidation \
+            --distribution-id "${CLOUDFRONT_DISTRIBUTION_ID}" \
+            --paths "/*"
