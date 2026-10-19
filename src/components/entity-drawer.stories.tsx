@@ -13,7 +13,7 @@ const meta = {
     docs: {
       description: {
         component:
-          'The canonical CREATE / EDIT shell for a single record: a right-side drawer with a sectioned single form and a Cancel / primary footer. Standardised 2026-10-20 (Sofia). Use for Create User, Edit Tenant, etc. For genuinely multi-step setup flows, use SetupWizard instead.',
+          'The ONE public drawer: the canonical CREATE / EDIT shell for a single record — a right-side drawer with a sectioned single form and a Cancel / primary footer. Standardised 2026-10-20 (Sofia). Use for Create User, Edit Tenant, etc. Built on the internal Drawer primitive (Internal/Drawer), which you should not use directly. For genuinely multi-step setup flows, use SetupWizard instead.',
       },
     },
   },

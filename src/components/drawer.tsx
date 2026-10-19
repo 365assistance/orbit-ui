@@ -1,10 +1,15 @@
 // ---------------------------------------------------------------------------
-// Drawer — the canonical side panel for EDITING A RECORD with a real form.
+// Drawer — INTERNAL low-level side-panel primitive.
 //
-// Standard (Sofia 2026-10-07): a right-side drawer is the one pattern for
-// record editing (Plans, Promotions, future client-config records). Keep Dialog
-// for short confirmations / destructive prompts. This replaces the hand-rolled
-// fixed-overlay drawer in PlansTab and the inline edit form in PromotionsTab.
+// DO NOT use directly for create/edit forms. Use EntityDrawer
+// (entity-drawer.tsx) instead — it standardises the header, eyebrow-labelled
+// sections, and Cancel + primary footer on top of these primitives so every
+// create/edit drawer is identical. (Sofia 2026-10-20: one public drawer =
+// EntityDrawer; Drawer is demoted to an internal primitive.)
+//
+// This primitive stays exported only so EntityDrawer can compose it, and for
+// the rare non-form side panel that genuinely isn't a standard entity form.
+// Keep Dialog for short confirmations / destructive prompts.
 //
 // Built on the same Radix Dialog primitive as Dialog (Radix has no separate
 // Drawer); the Content is anchored to the right edge, full height, sliding in
