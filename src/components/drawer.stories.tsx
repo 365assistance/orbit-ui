@@ -8,14 +8,19 @@ import { Input } from './input'
 import { Label } from './label'
 
 const meta = {
-  title: 'Patterns/Drawer',
+  // INTERNAL PRIMITIVE — not the component to reach for. Use EntityDrawer
+  // (Patterns/EntityDrawer) for all create/edit record forms. Drawer is the
+  // low-level slide-in panel that EntityDrawer is built on; it stays exported
+  // only so EntityDrawer (and rare non-form side panels) can compose it.
+  // Demoted from Patterns -> Internal and autodocs removed 2026-10-20 so the
+  // team sees one drawer (EntityDrawer), not two.
+  title: 'Internal/Drawer (primitive)',
   component: Drawer,
-  tags: ['autodocs'],
   parameters: {
     docs: {
       description: {
         component:
-          'The canonical side panel for EDITING A RECORD with a real form (Plans, Promotions, future client-config records). Standardised 2026-10-07: Drawer for record editing, Dialog for short confirmations/destructive prompts. No bespoke overlays or inline edit forms.',
+          'INTERNAL PRIMITIVE. Do not use directly for record editing — use EntityDrawer (Patterns/EntityDrawer) instead, which standardises the header, sectioned body, and Cancel + primary footer. Drawer is the low-level slide-in panel (overlay, focus-trap, Header/Body/Footer parts) that EntityDrawer is built on. Reach for it only for a non-standard side panel that is not a create/edit form.',
       },
     },
   },
