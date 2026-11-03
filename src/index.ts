@@ -43,3 +43,4 @@ export * from "./components/table-toolbar";
 export * from "./components/tabs";
 export * from "./components/toast";
 export * from "./components/tooltip";
+export * from "./components/confirm-destroy-dialog";

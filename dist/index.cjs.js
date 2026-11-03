@@ -14463,6 +14463,11 @@ function useToast() {
     return ctx;
 }
 
+function ConfirmDestroyDialog({ open, onOpenChange, title, description, confirmLabel, cancelLabel = "Cancel", onConfirm, loading = false, }) {
+    const resolvedConfirm = confirmLabel ?? title.replace(/\?\s*$/, "");
+    return (jsxRuntime.jsx(Dialog, { open: open, onOpenChange: (next) => !next && !loading && onOpenChange(false), children: jsxRuntime.jsxs(DialogContent, { className: "sm:max-w-md", children: [jsxRuntime.jsx(DialogHeader, { children: jsxRuntime.jsx(DialogTitle, { children: title }) }), jsxRuntime.jsx("p", { className: "text-sm text-[var(--ink-muted,var(--muted-foreground))]", children: description }), jsxRuntime.jsxs(DialogFooter, { children: [jsxRuntime.jsx(Button, { variant: "ghost", onClick: () => onOpenChange(false), disabled: loading, children: cancelLabel }), jsxRuntime.jsxs(Button, { variant: "destructive", onClick: onConfirm, disabled: loading, children: [loading && jsxRuntime.jsx(Spinner, { size: "sm" }), resolvedConfirm] })] })] }) }));
+}
+
 exports.Accordion = Accordion;
 exports.AccordionContent = AccordionContent;
 exports.AccordionItem = AccordionItem;
@@ -14481,6 +14486,7 @@ exports.CardDescription = CardDescription;
 exports.CardFooter = CardFooter;
 exports.CardHeader = CardHeader;
 exports.CardTitle = CardTitle;
+exports.ConfirmDestroyDialog = ConfirmDestroyDialog;
 exports.DateTimePicker = DateTimePicker;
 exports.Dialog = Dialog;
 exports.DialogClose = DialogClose;
