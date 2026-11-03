@@ -65,9 +65,31 @@ function HeroStatHeadline({ className, style, ...props }: React.ComponentProps<"
   )
 }
 
+/** Icon-tile accent colours for StatCard. Colour must mean something
+ *  (restrained-colour rule): use brand for the headline metric, info/success/
+ *  warning/danger for semantic counts, neutral for plain context. */
+export type StatCardColor =
+  | "brand"
+  | "info"
+  | "success"
+  | "warning"
+  | "danger"
+  | "neutral"
+
+const STAT_ICON_TILE: Record<StatCardColor, string> = {
+  brand: "bg-[var(--accent,#f3e9f5)] text-[var(--primary)]",
+  info: "bg-[var(--orbit-info-bg,#dbeafe)] text-[var(--orbit-info,#2563eb)]",
+  success: "bg-[var(--orbit-success-bg,#dcfce7)] text-[var(--orbit-success,#16a34a)]",
+  warning: "bg-[var(--orbit-warning-bg,#fef3c7)] text-[var(--orbit-warning,#d97706)]",
+  danger: "bg-[var(--orbit-error-bg,#fee2e2)] text-[var(--destructive,#dc2626)]",
+  neutral: "bg-[var(--muted,#f1f0f4)] text-[var(--ink-muted,#6b6676)]",
+}
+
 function StatCard({
   label,
   value,
+  icon: Icon,
+  color = "brand",
   children,
   className,
   style,
@@ -75,19 +97,66 @@ function StatCard({
 }: React.ComponentProps<"div"> & {
   label?: React.ReactNode
   value?: React.ReactNode
+  /** Optional leading icon. When set, the card uses the horizontal
+   *  icon-tile layout (tile + label/value stack); otherwise the plain
+   *  vertical layout. */
+  icon?: React.ComponentType<{ className?: string }>
+  /** Icon-tile accent colour (only used when `icon` is set). Default brand. */
+  color?: StatCardColor
 }) {
+  const cardClass = cn(
+    "overflow-hidden rounded-[var(--radius-card,16px)] bg-card p-6",
+    className
+  )
+  const cardStyle: React.CSSProperties = {
+    boxShadow: "var(--shadow-card, 0 1px 2px rgba(16,24,40,.04), 0 4px 16px rgba(16,24,40,.06))",
+    fontFamily: "var(--font-sans)",
+    ...style,
+  }
+
+  // Icon-tile layout: coloured rounded tile on the left, label over value.
+  if (Icon) {
+    return (
+      <div data-slot="stat-card" className={cardClass} style={cardStyle} {...props}>
+        <div className="flex items-center gap-4">
+          <div
+            className={cn(
+              "grid h-12 w-12 shrink-0 place-items-center rounded-[var(--radius-control,12px)]",
+              STAT_ICON_TILE[color]
+            )}
+          >
+            <Icon className="h-[22px] w-[22px]" aria-hidden />
+          </div>
+          <div className="min-w-0">
+            {label != null ? (
+              <span
+                className="block text-sm font-medium"
+                style={{ color: "var(--ink-muted, #6b6676)" }}
+              >
+                {label}
+              </span>
+            ) : null}
+            {value != null ? (
+              <span
+                className="mt-0.5 block font-bold leading-none"
+                style={{ fontSize: 26, color: "var(--ink-primary, #1b1733)" }}
+              >
+                {value}
+              </span>
+            ) : null}
+            {children}
+          </div>
+        </div>
+      </div>
+    )
+  }
+
+  // Plain vertical layout (original).
   return (
     <div
       data-slot="stat-card"
-      className={cn(
-        "flex flex-col overflow-hidden rounded-[var(--radius-card,16px)] bg-card p-6",
-        className
-      )}
-      style={{
-        boxShadow: "var(--shadow-card, 0 1px 2px rgba(16,24,40,.04), 0 4px 16px rgba(16,24,40,.06))",
-        fontFamily: "var(--font-sans)",
-        ...style,
-      }}
+      className={cn("flex flex-col", cardClass)}
+      style={cardStyle}
       {...props}
     >
       {label != null ? (
