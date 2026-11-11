@@ -14126,13 +14126,31 @@ function StatusChip({ variant, children, className, style, ...props }) {
 function PortalSelect({ value, options, onChange, minWidth = 200, disabled = false, fullWidth = false, placeholder, ...rest }) {
     const [open, setOpen] = useState(false);
     const btnRef = useRef(null);
+    // Viewport-aware placement: open downward when there's room, otherwise flip up.
+    // maxHeight is clamped to the available space so the list always scrolls within
+    // the viewport instead of being clipped off-screen.
     const [rect, setRect] = useState(null);
     useLayoutEffect(() => {
         if (!open || !btnRef.current)
             return;
         const update = () => {
             const r = btnRef.current.getBoundingClientRect();
-            setRect({ left: r.left, top: r.bottom + 4, width: r.width });
+            const GAP = 4;
+            const MARGIN = 8; // keep the list off the viewport edges
+            const DESIRED = 280;
+            const spaceBelow = window.innerHeight - r.bottom - GAP - MARGIN;
+            const spaceAbove = r.top - GAP - MARGIN;
+            // Prefer down; flip up only when below can't fit a reasonable list and above
+            // has more room.
+            const flipUp = spaceBelow < Math.min(DESIRED, 160) && spaceAbove > spaceBelow;
+            const maxHeight = Math.max(120, Math.min(DESIRED, flipUp ? spaceAbove : spaceBelow));
+            setRect({
+                left: r.left,
+                width: r.width,
+                maxHeight,
+                placement: flipUp ? 'up' : 'down',
+                top: flipUp ? r.top - GAP : r.bottom + GAP,
+            });
         };
         update();
         window.addEventListener('scroll', update, true);
@@ -14166,7 +14184,10 @@ function PortalSelect({ value, options, onChange, minWidth = 200, disabled = fal
                 }, children: [jsx("span", { style: { overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', color: current ? 'var(--ink-primary)' : 'var(--ink-muted)' }, children: current?.label ?? placeholder ?? '' }), jsx(ChevronDown, { className: "h-4 w-4", style: { color: 'var(--ink-muted)', flexShrink: 0, transform: open ? 'rotate(180deg)' : 'none', transition: 'transform .15s' } })] }), open && rect && createPortal(jsxs(Fragment, { children: [jsx("div", { onClick: () => setOpen(false), style: { position: 'fixed', inset: 0, zIndex: 1000 } }), jsx("div", { role: "listbox", style: {
                             position: 'fixed',
                             left: rect.left,
+                            // When flipping up, anchor the list's bottom to just above the
+                            // trigger via translateY(-100%).
                             top: rect.top,
+                            transform: rect.placement === 'up' ? 'translateY(-100%)' : undefined,
                             minWidth: rect.width,
                             width: 'max-content',
                             maxWidth: 360,
@@ -14175,7 +14196,7 @@ function PortalSelect({ value, options, onChange, minWidth = 200, disabled = fal
                             borderRadius: 'var(--radius)',
                             boxShadow: 'var(--shadow-md)',
                             zIndex: 1001,
-                            maxHeight: 280,
+                            maxHeight: rect.maxHeight,
                             overflowY: 'auto',
                             padding: 4,
                         }, children: options.map((o) => {
