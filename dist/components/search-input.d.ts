@@ -1,11 +1,12 @@
 /**
- * SearchInput — shared search field for admin lists (clients, members, etc.).
+ * SearchInput — the ONE shared search field across Orbit (admin lists, pickers,
+ * modals: clients, members, tenants, permissions, etc.).
  *
- * The base Orbit Input is bg-transparent with a light border, which disappears
- * on grey page backgrounds. This wraps it in a clearly-visible affordance:
- * white fill, defined border, a leading magnifier, and an optional clear button.
- * Tokenised so it stays on-system. Use everywhere search appears so it doesn't
- * drift per-screen.
+ * Standardised 2026-11-11 (Sofia): one style everywhere so search stops drifting
+ * per-screen with different border radii. White fill, defined border, a leading
+ * magnifier, moderate rounded corners (8px, matching other Orbit controls), a
+ * purple focus ring, and an optional clear button. Use this everywhere search
+ * appears — do not hand-roll a search input.
  */
 export declare function SearchInput({ value, onChange, placeholder, ariaLabel, width, }: {
     value: string;
