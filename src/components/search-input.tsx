@@ -1,13 +1,14 @@
 import { Search as SearchIcon, X } from 'lucide-react';
 
 /**
- * SearchInput — shared search field for admin lists (clients, members, etc.).
+ * SearchInput — the ONE shared search field across Orbit (admin lists, pickers,
+ * modals: clients, members, tenants, permissions, etc.).
  *
- * The base Orbit Input is bg-transparent with a light border, which disappears
- * on grey page backgrounds. This wraps it in a clearly-visible affordance:
- * white fill, defined border, a leading magnifier, and an optional clear button.
- * Tokenised so it stays on-system. Use everywhere search appears so it doesn't
- * drift per-screen.
+ * Standardised 2026-11-11 (Sofia): one style everywhere so search stops drifting
+ * per-screen with different border radii. White fill, defined border, a leading
+ * magnifier, moderate rounded corners (8px, matching other Orbit controls), a
+ * purple focus ring, and an optional clear button. Use this everywhere search
+ * appears — do not hand-roll a search input.
  */
 export function SearchInput({
   value,
@@ -47,24 +48,23 @@ export function SearchInput({
         style={{
           width: '100%',
           height: 40,
-          borderRadius: 9999,
-          border: '1.5px solid #D8DEE6',
+          borderRadius: 8,
+          border: '1px solid #D8DEE6',
           background: '#fff',
           padding: '0 38px 0 38px',
           fontSize: 13,
           fontFamily: 'var(--font-sans)',
           color: '#242D38',
           outline: 'none',
-          boxShadow: '0 1px 2px rgba(0,0,0,.04)',
           transition: 'border-color .15s, box-shadow .15s',
         }}
         onFocus={(e) => {
           e.currentTarget.style.borderColor = '#92248E';
-          e.currentTarget.style.boxShadow = '0 0 0 3px rgba(146,36,142,.15)';
+          e.currentTarget.style.boxShadow = '0 0 0 3px rgba(146,36,142,.20)';
         }}
         onBlur={(e) => {
           e.currentTarget.style.borderColor = '#D8DEE6';
-          e.currentTarget.style.boxShadow = '0 1px 2px rgba(0,0,0,.04)';
+          e.currentTarget.style.boxShadow = 'none';
         }}
       />
       {value && (

@@ -14003,12 +14003,26 @@ const VARIANT_STYLE$1 = {
     danger: { bg: "var(--orbit-error-bg)", color: "var(--orbit-error)" },
     ghost: { bg: "transparent", color: "var(--ink-muted)", border: "1px solid var(--border-default)" },
 };
-function Pill({ variant = "neutral", className, style, ...props }) {
-    const v = VARIANT_STYLE$1[variant];
-    return (jsxRuntime.jsx("span", { "data-slot": "pill", "data-variant": variant, className: cn("inline-flex w-fit items-center gap-1 whitespace-nowrap", className), style: {
-            background: v.bg,
-            color: v.color,
-            border: v.border,
+// Outlined appearance: coloured border + text on a transparent fill (the house
+// style for status chips, Sofia 2026-11-13). Each variant maps to its semantic
+// colour token for BOTH border and text; `brand` uses --primary. `ghost` and
+// `neutral` fall back to the neutral border/ink so they stay subtle.
+const OUTLINE_STYLE = {
+    neutral: { color: "var(--ink-mid)", border: "1px solid var(--border-default)" },
+    brand: { color: "var(--primary)", border: "1px solid var(--primary)" },
+    success: { color: "var(--orbit-success)", border: "1px solid var(--orbit-success)" },
+    warning: { color: "var(--orbit-warning)", border: "1px solid var(--orbit-warning)" },
+    danger: { color: "var(--orbit-error)", border: "1px solid var(--orbit-error)" },
+    ghost: { color: "var(--ink-muted)", border: "1px solid var(--border-default)" },
+};
+function Pill({ variant = "neutral", appearance = "soft", className, style, ...props }) {
+    const soft = VARIANT_STYLE$1[variant];
+    const outline = OUTLINE_STYLE[variant];
+    const isOutline = appearance === "outline";
+    return (jsxRuntime.jsx("span", { "data-slot": "pill", "data-variant": variant, "data-appearance": appearance, className: cn("inline-flex w-fit items-center gap-1 whitespace-nowrap", className), style: {
+            background: isOutline ? "transparent" : soft.bg,
+            color: isOutline ? outline.color : soft.color,
+            border: isOutline ? outline.border : soft.border,
             borderRadius: "var(--radius-pill)",
             padding: "2px 10px",
             fontSize: "var(--text-label-size)",
@@ -14146,13 +14160,31 @@ function StatusChip({ variant, children, className, style, ...props }) {
 function PortalSelect({ value, options, onChange, minWidth = 200, disabled = false, fullWidth = false, placeholder, ...rest }) {
     const [open, setOpen] = React.useState(false);
     const btnRef = React.useRef(null);
+    // Viewport-aware placement: open downward when there's room, otherwise flip up.
+    // maxHeight is clamped to the available space so the list always scrolls within
+    // the viewport instead of being clipped off-screen.
     const [rect, setRect] = React.useState(null);
     React.useLayoutEffect(() => {
         if (!open || !btnRef.current)
             return;
         const update = () => {
             const r = btnRef.current.getBoundingClientRect();
-            setRect({ left: r.left, top: r.bottom + 4, width: r.width });
+            const GAP = 4;
+            const MARGIN = 8; // keep the list off the viewport edges
+            const DESIRED = 280;
+            const spaceBelow = window.innerHeight - r.bottom - GAP - MARGIN;
+            const spaceAbove = r.top - GAP - MARGIN;
+            // Prefer down; flip up only when below can't fit a reasonable list and above
+            // has more room.
+            const flipUp = spaceBelow < Math.min(DESIRED, 160) && spaceAbove > spaceBelow;
+            const maxHeight = Math.max(120, Math.min(DESIRED, flipUp ? spaceAbove : spaceBelow));
+            setRect({
+                left: r.left,
+                width: r.width,
+                maxHeight,
+                placement: flipUp ? 'up' : 'down',
+                top: flipUp ? r.top - GAP : r.bottom + GAP,
+            });
         };
         update();
         window.addEventListener('scroll', update, true);
@@ -14186,7 +14218,10 @@ function PortalSelect({ value, options, onChange, minWidth = 200, disabled = fal
                 }, children: [jsxRuntime.jsx("span", { style: { overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', color: current ? 'var(--ink-primary)' : 'var(--ink-muted)' }, children: current?.label ?? placeholder ?? '' }), jsxRuntime.jsx(ChevronDown, { className: "h-4 w-4", style: { color: 'var(--ink-muted)', flexShrink: 0, transform: open ? 'rotate(180deg)' : 'none', transition: 'transform .15s' } })] }), open && rect && ReactDOM.createPortal(jsxRuntime.jsxs(jsxRuntime.Fragment, { children: [jsxRuntime.jsx("div", { onClick: () => setOpen(false), style: { position: 'fixed', inset: 0, zIndex: 1000 } }), jsxRuntime.jsx("div", { role: "listbox", style: {
                             position: 'fixed',
                             left: rect.left,
+                            // When flipping up, anchor the list's bottom to just above the
+                            // trigger via translateY(-100%).
                             top: rect.top,
+                            transform: rect.placement === 'up' ? 'translateY(-100%)' : undefined,
                             minWidth: rect.width,
                             width: 'max-content',
                             maxWidth: 360,
@@ -14195,7 +14230,7 @@ function PortalSelect({ value, options, onChange, minWidth = 200, disabled = fal
                             borderRadius: 'var(--radius)',
                             boxShadow: 'var(--shadow-md)',
                             zIndex: 1001,
-                            maxHeight: 280,
+                            maxHeight: rect.maxHeight,
                             overflowY: 'auto',
                             padding: 4,
                         }, children: options.map((o) => {
@@ -14220,13 +14255,14 @@ function PortalSelect({ value, options, onChange, minWidth = 200, disabled = fal
 }
 
 /**
- * SearchInput — shared search field for admin lists (clients, members, etc.).
+ * SearchInput — the ONE shared search field across Orbit (admin lists, pickers,
+ * modals: clients, members, tenants, permissions, etc.).
  *
- * The base Orbit Input is bg-transparent with a light border, which disappears
- * on grey page backgrounds. This wraps it in a clearly-visible affordance:
- * white fill, defined border, a leading magnifier, and an optional clear button.
- * Tokenised so it stays on-system. Use everywhere search appears so it doesn't
- * drift per-screen.
+ * Standardised 2026-11-11 (Sofia): one style everywhere so search stops drifting
+ * per-screen with different border radii. White fill, defined border, a leading
+ * magnifier, moderate rounded corners (8px, matching other Orbit controls), a
+ * purple focus ring, and an optional clear button. Use this everywhere search
+ * appears — do not hand-roll a search input.
  */
 function SearchInput({ value, onChange, placeholder = 'Search', ariaLabel, width = 320, }) {
     return (jsxRuntime.jsxs("div", { style: {
@@ -14238,22 +14274,21 @@ function SearchInput({ value, onChange, placeholder = 'Search', ariaLabel, width
         }, children: [jsxRuntime.jsx(Search, { className: "h-4 w-4", "aria-hidden": true, style: { position: 'absolute', left: 12, color: '#92248E', pointerEvents: 'none' } }), jsxRuntime.jsx("input", { type: "search", value: value, onChange: (e) => onChange(e.target.value), placeholder: placeholder, "aria-label": ariaLabel ?? placeholder, style: {
                     width: '100%',
                     height: 40,
-                    borderRadius: 9999,
-                    border: '1.5px solid #D8DEE6',
+                    borderRadius: 8,
+                    border: '1px solid #D8DEE6',
                     background: '#fff',
                     padding: '0 38px 0 38px',
                     fontSize: 13,
                     fontFamily: 'var(--font-sans)',
                     color: '#242D38',
                     outline: 'none',
-                    boxShadow: '0 1px 2px rgba(0,0,0,.04)',
                     transition: 'border-color .15s, box-shadow .15s',
                 }, onFocus: (e) => {
                     e.currentTarget.style.borderColor = '#92248E';
-                    e.currentTarget.style.boxShadow = '0 0 0 3px rgba(146,36,142,.15)';
+                    e.currentTarget.style.boxShadow = '0 0 0 3px rgba(146,36,142,.20)';
                 }, onBlur: (e) => {
                     e.currentTarget.style.borderColor = '#D8DEE6';
-                    e.currentTarget.style.boxShadow = '0 1px 2px rgba(0,0,0,.04)';
+                    e.currentTarget.style.boxShadow = 'none';
                 } }), value && (jsxRuntime.jsx("button", { type: "button", onClick: () => onChange(''), "aria-label": "Clear search", style: {
                     position: 'absolute',
                     right: 10,
@@ -14369,6 +14404,31 @@ function TableCell({ className, ...props }) {
         // Row hairline lives on the cell (border-separate ignores tr borders).
         // Last row's cells drop it via the body's [&_tr:last-child] rule.
         className: cn("border-b border-gray-100 px-4 py-3 align-middle text-sm text-gray-900 group-hover/tr:bg-gray-50/50 [&:has([role=checkbox])]:pr-0", className), ...props }));
+}
+
+// When a <Table/> is rendered INSIDE a TableCard, the grey header band must sit
+// FLUSH with the card's border (Sofia 2026-11-13): no outer-corner rounding and
+// no white gap below the band, so the header reads as part of the card edge
+// rather than a floating inset pill. Standalone <Table/> elsewhere keeps its
+// rounded floating band (that CSS lives in table.tsx). Scoped to
+// [data-slot="table-card"] so it only affects tables inside this component.
+const FLUSH_HEADER_CSS = `
+[data-slot="table-card"] [data-slot="table-head"]:first-child{border-top-left-radius:0;border-bottom-left-radius:0}
+[data-slot="table-card"] [data-slot="table-head"]:last-child{border-top-right-radius:0;border-bottom-right-radius:0}
+[data-slot="table-card"] [data-slot="table-head"]{border-bottom:1px solid var(--border-default,var(--border))}
+[data-slot="table-card"] [data-slot="table-head"]:first-child,[data-slot="table-card"] [data-slot="table-cell"]:first-child{padding-left:20px}
+[data-slot="table-card"] [data-slot="table-head"]:last-child,[data-slot="table-card"] [data-slot="table-cell"]:last-child{padding-right:20px}
+`;
+function TableCard({ search, actions, children, footer, className, style, }) {
+    const hasToolbar = search != null || actions != null;
+    return (jsxRuntime.jsxs("div", { "data-slot": "table-card", className: cn(
+        // One unified surface: soft border, large radius, subtle raised shadow,
+        // card background. The toolbar / table / footer all live inside it.
+        "overflow-hidden rounded-2xl border shadow-sm", "border-[var(--border-default,var(--border))] bg-[var(--card)]", className), style: style, children: [hasToolbar && (jsxRuntime.jsxs("div", { "data-slot": "table-card-toolbar", className: cn(
+                // Toolbar sits flush inside the card, divided from the table below.
+                "flex flex-col gap-3 border-b px-4 py-3 lg:flex-row lg:items-center lg:justify-between lg:px-5 lg:py-4", "border-[var(--border-default,var(--border))]"), children: [search != null ? (jsxRuntime.jsx("div", { className: "flex flex-1 items-center gap-2", children: search })) : (
+                    // Keep actions right-aligned even when there is no search slot.
+                    jsxRuntime.jsx("div", { className: "hidden lg:block lg:flex-1" })), actions != null && (jsxRuntime.jsx("div", { className: "flex flex-wrap items-center gap-2", children: actions }))] })), jsxRuntime.jsx("style", { children: FLUSH_HEADER_CSS }), jsxRuntime.jsx("div", { "data-slot": "table-card-body", children: children }), footer != null && (jsxRuntime.jsx("div", { "data-slot": "table-card-footer", className: cn("border-t px-4 py-3 lg:px-5 lg:py-4", "border-[var(--border-default,var(--border))]"), children: footer }))] }));
 }
 
 function TableToolbar({ title, count, countLabel = "items", subtitle, action, className, style, }) {
@@ -14551,6 +14611,7 @@ exports.StatCard = StatCard;
 exports.StatusChip = StatusChip;
 exports.Table = Table;
 exports.TableBody = TableBody;
+exports.TableCard = TableCard;
 exports.TableCell = TableCell;
 exports.TableHead = TableHead;
 exports.TableHeader = TableHeader;
