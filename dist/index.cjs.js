@@ -14003,12 +14003,26 @@ const VARIANT_STYLE$1 = {
     danger: { bg: "var(--orbit-error-bg)", color: "var(--orbit-error)" },
     ghost: { bg: "transparent", color: "var(--ink-muted)", border: "1px solid var(--border-default)" },
 };
-function Pill({ variant = "neutral", className, style, ...props }) {
-    const v = VARIANT_STYLE$1[variant];
-    return (jsxRuntime.jsx("span", { "data-slot": "pill", "data-variant": variant, className: cn("inline-flex w-fit items-center gap-1 whitespace-nowrap", className), style: {
-            background: v.bg,
-            color: v.color,
-            border: v.border,
+// Outlined appearance: coloured border + text on a transparent fill (the house
+// style for status chips, Sofia 2026-11-13). Each variant maps to its semantic
+// colour token for BOTH border and text; `brand` uses --primary. `ghost` and
+// `neutral` fall back to the neutral border/ink so they stay subtle.
+const OUTLINE_STYLE = {
+    neutral: { color: "var(--ink-mid)", border: "1px solid var(--border-default)" },
+    brand: { color: "var(--primary)", border: "1px solid var(--primary)" },
+    success: { color: "var(--orbit-success)", border: "1px solid var(--orbit-success)" },
+    warning: { color: "var(--orbit-warning)", border: "1px solid var(--orbit-warning)" },
+    danger: { color: "var(--orbit-error)", border: "1px solid var(--orbit-error)" },
+    ghost: { color: "var(--ink-muted)", border: "1px solid var(--border-default)" },
+};
+function Pill({ variant = "neutral", appearance = "soft", className, style, ...props }) {
+    const soft = VARIANT_STYLE$1[variant];
+    const outline = OUTLINE_STYLE[variant];
+    const isOutline = appearance === "outline";
+    return (jsxRuntime.jsx("span", { "data-slot": "pill", "data-variant": variant, "data-appearance": appearance, className: cn("inline-flex w-fit items-center gap-1 whitespace-nowrap", className), style: {
+            background: isOutline ? "transparent" : soft.bg,
+            color: isOutline ? outline.color : soft.color,
+            border: isOutline ? outline.border : soft.border,
             borderRadius: "var(--radius-pill)",
             padding: "2px 10px",
             fontSize: "var(--text-label-size)",
@@ -14392,6 +14406,31 @@ function TableCell({ className, ...props }) {
         className: cn("border-b border-gray-100 px-4 py-3 align-middle text-sm text-gray-900 group-hover/tr:bg-gray-50/50 [&:has([role=checkbox])]:pr-0", className), ...props }));
 }
 
+// When a <Table/> is rendered INSIDE a TableCard, the grey header band must sit
+// FLUSH with the card's border (Sofia 2026-11-13): no outer-corner rounding and
+// no white gap below the band, so the header reads as part of the card edge
+// rather than a floating inset pill. Standalone <Table/> elsewhere keeps its
+// rounded floating band (that CSS lives in table.tsx). Scoped to
+// [data-slot="table-card"] so it only affects tables inside this component.
+const FLUSH_HEADER_CSS = `
+[data-slot="table-card"] [data-slot="table-head"]:first-child{border-top-left-radius:0;border-bottom-left-radius:0}
+[data-slot="table-card"] [data-slot="table-head"]:last-child{border-top-right-radius:0;border-bottom-right-radius:0}
+[data-slot="table-card"] [data-slot="table-head"]{border-bottom:1px solid var(--border-default,var(--border))}
+[data-slot="table-card"] [data-slot="table-head"]:first-child,[data-slot="table-card"] [data-slot="table-cell"]:first-child{padding-left:20px}
+[data-slot="table-card"] [data-slot="table-head"]:last-child,[data-slot="table-card"] [data-slot="table-cell"]:last-child{padding-right:20px}
+`;
+function TableCard({ search, actions, children, footer, className, style, }) {
+    const hasToolbar = search != null || actions != null;
+    return (jsxRuntime.jsxs("div", { "data-slot": "table-card", className: cn(
+        // One unified surface: soft border, large radius, subtle raised shadow,
+        // card background. The toolbar / table / footer all live inside it.
+        "overflow-hidden rounded-2xl border shadow-sm", "border-[var(--border-default,var(--border))] bg-[var(--card)]", className), style: style, children: [hasToolbar && (jsxRuntime.jsxs("div", { "data-slot": "table-card-toolbar", className: cn(
+                // Toolbar sits flush inside the card, divided from the table below.
+                "flex flex-col gap-3 border-b px-4 py-3 lg:flex-row lg:items-center lg:justify-between lg:px-5 lg:py-4", "border-[var(--border-default,var(--border))]"), children: [search != null ? (jsxRuntime.jsx("div", { className: "flex flex-1 items-center gap-2", children: search })) : (
+                    // Keep actions right-aligned even when there is no search slot.
+                    jsxRuntime.jsx("div", { className: "hidden lg:block lg:flex-1" })), actions != null && (jsxRuntime.jsx("div", { className: "flex flex-wrap items-center gap-2", children: actions }))] })), jsxRuntime.jsx("style", { children: FLUSH_HEADER_CSS }), jsxRuntime.jsx("div", { "data-slot": "table-card-body", children: children }), footer != null && (jsxRuntime.jsx("div", { "data-slot": "table-card-footer", className: cn("border-t px-4 py-3 lg:px-5 lg:py-4", "border-[var(--border-default,var(--border))]"), children: footer }))] }));
+}
+
 function TableToolbar({ title, count, countLabel = "items", subtitle, action, className, style, }) {
     const countLine = subtitle != null
         ? subtitle
@@ -14572,6 +14611,7 @@ exports.StatCard = StatCard;
 exports.StatusChip = StatusChip;
 exports.Table = Table;
 exports.TableBody = TableBody;
+exports.TableCard = TableCard;
 exports.TableCell = TableCell;
 exports.TableHead = TableHead;
 exports.TableHeader = TableHeader;
