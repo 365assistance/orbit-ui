@@ -10,6 +10,10 @@ const meta = {
       control: 'select',
       options: ['neutral', 'brand', 'success', 'warning', 'danger', 'ghost'],
     },
+    appearance: {
+      control: 'inline-radio',
+      options: ['soft', 'outline'],
+    },
   },
   args: { children: 'Pill' },
 } satisfies Meta<typeof Pill>
@@ -28,6 +32,18 @@ export const AllVariants: Story = {
       <Pill variant="warning">Grace period</Pill>
       <Pill variant="danger">Expired</Pill>
       <Pill variant="ghost">Ghost</Pill>
+    </div>
+  ),
+}
+
+/** Outlined appearance: coloured border + text, transparent fill (house style for status chips). */
+export const Outlined: Story = {
+  render: () => (
+    <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, alignItems: 'center' }}>
+      <Pill variant="brand" appearance="outline">Authorised</Pill>
+      <Pill variant="danger" appearance="outline">Overdue</Pill>
+      <Pill variant="success" appearance="outline">Paid</Pill>
+      <Pill variant="neutral" appearance="outline">Draft</Pill>
     </div>
   ),
 }

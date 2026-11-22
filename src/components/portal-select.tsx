@@ -30,13 +30,37 @@ export interface PortalSelectProps {
 export function PortalSelect({ value, options, onChange, minWidth = 200, disabled = false, fullWidth = false, placeholder, ...rest }: PortalSelectProps) {
   const [open, setOpen] = useState(false);
   const btnRef = useRef<HTMLButtonElement>(null);
-  const [rect, setRect] = useState<{ left: number; top: number; width: number } | null>(null);
+  // Viewport-aware placement: open downward when there's room, otherwise flip up.
+  // maxHeight is clamped to the available space so the list always scrolls within
+  // the viewport instead of being clipped off-screen.
+  const [rect, setRect] = useState<{
+    left: number;
+    top: number;
+    width: number;
+    maxHeight: number;
+    placement: 'down' | 'up';
+  } | null>(null);
 
   useLayoutEffect(() => {
     if (!open || !btnRef.current) return;
     const update = () => {
       const r = btnRef.current!.getBoundingClientRect();
-      setRect({ left: r.left, top: r.bottom + 4, width: r.width });
+      const GAP = 4;
+      const MARGIN = 8; // keep the list off the viewport edges
+      const DESIRED = 280;
+      const spaceBelow = window.innerHeight - r.bottom - GAP - MARGIN;
+      const spaceAbove = r.top - GAP - MARGIN;
+      // Prefer down; flip up only when below can't fit a reasonable list and above
+      // has more room.
+      const flipUp = spaceBelow < Math.min(DESIRED, 160) && spaceAbove > spaceBelow;
+      const maxHeight = Math.max(120, Math.min(DESIRED, flipUp ? spaceAbove : spaceBelow));
+      setRect({
+        left: r.left,
+        width: r.width,
+        maxHeight,
+        placement: flipUp ? 'up' : 'down',
+        top: flipUp ? r.top - GAP : r.bottom + GAP,
+      });
     };
     update();
     window.addEventListener('scroll', update, true);
@@ -95,7 +119,10 @@ export function PortalSelect({ value, options, onChange, minWidth = 200, disable
             style={{
               position: 'fixed',
               left: rect.left,
+              // When flipping up, anchor the list's bottom to just above the
+              // trigger via translateY(-100%).
               top: rect.top,
+              transform: rect.placement === 'up' ? 'translateY(-100%)' : undefined,
               minWidth: rect.width,
               width: 'max-content',
               maxWidth: 360,
@@ -104,7 +131,7 @@ export function PortalSelect({ value, options, onChange, minWidth = 200, disable
               borderRadius: 'var(--radius)',
               boxShadow: 'var(--shadow-md)',
               zIndex: 1001,
-              maxHeight: 280,
+              maxHeight: rect.maxHeight,
               overflowY: 'auto',
               padding: 4,
             }}
