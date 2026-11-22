@@ -48,13 +48,16 @@ const OUTLINE_STYLE: Record<PillVariant, { color: string; border: string }> = {
 
 export interface PillProps extends React.ComponentProps<"span"> {
   variant?: PillVariant
-  /** Visual style: soft tinted fill (default) or coloured outline on transparent fill. */
+  /**
+   * Visual style: coloured outline on transparent fill (default, the house
+   * standard for status chips, Sofia 2026-11-23) or soft tinted fill.
+   */
   appearance?: "soft" | "outline"
 }
 
 export function Pill({
   variant = "neutral",
-  appearance = "soft",
+  appearance = "outline",
   className,
   style,
   ...props

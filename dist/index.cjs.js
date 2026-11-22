@@ -14015,7 +14015,7 @@ const OUTLINE_STYLE = {
     danger: { color: "var(--orbit-error)", border: "1px solid var(--orbit-error)" },
     ghost: { color: "var(--ink-muted)", border: "1px solid var(--border-default)" },
 };
-function Pill({ variant = "neutral", appearance = "soft", className, style, ...props }) {
+function Pill({ variant = "neutral", appearance = "outline", className, style, ...props }) {
     const soft = VARIANT_STYLE$1[variant];
     const outline = OUTLINE_STYLE[variant];
     const isOutline = appearance === "outline";
