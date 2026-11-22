@@ -19,6 +19,7 @@ import { cn } from "@/lib/utils"
 export type PillVariant =
   | "neutral"
   | "brand"
+  | "info"
   | "success"
   | "warning"
   | "danger"
@@ -27,6 +28,7 @@ export type PillVariant =
 const VARIANT_STYLE: Record<PillVariant, { bg: string; color: string; border?: string }> = {
   neutral: { bg: "var(--surface-alt)", color: "var(--ink-mid)" },
   brand: { bg: "var(--accent)", color: "var(--primary)" },
+  info: { bg: "var(--orbit-info-bg)", color: "var(--orbit-info)" },
   success: { bg: "var(--orbit-success-bg)", color: "var(--orbit-success)" },
   warning: { bg: "var(--orbit-warning-bg)", color: "var(--orbit-warning)" },
   danger: { bg: "var(--orbit-error-bg)", color: "var(--orbit-error)" },
@@ -40,6 +42,7 @@ const VARIANT_STYLE: Record<PillVariant, { bg: string; color: string; border?: s
 const OUTLINE_STYLE: Record<PillVariant, { color: string; border: string }> = {
   neutral: { color: "var(--ink-mid)", border: "1px solid var(--border-default)" },
   brand: { color: "var(--primary)", border: "1px solid var(--primary)" },
+  info: { color: "var(--orbit-info)", border: "1px solid var(--orbit-info)" },
   success: { color: "var(--orbit-success)", border: "1px solid var(--orbit-success)" },
   warning: { color: "var(--orbit-warning)", border: "1px solid var(--orbit-warning)" },
   danger: { color: "var(--orbit-error)", border: "1px solid var(--orbit-error)" },
