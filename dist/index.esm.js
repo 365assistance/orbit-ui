@@ -13873,10 +13873,15 @@ function FormFieldRow({ className, ...props }) {
     return (jsx("div", { "data-slot": "form-field-row", className: cn("grid grid-cols-1 gap-4 sm:grid-cols-2", className), ...props }));
 }
 
-function FormSection({ title, summary, collapsible = true, open: openProp, onToggle, children, footer, headerAccessory, }) {
+function FormSection({ title, summary, collapsible = true, bordered = true, open: openProp, onToggle, children, footer, headerAccessory, }) {
     // Non-collapsible sections are always expanded.
     const open = collapsible ? !!openProp : true;
     const header = (jsxs("span", { style: { display: "flex", alignItems: "center", justifyContent: "space-between", gap: 12, width: "100%" }, children: [jsxs("span", { children: [jsx("span", { style: { display: "block", fontFamily: "var(--font-sans)", fontSize: 14, fontWeight: 700, color: "var(--ink-primary, #1b1733)" }, children: title }), summary ? (jsx("span", { style: { display: "block", marginTop: 3, fontFamily: "var(--font-sans)", fontSize: 12, color: "var(--ink-muted, #5b5670)", lineHeight: 1.35 }, children: summary })) : null] }), jsxs("span", { style: { display: "inline-flex", alignItems: "center", gap: 10, flexShrink: 0 }, children: [headerAccessory, collapsible && (jsx("span", { style: { color: "var(--primary)", display: "inline-flex" }, children: open ? jsx(ChevronDown, { className: "h-4 w-4", "aria-hidden": true }) : jsx(ChevronRight, { className: "h-4 w-4", "aria-hidden": true }) }))] })] }));
+    // Borderless: no card chrome, just a titled group — for modals where the modal
+    // is the container (avoids nested borders; Sofia 2026-11-23).
+    if (!bordered) {
+        return (jsxs("div", { "data-slot": "form-section", children: [jsx("div", { style: { marginBottom: 12 }, children: header }), jsxs("div", { children: [children, footer && (jsx("div", { style: { marginTop: 16, display: "flex", justifyContent: "flex-end", gap: 8 }, children: footer }))] })] }));
+    }
     return (jsxs("div", { "data-slot": "form-section", style: {
             border: "1px solid var(--border-default, var(--border, #e5e7eb))",
             borderRadius: "var(--radius-lg, 12px)",

@@ -26,6 +26,10 @@ export interface FormSectionProps {
     /** Collapsible (default). When false, the body is always shown and the header
      *  is static (no toggle button, no chevron); `open`/`onToggle` are ignored. */
     collapsible?: boolean;
+    /** Card chrome (default true). When false, the section drops its outer border,
+     *  radius, background and header band — just a titled group of fields. Use in
+     *  modals where the modal is already the container, to avoid nested borders. */
+    bordered?: boolean;
     open?: boolean;
     onToggle?: () => void;
     children: React.ReactNode;
@@ -34,4 +38,4 @@ export interface FormSectionProps {
     /** Element shown left of the chevron (e.g. a StatusChip). Use on all siblings or none. */
     headerAccessory?: React.ReactNode;
 }
-export declare function FormSection({ title, summary, collapsible, open: openProp, onToggle, children, footer, headerAccessory, }: FormSectionProps): React.JSX.Element;
+export declare function FormSection({ title, summary, collapsible, bordered, open: openProp, onToggle, children, footer, headerAccessory, }: FormSectionProps): React.JSX.Element;

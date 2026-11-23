@@ -28,6 +28,10 @@ export interface FormSectionProps {
   /** Collapsible (default). When false, the body is always shown and the header
    *  is static (no toggle button, no chevron); `open`/`onToggle` are ignored. */
   collapsible?: boolean
+  /** Card chrome (default true). When false, the section drops its outer border,
+   *  radius, background and header band — just a titled group of fields. Use in
+   *  modals where the modal is already the container, to avoid nested borders. */
+  bordered?: boolean
   open?: boolean
   onToggle?: () => void
   children: React.ReactNode
@@ -41,6 +45,7 @@ export function FormSection({
   title,
   summary,
   collapsible = true,
+  bordered = true,
   open: openProp,
   onToggle,
   children,
@@ -68,6 +73,22 @@ export function FormSection({
       </span>
     </span>
   )
+
+  // Borderless: no card chrome, just a titled group — for modals where the modal
+  // is the container (avoids nested borders; Sofia 2026-11-23).
+  if (!bordered) {
+    return (
+      <div data-slot="form-section">
+        <div style={{ marginBottom: 12 }}>{header}</div>
+        <div>
+          {children}
+          {footer && (
+            <div style={{ marginTop: 16, display: "flex", justifyContent: "flex-end", gap: 8 }}>{footer}</div>
+          )}
+        </div>
+      </div>
+    )
+  }
 
   return (
     <div
