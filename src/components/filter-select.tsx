@@ -66,7 +66,9 @@ export function FilterSelect({
           align="start"
           sideOffset={4}
           className={cn(
-            "z-50 min-w-[10rem] rounded-xl border p-1 shadow-[var(--shadow-md,0_1px_3px_rgba(16,24,40,.08))]",
+            // z-[80]: sit above app filter popovers (~z-70) so a FilterSelect
+            // opened inside a popover surfaces in front of it, not behind.
+            "z-[80] min-w-[10rem] rounded-xl border p-1 shadow-[var(--shadow-md,0_1px_3px_rgba(16,24,40,.08))]",
             "border-[var(--border-default,var(--border))] bg-[var(--card)]",
             "data-[state=open]:animate-in data-[state=closed]:animate-out",
             "data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0"
