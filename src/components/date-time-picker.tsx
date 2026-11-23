@@ -85,7 +85,7 @@ export interface DateTimePickerProps {
 export function DateTimePicker({
   value,
   onChange,
-  placeholder = 'Select date and time',
+  placeholder,
   minDate,
   ariaLabel = 'Select date and time',
   maxWidth = 300,
@@ -93,6 +93,8 @@ export function DateTimePicker({
 }: DateTimePickerProps) {
   const [open, setOpen] = React.useState(false);
   const parsed = parseValue(value);
+  // Placeholder defaults to match the mode (no stray "and time" in date-only mode).
+  const resolvedPlaceholder = placeholder ?? (dateOnly ? 'Select date' : 'Select date and time');
 
   // The month currently shown in the calendar; defaults to the selected month
   // or the current month.
@@ -176,7 +178,7 @@ export function DateTimePicker({
             transition: 'border-color .12s ease',
           }}
         >
-          <span>{parsed ? (dateOnly ? formatDisplayDate(parsed) : formatDisplay(parsed)) : placeholder}</span>
+          <span>{parsed ? (dateOnly ? formatDisplayDate(parsed) : formatDisplay(parsed)) : resolvedPlaceholder}</span>
           <Calendar className="h-4 w-4" style={{ color: 'var(--ink-muted)', flexShrink: 0 }} aria-hidden />
         </button>
       </PopoverPrimitive.Trigger>

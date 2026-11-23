@@ -13554,9 +13554,11 @@ function monthGrid(year, month) {
         cells.push(null);
     return cells;
 }
-function DateTimePicker({ value, onChange, placeholder = 'Select date and time', minDate, ariaLabel = 'Select date and time', maxWidth = 300, dateOnly = false, }) {
+function DateTimePicker({ value, onChange, placeholder, minDate, ariaLabel = 'Select date and time', maxWidth = 300, dateOnly = false, }) {
     const [open, setOpen] = React__namespace.useState(false);
     const parsed = parseValue(value);
+    // Placeholder defaults to match the mode (no stray "and time" in date-only mode).
+    const resolvedPlaceholder = placeholder ?? (dateOnly ? 'Select date' : 'Select date and time');
     // The month currently shown in the calendar; defaults to the selected month
     // or the current month.
     const now = new Date();
@@ -13632,7 +13634,7 @@ function DateTimePicker({ value, onChange, placeholder = 'Select date and time',
                         fontFamily: 'var(--font-sans)',
                         cursor: 'pointer', outline: 'none',
                         transition: 'border-color .12s ease',
-                    }, children: [jsxRuntime.jsx("span", { children: parsed ? (dateOnly ? formatDisplayDate(parsed) : formatDisplay(parsed)) : placeholder }), jsxRuntime.jsx(Calendar, { className: "h-4 w-4", style: { color: 'var(--ink-muted)', flexShrink: 0 }, "aria-hidden": true })] }) }), jsxRuntime.jsx(Portal$1, { children: jsxRuntime.jsxs(Content2$1, { align: "start", sideOffset: 6, style: {
+                    }, children: [jsxRuntime.jsx("span", { children: parsed ? (dateOnly ? formatDisplayDate(parsed) : formatDisplay(parsed)) : resolvedPlaceholder }), jsxRuntime.jsx(Calendar, { className: "h-4 w-4", style: { color: 'var(--ink-muted)', flexShrink: 0 }, "aria-hidden": true })] }) }), jsxRuntime.jsx(Portal$1, { children: jsxRuntime.jsxs(Content2$1, { align: "start", sideOffset: 6, style: {
                         // Above app popovers/menus (filter popovers sit ~z-70) so the
                         // calendar isn't trapped behind a FilterMenu it's opened inside of.
                         zIndex: 90,
