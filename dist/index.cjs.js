@@ -13893,13 +13893,16 @@ function FormFieldRow({ className, ...props }) {
     return (jsxRuntime.jsx("div", { "data-slot": "form-field-row", className: cn("grid grid-cols-1 gap-4 sm:grid-cols-2", className), ...props }));
 }
 
-function FormSection({ title, summary, open, onToggle, children, footer, headerAccessory, }) {
+function FormSection({ title, summary, collapsible = true, open: openProp, onToggle, children, footer, headerAccessory, }) {
+    // Non-collapsible sections are always expanded.
+    const open = collapsible ? !!openProp : true;
+    const header = (jsxRuntime.jsxs("span", { style: { display: "flex", alignItems: "center", justifyContent: "space-between", gap: 12, width: "100%" }, children: [jsxRuntime.jsxs("span", { children: [jsxRuntime.jsx("span", { style: { display: "block", fontFamily: "var(--font-sans)", fontSize: 14, fontWeight: 700, color: "var(--ink-primary, #1b1733)" }, children: title }), summary ? (jsxRuntime.jsx("span", { style: { display: "block", marginTop: 3, fontFamily: "var(--font-sans)", fontSize: 12, color: "var(--ink-muted, #5b5670)", lineHeight: 1.35 }, children: summary })) : null] }), jsxRuntime.jsxs("span", { style: { display: "inline-flex", alignItems: "center", gap: 10, flexShrink: 0 }, children: [headerAccessory, collapsible && (jsxRuntime.jsx("span", { style: { color: "var(--primary)", display: "inline-flex" }, children: open ? jsxRuntime.jsx(ChevronDown, { className: "h-4 w-4", "aria-hidden": true }) : jsxRuntime.jsx(ChevronRight, { className: "h-4 w-4", "aria-hidden": true }) }))] })] }));
     return (jsxRuntime.jsxs("div", { "data-slot": "form-section", style: {
             border: "1px solid var(--border-default, var(--border, #e5e7eb))",
             borderRadius: "var(--radius-lg, 12px)",
             background: "var(--card, #fff)",
             overflow: "hidden",
-        }, children: [jsxRuntime.jsxs("button", { type: "button", onClick: onToggle, "aria-expanded": open, style: {
+        }, children: [collapsible ? (jsxRuntime.jsx("button", { type: "button", onClick: onToggle, "aria-expanded": open, style: {
                     width: "100%",
                     border: "none",
                     background: open ? "var(--surface-page, #f8f9fb)" : "var(--card, #fff)",
@@ -13910,7 +13913,7 @@ function FormSection({ title, summary, open, onToggle, children, footer, headerA
                     justifyContent: "space-between",
                     gap: 12,
                     textAlign: "left",
-                }, children: [jsxRuntime.jsxs("span", { children: [jsxRuntime.jsx("span", { style: { display: "block", fontFamily: "var(--font-sans)", fontSize: 14, fontWeight: 700, color: "var(--ink-primary, #1b1733)" }, children: title }), summary ? (jsxRuntime.jsx("span", { style: { display: "block", marginTop: 3, fontFamily: "var(--font-sans)", fontSize: 12, color: "var(--ink-muted, #5b5670)", lineHeight: 1.35 }, children: summary })) : null] }), jsxRuntime.jsxs("span", { style: { display: "inline-flex", alignItems: "center", gap: 10, flexShrink: 0 }, children: [headerAccessory, jsxRuntime.jsx("span", { style: { color: "var(--primary)", display: "inline-flex" }, children: open ? jsxRuntime.jsx(ChevronDown, { className: "h-4 w-4", "aria-hidden": true }) : jsxRuntime.jsx(ChevronRight, { className: "h-4 w-4", "aria-hidden": true }) })] })] }), open && (jsxRuntime.jsxs("div", { style: { borderTop: "1px solid var(--surface-alt, #eef1f5)", padding: 16 }, children: [children, footer && (jsxRuntime.jsx("div", { style: { marginTop: 16, display: "flex", justifyContent: "flex-end", gap: 8 }, children: footer }))] }))] }));
+                }, children: header })) : (jsxRuntime.jsx("div", { style: { background: "var(--card, #fff)", padding: "14px 16px" }, children: header })), open && (jsxRuntime.jsxs("div", { style: { borderTop: "1px solid var(--surface-alt, #eef1f5)", padding: 16 }, children: [children, footer && (jsxRuntime.jsx("div", { style: { marginTop: 16, display: "flex", justifyContent: "flex-end", gap: 8 }, children: footer }))] }))] }));
 }
 
 function SetupWizard({ open, onOpenChange, title, subtitle, steps, activeStep, onStepChange, onNext, onFinish, canAdvance = true, allowStepJump = true, finishLabel = "Finish", loading = false, supportSlot, children, className, }) {

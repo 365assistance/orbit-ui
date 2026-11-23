@@ -23,12 +23,15 @@ export interface FormSectionProps {
     title: string;
     /** Optional sub-line under the title. Use consistently across siblings or not at all. */
     summary?: string;
-    open: boolean;
-    onToggle: () => void;
+    /** Collapsible (default). When false, the body is always shown and the header
+     *  is static (no toggle button, no chevron); `open`/`onToggle` are ignored. */
+    collapsible?: boolean;
+    open?: boolean;
+    onToggle?: () => void;
     children: React.ReactNode;
     /** Bottom-of-panel actions (canonical Save + Cancel). */
     footer?: React.ReactNode;
     /** Element shown left of the chevron (e.g. a StatusChip). Use on all siblings or none. */
     headerAccessory?: React.ReactNode;
 }
-export declare function FormSection({ title, summary, open, onToggle, children, footer, headerAccessory, }: FormSectionProps): React.JSX.Element;
+export declare function FormSection({ title, summary, collapsible, open: openProp, onToggle, children, footer, headerAccessory, }: FormSectionProps): React.JSX.Element;

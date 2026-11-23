@@ -25,8 +25,11 @@ export interface FormSectionProps {
   title: string
   /** Optional sub-line under the title. Use consistently across siblings or not at all. */
   summary?: string
-  open: boolean
-  onToggle: () => void
+  /** Collapsible (default). When false, the body is always shown and the header
+   *  is static (no toggle button, no chevron); `open`/`onToggle` are ignored. */
+  collapsible?: boolean
+  open?: boolean
+  onToggle?: () => void
   children: React.ReactNode
   /** Bottom-of-panel actions (canonical Save + Cancel). */
   footer?: React.ReactNode
@@ -37,12 +40,35 @@ export interface FormSectionProps {
 export function FormSection({
   title,
   summary,
-  open,
+  collapsible = true,
+  open: openProp,
   onToggle,
   children,
   footer,
   headerAccessory,
 }: FormSectionProps) {
+  // Non-collapsible sections are always expanded.
+  const open = collapsible ? !!openProp : true
+
+  const header = (
+    <span style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 12, width: "100%" }}>
+      <span>
+        <span style={{ display: "block", fontFamily: "var(--font-sans)", fontSize: 14, fontWeight: 700, color: "var(--ink-primary, #1b1733)" }}>{title}</span>
+        {summary ? (
+          <span style={{ display: "block", marginTop: 3, fontFamily: "var(--font-sans)", fontSize: 12, color: "var(--ink-muted, #5b5670)", lineHeight: 1.35 }}>{summary}</span>
+        ) : null}
+      </span>
+      <span style={{ display: "inline-flex", alignItems: "center", gap: 10, flexShrink: 0 }}>
+        {headerAccessory}
+        {collapsible && (
+          <span style={{ color: "var(--primary)", display: "inline-flex" }}>
+            {open ? <ChevronDown className="h-4 w-4" aria-hidden /> : <ChevronRight className="h-4 w-4" aria-hidden />}
+          </span>
+        )}
+      </span>
+    </span>
+  )
+
   return (
     <div
       data-slot="form-section"
@@ -53,36 +79,29 @@ export function FormSection({
         overflow: "hidden",
       }}
     >
-      <button
-        type="button"
-        onClick={onToggle}
-        aria-expanded={open}
-        style={{
-          width: "100%",
-          border: "none",
-          background: open ? "var(--surface-page, #f8f9fb)" : "var(--card, #fff)",
-          padding: "14px 16px",
-          cursor: "pointer",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-          gap: 12,
-          textAlign: "left",
-        }}
-      >
-        <span>
-          <span style={{ display: "block", fontFamily: "var(--font-sans)", fontSize: 14, fontWeight: 700, color: "var(--ink-primary, #1b1733)" }}>{title}</span>
-          {summary ? (
-            <span style={{ display: "block", marginTop: 3, fontFamily: "var(--font-sans)", fontSize: 12, color: "var(--ink-muted, #5b5670)", lineHeight: 1.35 }}>{summary}</span>
-          ) : null}
-        </span>
-        <span style={{ display: "inline-flex", alignItems: "center", gap: 10, flexShrink: 0 }}>
-          {headerAccessory}
-          <span style={{ color: "var(--primary)", display: "inline-flex" }}>
-            {open ? <ChevronDown className="h-4 w-4" aria-hidden /> : <ChevronRight className="h-4 w-4" aria-hidden />}
-          </span>
-        </span>
-      </button>
+      {collapsible ? (
+        <button
+          type="button"
+          onClick={onToggle}
+          aria-expanded={open}
+          style={{
+            width: "100%",
+            border: "none",
+            background: open ? "var(--surface-page, #f8f9fb)" : "var(--card, #fff)",
+            padding: "14px 16px",
+            cursor: "pointer",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+            gap: 12,
+            textAlign: "left",
+          }}
+        >
+          {header}
+        </button>
+      ) : (
+        <div style={{ background: "var(--card, #fff)", padding: "14px 16px" }}>{header}</div>
+      )}
       {open && (
         <div style={{ borderTop: "1px solid var(--surface-alt, #eef1f5)", padding: 16 }}>
           {children}
