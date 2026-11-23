@@ -13633,7 +13633,9 @@ function DateTimePicker({ value, onChange, placeholder = 'Select date and time',
                         cursor: 'pointer', outline: 'none',
                         transition: 'border-color .12s ease',
                     }, children: [jsxRuntime.jsx("span", { children: parsed ? (dateOnly ? formatDisplayDate(parsed) : formatDisplay(parsed)) : placeholder }), jsxRuntime.jsx(Calendar, { className: "h-4 w-4", style: { color: 'var(--ink-muted)', flexShrink: 0 }, "aria-hidden": true })] }) }), jsxRuntime.jsx(Portal$1, { children: jsxRuntime.jsxs(Content2$1, { align: "start", sideOffset: 6, style: {
-                        zIndex: 60,
+                        // Above app popovers/menus (filter popovers sit ~z-70) so the
+                        // calendar isn't trapped behind a FilterMenu it's opened inside of.
+                        zIndex: 90,
                         background: 'var(--card)',
                         border: '1px solid var(--border-default)',
                         borderRadius: 'var(--radius-lg)',

@@ -186,7 +186,9 @@ export function DateTimePicker({
           align="start"
           sideOffset={6}
           style={{
-            zIndex: 60,
+            // Above app popovers/menus (filter popovers sit ~z-70) so the
+            // calendar isn't trapped behind a FilterMenu it's opened inside of.
+            zIndex: 90,
             background: 'var(--card)',
             border: '1px solid var(--border-default)',
             borderRadius: 'var(--radius-lg)',
