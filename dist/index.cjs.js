@@ -14414,12 +14414,18 @@ function TableCell({ className, ...props }) {
 // rather than a floating inset pill. Standalone <Table/> elsewhere keeps its
 // rounded floating band (that CSS lives in table.tsx). Scoped to
 // [data-slot="table-card"] so it only affects tables inside this component.
+// The standalone <Table/> rounds its header band's outer corners (10px) via a
+// <style> rendered INSIDE the table — which, as TableCard's child, sits AFTER
+// this block in source order. Equal specificity would let that radius win and
+// leave a visible curve on the band's top edge (Sofia 2026-11-23). So every
+// selector here carries an extra [data-slot="table"] step to out-specify the
+// standalone rule, and ALL FOUR corners are squared so the band is perfectly
+// flush with the card edge.
 const FLUSH_HEADER_CSS = `
-[data-slot="table-card"] [data-slot="table-head"]:first-child{border-top-left-radius:0;border-bottom-left-radius:0}
-[data-slot="table-card"] [data-slot="table-head"]:last-child{border-top-right-radius:0;border-bottom-right-radius:0}
-[data-slot="table-card"] [data-slot="table-head"]{border-bottom:1px solid var(--border-default,var(--border))}
-[data-slot="table-card"] [data-slot="table-head"]:first-child,[data-slot="table-card"] [data-slot="table-cell"]:first-child{padding-left:20px}
-[data-slot="table-card"] [data-slot="table-head"]:last-child,[data-slot="table-card"] [data-slot="table-cell"]:last-child{padding-right:20px}
+[data-slot="table-card"] [data-slot="table"] [data-slot="table-head"]{border-radius:0}
+[data-slot="table-card"] [data-slot="table"] [data-slot="table-head"]{border-bottom:1px solid var(--border-default,var(--border))}
+[data-slot="table-card"] [data-slot="table"] [data-slot="table-head"]:first-child,[data-slot="table-card"] [data-slot="table"] [data-slot="table-cell"]:first-child{padding-left:20px}
+[data-slot="table-card"] [data-slot="table"] [data-slot="table-head"]:last-child,[data-slot="table-card"] [data-slot="table"] [data-slot="table-cell"]:last-child{padding-right:20px}
 `;
 function TableCard({ search, actions, children, footer, className, style, }) {
     const hasToolbar = search != null || actions != null;
