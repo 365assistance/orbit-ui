@@ -1,8 +1,8 @@
 import * as React from "react";
 import { type VariantProps } from "class-variance-authority";
 declare const buttonVariants: (props?: ({
-    variant?: "default" | "link" | "destructive" | "secondary" | "outline" | "ghost" | "pill" | "subtle" | null | undefined;
-    size?: "sm" | "default" | "icon" | "xs" | "lg" | "icon-xs" | "icon-sm" | "icon-lg" | null | undefined;
+    variant?: "default" | "destructive" | "link" | "secondary" | "outline" | "ghost" | "pill" | "subtle" | null | undefined;
+    size?: "default" | "xs" | "sm" | "lg" | "icon" | "icon-xs" | "icon-sm" | "icon-lg" | null | undefined;
 } & import("class-variance-authority/types").ClassProp) | undefined) => string;
 type ButtonProps = React.ComponentProps<"button"> & VariantProps<typeof buttonVariants> & {
     asChild?: boolean;
