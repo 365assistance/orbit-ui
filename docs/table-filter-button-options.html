@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Table filter button options</title>
+<style>
+  :root{
+    --purple:#92248E; --purple-d:#7A1F75; --orange:#FE4A00;
+    --ink:#242D38; --mid:#5b6470; --muted:#707885; --faint:#A0A8B4;
+    --surface:#F8F9FB; --border:#E2E4E9; --line:#EEF1F5; --alt:#F0F2F8;
+    --success:#16a34a; --accent:#F6E9F6;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:'Segoe UI',system-ui,Arial,sans-serif;color:var(--ink);background:var(--surface);padding:40px;}
+  h1{font-size:26px;font-weight:800;}
+  .intro{color:var(--muted);font-size:15px;margin:8px 0 34px;max-width:760px;line-height:1.5;}
+  .opt{margin-bottom:46px;}
+  .opt h2{font-size:18px;font-weight:800;color:var(--purple);}
+  .opt .d{font-size:14px;color:var(--mid);margin:6px 0 18px;max-width:720px;line-height:1.5;}
+  /* table card */
+  .card{background:#fff;border:1px solid var(--border);border-radius:14px;box-shadow:0 8px 28px rgba(36,45,56,.05);overflow:visible;max-width:920px;}
+  .toolbar{display:flex;align-items:center;gap:12px;padding:16px 18px;border-bottom:1px solid var(--line);position:relative;}
+  .search{flex:1;max-width:320px;height:38px;border:1px solid #D8DEE6;border-radius:8px;display:flex;align-items:center;padding:0 12px;color:var(--faint);font-size:13px;gap:8px;}
+  .search svg{width:15px;height:15px;}
+  .spacer{flex:1;}
+  .btn{height:38px;border-radius:8px;border:1px solid #D8DEE6;background:#fff;padding:0 14px;font-size:13px;font-weight:600;color:var(--ink);display:inline-flex;align-items:center;gap:8px;cursor:default;}
+  .btn.primary{background:var(--purple);border-color:var(--purple);color:#fff;}
+  .btn .chev{width:14px;height:14px;opacity:.6;}
+  .count{background:var(--purple);color:#fff;font-size:11px;font-weight:800;min-width:18px;height:18px;border-radius:9px;display:inline-grid;place-items:center;padding:0 5px;}
+  .filtericon{width:15px;height:15px;}
+  /* table body */
+  table{width:100%;border-collapse:collapse;}
+  th{ text-align:left;font-size:11px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);background:var(--alt);padding:11px 18px;}
+  td{padding:13px 18px;font-size:14px;color:var(--ink);border-top:1px solid var(--line);}
+  .chip{display:inline-block;font-size:12px;font-weight:600;padding:2px 10px;border-radius:999px;border:1px solid;}
+  .chip.active{color:var(--success);border-color:var(--success);}
+  .chip.pending{color:#d97706;border-color:#d97706;}
+  /* active filter chips row */
+  .chips{display:flex;gap:8px;flex-wrap:wrap;padding:12px 18px;border-bottom:1px solid var(--line);align-items:center;}
+  .fchip{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;color:var(--purple);background:var(--accent);border:1px solid #e3c7e2;border-radius:999px;padding:3px 6px 3px 10px;}
+  .fchip .x{width:15px;height:15px;border-radius:50%;background:#fff;display:inline-grid;place-items:center;font-size:11px;color:var(--purple);}
+  .clearall{font-size:12px;font-weight:600;color:var(--muted);text-decoration:underline;margin-left:4px;}
+  /* popover */
+  .pop{position:absolute;top:60px;right:18px;width:300px;background:#fff;border:1px solid var(--border);border-radius:12px;box-shadow:0 16px 44px rgba(36,45,56,.18);z-index:5;overflow:hidden;}
+  .pop .ph{display:flex;align-items:center;justify-content:space-between;padding:12px 14px;border-bottom:1px solid var(--line);font-weight:800;font-size:14px;}
+  .pop .ph a{font-size:12px;font-weight:600;color:var(--muted);text-decoration:underline;}
+  .fsec{padding:12px 14px;border-bottom:1px solid var(--line);}
+  .fsec:last-of-type{border-bottom:none;}
+  .fsec .lbl{font-size:12px;font-weight:700;color:var(--muted);margin-bottom:8px;text-transform:uppercase;letter-spacing:.03em;}
+  .optrow{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--ink);padding:4px 0;}
+  .box{width:16px;height:16px;border-radius:4px;border:1.5px solid #cbd2dc;display:inline-grid;place-items:center;}
+  .box.on{background:var(--purple);border-color:var(--purple);color:#fff;font-size:11px;}
+  .popfoot{display:flex;gap:8px;padding:12px 14px;}
+  .popfoot .b{flex:1;height:34px;border-radius:7px;font-size:13px;font-weight:700;display:grid;place-items:center;}
+  .popfoot .apply{background:var(--purple);color:#fff;}
+  .popfoot .reset{background:var(--accent);color:var(--purple);border:1px solid #e3c7e2;}
+  .pill-dd{position:absolute;top:60px;left:150px;width:190px;background:#fff;border:1px solid var(--border);border-radius:10px;box-shadow:0 14px 40px rgba(36,45,56,.16);z-index:5;padding:6px;}
+  .ddh{font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;padding:6px 8px 4px;}
+  .ddi{font-size:13px;padding:7px 8px;border-radius:6px;color:var(--ink);}
+  .ddi.sel{color:var(--purple);font-weight:700;background:var(--accent);}
+  .note{font-size:13px;color:var(--faint);margin-top:12px;max-width:760px;line-height:1.5;}
+  .seticon{display:inline-flex;}
+</style>
+</head>
+<body>
+  <h1>Table filter button: two options</h1>
+  <div class="intro">You liked TableCard and want a variation that combines multiple filters into one filter button instead of a row of separate dropdowns. Here are the two common patterns, both on the TableCard you already have. Pick one and I'll build it into the library.</div>
+
+  <!-- OPTION 1: popover with count -->
+  <div class="opt">
+    <h2>Option 1, one Filters button with a count, opens a panel</h2>
+    <div class="d">A single "Filters" button shows how many filters are active (the badge). Clicking it opens a panel holding every filter in one place, with Apply and Reset. Active filters also show as removable chips above the table so they stay visible. This is the standard pattern for data-dense tables with several filters.</div>
+    <div class="card">
+      <div class="toolbar">
+        <div class="search"><svg viewBox="0 0 24 24" fill="none" stroke="#A0A8B4" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg>Search invoices</div>
+        <div class="spacer"></div>
+        <div class="btn"><svg class="filtericon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 5h18M6 12h12M10 19h4"/></svg>Filters <span class="count">3</span></div>
+        <div class="btn primary">+ New invoice</div>
+        <!-- popover -->
+        <div class="pop">
+          <div class="ph">Filters <a>Reset</a></div>
+          <div class="fsec">
+            <div class="lbl">Status</div>
+            <div class="optrow"><span class="box on">&#10003;</span> Active</div>
+            <div class="optrow"><span class="box on">&#10003;</span> Pending</div>
+            <div class="optrow"><span class="box"></span> Expired</div>
+          </div>
+          <div class="fsec">
+            <div class="lbl">Plan</div>
+            <div class="optrow"><span class="box on">&#10003;</span> Premium</div>
+            <div class="optrow"><span class="box"></span> Basic</div>
+          </div>
+          <div class="popfoot"><div class="b reset">Reset</div><div class="b apply">Apply</div></div>
+        </div>
+      </div>
+      <div class="chips">
+        <span class="fchip">Status: Active <span class="x">&times;</span></span>
+        <span class="fchip">Status: Pending <span class="x">&times;</span></span>
+        <span class="fchip">Plan: Premium <span class="x">&times;</span></span>
+        <span class="clearall">Clear all</span>
+      </div>
+      <table>
+        <thead><tr><th>Invoice</th><th>Customer</th><th>Status</th><th>Amount</th></tr></thead>
+        <tbody>
+          <tr><td>INV-1042</td><td>Acme Pty Ltd</td><td><span class="chip active">Active</span></td><td>$1,240</td></tr>
+          <tr><td>INV-1043</td><td>Globex</td><td><span class="chip pending">Pending</span></td><td>$880</td></tr>
+          <tr><td>INV-1044</td><td>Initech</td><td><span class="chip active">Active</span></td><td>$2,110</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="note">Best when there are 3+ filters. The count and the chip row keep active filters visible even though the controls are tucked away.</div>
+  </div>
+
+  <!-- OPTION 2: single dropdown with sections -->
+  <div class="opt">
+    <h2>Option 2, one dropdown that holds multiple filter sections</h2>
+    <div class="d">A single "Filter" dropdown that, when opened, lists each filter as its own section inline (no separate panel, no Apply step, it filters as you pick). Lighter weight than the panel. Good when there are only two or three simple filters.</div>
+    <div class="card">
+      <div class="toolbar">
+        <div class="search"><svg viewBox="0 0 24 24" fill="none" stroke="#A0A8B4" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg>Search invoices</div>
+        <div class="btn" style="margin-left:4px;"><svg class="filtericon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 5h18M6 12h12M10 19h4"/></svg>Filter <span class="count">2</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></div>
+        <div class="spacer"></div>
+        <div class="btn primary">+ New invoice</div>
+        <div class="pill-dd">
+          <div class="ddh">Status</div>
+          <div class="ddi sel">Active</div>
+          <div class="ddi">Pending</div>
+          <div class="ddi">Expired</div>
+          <div class="ddh" style="margin-top:4px;">Plan</div>
+          <div class="ddi sel">Premium</div>
+          <div class="ddi">Basic</div>
+        </div>
+      </div>
+      <table>
+        <thead><tr><th>Invoice</th><th>Customer</th><th>Status</th><th>Amount</th></tr></thead>
+        <tbody>
+          <tr><td>INV-1042</td><td>Acme Pty Ltd</td><td><span class="chip active">Active</span></td><td>$1,240</td></tr>
+          <tr><td>INV-1044</td><td>Initech</td><td><span class="chip active">Active</span></td><td>$2,110</td></tr>
+          <tr><td>INV-1051</td><td>Umbrella</td><td><span class="chip active">Active</span></td><td>$640</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="note">Lighter and faster for a couple of filters. Less room to grow, and active filters are only shown by the count, not chips.</div>
+  </div>
+
+  <div class="note" style="color:var(--mid);"><strong>My recommendation:</strong> Option 1 (Filters button + count + panel + removable chips). It scales as filters grow, keeps active filters visible, and matches the data-dense finance tables. Option 2 is nicer only when you are sure it stays at two or three simple filters.</div>
+</body>
+</html>

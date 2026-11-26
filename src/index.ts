@@ -42,6 +42,7 @@ export * from "./components/spinner";
 export * from "./components/table";
 export * from "./components/table-card";
 export * from "./components/table-toolbar";
+export * from "./components/table-filter";
 export * from "./components/tabs";
 
 export * from "./components/tooltip";
