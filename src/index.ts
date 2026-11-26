@@ -27,6 +27,8 @@ export * from "./components/setup-wizard";
 export * from "./components/filter-bar";
 export * from "./components/filter-select";
 export * from "./components/input";
+export * from "./components/textarea";
+export * from "./components/checkbox";
 export * from "./components/label";
 
 export * from "./components/pagination";

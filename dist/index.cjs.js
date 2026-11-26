@@ -3374,8 +3374,8 @@ function AlertAction({ className, ...props }) {
     return (jsxRuntime.jsx("div", { "data-slot": "alert-action", className: cn("absolute top-2 right-2", className), ...props }));
 }
 
-var __defProp$t = Object.defineProperty;
-var __name$t = (target, value) => __defProp$t(target, "name", { value, configurable: true });
+var __defProp$u = Object.defineProperty;
+var __name$u = (target, value) => __defProp$u(target, "name", { value, configurable: true });
 function setRef$1(ref, value) {
   if (typeof ref === "function") {
     return ref(value);
@@ -3383,7 +3383,7 @@ function setRef$1(ref, value) {
     ref.current = value;
   }
 }
-__name$t(setRef$1, "setRef");
+__name$u(setRef$1, "setRef");
 function composeRefs(...refs) {
   return (node) => {
     let hasCleanup = false;
@@ -3408,14 +3408,14 @@ function composeRefs(...refs) {
     }
   };
 }
-__name$t(composeRefs, "composeRefs");
+__name$u(composeRefs, "composeRefs");
 function useComposedRefs(...refs) {
   return React__namespace.useCallback(composeRefs(...refs), refs);
 }
-__name$t(useComposedRefs, "useComposedRefs");
+__name$u(useComposedRefs, "useComposedRefs");
 
-var __defProp$s = Object.defineProperty;
-var __name$s = (target, value) => __defProp$s(target, "name", { value, configurable: true });
+var __defProp$t = Object.defineProperty;
+var __name$t = (target, value) => __defProp$t(target, "name", { value, configurable: true });
 // @__NO_SIDE_EFFECTS__
 function createSlot(ownerName) {
   const Slot2 = React__namespace.forwardRef((props, forwardedRef) => {
@@ -3470,18 +3470,18 @@ function createSlot(ownerName) {
   Slot2.displayName = `${ownerName}.Slot`;
   return Slot2;
 }
-__name$s(createSlot, "createSlot");
+__name$t(createSlot, "createSlot");
 var Slot$3 = /* @__PURE__ */ createSlot("Slot");
 var SLOTTABLE_IDENTIFIER = Symbol.for("radix.slottable");
 // @__NO_SIDE_EFFECTS__
 function createSlottable(ownerName) {
-  const Slottable2 = /* @__PURE__ */ __name$s((props) => "child" in props ? props.children(props.child) : props.children, "Slottable");
+  const Slottable2 = /* @__PURE__ */ __name$t((props) => "child" in props ? props.children(props.child) : props.children, "Slottable");
   Slottable2.displayName = `${ownerName}.Slottable`;
   Slottable2.__radixId = SLOTTABLE_IDENTIFIER;
   return Slottable2;
 }
-__name$s(createSlottable, "createSlottable");
-var getSlottableElementFromSlottable = /* @__PURE__ */ __name$s((slottable, child) => {
+__name$t(createSlottable, "createSlottable");
+var getSlottableElementFromSlottable = /* @__PURE__ */ __name$t((slottable, child) => {
   if ("child" in slottable.props) {
     const child2 = slottable.props.child;
     if (!React__namespace.isValidElement(child2)) return null;
@@ -3513,7 +3513,7 @@ function mergeProps(slotProps, childProps) {
   }
   return { ...slotProps, ...overrideProps };
 }
-__name$s(mergeProps, "mergeProps");
+__name$t(mergeProps, "mergeProps");
 function getElementRef$1(element) {
   let getter = Object.getOwnPropertyDescriptor(element.props, "ref")?.get;
   let mayWarn = getter && "isReactWarning" in getter && getter.isReactWarning;
@@ -3527,30 +3527,30 @@ function getElementRef$1(element) {
   }
   return element.props.ref || element.ref;
 }
-__name$s(getElementRef$1, "getElementRef");
+__name$t(getElementRef$1, "getElementRef");
 function isSlottable(child) {
   return React__namespace.isValidElement(child) && typeof child.type === "function" && "__radixId" in child.type && child.type.__radixId === SLOTTABLE_IDENTIFIER;
 }
-__name$s(isSlottable, "isSlottable");
+__name$t(isSlottable, "isSlottable");
 var REACT_LAZY_TYPE = Symbol.for("react.lazy");
 function isLazyComponent(element) {
   return element != null && typeof element === "object" && "$$typeof" in element && element.$$typeof === REACT_LAZY_TYPE && "_payload" in element && isPromiseLike(element._payload);
 }
-__name$s(isLazyComponent, "isLazyComponent");
+__name$t(isLazyComponent, "isLazyComponent");
 function isPromiseLike(value) {
   return typeof value === "object" && value !== null && "then" in value;
 }
-__name$s(isPromiseLike, "isPromiseLike");
-var createSlotError = /* @__PURE__ */ __name$s((ownerName) => {
+__name$t(isPromiseLike, "isPromiseLike");
+var createSlotError = /* @__PURE__ */ __name$t((ownerName) => {
   return `${ownerName} failed to slot onto its children. Expected a single React element child or \`Slottable\`.`;
 }, "createSlotError");
-var createSlottableError = /* @__PURE__ */ __name$s((ownerName) => {
+var createSlottableError = /* @__PURE__ */ __name$t((ownerName) => {
   return `${ownerName} failed to slot onto its \`Slottable\`. Expected \`Slottable\` to receive a single React element child.`;
 }, "createSlottableError");
 var use = React__namespace[" use ".trim().toString()];
 
-var __defProp$r = Object.defineProperty;
-var __name$r = (target, value) => __defProp$r(target, "name", { value, configurable: true });
+var __defProp$s = Object.defineProperty;
+var __name$s = (target, value) => __defProp$s(target, "name", { value, configurable: true });
 var NODES = [
   "a",
   "button",
@@ -3586,10 +3586,10 @@ var Primitive = NODES.reduce((primitive, node) => {
 function dispatchDiscreteCustomEvent(target, event) {
   if (target) ReactDOM__namespace.flushSync(() => target.dispatchEvent(event));
 }
-__name$r(dispatchDiscreteCustomEvent, "dispatchDiscreteCustomEvent");
+__name$s(dispatchDiscreteCustomEvent, "dispatchDiscreteCustomEvent");
 
-var __defProp$q = Object.defineProperty;
-var __name$q = (target, value) => __defProp$q(target, "name", { value, configurable: true });
+var __defProp$r = Object.defineProperty;
+var __name$r = (target, value) => __defProp$r(target, "name", { value, configurable: true });
 var VISUALLY_HIDDEN_STYLES = Object.freeze({
   // See: https://github.com/twbs/bootstrap/blob/main/scss/mixins/_visually-hidden.scss
   position: "absolute",
@@ -3604,7 +3604,7 @@ var VISUALLY_HIDDEN_STYLES = Object.freeze({
   wordWrap: "normal"
 });
 var VisuallyHidden = /* @__PURE__ */ React__namespace.forwardRef(
-  /* @__PURE__ */ __name$q(function VisuallyHidden2(props, forwardedRef) {
+  /* @__PURE__ */ __name$r(function VisuallyHidden2(props, forwardedRef) {
     return /* @__PURE__ */ jsxRuntime.jsx(
       Primitive.span,
       {
@@ -3617,13 +3617,13 @@ var VisuallyHidden = /* @__PURE__ */ React__namespace.forwardRef(
 );
 var Root$4 = VisuallyHidden;
 
-var __defProp$p = Object.defineProperty;
-var __name$p = (target, value) => __defProp$p(target, "name", { value, configurable: true });
+var __defProp$q = Object.defineProperty;
+var __name$q = (target, value) => __defProp$q(target, "name", { value, configurable: true });
 // @__NO_SIDE_EFFECTS__
 function createContext2(rootComponentName, defaultContext) {
   const Context = React__namespace.createContext(defaultContext);
   Context.displayName = rootComponentName + "Context";
-  const Provider = /* @__PURE__ */ __name$p((props) => {
+  const Provider = /* @__PURE__ */ __name$q((props) => {
     const { children, ...context } = props;
     const value = React__namespace.useMemo(() => context, Object.values(context));
     return /* @__PURE__ */ jsxRuntime.jsx(Context.Provider, { value, children });
@@ -3637,10 +3637,10 @@ function createContext2(rootComponentName, defaultContext) {
     if (optional) return void 0;
     throw new Error(`\`${consumerName}\` must be used within \`${rootComponentName}\``);
   }
-  __name$p(useContext2, "useContext");
+  __name$q(useContext2, "useContext");
   return [Provider, useContext2];
 }
-__name$p(createContext2, "createContext");
+__name$q(createContext2, "createContext");
 // @__NO_SIDE_EFFECTS__
 function createContextScope(scopeName, createContextScopeDeps = []) {
   let defaultContexts = [];
@@ -3649,7 +3649,7 @@ function createContextScope(scopeName, createContextScopeDeps = []) {
     BaseContext.displayName = rootComponentName + "Context";
     const index = defaultContexts.length;
     defaultContexts = [...defaultContexts, defaultContext];
-    const Provider = /* @__PURE__ */ __name$p((props) => {
+    const Provider = /* @__PURE__ */ __name$q((props) => {
       const { scope, children, ...context } = props;
       const Context = scope?.[scopeName]?.[index] || BaseContext;
       const value = React__namespace.useMemo(() => context, Object.values(context));
@@ -3665,15 +3665,15 @@ function createContextScope(scopeName, createContextScopeDeps = []) {
       if (optional) return void 0;
       throw new Error(`\`${consumerName}\` must be used within \`${rootComponentName}\``);
     }
-    __name$p(useContext2, "useContext");
+    __name$q(useContext2, "useContext");
     return [Provider, useContext2];
   }
-  __name$p(createContext3, "createContext");
-  const createScope = /* @__PURE__ */ __name$p(() => {
+  __name$q(createContext3, "createContext");
+  const createScope = /* @__PURE__ */ __name$q(() => {
     const scopeContexts = defaultContexts.map((defaultContext) => {
       return React__namespace.createContext(defaultContext);
     });
-    return /* @__PURE__ */ __name$p(function useScope(scope) {
+    return /* @__PURE__ */ __name$q(function useScope(scope) {
       const contexts = scope?.[scopeName] || scopeContexts;
       return React__namespace.useMemo(
         () => ({ [`__scope${scopeName}`]: { ...scope, [scopeName]: contexts } }),
@@ -3684,16 +3684,16 @@ function createContextScope(scopeName, createContextScopeDeps = []) {
   createScope.scopeName = scopeName;
   return [createContext3, composeContextScopes(createScope, ...createContextScopeDeps)];
 }
-__name$p(createContextScope, "createContextScope");
+__name$q(createContextScope, "createContextScope");
 function composeContextScopes(...scopes) {
   const baseScope = scopes[0];
   if (scopes.length === 1) return baseScope;
-  const createScope = /* @__PURE__ */ __name$p(() => {
+  const createScope = /* @__PURE__ */ __name$q(() => {
     const scopeHooks = scopes.map((createScope2) => ({
       useScope: createScope2(),
       scopeName: createScope2.scopeName
     }));
-    return /* @__PURE__ */ __name$p(function useComposedScopes(overrideScopes) {
+    return /* @__PURE__ */ __name$q(function useComposedScopes(overrideScopes) {
       const nextScopes = scopeHooks.reduce((nextScopes2, { useScope, scopeName }) => {
         const scopeProps = useScope(overrideScopes);
         const currentScope = scopeProps[`__scope${scopeName}`];
@@ -3705,10 +3705,10 @@ function composeContextScopes(...scopes) {
   createScope.scopeName = baseScope.scopeName;
   return createScope;
 }
-__name$p(composeContextScopes, "composeContextScopes");
+__name$q(composeContextScopes, "composeContextScopes");
 
-var __defProp$o = Object.defineProperty;
-var __name$o = (target, value) => __defProp$o(target, "name", { value, configurable: true });
+var __defProp$p = Object.defineProperty;
+var __name$p = (target, value) => __defProp$p(target, "name", { value, configurable: true });
 // @__NO_SIDE_EFFECTS__
 function createCollection(name) {
   const PROVIDER_NAME = name + "CollectionProvider";
@@ -3717,7 +3717,7 @@ function createCollection(name) {
     PROVIDER_NAME,
     { collectionRef: { current: null }, itemMap: /* @__PURE__ */ new Map() }
   );
-  const CollectionProvider = /* @__PURE__ */ __name$o((props) => {
+  const CollectionProvider = /* @__PURE__ */ __name$p((props) => {
     const { scope, children } = props;
     const ref = React__namespace.useRef(null);
     const itemMap = React__namespace.useRef(/* @__PURE__ */ new Map()).current;
@@ -3766,20 +3766,20 @@ function createCollection(name) {
     }, [context.collectionRef, context.itemMap]);
     return getItems;
   }
-  __name$o(useCollection, "useCollection");
+  __name$p(useCollection, "useCollection");
   return [
     { Provider: CollectionProvider, Slot: CollectionSlot, ItemSlot: CollectionItemSlot },
     useCollection,
     createCollectionScope
   ];
 }
-__name$o(createCollection, "createCollection");
+__name$p(createCollection, "createCollection");
 
 // src/ordered-dictionary.ts
 var __instanciated = /* @__PURE__ */ new WeakMap();
 var OrderedDict = class _OrderedDict extends Map {
   static {
-    __name$o(this, "OrderedDict");
+    __name$p(this, "OrderedDict");
   }
   #keys;
   constructor(entries) {
@@ -4073,18 +4073,18 @@ function at(array, index) {
   const actualIndex = toSafeIndex(array, index);
   return actualIndex === -1 ? void 0 : array[actualIndex];
 }
-__name$o(at, "at");
+__name$p(at, "at");
 function toSafeIndex(array, index) {
   const length = array.length;
   const relativeIndex = toSafeInteger(index);
   const actualIndex = relativeIndex >= 0 ? relativeIndex : length + relativeIndex;
   return actualIndex < 0 || actualIndex >= length ? -1 : actualIndex;
 }
-__name$o(toSafeIndex, "toSafeIndex");
+__name$p(toSafeIndex, "toSafeIndex");
 function toSafeInteger(number) {
   return number !== number || number === 0 ? 0 : Math.trunc(number);
 }
-__name$o(toSafeInteger, "toSafeInteger");
+__name$p(toSafeInteger, "toSafeInteger");
 // @__NO_SIDE_EFFECTS__
 function createCollection2(name) {
   const PROVIDER_NAME = name + "CollectionProvider";
@@ -4096,19 +4096,19 @@ function createCollection2(name) {
       collectionRef: { current: null },
       collectionRefObject: { current: null },
       itemMap: new OrderedDict(),
-      setItemMap: /* @__PURE__ */ __name$o(() => void 0, "setItemMap")
+      setItemMap: /* @__PURE__ */ __name$p(() => void 0, "setItemMap")
     }
   );
-  const CollectionProvider = /* @__PURE__ */ __name$o(({ state, ...props }) => {
+  const CollectionProvider = /* @__PURE__ */ __name$p(({ state, ...props }) => {
     return state ? /* @__PURE__ */ jsxRuntime.jsx(CollectionProviderImpl, { ...props, state }) : /* @__PURE__ */ jsxRuntime.jsx(CollectionInit, { ...props });
   }, "CollectionProvider");
   CollectionProvider.displayName = PROVIDER_NAME;
-  const CollectionInit = /* @__PURE__ */ __name$o((props) => {
+  const CollectionInit = /* @__PURE__ */ __name$p((props) => {
     const state = useInitCollection();
     return /* @__PURE__ */ jsxRuntime.jsx(CollectionProviderImpl, { ...props, state });
   }, "CollectionInit");
   CollectionInit.displayName = PROVIDER_NAME + "Init";
-  const CollectionProviderImpl = /* @__PURE__ */ __name$o((props) => {
+  const CollectionProviderImpl = /* @__PURE__ */ __name$p((props) => {
     const { scope, children, state } = props;
     const ref = React__namespace.useRef(null);
     const [collectionElement, setCollectionElement] = React__namespace.useState(
@@ -4198,12 +4198,12 @@ function createCollection2(name) {
   function useInitCollection() {
     return React__namespace.useState(new OrderedDict());
   }
-  __name$o(useInitCollection, "useInitCollection");
+  __name$p(useInitCollection, "useInitCollection");
   function useCollection(scope) {
     const { itemMap } = useCollectionContext(name + "CollectionConsumer", scope);
     return itemMap;
   }
-  __name$o(useCollection, "useCollection");
+  __name$p(useCollection, "useCollection");
   const functions = {
     createCollectionScope,
     useCollection,
@@ -4214,7 +4214,7 @@ function createCollection2(name) {
     functions
   ];
 }
-__name$o(createCollection2, "createCollection");
+__name$p(createCollection2, "createCollection");
 function shallowEqual(a, b) {
   if (a === b) return true;
   if (typeof a !== "object" || typeof b !== "object") return false;
@@ -4228,15 +4228,15 @@ function shallowEqual(a, b) {
   }
   return true;
 }
-__name$o(shallowEqual, "shallowEqual");
+__name$p(shallowEqual, "shallowEqual");
 function isElementPreceding(a, b) {
   return !!(b.compareDocumentPosition(a) & Node.DOCUMENT_POSITION_PRECEDING);
 }
-__name$o(isElementPreceding, "isElementPreceding");
+__name$p(isElementPreceding, "isElementPreceding");
 function sortByDocumentPosition(a, b) {
   return !a[1].element || !b[1].element ? 0 : isElementPreceding(a[1].element, b[1].element) ? -1 : 1;
 }
-__name$o(sortByDocumentPosition, "sortByDocumentPosition");
+__name$p(sortByDocumentPosition, "sortByDocumentPosition");
 function getChildListObserver(callback) {
   const observer = new MutationObserver((mutationsList) => {
     for (const mutation of mutationsList) {
@@ -4248,36 +4248,36 @@ function getChildListObserver(callback) {
   });
   return observer;
 }
-__name$o(getChildListObserver, "getChildListObserver");
+__name$p(getChildListObserver, "getChildListObserver");
 
-var __defProp$n = Object.defineProperty;
-var __name$n = (target, value) => __defProp$n(target, "name", { value, configurable: true });
+var __defProp$o = Object.defineProperty;
+var __name$o = (target, value) => __defProp$o(target, "name", { value, configurable: true });
 
 // src/primitive.tsx
 var canUseDOM = !!(typeof window !== "undefined" && window.document && window.document.createElement);
 function composeEventHandlers(originalEventHandler, ourEventHandler, { checkForDefaultPrevented = true } = {}) {
-  return /* @__PURE__ */ __name$n(function handleEvent(event) {
+  return /* @__PURE__ */ __name$o(function handleEvent(event) {
     originalEventHandler?.(event);
     if (checkForDefaultPrevented === false || !event || !event.defaultPrevented) {
       return ourEventHandler?.(event);
     }
   }, "handleEvent");
 }
-__name$n(composeEventHandlers, "composeEventHandlers");
+__name$o(composeEventHandlers, "composeEventHandlers");
 function getOwnerWindow(element) {
   if (!canUseDOM) {
     throw new Error("Cannot access window outside of the DOM");
   }
   return element?.ownerDocument?.defaultView ?? window;
 }
-__name$n(getOwnerWindow, "getOwnerWindow");
+__name$o(getOwnerWindow, "getOwnerWindow");
 function getOwnerDocument(element) {
   if (!canUseDOM) {
     throw new Error("Cannot access document outside of the DOM");
   }
   return element?.ownerDocument ?? document;
 }
-__name$n(getOwnerDocument, "getOwnerDocument");
+__name$o(getOwnerDocument, "getOwnerDocument");
 function getActiveElement(node, activeDescendant = false) {
   const { activeElement } = getOwnerDocument(node);
   if (!activeElement?.nodeName) {
@@ -4297,18 +4297,18 @@ function getActiveElement(node, activeDescendant = false) {
   }
   return activeElement;
 }
-__name$n(getActiveElement, "getActiveElement");
+__name$o(getActiveElement, "getActiveElement");
 function isFrame(element) {
   return element.tagName === "IFRAME";
 }
-__name$n(isFrame, "isFrame");
+__name$o(isFrame, "isFrame");
 
 // src/use-layout-effect.tsx
 var useLayoutEffect2 = globalThis?.document ? React__namespace.useLayoutEffect : () => {
 };
 
-var __defProp$m = Object.defineProperty;
-var __name$m = (target, value) => __defProp$m(target, "name", { value, configurable: true });
+var __defProp$n = Object.defineProperty;
+var __name$n = (target, value) => __defProp$n(target, "name", { value, configurable: true });
 var useReactEffectEvent = React__namespace[" useEffectEvent ".trim().toString()];
 var useReactInsertionEffect = React__namespace[" useInsertionEffect ".trim().toString()];
 function useEffectEvent(callback) {
@@ -4329,15 +4329,15 @@ function useEffectEvent(callback) {
   }
   return React__namespace.useMemo(() => ((...args) => ref.current?.(...args)), []);
 }
-__name$m(useEffectEvent, "useEffectEvent");
+__name$n(useEffectEvent, "useEffectEvent");
 
-var __defProp$l = Object.defineProperty;
-var __name$l = (target, value) => __defProp$l(target, "name", { value, configurable: true });
+var __defProp$m = Object.defineProperty;
+var __name$m = (target, value) => __defProp$m(target, "name", { value, configurable: true });
 var useInsertionEffect = React__namespace[" useInsertionEffect ".trim().toString()] || useLayoutEffect2;
 function useControllableState({
   prop,
   defaultProp,
-  onChange = /* @__PURE__ */ __name$l(() => {
+  onChange = /* @__PURE__ */ __name$m(() => {
   }, "onChange"),
   caller
 }) {
@@ -4350,7 +4350,7 @@ function useControllableState({
   const setValue = React__namespace.useCallback(
     (nextValue) => {
       if (isControlled) {
-        const value2 = isFunction(nextValue) ? nextValue(prop) : nextValue;
+        const value2 = isFunction$1(nextValue) ? nextValue(prop) : nextValue;
         if (value2 !== prop) {
           onChangeRef.current?.(value2);
         }
@@ -4362,7 +4362,7 @@ function useControllableState({
   );
   return [value, setValue];
 }
-__name$l(useControllableState, "useControllableState");
+__name$m(useControllableState, "useControllableState");
 function useUncontrolledState({
   defaultProp,
   onChange
@@ -4381,11 +4381,11 @@ function useUncontrolledState({
   }, [value, prevValueRef]);
   return [value, setValue, onChangeRef];
 }
-__name$l(useUncontrolledState, "useUncontrolledState");
-function isFunction(value) {
+__name$m(useUncontrolledState, "useUncontrolledState");
+function isFunction$1(value) {
   return typeof value === "function";
 }
-__name$l(isFunction, "isFunction");
+__name$m(isFunction$1, "isFunction");
 var SYNC_STATE = Symbol("RADIX:SYNC_STATE");
 function useControllableStateReducer(reducer, userArgs, initialArg, init) {
   const { prop: controlledState, defaultProp, onChange: onChangeProp, caller } = userArgs;
@@ -4432,20 +4432,20 @@ function useControllableStateReducer(reducer, userArgs, initialArg, init) {
   }, [controlledState, internalState.state, isControlled]);
   return [state, dispatch];
 }
-__name$l(useControllableStateReducer, "useControllableStateReducer");
+__name$m(useControllableStateReducer, "useControllableStateReducer");
 
-var __defProp$k = Object.defineProperty;
-var __name$k = (target, value) => __defProp$k(target, "name", { value, configurable: true });
+var __defProp$l = Object.defineProperty;
+var __name$l = (target, value) => __defProp$l(target, "name", { value, configurable: true });
 function useStateMachine(initialState, machine) {
   return React__namespace.useReducer((state, event) => {
     const nextState = machine[state][event];
     return nextState ?? state;
   }, initialState);
 }
-__name$k(useStateMachine, "useStateMachine");
+__name$l(useStateMachine, "useStateMachine");
 
 // src/presence.tsx
-var Presence = /* @__PURE__ */ __name$k((props) => {
+var Presence = /* @__PURE__ */ __name$l((props) => {
   const { present, children } = props;
   const presence = usePresence(present);
   const child = typeof children === "function" ? children({ present: presence.isPresent }) : React__namespace.Children.only(children);
@@ -4508,7 +4508,7 @@ function usePresence(present) {
     if (node) {
       let timeoutId;
       const ownerWindow = node.ownerDocument.defaultView ?? window;
-      const handleAnimationEnd = /* @__PURE__ */ __name$k((event) => {
+      const handleAnimationEnd = /* @__PURE__ */ __name$l((event) => {
         const currentAnimationName = getAnimationName(stylesRef.current);
         const isCurrentAnimation = currentAnimationName.includes(CSS.escape(event.animationName));
         if (event.target === node && isCurrentAnimation) {
@@ -4524,7 +4524,7 @@ function usePresence(present) {
           }
         }
       }, "handleAnimationEnd");
-      const handleAnimationStart = /* @__PURE__ */ __name$k((event) => {
+      const handleAnimationStart = /* @__PURE__ */ __name$l((event) => {
         if (event.target === node) {
           prevAnimationNameRef.current = getAnimationName(stylesRef.current);
         }
@@ -4556,7 +4556,7 @@ function usePresence(present) {
     }, [])
   };
 }
-__name$k(usePresence, "usePresence");
+__name$l(usePresence, "usePresence");
 function setRef(ref, value) {
   if (typeof ref === "function") {
     return ref(value);
@@ -4564,7 +4564,7 @@ function setRef(ref, value) {
     ref.current = value;
   }
 }
-__name$k(setRef, "setRef");
+__name$l(setRef, "setRef");
 function useStableComposedRefs(...refs) {
   const refsRef = React__namespace.useRef(refs);
   refsRef.current = refs;
@@ -4592,11 +4592,11 @@ function useStableComposedRefs(...refs) {
     }
   }, []);
 }
-__name$k(useStableComposedRefs, "useStableComposedRefs");
+__name$l(useStableComposedRefs, "useStableComposedRefs");
 function getAnimationName(styles) {
   return styles?.animationName || "none";
 }
-__name$k(getAnimationName, "getAnimationName");
+__name$l(getAnimationName, "getAnimationName");
 function getElementRef(element) {
   let getter = Object.getOwnPropertyDescriptor(element.props, "ref")?.get;
   let mayWarn = getter && "isReactWarning" in getter && getter.isReactWarning;
@@ -4610,10 +4610,10 @@ function getElementRef(element) {
   }
   return element.props.ref || element.ref;
 }
-__name$k(getElementRef, "getElementRef");
+__name$l(getElementRef, "getElementRef");
 
-var __defProp$j = Object.defineProperty;
-var __name$j = (target, value) => __defProp$j(target, "name", { value, configurable: true });
+var __defProp$k = Object.defineProperty;
+var __name$k = (target, value) => __defProp$k(target, "name", { value, configurable: true });
 var useReactId = React__namespace[" useId ".trim().toString()] || (() => void 0);
 var count$1 = 0;
 function useId(deterministicId) {
@@ -4623,19 +4623,19 @@ function useId(deterministicId) {
   }, [deterministicId]);
   return deterministicId || (id ? `radix-${id}` : "");
 }
-__name$j(useId, "useId");
+__name$k(useId, "useId");
 
-var __defProp$i = Object.defineProperty;
-var __name$i = (target, value) => __defProp$i(target, "name", { value, configurable: true });
+var __defProp$j = Object.defineProperty;
+var __name$j = (target, value) => __defProp$j(target, "name", { value, configurable: true });
 var DirectionContext = React__namespace.createContext(void 0);
 function useDirection(localDir) {
   const globalDir = React__namespace.useContext(DirectionContext);
   return localDir || globalDir || "ltr";
 }
-__name$i(useDirection, "useDirection");
+__name$j(useDirection, "useDirection");
 
-var __defProp$h = Object.defineProperty;
-var __name$h = (target, value) => __defProp$h(target, "name", { value, configurable: true });
+var __defProp$i = Object.defineProperty;
+var __name$i = (target, value) => __defProp$i(target, "name", { value, configurable: true });
 function useCallbackRef$1(callback) {
   const callbackRef = React__namespace.useRef(callback);
   React__namespace.useEffect(() => {
@@ -4643,10 +4643,10 @@ function useCallbackRef$1(callback) {
   });
   return React__namespace.useMemo(() => ((...args) => callbackRef.current?.(...args)), []);
 }
-__name$h(useCallbackRef$1, "useCallbackRef");
+__name$i(useCallbackRef$1, "useCallbackRef");
 
-var __defProp$g = Object.defineProperty;
-var __name$g = (target, value) => __defProp$g(target, "name", { value, configurable: true });
+var __defProp$h = Object.defineProperty;
+var __name$h = (target, value) => __defProp$h(target, "name", { value, configurable: true });
 var CONTEXT_UPDATE = "dismissableLayer.update";
 var POINTER_DOWN_OUTSIDE = "dismissableLayer.pointerDownOutside";
 var FOCUS_OUTSIDE = "dismissableLayer.focusOutside";
@@ -4664,7 +4664,7 @@ var DismissableLayerContext = React__namespace.createContext({
 });
 var DismissableLayer = /* @__PURE__ */ React__namespace.forwardRef(
   // blank line to reduce diff noise
-  /* @__PURE__ */ __name$g(function DismissableLayer2(props, forwardedRef) {
+  /* @__PURE__ */ __name$h(function DismissableLayer2(props, forwardedRef) {
     const {
       disableOutsidePointerEvents = false,
       deferPointerDownOutside = false,
@@ -4772,7 +4772,7 @@ var DismissableLayer = /* @__PURE__ */ React__namespace.forwardRef(
       };
     }, [node, context]);
     React__namespace.useEffect(() => {
-      const handleUpdate = /* @__PURE__ */ __name$g(() => force({}), "handleUpdate");
+      const handleUpdate = /* @__PURE__ */ __name$h(() => force({}), "handleUpdate");
       document.addEventListener(CONTEXT_UPDATE, handleUpdate);
       return () => document.removeEventListener(CONTEXT_UPDATE, handleUpdate);
     }, []);
@@ -4809,8 +4809,8 @@ function useDismissableLayerSurface() {
   }, [node, context.dismissableSurfaces]);
   return setNode;
 }
-__name$g(useDismissableLayerSurface, "useDismissableLayerSurface");
-var IS_TRUE = /* @__PURE__ */ __name$g(() => true, "IS_TRUE");
+__name$h(useDismissableLayerSurface, "useDismissableLayerSurface");
+var IS_TRUE = /* @__PURE__ */ __name$h(() => true, "IS_TRUE");
 function usePointerDownOutside(onPointerDownOutside, args) {
   const {
     ownerDocument = globalThis?.document,
@@ -4831,11 +4831,11 @@ function usePointerDownOutside(onPointerDownOutside, args) {
       isDeferredPointerDownOutsideRef.current = false;
       interceptedOutsideInteractionEventsRef.current.clear();
     }
-    __name$g(resetOutsideInteraction, "resetOutsideInteraction");
+    __name$h(resetOutsideInteraction, "resetOutsideInteraction");
     function isOutsideInteractionIntercepted() {
       return Array.from(interceptedOutsideInteractionEventsRef.current.values()).some(Boolean);
     }
-    __name$g(isOutsideInteractionIntercepted, "isOutsideInteractionIntercepted");
+    __name$h(isOutsideInteractionIntercepted, "isOutsideInteractionIntercepted");
     function handleInteractionCapture(event) {
       if (!isPointerDownOutsideRef.current) {
         return;
@@ -4853,14 +4853,14 @@ function usePointerDownOutside(onPointerDownOutside, args) {
         }, 0);
       }
     }
-    __name$g(handleInteractionCapture, "handleInteractionCapture");
+    __name$h(handleInteractionCapture, "handleInteractionCapture");
     function handleInteractionBubble(event) {
       if (isPointerDownOutsideRef.current) {
         interceptedOutsideInteractionEventsRef.current.set(event.type, false);
       }
     }
-    __name$g(handleInteractionBubble, "handleInteractionBubble");
-    const handlePointerDown = /* @__PURE__ */ __name$g((event) => {
+    __name$h(handleInteractionBubble, "handleInteractionBubble");
+    const handlePointerDown = /* @__PURE__ */ __name$h((event) => {
       if (event.target && !isPointerInsideReactTreeRef.current) {
         let handleAndDispatchPointerDownOutsideEvent2 = function() {
           ownerDocument.removeEventListener("click", handleClickRef.current);
@@ -4875,7 +4875,7 @@ function usePointerDownOutside(onPointerDownOutside, args) {
             );
           }
         };
-        __name$g(handleAndDispatchPointerDownOutsideEvent2, "handleAndDispatchPointerDownOutsideEvent");
+        __name$h(handleAndDispatchPointerDownOutsideEvent2, "handleAndDispatchPointerDownOutsideEvent");
         if (!shouldHandlePointerDownOutside(event.target)) {
           ownerDocument.removeEventListener("click", handleClickRef.current);
           resetOutsideInteraction();
@@ -4933,15 +4933,15 @@ function usePointerDownOutside(onPointerDownOutside, args) {
   ]);
   return {
     // ensures we check React component tree (not just DOM tree)
-    onPointerDownCapture: /* @__PURE__ */ __name$g(() => isPointerInsideReactTreeRef.current = true, "onPointerDownCapture")
+    onPointerDownCapture: /* @__PURE__ */ __name$h(() => isPointerInsideReactTreeRef.current = true, "onPointerDownCapture")
   };
 }
-__name$g(usePointerDownOutside, "usePointerDownOutside");
+__name$h(usePointerDownOutside, "usePointerDownOutside");
 function useFocusOutside(onFocusOutside, ownerDocument = globalThis?.document) {
   const handleFocusOutside = useCallbackRef$1(onFocusOutside);
   const isFocusInsideReactTreeRef = React__namespace.useRef(false);
   React__namespace.useEffect(() => {
-    const handleFocus = /* @__PURE__ */ __name$g((event) => {
+    const handleFocus = /* @__PURE__ */ __name$h((event) => {
       if (event.target && !isFocusInsideReactTreeRef.current) {
         const eventDetail = { originalEvent: event };
         handleAndDispatchCustomEvent(FOCUS_OUTSIDE, handleFocusOutside, eventDetail, {
@@ -4953,16 +4953,16 @@ function useFocusOutside(onFocusOutside, ownerDocument = globalThis?.document) {
     return () => ownerDocument.removeEventListener("focusin", handleFocus);
   }, [ownerDocument, handleFocusOutside]);
   return {
-    onFocusCapture: /* @__PURE__ */ __name$g(() => isFocusInsideReactTreeRef.current = true, "onFocusCapture"),
-    onBlurCapture: /* @__PURE__ */ __name$g(() => isFocusInsideReactTreeRef.current = false, "onBlurCapture")
+    onFocusCapture: /* @__PURE__ */ __name$h(() => isFocusInsideReactTreeRef.current = true, "onFocusCapture"),
+    onBlurCapture: /* @__PURE__ */ __name$h(() => isFocusInsideReactTreeRef.current = false, "onBlurCapture")
   };
 }
-__name$g(useFocusOutside, "useFocusOutside");
+__name$h(useFocusOutside, "useFocusOutside");
 function dispatchUpdate() {
   const event = new CustomEvent(CONTEXT_UPDATE);
   document.dispatchEvent(event);
 }
-__name$g(dispatchUpdate, "dispatchUpdate");
+__name$h(dispatchUpdate, "dispatchUpdate");
 function handleAndDispatchCustomEvent(name, handler, detail, { discrete }) {
   const target = detail.originalEvent.target;
   const event = new CustomEvent(name, { bubbles: false, cancelable: true, detail });
@@ -4973,15 +4973,15 @@ function handleAndDispatchCustomEvent(name, handler, detail, { discrete }) {
     target.dispatchEvent(event);
   }
 }
-__name$g(handleAndDispatchCustomEvent, "handleAndDispatchCustomEvent");
+__name$h(handleAndDispatchCustomEvent, "handleAndDispatchCustomEvent");
 
-var __defProp$f = Object.defineProperty;
-var __name$f = (target, value) => __defProp$f(target, "name", { value, configurable: true });
+var __defProp$g = Object.defineProperty;
+var __name$g = (target, value) => __defProp$g(target, "name", { value, configurable: true });
 var AUTOFOCUS_ON_MOUNT = "focusScope.autoFocusOnMount";
 var AUTOFOCUS_ON_UNMOUNT = "focusScope.autoFocusOnUnmount";
 var EVENT_OPTIONS$1 = { bubbles: false, cancelable: true };
 var FocusScope = /* @__PURE__ */ React__namespace.forwardRef(
-  /* @__PURE__ */ __name$f(function FocusScope2(props, forwardedRef) {
+  /* @__PURE__ */ __name$g(function FocusScope2(props, forwardedRef) {
     const {
       loop = false,
       trapped = false,
@@ -5027,9 +5027,9 @@ var FocusScope = /* @__PURE__ */ React__namespace.forwardRef(
             if (mutation.removedNodes.length > 0) focus(container);
           }
         };
-        __name$f(handleFocusIn2, "handleFocusIn");
-        __name$f(handleFocusOut2, "handleFocusOut");
-        __name$f(handleMutations2, "handleMutations");
+        __name$g(handleFocusIn2, "handleFocusIn");
+        __name$g(handleFocusOut2, "handleFocusOut");
+        __name$g(handleMutations2, "handleMutations");
         document.addEventListener("focusin", handleFocusIn2);
         document.addEventListener("focusout", handleFocusOut2);
         const mutationObserver = new MutationObserver(handleMutations2);
@@ -5107,18 +5107,18 @@ function focusFirst$2(candidates, { select = false } = {}) {
     if (document.activeElement !== previouslyFocusedElement) return;
   }
 }
-__name$f(focusFirst$2, "focusFirst");
+__name$g(focusFirst$2, "focusFirst");
 function getTabbableEdges(container) {
   const candidates = getTabbableCandidates(container);
   const first = findVisible(candidates, container);
   const last = findVisible(candidates.reverse(), container);
   return [first, last];
 }
-__name$f(getTabbableEdges, "getTabbableEdges");
+__name$g(getTabbableEdges, "getTabbableEdges");
 function getTabbableCandidates(container) {
   const nodes = [];
   const walker = document.createTreeWalker(container, NodeFilter.SHOW_ELEMENT, {
-    acceptNode: /* @__PURE__ */ __name$f((node) => {
+    acceptNode: /* @__PURE__ */ __name$g((node) => {
       const isHiddenInput = node.tagName === "INPUT" && node.type === "hidden";
       if (node.disabled || node.hidden || isHiddenInput) return NodeFilter.FILTER_SKIP;
       return node.tabIndex >= 0 ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_SKIP;
@@ -5127,7 +5127,7 @@ function getTabbableCandidates(container) {
   while (walker.nextNode()) nodes.push(walker.currentNode);
   return nodes;
 }
-__name$f(getTabbableCandidates, "getTabbableCandidates");
+__name$g(getTabbableCandidates, "getTabbableCandidates");
 function findVisible(elements, container) {
   const canUseCheckVisibility = typeof container.checkVisibility === "function" && container.checkVisibility({ checkVisibilityCSS: true });
   for (const element of elements) {
@@ -5137,7 +5137,7 @@ function findVisible(elements, container) {
     }
   }
 }
-__name$f(findVisible, "findVisible");
+__name$g(findVisible, "findVisible");
 function isHidden(node, { upTo }) {
   if (getComputedStyle(node).visibility === "hidden") return true;
   while (node) {
@@ -5147,11 +5147,11 @@ function isHidden(node, { upTo }) {
   }
   return false;
 }
-__name$f(isHidden, "isHidden");
+__name$g(isHidden, "isHidden");
 function isSelectableInput(element) {
   return element instanceof HTMLInputElement && "select" in element;
 }
-__name$f(isSelectableInput, "isSelectableInput");
+__name$g(isSelectableInput, "isSelectableInput");
 function focus(element, { select = false } = {}) {
   if (element && element.focus) {
     const previouslyFocusedElement = document.activeElement;
@@ -5160,7 +5160,7 @@ function focus(element, { select = false } = {}) {
       element.select();
   }
 }
-__name$f(focus, "focus");
+__name$g(focus, "focus");
 var focusScopesStack = createFocusScopesStack();
 function createFocusScopesStack() {
   let stack = [];
@@ -5179,7 +5179,7 @@ function createFocusScopesStack() {
     }
   };
 }
-__name$f(createFocusScopesStack, "createFocusScopesStack");
+__name$g(createFocusScopesStack, "createFocusScopesStack");
 function arrayRemove(array, item) {
   const updatedArray = [...array];
   const index = updatedArray.indexOf(item);
@@ -5188,16 +5188,16 @@ function arrayRemove(array, item) {
   }
   return updatedArray;
 }
-__name$f(arrayRemove, "arrayRemove");
+__name$g(arrayRemove, "arrayRemove");
 function removeLinks(items) {
   return items.filter((item) => item.tagName !== "A");
 }
-__name$f(removeLinks, "removeLinks");
+__name$g(removeLinks, "removeLinks");
 
-var __defProp$e = Object.defineProperty;
-var __name$e = (target, value) => __defProp$e(target, "name", { value, configurable: true });
+var __defProp$f = Object.defineProperty;
+var __name$f = (target, value) => __defProp$f(target, "name", { value, configurable: true });
 var Portal$3 = /* @__PURE__ */ React__namespace.forwardRef(
-  /* @__PURE__ */ __name$e(function Portal2(props, forwardedRef) {
+  /* @__PURE__ */ __name$f(function Portal2(props, forwardedRef) {
     const { container: containerProp, ...portalProps } = props;
     const [mounted, setMounted] = React__namespace.useState(false);
     useLayoutEffect2(() => setMounted(true), []);
@@ -5206,15 +5206,15 @@ var Portal$3 = /* @__PURE__ */ React__namespace.forwardRef(
   }, "Portal")
 );
 
-var __defProp$d = Object.defineProperty;
-var __name$d = (target, value) => __defProp$d(target, "name", { value, configurable: true });
+var __defProp$e = Object.defineProperty;
+var __name$e = (target, value) => __defProp$e(target, "name", { value, configurable: true });
 var count = 0;
 var guards = null;
 function FocusGuards(props) {
   useFocusGuards();
   return props.children;
 }
-__name$d(FocusGuards, "FocusGuards");
+__name$e(FocusGuards, "FocusGuards");
 function useFocusGuards() {
   React__namespace.useEffect(() => {
     if (!guards) {
@@ -5238,7 +5238,7 @@ function useFocusGuards() {
     };
   }, []);
 }
-__name$d(useFocusGuards, "useFocusGuards");
+__name$e(useFocusGuards, "useFocusGuards");
 function createFocusGuard() {
   const element = document.createElement("span");
   element.setAttribute("data-radix-focus-guard", "");
@@ -5249,7 +5249,7 @@ function createFocusGuard() {
   element.style.pointerEvents = "none";
   return element;
 }
-__name$d(createFocusGuard, "createFocusGuard");
+__name$e(createFocusGuard, "createFocusGuard");
 
 /******************************************************************************
 Copyright (c) Microsoft Corporation.
@@ -6145,12 +6145,12 @@ var hideOthers = function (originalTarget, parentNode, markerName) {
     return applyAttributeToOthers(targets, activeParentNode, markerName, 'aria-hidden');
 };
 
-var __defProp$c = Object.defineProperty;
-var __name$c = (target, value) => __defProp$c(target, "name", { value, configurable: true });
+var __defProp$d = Object.defineProperty;
+var __name$d = (target, value) => __defProp$d(target, "name", { value, configurable: true });
 var DIALOG_NAME = "Dialog";
 var [createDialogContext, createDialogScope] = createContextScope(DIALOG_NAME);
 var [DialogProvider, useDialogContext] = createDialogContext(DIALOG_NAME);
-var Dialog$1 = /* @__PURE__ */ __name$c((props) => {
+var Dialog$1 = /* @__PURE__ */ __name$d((props) => {
   const {
     __scopeDialog,
     children,
@@ -6190,11 +6190,11 @@ var Dialog$1 = /* @__PURE__ */ __name$c((props) => {
     }
   );
 }, "Dialog");
-var TRIGGER_NAME$4 = "DialogTrigger";
+var TRIGGER_NAME$5 = "DialogTrigger";
 var DialogTrigger$1 = /* @__PURE__ */ React__namespace.forwardRef(
-  /* @__PURE__ */ __name$c(function DialogTrigger2(props, forwardedRef) {
+  /* @__PURE__ */ __name$d(function DialogTrigger2(props, forwardedRef) {
     const { __scopeDialog, ...triggerProps } = props;
-    const context = useDialogContext(TRIGGER_NAME$4, __scopeDialog);
+    const context = useDialogContext(TRIGGER_NAME$5, __scopeDialog);
     const composedTriggerRef = useComposedRefs(forwardedRef, context.triggerRef);
     return /* @__PURE__ */ jsxRuntime.jsx(
       Primitive.button,
@@ -6203,7 +6203,7 @@ var DialogTrigger$1 = /* @__PURE__ */ React__namespace.forwardRef(
         "aria-haspopup": "dialog",
         "aria-expanded": context.open,
         "aria-controls": context.open ? context.contentId : void 0,
-        "data-state": getState$1(context.open),
+        "data-state": getState$2(context.open),
         ...triggerProps,
         ref: composedTriggerRef,
         onClick: composeEventHandlers(props.onClick, context.onOpenToggle)
@@ -6215,14 +6215,14 @@ var PORTAL_NAME$3 = "DialogPortal";
 var [PortalProvider$3, usePortalContext$3] = createDialogContext(PORTAL_NAME$3, {
   forceMount: void 0
 });
-var DialogPortal = /* @__PURE__ */ __name$c((props) => {
+var DialogPortal = /* @__PURE__ */ __name$d((props) => {
   const { __scopeDialog, forceMount, children, container } = props;
   const context = useDialogContext(PORTAL_NAME$3, __scopeDialog);
   return /* @__PURE__ */ jsxRuntime.jsx(PortalProvider$3, { scope: __scopeDialog, forceMount, children: React__namespace.Children.map(children, (child) => /* @__PURE__ */ jsxRuntime.jsx(Presence, { present: forceMount || context.open, children: /* @__PURE__ */ jsxRuntime.jsx(Portal$3, { asChild: true, container, children: child }) })) });
 }, "DialogPortal");
 var OVERLAY_NAME = "DialogOverlay";
 var DialogOverlay$1 = /* @__PURE__ */ React__namespace.forwardRef(
-  /* @__PURE__ */ __name$c(function DialogOverlay2(props, forwardedRef) {
+  /* @__PURE__ */ __name$d(function DialogOverlay2(props, forwardedRef) {
     const portalContext = usePortalContext$3(OVERLAY_NAME, props.__scopeDialog);
     const { forceMount = portalContext.forceMount, ...overlayProps } = props;
     const context = useDialogContext(OVERLAY_NAME, props.__scopeDialog);
@@ -6232,7 +6232,7 @@ var DialogOverlay$1 = /* @__PURE__ */ React__namespace.forwardRef(
 var Slot$2 = createSlot("DialogOverlay.RemoveScroll");
 var DialogOverlayImpl = /* @__PURE__ */ React__namespace.forwardRef(
   // blank line to reduce diff noise
-  /* @__PURE__ */ __name$c(function DialogOverlayImpl2(props, forwardedRef) {
+  /* @__PURE__ */ __name$d(function DialogOverlayImpl2(props, forwardedRef) {
     const { __scopeDialog, ...overlayProps } = props;
     const context = useDialogContext(OVERLAY_NAME, __scopeDialog);
     const registerDismissableSurface = useDismissableLayerSurface();
@@ -6243,7 +6243,7 @@ var DialogOverlayImpl = /* @__PURE__ */ React__namespace.forwardRef(
       /* @__PURE__ */ jsxRuntime.jsx(ReactRemoveScroll, { as: Slot$2, allowPinchZoom: true, shards: [context.contentRef], children: /* @__PURE__ */ jsxRuntime.jsx(
         Primitive.div,
         {
-          "data-state": getState$1(context.open),
+          "data-state": getState$2(context.open),
           ...overlayProps,
           ref: composedRefs,
           style: { pointerEvents: "auto", ...overlayProps.style }
@@ -6254,7 +6254,7 @@ var DialogOverlayImpl = /* @__PURE__ */ React__namespace.forwardRef(
 );
 var CONTENT_NAME$6 = "DialogContent";
 var DialogContent$1 = /* @__PURE__ */ React__namespace.forwardRef(
-  /* @__PURE__ */ __name$c(function DialogContent2(props, forwardedRef) {
+  /* @__PURE__ */ __name$d(function DialogContent2(props, forwardedRef) {
     const portalContext = usePortalContext$3(CONTENT_NAME$6, props.__scopeDialog);
     const { forceMount = portalContext.forceMount, ...contentProps } = props;
     const context = useDialogContext(CONTENT_NAME$6, props.__scopeDialog);
@@ -6263,7 +6263,7 @@ var DialogContent$1 = /* @__PURE__ */ React__namespace.forwardRef(
 );
 var DialogContentModal = /* @__PURE__ */ React__namespace.forwardRef(
   // blank line to reduce diff noise
-  /* @__PURE__ */ __name$c(function DialogContentModal2(props, forwardedRef) {
+  /* @__PURE__ */ __name$d(function DialogContentModal2(props, forwardedRef) {
     const context = useDialogContext(CONTENT_NAME$6, props.__scopeDialog);
     const contentRef = React__namespace.useRef(null);
     const composedRefs = useComposedRefs(forwardedRef, context.contentRef, contentRef);
@@ -6298,7 +6298,7 @@ var DialogContentModal = /* @__PURE__ */ React__namespace.forwardRef(
 );
 var DialogContentNonModal = /* @__PURE__ */ React__namespace.forwardRef(
   // blank line to reduce diff noise
-  /* @__PURE__ */ __name$c(function DialogContentNonModal2(props, forwardedRef) {
+  /* @__PURE__ */ __name$d(function DialogContentNonModal2(props, forwardedRef) {
     const context = useDialogContext(CONTENT_NAME$6, props.__scopeDialog);
     const hasInteractedOutsideRef = React__namespace.useRef(false);
     const hasPointerDownOutsideRef = React__namespace.useRef(false);
@@ -6339,7 +6339,7 @@ var DialogContentNonModal = /* @__PURE__ */ React__namespace.forwardRef(
 );
 var DialogContentImpl = /* @__PURE__ */ React__namespace.forwardRef(
   // blank line to reduce diff noise
-  /* @__PURE__ */ __name$c(function DialogContentImpl2(props, forwardedRef) {
+  /* @__PURE__ */ __name$d(function DialogContentImpl2(props, forwardedRef) {
     const { __scopeDialog, trapFocus, onOpenAutoFocus, onCloseAutoFocus, ...contentProps } = props;
     const context = useDialogContext(CONTENT_NAME$6, __scopeDialog);
     useFocusGuards();
@@ -6358,7 +6358,7 @@ var DialogContentImpl = /* @__PURE__ */ React__namespace.forwardRef(
             id: context.contentId,
             "aria-describedby": context.descriptionPresent ? context.descriptionId : void 0,
             "aria-labelledby": context.titlePresent ? context.titleId : void 0,
-            "data-state": getState$1(context.open),
+            "data-state": getState$2(context.open),
             ...contentProps,
             ref: forwardedRef,
             deferPointerDownOutside: true,
@@ -6371,7 +6371,7 @@ var DialogContentImpl = /* @__PURE__ */ React__namespace.forwardRef(
 );
 var TITLE_NAME = "DialogTitle";
 var DialogTitle$1 = /* @__PURE__ */ React__namespace.forwardRef(
-  /* @__PURE__ */ __name$c(function DialogTitle2(props, forwardedRef) {
+  /* @__PURE__ */ __name$d(function DialogTitle2(props, forwardedRef) {
     const { __scopeDialog, ...titleProps } = props;
     const context = useDialogContext(TITLE_NAME, __scopeDialog);
     const { setTitleCount } = context;
@@ -6385,7 +6385,7 @@ var DialogTitle$1 = /* @__PURE__ */ React__namespace.forwardRef(
 var DESCRIPTION_NAME = "DialogDescription";
 var DialogDescription$1 = /* @__PURE__ */ React__namespace.forwardRef(
   // blank line to reduce diff noise
-  /* @__PURE__ */ __name$c(function DialogDescription2(props, forwardedRef) {
+  /* @__PURE__ */ __name$d(function DialogDescription2(props, forwardedRef) {
     const { __scopeDialog, ...descriptionProps } = props;
     const context = useDialogContext(DESCRIPTION_NAME, __scopeDialog);
     const { setDescriptionCount } = context;
@@ -6398,7 +6398,7 @@ var DialogDescription$1 = /* @__PURE__ */ React__namespace.forwardRef(
 );
 var CLOSE_NAME = "DialogClose";
 var DialogClose$1 = /* @__PURE__ */ React__namespace.forwardRef(
-  /* @__PURE__ */ __name$c(function DialogClose2(props, forwardedRef) {
+  /* @__PURE__ */ __name$d(function DialogClose2(props, forwardedRef) {
     const { __scopeDialog, ...closeProps } = props;
     const context = useDialogContext(CLOSE_NAME, __scopeDialog);
     return /* @__PURE__ */ jsxRuntime.jsx(
@@ -6412,13 +6412,13 @@ var DialogClose$1 = /* @__PURE__ */ React__namespace.forwardRef(
     );
   }, "DialogClose")
 );
-function getState$1(open) {
+function getState$2(open) {
   return open ? "open" : "closed";
 }
-__name$c(getState$1, "getState");
+__name$d(getState$2, "getState");
 
-var __defProp$b = Object.defineProperty;
-var __name$b = (target, value) => __defProp$b(target, "name", { value, configurable: true });
+var __defProp$c = Object.defineProperty;
+var __name$c = (target, value) => __defProp$c(target, "name", { value, configurable: true });
 function useSize(element) {
   const [size, setSize] = React__namespace.useState(void 0);
   useLayoutEffect2(() => {
@@ -6453,7 +6453,292 @@ function useSize(element) {
   }, [element]);
   return size;
 }
-__name$b(useSize, "useSize");
+__name$c(useSize, "useSize");
+
+var __defProp$b = Object.defineProperty;
+var __name$b = (target, value) => __defProp$b(target, "name", { value, configurable: true });
+var CHECKBOX_NAME = "Checkbox";
+var [createCheckboxContext, createCheckboxScope] = createContextScope(CHECKBOX_NAME);
+var [CheckboxProviderImpl, useCheckboxContext] = createCheckboxContext(CHECKBOX_NAME);
+function CheckboxProvider(props) {
+  const {
+    __scopeCheckbox,
+    checked: checkedProp,
+    children,
+    defaultChecked,
+    disabled,
+    form,
+    name,
+    onCheckedChange,
+    required,
+    value = "on",
+    // @ts-expect-error
+    internal_do_not_use_render
+  } = props;
+  const [checked, setChecked] = useControllableState({
+    prop: checkedProp,
+    defaultProp: defaultChecked ?? false,
+    onChange: onCheckedChange,
+    caller: CHECKBOX_NAME
+  });
+  const [control, setControl] = React__namespace.useState(null);
+  const [bubbleInput, setBubbleInput] = React__namespace.useState(null);
+  const hasConsumerStoppedPropagationRef = React__namespace.useRef(false);
+  const [userInteractionCount, onUserInteraction] = React__namespace.useReducer(
+    (count) => count + 1,
+    0
+  );
+  const isFormControl = control ? !!form || !!control.closest("form") : (
+    // We set this to true by default so that events bubble to forms without JS (SSR)
+    true
+  );
+  const context = {
+    checked,
+    disabled,
+    setChecked,
+    control,
+    setControl,
+    name,
+    form,
+    value,
+    hasConsumerStoppedPropagationRef,
+    userInteractionCount,
+    onUserInteraction,
+    required,
+    defaultChecked: isIndeterminate$1(defaultChecked) ? false : defaultChecked,
+    isFormControl,
+    bubbleInput,
+    setBubbleInput
+  };
+  return /* @__PURE__ */ jsxRuntime.jsx(
+    CheckboxProviderImpl,
+    {
+      scope: __scopeCheckbox,
+      ...context,
+      children: isFunction(internal_do_not_use_render) ? internal_do_not_use_render(context) : children
+    }
+  );
+}
+__name$b(CheckboxProvider, "CheckboxProvider");
+var TRIGGER_NAME$4 = "CheckboxTrigger";
+var CheckboxTrigger = /* @__PURE__ */ React__namespace.forwardRef(
+  /* @__PURE__ */ __name$b(function CheckboxTrigger2({ __scopeCheckbox, onKeyDown, onClick, ...checkboxProps }, forwardedRef) {
+    const {
+      control,
+      value,
+      disabled,
+      checked,
+      required,
+      setControl,
+      setChecked,
+      hasConsumerStoppedPropagationRef,
+      onUserInteraction,
+      isFormControl,
+      bubbleInput
+    } = useCheckboxContext(TRIGGER_NAME$4, __scopeCheckbox);
+    const composedRefs = useComposedRefs(forwardedRef, setControl);
+    const initialCheckedStateRef = React__namespace.useRef(checked);
+    React__namespace.useEffect(() => {
+      const form = control?.form;
+      if (form) {
+        const reset = /* @__PURE__ */ __name$b(() => setChecked(initialCheckedStateRef.current), "reset");
+        form.addEventListener("reset", reset);
+        return () => form.removeEventListener("reset", reset);
+      }
+    }, [control, setChecked]);
+    return /* @__PURE__ */ jsxRuntime.jsx(
+      Primitive.button,
+      {
+        type: "button",
+        role: "checkbox",
+        "aria-checked": isIndeterminate$1(checked) ? "mixed" : checked,
+        "aria-required": required,
+        "data-state": getState$1(checked),
+        "data-disabled": disabled ? "" : void 0,
+        disabled,
+        value,
+        ...checkboxProps,
+        ref: composedRefs,
+        onKeyDown: composeEventHandlers(onKeyDown, (event) => {
+          if (event.key === "Enter") event.preventDefault();
+        }),
+        onClick: composeEventHandlers(onClick, (event) => {
+          onUserInteraction();
+          setChecked((prevChecked) => isIndeterminate$1(prevChecked) ? true : !prevChecked);
+          if (bubbleInput && isFormControl) {
+            hasConsumerStoppedPropagationRef.current = event.isPropagationStopped();
+            if (!hasConsumerStoppedPropagationRef.current) event.stopPropagation();
+          }
+        })
+      }
+    );
+  }, "CheckboxTrigger")
+);
+var Checkbox$1 = /* @__PURE__ */ React__namespace.forwardRef(
+  // blank line to reduce diff noise
+  /* @__PURE__ */ __name$b(function Checkbox2(props, forwardedRef) {
+    const {
+      __scopeCheckbox,
+      name,
+      checked,
+      defaultChecked,
+      required,
+      disabled,
+      value,
+      onCheckedChange,
+      form,
+      ...checkboxProps
+    } = props;
+    return /* @__PURE__ */ jsxRuntime.jsx(
+      CheckboxProvider,
+      {
+        __scopeCheckbox,
+        checked,
+        defaultChecked,
+        disabled,
+        required,
+        onCheckedChange,
+        name,
+        form,
+        value,
+        internal_do_not_use_render: ({ isFormControl }) => /* @__PURE__ */ jsxRuntime.jsxs(jsxRuntime.Fragment, { children: [
+          /* @__PURE__ */ jsxRuntime.jsx(
+            CheckboxTrigger,
+            {
+              ...checkboxProps,
+              ref: forwardedRef,
+              __scopeCheckbox
+            }
+          ),
+          isFormControl && /* @__PURE__ */ jsxRuntime.jsx(
+            CheckboxBubbleInput,
+            {
+              __scopeCheckbox
+            }
+          )
+        ] })
+      }
+    );
+  }, "Checkbox")
+);
+var INDICATOR_NAME = "CheckboxIndicator";
+var CheckboxIndicator = /* @__PURE__ */ React__namespace.forwardRef(
+  // blank line to reduce diff noise
+  /* @__PURE__ */ __name$b(function CheckboxIndicator2(props, forwardedRef) {
+    const { __scopeCheckbox, forceMount, ...indicatorProps } = props;
+    const context = useCheckboxContext(INDICATOR_NAME, __scopeCheckbox);
+    return /* @__PURE__ */ jsxRuntime.jsx(
+      Presence,
+      {
+        present: forceMount || isIndeterminate$1(context.checked) || context.checked === true,
+        children: /* @__PURE__ */ jsxRuntime.jsx(
+          Primitive.span,
+          {
+            "data-state": getState$1(context.checked),
+            "data-disabled": context.disabled ? "" : void 0,
+            ...indicatorProps,
+            ref: forwardedRef,
+            style: { pointerEvents: "none", ...props.style }
+          }
+        )
+      }
+    );
+  }, "CheckboxIndicator")
+);
+var BUBBLE_INPUT_NAME = "CheckboxBubbleInput";
+var CheckboxBubbleInput = /* @__PURE__ */ React__namespace.forwardRef(
+  // blank line to reduce diff noise
+  /* @__PURE__ */ __name$b(function CheckboxBubbleInput2({ __scopeCheckbox, onClick, ...props }, forwardedRef) {
+    const {
+      control,
+      hasConsumerStoppedPropagationRef,
+      userInteractionCount,
+      checked,
+      defaultChecked,
+      required,
+      disabled,
+      name,
+      value,
+      form,
+      bubbleInput,
+      setBubbleInput
+    } = useCheckboxContext(BUBBLE_INPUT_NAME, __scopeCheckbox);
+    const composedRefs = useComposedRefs(forwardedRef, setBubbleInput);
+    const controlSize = useSize(control);
+    const shouldStopClickPropagationRef = React__namespace.useRef(false);
+    const prevCheckedRef = React__namespace.useRef(checked);
+    const prevUserInteractionCountRef = React__namespace.useRef(userInteractionCount);
+    React__namespace.useEffect(() => {
+      const input = bubbleInput;
+      if (!input) return;
+      const inputProto = window.HTMLInputElement.prototype;
+      const descriptor = Object.getOwnPropertyDescriptor(
+        inputProto,
+        "checked"
+      );
+      const setChecked = descriptor.set;
+      const isUserInteraction = userInteractionCount !== prevUserInteractionCountRef.current;
+      prevUserInteractionCountRef.current = userInteractionCount;
+      const checkedChanged = prevCheckedRef.current !== checked;
+      prevCheckedRef.current = checked;
+      const bubbles = !(isUserInteraction && hasConsumerStoppedPropagationRef.current);
+      if (checkedChanged && setChecked) {
+        shouldStopClickPropagationRef.current = !isUserInteraction;
+        const event = new Event("click", { bubbles });
+        input.indeterminate = isIndeterminate$1(checked);
+        setChecked.call(input, isIndeterminate$1(checked) ? false : checked);
+        input.dispatchEvent(event);
+        shouldStopClickPropagationRef.current = false;
+      }
+    }, [bubbleInput, checked, hasConsumerStoppedPropagationRef, userInteractionCount]);
+    const defaultCheckedRef = React__namespace.useRef(isIndeterminate$1(checked) ? false : checked);
+    return /* @__PURE__ */ jsxRuntime.jsx(
+      Primitive.input,
+      {
+        type: "checkbox",
+        "aria-hidden": true,
+        defaultChecked: defaultChecked ?? defaultCheckedRef.current,
+        required,
+        disabled,
+        name,
+        value,
+        form,
+        ...props,
+        tabIndex: -1,
+        ref: composedRefs,
+        onClick: composeEventHandlers(onClick, (event) => {
+          if (shouldStopClickPropagationRef.current) {
+            event.stopPropagation();
+          }
+        }),
+        style: {
+          ...props.style,
+          ...controlSize,
+          position: "absolute",
+          pointerEvents: "none",
+          opacity: 0,
+          margin: 0,
+          // We transform because the input is absolutely positioned but we have
+          // rendered it **after** the button. This pulls it back to sit on top
+          // of the button.
+          transform: "translateX(-100%)"
+        }
+      }
+    );
+  }, "CheckboxBubbleInput")
+);
+function isFunction(value) {
+  return typeof value === "function";
+}
+__name$b(isFunction, "isFunction");
+function isIndeterminate$1(checked) {
+  return checked === "indeterminate";
+}
+__name$b(isIndeterminate$1, "isIndeterminate");
+function getState$1(checked) {
+  return isIndeterminate$1(checked) ? "indeterminate" : checked ? "checked" : "unchecked";
+}
+__name$b(getState$1, "getState");
 
 /**
  * Custom positioning reference element.
@@ -11163,6 +11448,16 @@ const LoaderCircle = createLucideIcon("LoaderCircle", [
  */
 
 
+const Minus = createLucideIcon("Minus", [["path", { d: "M5 12h14", key: "1ays0h" }]]);
+
+/**
+ * @license lucide-react v0.469.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+
+
 const PanelLeftClose = createLucideIcon("PanelLeftClose", [
   ["rect", { width: "18", height: "18", x: "3", y: "3", rx: "2", key: "afitv7" }],
   ["path", { d: "M9 3v18", key: "fh3hqa" }],
@@ -11557,6 +11852,33 @@ function FilterSelect({ value, options, onChange, ariaLabel, className, }) {
 
 function Input({ className, type, ...props }) {
     return (jsxRuntime.jsx("input", { type: type, "data-slot": "input", className: cn("h-8 w-full min-w-0 rounded-lg border border-input bg-transparent px-2.5 py-1 text-base transition-colors outline-none file:inline-flex file:h-6 file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 disabled:pointer-events-none disabled:cursor-not-allowed disabled:bg-input/50 disabled:opacity-50 aria-invalid:border-destructive aria-invalid:ring-3 aria-invalid:ring-destructive/20 md:text-sm dark:bg-input/30 dark:disabled:bg-input/80 dark:aria-invalid:border-destructive/50 dark:aria-invalid:ring-destructive/40", className), ...props }));
+}
+
+/**
+ * Textarea — multi-line text input.
+ *
+ * Shares the Input visual language (same border, radius, focus ring, disabled
+ * and invalid states) but drops the fixed single-line height for a sensible
+ * multi-line min-height and vertical resize. Use for descriptions, notes, and
+ * any free-text field that needs more than one line.
+ */
+function Textarea({ className, ...props }) {
+    return (jsxRuntime.jsx("textarea", { "data-slot": "textarea", className: cn("min-h-16 w-full min-w-0 rounded-lg border border-input bg-transparent px-2.5 py-2 text-base transition-colors outline-none field-sizing-content resize-y placeholder:text-muted-foreground focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 disabled:pointer-events-none disabled:cursor-not-allowed disabled:bg-input/50 disabled:opacity-50 aria-invalid:border-destructive aria-invalid:ring-3 aria-invalid:ring-destructive/20 md:text-sm dark:bg-input/30 dark:disabled:bg-input/80 dark:aria-invalid:border-destructive/50 dark:aria-invalid:ring-destructive/40", className), ...props }));
+}
+
+/**
+ * Checkbox — square boolean control.
+ *
+ * Shares the Input visual language (border-input, focus ring). Unchecked is a
+ * neutral bordered box; checked/indeterminate fills with the brand primary and
+ * shows a white check / dash. Supports the Radix `indeterminate` state (pass
+ * checked="indeterminate").
+ *
+ * Pair with <Label> for a clickable label, or wrap label + checkbox yourself.
+ */
+function Checkbox({ className, ...props }) {
+    const indeterminate = props.checked === "indeterminate";
+    return (jsxRuntime.jsx(Checkbox$1, { "data-slot": "checkbox", className: cn("peer size-4 shrink-0 rounded-[4px] border border-input bg-transparent shadow-xs transition-colors outline-none", "focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50", "disabled:cursor-not-allowed disabled:opacity-50", "data-[state=checked]:border-primary data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground", "data-[state=indeterminate]:border-primary data-[state=indeterminate]:bg-primary data-[state=indeterminate]:text-primary-foreground", "aria-invalid:border-destructive aria-invalid:ring-3 aria-invalid:ring-destructive/20", className), ...props, children: jsxRuntime.jsx(CheckboxIndicator, { "data-slot": "checkbox-indicator", className: "grid place-items-center text-current", children: indeterminate ? (jsxRuntime.jsx(Minus, { className: "size-3.5", strokeWidth: 3 })) : (jsxRuntime.jsx(Check, { className: "size-3.5", strokeWidth: 3 })) }) }));
 }
 
 function Pagination({ page, pageSize, total, onPageChange, label = "results", alwaysShow = false, marginTop = 14, }) {
@@ -12233,6 +12555,7 @@ exports.CardDescription = CardDescription;
 exports.CardFooter = CardFooter;
 exports.CardHeader = CardHeader;
 exports.CardTitle = CardTitle;
+exports.Checkbox = Checkbox;
 exports.ConfirmDestroyDialog = ConfirmDestroyDialog;
 exports.Dialog = Dialog;
 exports.DialogClose = DialogClose;
@@ -12302,6 +12625,7 @@ exports.Tabs = Tabs;
 exports.TabsContent = TabsContent;
 exports.TabsList = TabsList;
 exports.TabsTrigger = TabsTrigger;
+exports.Textarea = Textarea;
 exports.Tooltip = Tooltip;
 exports.TooltipContent = TooltipContent;
 exports.TooltipProvider = TooltipProvider;
