@@ -43,6 +43,10 @@ export * from "./components/table";
 export * from "./components/table-card";
 export * from "./components/table-toolbar";
 export * from "./components/table-filter";
+export * from "./components/sidebar";
+export * from "./components/app-shell";
+export * from "./components/page-header";
+export * from "./components/settings-menu";
 export * from "./components/tabs";
 
 export * from "./components/tooltip";
