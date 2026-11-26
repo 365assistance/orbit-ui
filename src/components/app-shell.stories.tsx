@@ -81,7 +81,7 @@ const settingsSections = [
 const footer = (
   <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
     <a href="#" onClick={(e) => e.preventDefault()} style={{ display: 'flex', alignItems: 'center', gap: 12, padding: '8px 12px', borderRadius: 10, fontSize: 14, color: 'var(--ink-mid, #5b6470)', textDecoration: 'none' }}>
-      <LifeBuoy className="h-[18px] w-[18px]" aria-hidden /> Help &amp; support
+      <LifeBuoy className="h-[18px] w-[18px]" aria-hidden /> Help
     </a>
     <div style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '8px 12px' }}>
       <span style={{ width: 32, height: 32, borderRadius: '50%', background: 'var(--accent, #F6E9F6)', color: 'var(--primary, #92248E)', display: 'grid', placeItems: 'center', fontWeight: 700, fontSize: 13 }}>SF</span>
@@ -101,10 +101,7 @@ export const FinanceNav: Story = {
         <Sidebar brand={brand} sections={sections} activeKey="ar" footer={footer} />
       }
       topBar={
-        <TopBar
-          title="Invoices"
-          actions={<SettingsMenu sections={settingsSections} />}
-        />
+        <TopBar actions={<SettingsMenu sections={settingsSections} />} />
       }
     >
       <PageContainer>
