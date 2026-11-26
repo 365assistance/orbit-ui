@@ -3330,11 +3330,19 @@ const cva = (base, config)=>(props)=>{
         return cx(base, getVariantClassNames, getCompoundVariantClassNames, props === null || props === void 0 ? void 0 : props.class, props === null || props === void 0 ? void 0 : props.className);
     };
 
-const alertVariants = cva("group/alert relative grid w-full gap-0.5 rounded-lg border px-2.5 py-2 text-left text-sm has-data-[slot=alert-action]:relative has-data-[slot=alert-action]:pr-18 has-[>svg]:grid-cols-[auto_1fr] has-[>svg]:gap-x-2 *:[svg]:row-span-2 *:[svg]:translate-y-0.5 *:[svg]:text-current *:[svg:not([class*='size-'])]:size-4", {
+const alertVariants = cva("group/alert relative grid w-full gap-0.5 rounded-lg border px-3 py-2.5 text-left text-sm has-data-[slot=alert-action]:relative has-data-[slot=alert-action]:pr-18 has-[>svg]:grid-cols-[auto_1fr] has-[>svg]:gap-x-2.5 *:[svg]:row-span-2 *:[svg]:translate-y-0.5 *:[svg]:text-current *:[svg:not([class*='size-'])]:size-4", {
     variants: {
         variant: {
-            default: "bg-card text-card-foreground",
-            destructive: "bg-card text-destructive *:data-[slot=alert-description]:text-destructive/90 *:[svg]:text-current",
+            // Neutral card alert (quiet). Border softened to the subtle token so it
+            // no longer reads as a heavy wireframe outline.
+            default: "border-border bg-card text-card-foreground",
+            // Soft-tinted semantic variants: tinted bg + matching border + accent
+            // icon/title, body stays readable. Icon colour comes from the variant
+            // (pass a lucide icon as the first child).
+            info: "border-[var(--orbit-info)]/25 bg-[var(--orbit-info-bg)] text-foreground *:[svg]:text-[var(--orbit-info)] *:data-[slot=alert-title]:text-[var(--orbit-info)]",
+            success: "border-[var(--orbit-success)]/25 bg-[var(--orbit-success-bg)] text-foreground *:[svg]:text-[var(--orbit-success)] *:data-[slot=alert-title]:text-[var(--orbit-success)]",
+            warning: "border-[var(--orbit-warning)]/30 bg-[var(--orbit-warning-bg)] text-foreground *:[svg]:text-[var(--orbit-warning)] *:data-[slot=alert-title]:text-[var(--orbit-warning)]",
+            destructive: "border-destructive/25 bg-destructive/5 text-destructive *:data-[slot=alert-description]:text-destructive/90 *:[svg]:text-current",
         },
     },
     defaultVariants: {
