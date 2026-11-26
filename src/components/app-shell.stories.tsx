@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite'
 import * as React from 'react'
 import {
   Briefcase, Workflow, Receipt, Users2, Package, BookOpen,
-  LifeBuoy, UserCircle2, Bell, ShieldCheck, Building2, Sparkles, DollarSign,
+  LifeBuoy, UserCircle2, ShieldCheck, Building2, DollarSign, FolderTree,
 } from 'lucide-react'
 import { AppShell, TopBar } from './app-shell'
 import { Sidebar } from './sidebar'
@@ -39,6 +39,7 @@ const sections = [
     label: 'Workflow',
     items: [
       { key: 'cases', label: 'Cases', icon: Briefcase },
+      { key: 'flow-collections', label: 'Flow collections', icon: FolderTree },
       { key: 'flows', label: 'Flows', icon: Workflow },
     ],
   },
@@ -58,7 +59,6 @@ const settingsSections = [
     label: 'Personal settings',
     items: [
       { key: 'general', title: 'General settings', description: 'Language, time zone and personal preferences', icon: UserCircle2 },
-      { key: 'notifications', title: 'Notifications', description: 'Manage email and in-app notifications', icon: Bell },
     ],
   },
   {
@@ -67,7 +67,6 @@ const settingsSections = [
       { key: 'system', title: 'System', description: 'Configuration, security, automation', icon: ShieldCheck },
       { key: 'users', title: 'User management', description: 'Users, roles, groups and access', icon: Users2 },
       { key: 'tenants', title: 'Tenants', description: 'Tenant accounts, branding, configuration', icon: Building2 },
-      { key: 'ai', title: 'AI settings', description: 'Configure Orbita, prompts and AI features', icon: Sparkles },
     ],
   },
   {
