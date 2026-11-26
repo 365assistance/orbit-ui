@@ -9,7 +9,7 @@
 
 import * as React from "react"
 import { Popover } from "radix-ui"
-import { Settings, Search } from "lucide-react"
+import { Settings, Search, LogOut } from "lucide-react"
 
 import { cn } from "@/lib/utils"
 
@@ -33,6 +33,19 @@ export interface SettingsMenuProps {
   searchable?: boolean
   /** Accessible label for the trigger. Default "Settings". */
   triggerLabel?: string
+  /**
+   * Mark the cog as active (e.g. the user is currently on a settings page).
+   * Tints the trigger with the brand colour + a brand-tint background so the
+   * entry point reads as "selected".
+   */
+  active?: boolean
+  /**
+   * When provided, renders a "Sign out" row at the bottom of the menu. Called
+   * when it is clicked (the menu closes automatically).
+   */
+  onSignOut?: () => void
+  /** Label for the sign-out row. Default "Sign out". */
+  signOutLabel?: React.ReactNode
   className?: string
 }
 
@@ -41,6 +54,9 @@ export function SettingsMenu({
   onSelect,
   searchable = true,
   triggerLabel = "Settings",
+  active = false,
+  onSignOut,
+  signOutLabel = "Sign out",
   className,
 }: SettingsMenuProps) {
   const [open, setOpen] = React.useState(false)
@@ -52,14 +68,21 @@ export function SettingsMenu({
           type="button"
           aria-label={triggerLabel}
           data-slot="settings-menu-trigger"
+          data-active={active || undefined}
           className={cn(
-            "grid min-h-[36px] min-w-[36px] place-items-center rounded-lg",
+            "grid min-h-[36px] min-w-[36px] place-items-center rounded-lg transition-colors",
             "hover:bg-[var(--orbit-surface-muted,var(--surface-alt,#f0f2f8))]",
             "aria-expanded:bg-[var(--orbit-surface-muted,var(--surface-alt,#f0f2f8))]",
+            // Active (on a settings page): brand-purple cog on a brand tint.
+            "data-[active]:bg-[var(--orbit-brand-tint,var(--accent,#F6E9F6))]",
             "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--orbit-focus-ring,var(--primary))]",
             className
           )}
-          style={{ color: "var(--orbit-text-muted, var(--ink-muted, #707885))" }}
+          style={{
+            color: active
+              ? "var(--orbit-brand-primary, var(--primary, #92248E))"
+              : "var(--orbit-text-muted, var(--ink-muted, #707885))",
+          }}
         >
           <Settings className="h-[18px] w-[18px]" aria-hidden />
         </button>
@@ -143,6 +166,48 @@ export function SettingsMenu({
               })}
             </div>
           ))}
+
+          {onSignOut && (
+            <>
+              <div
+                className="mx-2 my-1.5 h-px"
+                style={{ background: "var(--orbit-border, var(--border-default, #e2e4e9))" }}
+              />
+              <button
+                type="button"
+                role="menuitem"
+                data-slot="settings-menu-signout"
+                onClick={() => {
+                  onSignOut()
+                  setOpen(false)
+                }}
+                className="flex w-full items-center gap-3 rounded-[9px] px-3 py-2.5"
+                style={{
+                  background: "transparent",
+                  border: "none",
+                  cursor: "pointer",
+                  font: "inherit",
+                  color: "var(--orbit-text, var(--ink-primary, #242d38))",
+                }}
+                onMouseEnter={(e) =>
+                  (e.currentTarget.style.background =
+                    "var(--orbit-surface-muted, var(--surface-alt, #f0f2f8))")
+                }
+                onMouseLeave={(e) => (e.currentTarget.style.background = "transparent")}
+              >
+                <span
+                  className="grid h-[34px] w-[34px] shrink-0 place-items-center rounded-[9px]"
+                  style={{
+                    background: "var(--orbit-surface-muted, var(--surface-alt, #f0f2f8))",
+                    color: "var(--orbit-text-muted, var(--ink-muted, #707885))",
+                  }}
+                >
+                  <LogOut className="h-[18px] w-[18px]" aria-hidden />
+                </span>
+                <span className="text-sm font-semibold leading-tight">{signOutLabel}</span>
+              </button>
+            </>
+          )}
         </Popover.Content>
       </Popover.Portal>
     </Popover.Root>

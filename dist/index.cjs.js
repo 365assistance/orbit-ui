@@ -11448,6 +11448,20 @@ const LoaderCircle = createLucideIcon("LoaderCircle", [
  */
 
 
+const LogOut = createLucideIcon("LogOut", [
+  ["path", { d: "M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4", key: "1uf3rs" }],
+  ["polyline", { points: "16 17 21 12 16 7", key: "1gabdz" }],
+  ["line", { x1: "21", x2: "9", y1: "12", y2: "12", key: "1uyos4" }]
+]);
+
+/**
+ * @license lucide-react v0.469.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+
+
 const Minus = createLucideIcon("Minus", [["path", { d: "M5 12h14", key: "1ays0h" }]]);
 
 /**
@@ -12496,9 +12510,15 @@ function PageHeader({ title, subtitle, actions, className }) {
     return (jsxRuntime.jsxs("div", { "data-slot": "page-header", className: cn("mb-8 flex items-start justify-between gap-4", className), children: [jsxRuntime.jsxs("div", { className: "min-w-0", children: [title != null && title !== "" && (jsxRuntime.jsx("h1", { className: "text-[28px] font-bold leading-tight tracking-tight", style: { color: "var(--orbit-text, var(--ink-primary, #242d38))" }, children: title })), subtitle && (jsxRuntime.jsx("p", { className: "mt-1 max-w-2xl text-sm leading-relaxed", style: { color: "var(--orbit-text-muted, var(--ink-muted, #707885))" }, children: subtitle }))] }), actions && jsxRuntime.jsx("div", { className: "flex shrink-0 items-center gap-2", children: actions })] }));
 }
 
-function SettingsMenu({ sections, onSelect, searchable = true, triggerLabel = "Settings", className, }) {
+function SettingsMenu({ sections, onSelect, searchable = true, triggerLabel = "Settings", active = false, onSignOut, signOutLabel = "Sign out", className, }) {
     const [open, setOpen] = React__namespace.useState(false);
-    return (jsxRuntime.jsxs(Root2$1, { open: open, onOpenChange: setOpen, children: [jsxRuntime.jsx(Trigger$2, { asChild: true, children: jsxRuntime.jsx("button", { type: "button", "aria-label": triggerLabel, "data-slot": "settings-menu-trigger", className: cn("grid min-h-[36px] min-w-[36px] place-items-center rounded-lg", "hover:bg-[var(--orbit-surface-muted,var(--surface-alt,#f0f2f8))]", "aria-expanded:bg-[var(--orbit-surface-muted,var(--surface-alt,#f0f2f8))]", "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--orbit-focus-ring,var(--primary))]", className), style: { color: "var(--orbit-text-muted, var(--ink-muted, #707885))" }, children: jsxRuntime.jsx(Settings, { className: "h-[18px] w-[18px]", "aria-hidden": true }) }) }), jsxRuntime.jsx(Portal$1, { children: jsxRuntime.jsxs(Content2$1, { align: "end", sideOffset: 8, className: "z-[1000] w-[380px] overflow-hidden rounded-[14px] border p-[10px] shadow-[var(--shadow-lg,0_18px_50px_rgba(36,45,56,.20))]", style: {
+    return (jsxRuntime.jsxs(Root2$1, { open: open, onOpenChange: setOpen, children: [jsxRuntime.jsx(Trigger$2, { asChild: true, children: jsxRuntime.jsx("button", { type: "button", "aria-label": triggerLabel, "data-slot": "settings-menu-trigger", "data-active": active || undefined, className: cn("grid min-h-[36px] min-w-[36px] place-items-center rounded-lg transition-colors", "hover:bg-[var(--orbit-surface-muted,var(--surface-alt,#f0f2f8))]", "aria-expanded:bg-[var(--orbit-surface-muted,var(--surface-alt,#f0f2f8))]", 
+                    // Active (on a settings page): brand-purple cog on a brand tint.
+                    "data-[active]:bg-[var(--orbit-brand-tint,var(--accent,#F6E9F6))]", "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--orbit-focus-ring,var(--primary))]", className), style: {
+                        color: active
+                            ? "var(--orbit-brand-primary, var(--primary, #92248E))"
+                            : "var(--orbit-text-muted, var(--ink-muted, #707885))",
+                    }, children: jsxRuntime.jsx(Settings, { className: "h-[18px] w-[18px]", "aria-hidden": true }) }) }), jsxRuntime.jsx(Portal$1, { children: jsxRuntime.jsxs(Content2$1, { align: "end", sideOffset: 8, className: "z-[1000] w-[380px] overflow-hidden rounded-[14px] border p-[10px] shadow-[var(--shadow-lg,0_18px_50px_rgba(36,45,56,.20))]", style: {
                         background: "var(--orbit-surface, var(--card, #fff))",
                         borderColor: "var(--orbit-border, var(--border-default, #e2e4e9))",
                         maxHeight: "80vh",
@@ -12519,7 +12539,20 @@ function SettingsMenu({ sections, onSelect, searchable = true, triggerLabel = "S
                                                     background: "var(--orbit-brand-tint, var(--accent, #F6E9F6))",
                                                     color: "var(--orbit-brand-primary, var(--primary, #92248E))",
                                                 }, children: Icon && jsxRuntime.jsx(Icon, { className: "h-[18px] w-[18px]", "aria-hidden": true }) }), jsxRuntime.jsxs("span", { className: "flex flex-col", children: [jsxRuntime.jsx("span", { className: "text-sm font-semibold leading-tight", children: item.title }), item.description && (jsxRuntime.jsx("span", { className: "mt-0.5 text-xs leading-snug", style: { color: "var(--orbit-text-muted, var(--ink-muted, #707885))" }, children: item.description }))] })] }, item.key));
-                                })] }, si)))] }) })] }));
+                                })] }, si))), onSignOut && (jsxRuntime.jsxs(jsxRuntime.Fragment, { children: [jsxRuntime.jsx("div", { className: "mx-2 my-1.5 h-px", style: { background: "var(--orbit-border, var(--border-default, #e2e4e9))" } }), jsxRuntime.jsxs("button", { type: "button", role: "menuitem", "data-slot": "settings-menu-signout", onClick: () => {
+                                        onSignOut();
+                                        setOpen(false);
+                                    }, className: "flex w-full items-center gap-3 rounded-[9px] px-3 py-2.5", style: {
+                                        background: "transparent",
+                                        border: "none",
+                                        cursor: "pointer",
+                                        font: "inherit",
+                                        color: "var(--orbit-text, var(--ink-primary, #242d38))",
+                                    }, onMouseEnter: (e) => (e.currentTarget.style.background =
+                                        "var(--orbit-surface-muted, var(--surface-alt, #f0f2f8))"), onMouseLeave: (e) => (e.currentTarget.style.background = "transparent"), children: [jsxRuntime.jsx("span", { className: "grid h-[34px] w-[34px] shrink-0 place-items-center rounded-[9px]", style: {
+                                                background: "var(--orbit-surface-muted, var(--surface-alt, #f0f2f8))",
+                                                color: "var(--orbit-text-muted, var(--ink-muted, #707885))",
+                                            }, children: jsxRuntime.jsx(LogOut, { className: "h-[18px] w-[18px]", "aria-hidden": true }) }), jsxRuntime.jsx("span", { className: "text-sm font-semibold leading-tight", children: signOutLabel })] })] }))] }) })] }));
 }
 
 function Tabs({ className, ...props }) {
