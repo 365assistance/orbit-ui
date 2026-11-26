@@ -143,3 +143,51 @@ export const FinanceNav: Story = {
     )
   },
 }
+
+function CollapsedShell({ collapseToggle }: { collapseToggle: 'floating' | 'bottom' | 'bottom-dot' }) {
+  const [collapsed, setCollapsed] = React.useState(true)
+  return (
+    <AppShell
+      sidebar={
+        <Sidebar
+          brand={brand}
+          brandCollapsed={brandCollapsed}
+          sections={sections}
+          activeKey="ar"
+          footer={footer}
+          footerCollapsed={footerCollapsed}
+          collapsible
+          collapsed={collapsed}
+          onToggleCollapsed={setCollapsed}
+          collapseToggle={collapseToggle}
+        />
+      }
+      topBar={<TopBar actions={<SettingsMenu sections={settingsSections} searchable={false} />} />}
+    >
+      <PageContainer>
+        <PageHeader title="Invoices" subtitle="Collapsed nav preview." actions={<Button>New invoice</Button>} />
+        <div style={{ height: 240, borderRadius: 14, border: '1px dashed var(--border-default, #e2e4e9)', display: 'grid', placeItems: 'center', color: 'var(--ink-muted, #707885)' }}>
+          Page content
+        </div>
+      </PageContainer>
+    </AppShell>
+  )
+}
+
+/** Option A: collapse toggle is a small circle on the sidebar's right edge. */
+export const CollapsedFloatingToggle: Story = {
+  args: { sidebar: null, children: null },
+  render: () => <CollapsedShell collapseToggle="floating" />,
+}
+
+/** Option B: collapse toggle sits at the bottom of the sidebar. */
+export const CollapsedBottomToggle: Story = {
+  args: { sidebar: null, children: null },
+  render: () => <CollapsedShell collapseToggle="bottom" />,
+}
+
+/** A circular dot toggle on the bottom-right edge of the nav. */
+export const CollapsedBottomDotToggle: Story = {
+  args: { sidebar: null, children: null },
+  render: () => <CollapsedShell collapseToggle="bottom-dot" />,
+}

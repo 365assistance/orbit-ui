@@ -12073,7 +12073,7 @@ function ActiveFilterChips({ groups, value, onChange, className, }) {
             }), jsx("button", { type: "button", onClick: clearAll, className: "text-xs font-semibold underline", style: { color: "var(--ink-muted)" }, children: "Clear all" })] }));
 }
 
-function Sidebar({ brand, brandCollapsed, sections, activeKey, onNavigate, footer, footerCollapsed, collapsible = false, collapsed: collapsedProp, onToggleCollapsed, className, }) {
+function Sidebar({ brand, brandCollapsed, sections, activeKey, onNavigate, footer, footerCollapsed, collapsible = false, collapsed: collapsedProp, onToggleCollapsed, collapseToggle = "floating", className, }) {
     const [internalCollapsed, setInternalCollapsed] = React.useState(false);
     const isControlled = collapsedProp !== undefined;
     const collapsed = collapsible && (isControlled ? collapsedProp : internalCollapsed);
@@ -12084,10 +12084,19 @@ function Sidebar({ brand, brandCollapsed, sections, activeKey, onNavigate, foote
         onToggleCollapsed?.(next);
     };
     return (jsxs("nav", { "data-slot": "sidebar", "data-collapsed": collapsed ? "" : undefined, "aria-label": "Primary", className: cn("flex h-full shrink-0 flex-col transition-[width] duration-150", collapsed ? "w-[68px]" : "w-[248px]", className), style: {
+            position: "relative",
             background: "var(--orbit-surface, var(--card, #fff))",
             borderRight: "1px solid var(--orbit-border, var(--border-default, #e2e4e9))",
             fontFamily: "var(--font-sans)",
-        }, children: [jsxs("div", { className: cn("flex min-h-[56px] items-center gap-2", collapsed ? "justify-center px-2" : "px-4"), children: [(brand != null || brandCollapsed != null) && (jsx("div", { className: "min-w-0 flex-1 overflow-hidden", children: collapsed ? (brandCollapsed ?? null) : brand })), collapsible && (jsx("button", { type: "button", onClick: toggle, "aria-label": collapsed ? "Expand navigation" : "Collapse navigation", "aria-expanded": !collapsed, className: "grid h-8 w-8 shrink-0 place-items-center rounded-lg hover:bg-[var(--orbit-surface-muted,var(--surface-alt,#f0f2f8))] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--orbit-focus-ring,var(--primary))]", style: { color: "var(--orbit-text-muted, var(--ink-muted, #707885))" }, children: collapsed ? (jsx(PanelLeftOpen, { className: "h-[18px] w-[18px]", "aria-hidden": true })) : (jsx(PanelLeftClose, { className: "h-[18px] w-[18px]", "aria-hidden": true })) }))] }), jsx("div", { className: "orbit-thin-scrollbar flex-1 overflow-y-auto py-2", children: sections.map((section, si) => (jsxs("div", { className: "mb-2", children: [section.label != null && !collapsed && (jsx("div", { className: "px-5 pb-1 pt-3 text-[11px] font-bold uppercase tracking-[0.06em]", style: { color: "var(--orbit-text-muted, var(--ink-muted, #707885))" }, children: section.label })), section.label != null && collapsed && si > 0 && (jsx("div", { className: "mx-3 my-2", style: { borderTop: "1px solid var(--orbit-border, var(--border-default, #e2e4e9))" } })), jsx("ul", { className: "list-none", children: section.items.map((item) => {
+        }, children: [jsxs("div", { className: cn("flex min-h-[56px] items-center gap-2", collapsed ? "justify-center px-2" : "px-4"), children: [(brand != null || brandCollapsed != null) && (jsx("div", { className: cn("min-w-0 overflow-hidden", collapsed ? "" : "flex-1"), children: collapsed ? (brandCollapsed ?? null) : brand })), collapsible && !collapsed && collapseToggle !== "floating" && (jsx("button", { type: "button", onClick: toggle, "aria-label": "Collapse navigation", "aria-expanded": true, className: "grid h-8 w-8 shrink-0 place-items-center rounded-lg hover:bg-[var(--orbit-surface-muted,var(--surface-alt,#f0f2f8))] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--orbit-focus-ring,var(--primary))]", style: { color: "var(--orbit-text-muted, var(--ink-muted, #707885))" }, children: jsx(PanelLeftClose, { className: "h-[18px] w-[18px]", "aria-hidden": true }) }))] }), collapsible && collapseToggle === "floating" && (jsx("button", { type: "button", onClick: toggle, "aria-label": collapsed ? "Expand navigation" : "Collapse navigation", "aria-expanded": !collapsed, className: "absolute grid h-8 w-8 place-items-center rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--orbit-focus-ring,var(--primary))]", style: {
+                    top: 14,
+                    right: -16,
+                    background: "var(--orbit-surface, var(--card, #fff))",
+                    border: "1px solid var(--orbit-border, var(--border-default, #e2e4e9))",
+                    boxShadow: "0 2px 8px rgba(16,24,40,.12)",
+                    color: "var(--orbit-text-muted, var(--ink-muted, #707885))",
+                    zIndex: 20,
+                }, children: collapsed ? (jsx(PanelLeftOpen, { className: "h-[15px] w-[15px]", "aria-hidden": true })) : (jsx(PanelLeftClose, { className: "h-[15px] w-[15px]", "aria-hidden": true })) })), jsx("div", { className: "orbit-thin-scrollbar flex-1 overflow-y-auto py-2", children: sections.map((section, si) => (jsxs("div", { className: "mb-2", children: [section.label != null && !collapsed && (jsx("div", { className: "px-5 pb-1 pt-3 text-[11px] font-bold uppercase tracking-[0.06em]", style: { color: "var(--orbit-text-muted, var(--ink-muted, #707885))" }, children: section.label })), section.label != null && collapsed && si > 0 && (jsx("div", { className: "mx-3 my-2", style: { borderTop: "1px solid var(--orbit-border, var(--border-default, #e2e4e9))" } })), jsx("ul", { className: "list-none", children: section.items.map((item) => {
                                 const active = item.key === activeKey;
                                 const Icon = item.icon;
                                 return (jsx("li", { children: jsxs("a", { href: item.href ?? "#", "aria-current": active ? "page" : undefined, title: collapsed && typeof item.label === "string" ? item.label : undefined, onClick: (e) => {
@@ -12110,7 +12119,18 @@ function Sidebar({ brand, brandCollapsed, sections, activeKey, onNavigate, foote
                                             if (!active)
                                                 e.currentTarget.style.background = "transparent";
                                         }, children: [Icon && jsx(Icon, { className: "h-[18px] w-[18px] shrink-0", "aria-hidden": true }), !collapsed && jsx("span", { className: "flex-1 truncate", children: item.label })] }) }, item.key));
-                            }) })] }, si))) }), (footer != null || footerCollapsed != null) && (jsx("div", { className: collapsed ? "p-2" : "p-2", style: { borderTop: "1px solid var(--orbit-border, var(--border-default, #e2e4e9))" }, children: collapsed ? (footerCollapsed ?? null) : footer }))] }));
+                            }) })] }, si))) }), (footer != null || footerCollapsed != null) && (jsx("div", { className: "p-2", style: { borderTop: "1px solid var(--orbit-border, var(--border-default, #e2e4e9))" }, children: collapsed ? (footerCollapsed ?? footer) : footer })), collapsible && collapseToggle === "bottom-dot" && (jsx("button", { type: "button", onClick: toggle, "aria-label": collapsed ? "Expand navigation" : "Collapse navigation", "aria-expanded": !collapsed, className: "absolute grid h-7 w-7 place-items-center rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--orbit-focus-ring,var(--primary))]", style: {
+                    bottom: 18,
+                    right: 6,
+                    background: "var(--orbit-surface, var(--card, #fff))",
+                    border: "1px solid var(--orbit-border, var(--border-default, #e2e4e9))",
+                    boxShadow: "0 2px 6px rgba(16,24,40,.10)",
+                    color: "var(--orbit-text-muted, var(--ink-muted, #707885))",
+                    zIndex: 10,
+                }, children: collapsed ? (jsx(PanelLeftOpen, { className: "h-[15px] w-[15px]", "aria-hidden": true })) : (jsx(PanelLeftClose, { className: "h-[15px] w-[15px]", "aria-hidden": true })) })), collapsible && collapseToggle === "bottom" && (jsx("button", { type: "button", onClick: toggle, "aria-label": collapsed ? "Expand navigation" : "Collapse navigation", "aria-expanded": !collapsed, className: cn("m-2 flex min-h-[40px] items-center rounded-[10px] text-sm transition-colors", collapsed ? "justify-center px-0" : "gap-3 px-3", "hover:bg-[var(--orbit-surface-muted,var(--surface-alt,#f0f2f8))] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--orbit-focus-ring,var(--primary))]"), style: {
+                    borderTop: "1px solid var(--orbit-border, var(--border-default, #e2e4e9))",
+                    color: "var(--orbit-text-muted, var(--ink-muted, #707885))",
+                }, children: collapsed ? (jsx(PanelLeftOpen, { className: "h-[18px] w-[18px] shrink-0", "aria-hidden": true })) : (jsxs(Fragment, { children: [jsx(PanelLeftClose, { className: "h-[18px] w-[18px] shrink-0", "aria-hidden": true }), jsx("span", { className: "flex-1 truncate text-left", children: "Collapse" })] })) }))] }));
 }
 
 function TopBar({ title, leading, actions, className }) {
@@ -12121,7 +12141,10 @@ function TopBar({ title, leading, actions, className }) {
         }, children: [leading, title != null && (jsx("h1", { className: "truncate text-lg font-semibold", style: { color: "var(--orbit-text, var(--ink-primary, #242d38))" }, children: title })), actions != null && (jsx("div", { className: "ml-auto flex items-center gap-1", children: actions }))] }));
 }
 function AppShell({ sidebar, topBar, children, className }) {
-    return (jsxs("div", { "data-slot": "app-shell", className: cn("flex h-screen w-full overflow-hidden", className), style: { background: "var(--orbit-bg, var(--surface, #f8f9fb))" }, children: [sidebar, jsxs("div", { className: "flex min-w-0 flex-1 flex-col", children: [topBar, jsx("main", { id: "main", className: "orbit-thin-scrollbar min-w-0 flex-1 overflow-y-auto", children: children })] })] }));
+    return (jsxs("div", { "data-slot": "app-shell", 
+        // No overflow-hidden here so an edge-straddling collapse toggle can sit on
+        // the sidebar border; the scroll region (<main>) clips its own overflow.
+        className: cn("flex h-screen w-full", className), style: { background: "var(--orbit-bg, var(--surface, #f8f9fb))" }, children: [sidebar, jsxs("div", { className: "flex min-w-0 flex-1 flex-col", children: [topBar, jsx("main", { id: "main", className: "orbit-thin-scrollbar min-w-0 flex-1 overflow-y-auto", children: children })] })] }));
 }
 
 function PageContainer({ width = "full", className, children, ...props }) {
