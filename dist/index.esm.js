@@ -11156,6 +11156,25 @@ const Search = createLucideIcon("Search", [
  */
 
 
+const Settings = createLucideIcon("Settings", [
+  [
+    "path",
+    {
+      d: "M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z",
+      key: "1qme2f"
+    }
+  ],
+  ["circle", { cx: "12", cy: "12", r: "3", key: "1v7zrd" }]
+]);
+
+/**
+ * @license lucide-react v0.469.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+
+
 const TriangleAlert = createLucideIcon("TriangleAlert", [
   [
     "path",
@@ -12026,6 +12045,81 @@ function ActiveFilterChips({ groups, value, onChange, className, }) {
             }), jsx("button", { type: "button", onClick: clearAll, className: "text-xs font-semibold underline", style: { color: "var(--ink-muted)" }, children: "Clear all" })] }));
 }
 
+function Sidebar({ brand, sections, activeKey, onNavigate, footer, className, }) {
+    return (jsxs("nav", { "data-slot": "sidebar", "aria-label": "Primary", className: cn("flex h-full w-[248px] shrink-0 flex-col", className), style: {
+            background: "var(--orbit-surface, var(--card, #fff))",
+            borderRight: "1px solid var(--orbit-border, var(--border-default, #e2e4e9))",
+            fontFamily: "var(--font-sans)",
+        }, children: [brand != null && (jsx("div", { className: "flex min-h-[56px] items-center px-4", children: brand })), jsx("div", { className: "orbit-thin-scrollbar flex-1 overflow-y-auto py-2", children: sections.map((section, si) => (jsxs("div", { className: "mb-2", children: [section.label != null && (jsx("div", { className: "px-5 pb-1 pt-3 text-[11px] font-bold uppercase tracking-[0.06em]", style: { color: "var(--orbit-text-muted, var(--ink-muted, #707885))" }, children: section.label })), jsx("ul", { className: "list-none", children: section.items.map((item) => {
+                                const active = item.key === activeKey;
+                                const Icon = item.icon;
+                                return (jsx("li", { children: jsxs("a", { href: item.href ?? "#", "aria-current": active ? "page" : undefined, onClick: (e) => {
+                                            if (!item.href)
+                                                e.preventDefault();
+                                            onNavigate?.(item.key, item);
+                                        }, className: cn("mx-2 flex min-h-[40px] items-center gap-3 rounded-[10px] px-3 text-sm transition-colors", "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--orbit-focus-ring,var(--primary))]"), style: active
+                                            ? {
+                                                background: "var(--orbit-brand-tint, var(--accent, #F5EBFA))",
+                                                color: "var(--orbit-brand-primary, var(--primary, #92248E))",
+                                                fontWeight: 600,
+                                            }
+                                            : {
+                                                color: "var(--orbit-text-muted, var(--ink-mid, #5b6470))",
+                                            }, onMouseEnter: (e) => {
+                                            if (!active)
+                                                e.currentTarget.style.background =
+                                                    "var(--orbit-surface-muted, var(--surface-alt, #f0f2f8))";
+                                        }, onMouseLeave: (e) => {
+                                            if (!active)
+                                                e.currentTarget.style.background = "transparent";
+                                        }, children: [Icon && jsx(Icon, { className: "h-[18px] w-[18px] shrink-0", "aria-hidden": true }), jsx("span", { className: "flex-1 truncate", children: item.label })] }) }, item.key));
+                            }) })] }, si))) }), footer != null && (jsx("div", { className: "p-2", style: { borderTop: "1px solid var(--orbit-border, var(--border-default, #e2e4e9))" }, children: footer }))] }));
+}
+
+function TopBar({ title, leading, actions, className }) {
+    return (jsxs("header", { "data-slot": "top-bar", "aria-label": "Site header", className: cn("flex min-h-[56px] items-center gap-3 px-5", className), style: {
+            background: "var(--orbit-surface, var(--card, #fff))",
+            borderBottom: "1px solid var(--orbit-border, var(--border-default, #e2e4e9))",
+            fontFamily: "var(--font-sans)",
+        }, children: [leading, title != null && (jsx("h1", { className: "truncate text-lg font-semibold", style: { color: "var(--orbit-text, var(--ink-primary, #242d38))" }, children: title })), actions != null && (jsx("div", { className: "ml-auto flex items-center gap-1", children: actions }))] }));
+}
+function AppShell({ sidebar, topBar, children, className }) {
+    return (jsxs("div", { "data-slot": "app-shell", className: cn("flex h-screen w-full overflow-hidden", className), style: { background: "var(--orbit-bg, var(--surface, #f8f9fb))" }, children: [sidebar, jsxs("div", { className: "flex min-w-0 flex-1 flex-col", children: [topBar, jsx("main", { id: "main", className: "orbit-thin-scrollbar min-w-0 flex-1 overflow-y-auto", children: children })] })] }));
+}
+
+function PageContainer({ width = "full", className, children, ...props }) {
+    return (jsx("div", { "data-slot": "page-container", className: cn("w-full", className), style: { fontFamily: "var(--font-sans)" }, ...props, children: jsx("div", { className: cn("p-8", width === "contained" && "mx-auto max-w-5xl"), children: children }) }));
+}
+function PageHeader({ title, subtitle, actions, className }) {
+    return (jsxs("div", { "data-slot": "page-header", className: cn("mb-8 flex items-start justify-between gap-4", className), children: [jsxs("div", { className: "min-w-0", children: [title != null && title !== "" && (jsx("h1", { className: "text-[28px] font-bold leading-tight tracking-tight", style: { color: "var(--orbit-text, var(--ink-primary, #242d38))" }, children: title })), subtitle && (jsx("p", { className: "mt-1 max-w-2xl text-sm leading-relaxed", style: { color: "var(--orbit-text-muted, var(--ink-muted, #707885))" }, children: subtitle }))] }), actions && jsx("div", { className: "flex shrink-0 items-center gap-2", children: actions })] }));
+}
+
+function SettingsMenu({ sections, onSelect, searchable = true, triggerLabel = "Settings", className, }) {
+    const [open, setOpen] = React.useState(false);
+    return (jsxs(Root2$1, { open: open, onOpenChange: setOpen, children: [jsx(Trigger$2, { asChild: true, children: jsx("button", { type: "button", "aria-label": triggerLabel, "data-slot": "settings-menu-trigger", className: cn("grid min-h-[36px] min-w-[36px] place-items-center rounded-lg", "hover:bg-[var(--orbit-surface-muted,var(--surface-alt,#f0f2f8))]", "aria-expanded:bg-[var(--orbit-surface-muted,var(--surface-alt,#f0f2f8))]", "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--orbit-focus-ring,var(--primary))]", className), style: { color: "var(--orbit-text-muted, var(--ink-muted, #707885))" }, children: jsx(Settings, { className: "h-[18px] w-[18px]", "aria-hidden": true }) }) }), jsx(Portal$1, { children: jsxs(Content2$1, { align: "end", sideOffset: 8, className: "z-[1000] w-[380px] overflow-hidden rounded-[14px] border p-[10px] shadow-[var(--shadow-lg,0_18px_50px_rgba(36,45,56,.20))]", style: {
+                        background: "var(--orbit-surface, var(--card, #fff))",
+                        borderColor: "var(--orbit-border, var(--border-default, #e2e4e9))",
+                        maxHeight: "80vh",
+                        overflowY: "auto",
+                        fontFamily: "var(--font-sans)",
+                    }, children: [searchable && (jsxs("div", { className: "mx-2 mb-2.5 mt-1.5 flex items-center gap-2 rounded-[9px] px-2.5 py-2 text-sm", style: {
+                                border: "1px solid var(--orbit-border, var(--border-default, #D8DEE6))",
+                                color: "var(--orbit-text-muted, var(--ink-muted, #707885))",
+                            }, children: [jsx(Search, { className: "h-[15px] w-[15px]", "aria-hidden": true }), "Search settings"] })), sections.map((section, si) => (jsxs("div", { children: [jsx("div", { className: "px-3 pb-1.5 pt-3 text-[11px] font-extrabold uppercase tracking-[0.05em]", style: { color: "var(--orbit-text-muted, var(--ink-muted, #707885))" }, children: section.label }), section.items.map((item) => {
+                                    const Icon = item.icon;
+                                    return (jsxs("a", { href: item.href ?? "#", role: "menuitem", onClick: (e) => {
+                                            if (!item.href)
+                                                e.preventDefault();
+                                            onSelect?.(item.key, item);
+                                            setOpen(false);
+                                        }, className: "flex items-start gap-3 rounded-[9px] px-3 py-2.5 no-underline", style: { color: "var(--orbit-text, var(--ink-primary, #242d38))" }, onMouseEnter: (e) => (e.currentTarget.style.background =
+                                            "var(--orbit-brand-tint, var(--accent, #F6E9F6))"), onMouseLeave: (e) => (e.currentTarget.style.background = "transparent"), children: [jsx("span", { className: "grid h-[34px] w-[34px] shrink-0 place-items-center rounded-[9px]", style: {
+                                                    background: "var(--orbit-brand-tint, var(--accent, #F6E9F6))",
+                                                    color: "var(--orbit-brand-primary, var(--primary, #92248E))",
+                                                }, children: Icon && jsx(Icon, { className: "h-[18px] w-[18px]", "aria-hidden": true }) }), jsxs("span", { className: "flex flex-col", children: [jsx("span", { className: "text-sm font-semibold leading-tight", children: item.title }), item.description && (jsx("span", { className: "mt-0.5 text-xs leading-snug", style: { color: "var(--orbit-text-muted, var(--ink-muted, #707885))" }, children: item.description }))] })] }, item.key));
+                                })] }, si)))] }) })] }));
+}
+
 function Tabs({ className, ...props }) {
     return (jsx(Root2, { "data-slot": "tabs", className: cn("flex flex-col gap-4", className), ...props }));
 }
@@ -12044,5 +12138,5 @@ function ConfirmDestroyDialog({ open, onOpenChange, title, description, confirmL
     return (jsx(Dialog, { open: open, onOpenChange: (next) => !next && !loading && onOpenChange(false), children: jsxs(DialogContent, { className: "sm:max-w-md", children: [jsx(DialogHeader, { children: jsx(DialogTitle, { children: title }) }), jsx("p", { className: "text-sm text-[var(--ink-muted,var(--muted-foreground))]", children: description }), jsxs(DialogFooter, { children: [jsx(Button, { variant: "ghost", onClick: () => onOpenChange(false), disabled: loading, children: cancelLabel }), jsxs(Button, { variant: "destructive", onClick: onConfirm, disabled: loading, children: [loading && jsx(Spinner, { size: "sm" }), resolvedConfirm] })] })] }) }));
 }
 
-export { ActiveFilterChips, Alert, AlertAction, AlertDescription, AlertTitle, Badge, Button, Card, CardAction, CardContent, CardDescription, CardFooter, CardHeader, CardTitle, ConfirmDestroyDialog, Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogOverlay, DialogTitle, DialogTrigger, Drawer, DrawerBody, DrawerClose, DrawerContent, DrawerDescription, DrawerFooter, DrawerHeader, DrawerOverlay, DrawerTitle, DrawerTrigger, EmptyState, EntityDrawer, EntityDrawerSection, ErrorState, FieldHelp, FilterBar, FilterSelect, FormField, FormFieldRow, FormSection, HeroStatCard, HeroStatHeadline, Input, Label, MetricCard, Modal, Pagination, Pill, PortalSelect, RowAvatar, RowItem, RowKebab, RowList, RowNumber, RowPill, RowPrimary, SearchInput, Separator, SetupWizard, Spinner, StatCard, StatusChip, Table, TableBody, TableCard, TableCell, TableFilter, TableHead, TableHeader, TableRow, TableToolbar, Tabs, TabsContent, TabsList, TabsTrigger, Tooltip, TooltipContent, TooltipProvider, TooltipTrigger, badgeVariants, buttonVariants, cn };
+export { ActiveFilterChips, Alert, AlertAction, AlertDescription, AlertTitle, AppShell, Badge, Button, Card, CardAction, CardContent, CardDescription, CardFooter, CardHeader, CardTitle, ConfirmDestroyDialog, Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogOverlay, DialogTitle, DialogTrigger, Drawer, DrawerBody, DrawerClose, DrawerContent, DrawerDescription, DrawerFooter, DrawerHeader, DrawerOverlay, DrawerTitle, DrawerTrigger, EmptyState, EntityDrawer, EntityDrawerSection, ErrorState, FieldHelp, FilterBar, FilterSelect, FormField, FormFieldRow, FormSection, HeroStatCard, HeroStatHeadline, Input, Label, MetricCard, Modal, PageContainer, PageHeader, Pagination, Pill, PortalSelect, RowAvatar, RowItem, RowKebab, RowList, RowNumber, RowPill, RowPrimary, SearchInput, Separator, SettingsMenu, SetupWizard, Sidebar, Spinner, StatCard, StatusChip, Table, TableBody, TableCard, TableCell, TableFilter, TableHead, TableHeader, TableRow, TableToolbar, Tabs, TabsContent, TabsList, TabsTrigger, Tooltip, TooltipContent, TooltipProvider, TooltipTrigger, TopBar, badgeVariants, buttonVariants, cn };
 //# sourceMappingURL=index.esm.js.map
