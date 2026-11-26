@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
+import * as React from 'react'
 import {
   Briefcase, Workflow, Receipt, Users2, Package, BookOpen,
   LifeBuoy, UserCircle2, Bell, ShieldCheck, Building2, Sparkles, DollarSign,
@@ -83,6 +84,7 @@ const footer = (
     <a href="#" onClick={(e) => e.preventDefault()} style={{ display: 'flex', alignItems: 'center', gap: 12, padding: '8px 12px', borderRadius: 10, fontSize: 14, color: 'var(--ink-mid, #5b6470)', textDecoration: 'none' }}>
       <LifeBuoy className="h-[18px] w-[18px]" aria-hidden /> Help
     </a>
+    <div style={{ height: 1, margin: '4px 8px', background: 'var(--border-default, #e2e4e9)' }} />
     <div style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '8px 12px' }}>
       <span style={{ width: 32, height: 32, borderRadius: '50%', background: 'var(--accent, #F6E9F6)', color: 'var(--primary, #92248E)', display: 'grid', placeItems: 'center', fontWeight: 700, fontSize: 13 }}>SF</span>
       <div style={{ display: 'flex', flexDirection: 'column', lineHeight: 1.2 }}>
@@ -93,12 +95,36 @@ const footer = (
   </div>
 )
 
+const brandCollapsed = (
+  <span style={{ fontSize: 20, fontWeight: 800, color: 'var(--primary, #92248E)' }}>O</span>
+)
+
+const footerCollapsed = (
+  <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8, padding: '4px 0' }}>
+    <LifeBuoy className="h-[18px] w-[18px]" aria-hidden style={{ color: 'var(--ink-mid, #5b6470)' }} />
+    <div style={{ height: 1, width: 28, background: 'var(--border-default, #e2e4e9)' }} />
+    <span style={{ width: 30, height: 30, borderRadius: '50%', background: 'var(--accent, #F6E9F6)', color: 'var(--primary, #92248E)', display: 'grid', placeItems: 'center', fontWeight: 700, fontSize: 12 }}>SF</span>
+  </div>
+)
+
 export const FinanceNav: Story = {
   args: { sidebar: null, children: null },
-  render: () => (
+  render: function Render() {
+    const [collapsed, setCollapsed] = React.useState(false)
+    return (
     <AppShell
       sidebar={
-        <Sidebar brand={brand} sections={sections} activeKey="ar" footer={footer} />
+        <Sidebar
+          brand={brand}
+          brandCollapsed={brandCollapsed}
+          sections={sections}
+          activeKey="ar"
+          footer={footer}
+          footerCollapsed={footerCollapsed}
+          collapsible
+          collapsed={collapsed}
+          onToggleCollapsed={setCollapsed}
+        />
       }
       topBar={
         <TopBar actions={<SettingsMenu sections={settingsSections} />} />
@@ -115,5 +141,6 @@ export const FinanceNav: Story = {
         </div>
       </PageContainer>
     </AppShell>
-  ),
+    )
+  },
 }
