@@ -1,4 +1,11 @@
 import * as React from "react";
+export interface SidebarChild {
+    /** Stable key, used for the active state and onNavigate. */
+    key: string;
+    label: React.ReactNode;
+    /** Optional href. If omitted, onNavigate(key) is the only signal. */
+    href?: string;
+}
 export interface SidebarItem {
     /** Stable key, used for the active state and onNavigate. */
     key: string;
@@ -10,6 +17,14 @@ export interface SidebarItem {
     }>;
     /** Optional href. If omitted, onNavigate(key) is the only signal. */
     href?: string;
+    /**
+     * Optional sub-items. When present, this item becomes an expandable group:
+     * clicking it toggles the children rather than navigating. A group shows as
+     * open/active when one of its children is the active item. In the collapsed
+     * icon rail, groups are not expandable (clicking still calls onNavigate for
+     * the group key so the host can expand the rail if it wants).
+     */
+    children?: SidebarChild[];
 }
 export interface SidebarSection {
     /** Optional section heading (e.g. "Workflow", "Finance"). */

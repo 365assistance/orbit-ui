@@ -12452,30 +12452,7 @@ function Sidebar({ brand, brandCollapsed, sections, activeKey, onNavigate, foote
                     boxShadow: "0 2px 8px rgba(16,24,40,.12)",
                     color: "var(--orbit-text-muted, var(--ink-muted, #707885))",
                     zIndex: 20,
-                }, children: collapsed ? (jsxRuntime.jsx(PanelLeftOpen, { className: "h-[15px] w-[15px]", "aria-hidden": true })) : (jsxRuntime.jsx(PanelLeftClose, { className: "h-[15px] w-[15px]", "aria-hidden": true })) })), jsxRuntime.jsx("div", { className: "orbit-thin-scrollbar flex-1 overflow-y-auto py-2", children: sections.map((section, si) => (jsxRuntime.jsxs("div", { className: "mb-2", children: [section.label != null && !collapsed && (jsxRuntime.jsx("div", { className: "px-5 pb-1 pt-3 text-[11px] font-bold uppercase tracking-[0.06em]", style: { color: "var(--orbit-text-muted, var(--ink-muted, #707885))" }, children: section.label })), section.label != null && collapsed && si > 0 && (jsxRuntime.jsx("div", { className: "mx-3 my-2", style: { borderTop: "1px solid var(--orbit-border, var(--border-default, #e2e4e9))" } })), jsxRuntime.jsx("ul", { className: "list-none", children: section.items.map((item) => {
-                                const active = item.key === activeKey;
-                                const Icon = item.icon;
-                                return (jsxRuntime.jsx("li", { children: jsxRuntime.jsxs("a", { href: item.href ?? "#", "aria-current": active ? "page" : undefined, title: collapsed && typeof item.label === "string" ? item.label : undefined, onClick: (e) => {
-                                            if (!item.href)
-                                                e.preventDefault();
-                                            onNavigate?.(item.key, item);
-                                        }, className: cn("mx-2 flex min-h-[40px] items-center rounded-[10px] text-sm transition-colors", collapsed ? "justify-center px-0" : "gap-3 px-3", "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--orbit-focus-ring,var(--primary))]"), style: active
-                                            ? {
-                                                background: "var(--orbit-brand-tint, var(--accent, #F5EBFA))",
-                                                color: "var(--orbit-brand-primary, var(--primary, #92248E))",
-                                                fontWeight: 600,
-                                            }
-                                            : {
-                                                color: "var(--orbit-text-muted, var(--ink-mid, #5b6470))",
-                                            }, onMouseEnter: (e) => {
-                                            if (!active)
-                                                e.currentTarget.style.background =
-                                                    "var(--orbit-surface-muted, var(--surface-alt, #f0f2f8))";
-                                        }, onMouseLeave: (e) => {
-                                            if (!active)
-                                                e.currentTarget.style.background = "transparent";
-                                        }, children: [Icon && jsxRuntime.jsx(Icon, { className: "h-[18px] w-[18px] shrink-0", "aria-hidden": true }), !collapsed && jsxRuntime.jsx("span", { className: "flex-1 truncate", children: item.label })] }) }, item.key));
-                            }) })] }, si))) }), (footer != null || footerCollapsed != null) && (jsxRuntime.jsx("div", { className: "p-2", style: { borderTop: "1px solid var(--orbit-border, var(--border-default, #e2e4e9))" }, children: collapsed ? (footerCollapsed ?? footer) : footer })), collapsible && collapseToggle === "bottom-dot" && (jsxRuntime.jsx("button", { type: "button", onClick: toggle, "aria-label": collapsed ? "Expand navigation" : "Collapse navigation", "aria-expanded": !collapsed, className: "absolute grid h-7 w-7 place-items-center rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--orbit-focus-ring,var(--primary))]", style: {
+                }, children: collapsed ? (jsxRuntime.jsx(PanelLeftOpen, { className: "h-[15px] w-[15px]", "aria-hidden": true })) : (jsxRuntime.jsx(PanelLeftClose, { className: "h-[15px] w-[15px]", "aria-hidden": true })) })), jsxRuntime.jsx("div", { className: "orbit-thin-scrollbar flex-1 overflow-y-auto py-2", children: sections.map((section, si) => (jsxRuntime.jsxs("div", { className: "mb-2", children: [section.label != null && !collapsed && (jsxRuntime.jsx("div", { className: "px-5 pb-1 pt-3 text-[11px] font-bold uppercase tracking-[0.06em]", style: { color: "var(--orbit-text-muted, var(--ink-muted, #707885))" }, children: section.label })), section.label != null && collapsed && si > 0 && (jsxRuntime.jsx("div", { className: "mx-3 my-2", style: { borderTop: "1px solid var(--orbit-border, var(--border-default, #e2e4e9))" } })), jsxRuntime.jsx("ul", { className: "list-none", children: section.items.map((item) => (jsxRuntime.jsx(SidebarRow, { item: item, collapsed: collapsed, activeKey: activeKey, onNavigate: onNavigate }, item.key))) })] }, si))) }), (footer != null || footerCollapsed != null) && (jsxRuntime.jsx("div", { className: "p-2", style: { borderTop: "1px solid var(--orbit-border, var(--border-default, #e2e4e9))" }, children: collapsed ? (footerCollapsed ?? footer) : footer })), collapsible && collapseToggle === "bottom-dot" && (jsxRuntime.jsx("button", { type: "button", onClick: toggle, "aria-label": collapsed ? "Expand navigation" : "Collapse navigation", "aria-expanded": !collapsed, className: "absolute grid h-7 w-7 place-items-center rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--orbit-focus-ring,var(--primary))]", style: {
                     bottom: 18,
                     right: 6,
                     background: "var(--orbit-surface, var(--card, #fff))",
@@ -12487,6 +12464,62 @@ function Sidebar({ brand, brandCollapsed, sections, activeKey, onNavigate, foote
                     borderTop: "1px solid var(--orbit-border, var(--border-default, #e2e4e9))",
                     color: "var(--orbit-text-muted, var(--ink-muted, #707885))",
                 }, children: collapsed ? (jsxRuntime.jsx(PanelLeftOpen, { className: "h-[18px] w-[18px] shrink-0", "aria-hidden": true })) : (jsxRuntime.jsxs(jsxRuntime.Fragment, { children: [jsxRuntime.jsx(PanelLeftClose, { className: "h-[18px] w-[18px] shrink-0", "aria-hidden": true }), jsxRuntime.jsx("span", { className: "flex-1 truncate text-left", children: "Collapse" })] })) }))] }));
+}
+// ---------------------------------------------------------------------------
+// SidebarRow — one nav entry. A leaf links/navigates; a group (item.children)
+// is an expandable disclosure with indented sub-items. The group auto-opens
+// when one of its children is the active item.
+// ---------------------------------------------------------------------------
+function SidebarRow({ item, collapsed, activeKey, onNavigate, }) {
+    const Icon = item.icon;
+    const hasChildren = !!item.children && item.children.length > 0;
+    const childActive = hasChildren && item.children.some((c) => c.key === activeKey);
+    const active = item.key === activeKey || childActive;
+    // Group open state: default open when a child is active; user can toggle.
+    const [open, setOpen] = React__namespace.useState(childActive);
+    React__namespace.useEffect(() => {
+        if (childActive)
+            setOpen(true);
+    }, [childActive]);
+    const baseRow = "mx-2 flex min-h-[40px] items-center rounded-[10px] text-sm transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--orbit-focus-ring,var(--primary))]";
+    const rowStyle = (isActive) => isActive
+        ? {
+            background: "var(--orbit-brand-tint, var(--accent, #F5EBFA))",
+            color: "var(--orbit-brand-primary, var(--primary, #92248E))",
+            fontWeight: 600,
+        }
+        : { color: "var(--orbit-text-muted, var(--ink-mid, #5b6470))" };
+    const hoverOn = (e, isActive) => {
+        if (!isActive)
+            e.currentTarget.style.background =
+                "var(--orbit-surface-muted, var(--surface-alt, #f0f2f8))";
+    };
+    const hoverOff = (e, isActive) => {
+        if (!isActive)
+            e.currentTarget.style.background = "transparent";
+    };
+    // ── Leaf item ──────────────────────────────────────────────────────────────
+    if (!hasChildren) {
+        return (jsxRuntime.jsx("li", { children: jsxRuntime.jsxs("a", { href: item.href ?? "#", "aria-current": active ? "page" : undefined, title: collapsed && typeof item.label === "string" ? item.label : undefined, onClick: (e) => {
+                    if (!item.href)
+                        e.preventDefault();
+                    onNavigate?.(item.key, item);
+                }, className: cn(baseRow, collapsed ? "justify-center px-0" : "gap-3 px-3"), style: rowStyle(active), onMouseEnter: (e) => hoverOn(e, active), onMouseLeave: (e) => hoverOff(e, active), children: [Icon && jsxRuntime.jsx(Icon, { className: "h-[18px] w-[18px] shrink-0", "aria-hidden": true }), !collapsed && jsxRuntime.jsx("span", { className: "flex-1 truncate", children: item.label })] }) }));
+    }
+    // ── Expandable group ─────────────────────────────────────────────────────────
+    // Collapsed rail: render the group like a leaf (icon only). Clicking signals
+    // the host (which can expand the rail); we don't show a flyout here.
+    if (collapsed) {
+        return (jsxRuntime.jsx("li", { children: jsxRuntime.jsx("button", { type: "button", title: typeof item.label === "string" ? item.label : undefined, onClick: () => onNavigate?.(item.key, item), className: cn(baseRow, "w-[calc(100%-16px)] justify-center border-0 bg-transparent px-0 cursor-pointer"), style: rowStyle(active), onMouseEnter: (e) => hoverOn(e, active), onMouseLeave: (e) => hoverOff(e, active), children: Icon && jsxRuntime.jsx(Icon, { className: "h-[18px] w-[18px] shrink-0", "aria-hidden": true }) }) }));
+    }
+    return (jsxRuntime.jsxs("li", { children: [jsxRuntime.jsxs("button", { type: "button", "aria-expanded": open, onClick: () => setOpen((o) => !o), className: cn(baseRow, "w-[calc(100%-16px)] gap-3 px-3 border-0 bg-transparent cursor-pointer text-left"), style: rowStyle(active && !open ? true : childActive), onMouseEnter: (e) => hoverOn(e, childActive), onMouseLeave: (e) => hoverOff(e, childActive), children: [Icon && jsxRuntime.jsx(Icon, { className: "h-[18px] w-[18px] shrink-0", "aria-hidden": true }), jsxRuntime.jsx("span", { className: "flex-1 truncate", children: item.label }), jsxRuntime.jsx(ChevronRight, { className: cn("h-[15px] w-[15px] shrink-0 transition-transform", open ? "rotate-90" : ""), "aria-hidden": true })] }), open && (jsxRuntime.jsx("ul", { className: "list-none", children: item.children.map((child) => {
+                    const cActive = child.key === activeKey;
+                    return (jsxRuntime.jsx("li", { children: jsxRuntime.jsx("a", { href: child.href ?? "#", "aria-current": cActive ? "page" : undefined, onClick: (e) => {
+                                if (!child.href)
+                                    e.preventDefault();
+                                onNavigate?.(child.key, { key: child.key, label: child.label, href: child.href });
+                            }, className: cn(baseRow, "gap-3 pl-[42px] pr-3"), style: rowStyle(cActive), onMouseEnter: (e) => hoverOn(e, cActive), onMouseLeave: (e) => hoverOff(e, cActive), children: jsxRuntime.jsx("span", { className: "flex-1 truncate", children: child.label }) }) }, child.key));
+                }) }))] }));
 }
 
 function TopBar({ title, leading, actions, className }) {

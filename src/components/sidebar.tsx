@@ -15,9 +15,17 @@
 // ---------------------------------------------------------------------------
 
 import * as React from "react"
-import { PanelLeftClose, PanelLeftOpen } from "lucide-react"
+import { PanelLeftClose, PanelLeftOpen, ChevronRight } from "lucide-react"
 
 import { cn } from "@/lib/utils"
+
+export interface SidebarChild {
+  /** Stable key, used for the active state and onNavigate. */
+  key: string
+  label: React.ReactNode
+  /** Optional href. If omitted, onNavigate(key) is the only signal. */
+  href?: string
+}
 
 export interface SidebarItem {
   /** Stable key, used for the active state and onNavigate. */
@@ -27,6 +35,14 @@ export interface SidebarItem {
   icon?: React.ComponentType<{ className?: string; "aria-hidden"?: boolean }>
   /** Optional href. If omitted, onNavigate(key) is the only signal. */
   href?: string
+  /**
+   * Optional sub-items. When present, this item becomes an expandable group:
+   * clicking it toggles the children rather than navigating. A group shows as
+   * open/active when one of its children is the active item. In the collapsed
+   * icon rail, groups are not expandable (clicking still calls onNavigate for
+   * the group key so the host can expand the rail if it wants).
+   */
+  children?: SidebarChild[]
 }
 
 export interface SidebarSection {
@@ -180,50 +196,15 @@ export function Sidebar({
               />
             )}
             <ul className="list-none">
-              {section.items.map((item) => {
-                const active = item.key === activeKey
-                const Icon = item.icon
-                return (
-                  <li key={item.key}>
-                    <a
-                      href={item.href ?? "#"}
-                      aria-current={active ? "page" : undefined}
-                      title={collapsed && typeof item.label === "string" ? item.label : undefined}
-                      onClick={(e) => {
-                        if (!item.href) e.preventDefault()
-                        onNavigate?.(item.key, item)
-                      }}
-                      className={cn(
-                        "mx-2 flex min-h-[40px] items-center rounded-[10px] text-sm transition-colors",
-                        collapsed ? "justify-center px-0" : "gap-3 px-3",
-                        "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--orbit-focus-ring,var(--primary))]"
-                      )}
-                      style={
-                        active
-                          ? {
-                              background: "var(--orbit-brand-tint, var(--accent, #F5EBFA))",
-                              color: "var(--orbit-brand-primary, var(--primary, #92248E))",
-                              fontWeight: 600,
-                            }
-                          : {
-                              color: "var(--orbit-text-muted, var(--ink-mid, #5b6470))",
-                            }
-                      }
-                      onMouseEnter={(e) => {
-                        if (!active)
-                          e.currentTarget.style.background =
-                            "var(--orbit-surface-muted, var(--surface-alt, #f0f2f8))"
-                      }}
-                      onMouseLeave={(e) => {
-                        if (!active) e.currentTarget.style.background = "transparent"
-                      }}
-                    >
-                      {Icon && <Icon className="h-[18px] w-[18px] shrink-0" aria-hidden />}
-                      {!collapsed && <span className="flex-1 truncate">{item.label}</span>}
-                    </a>
-                  </li>
-                )
-              })}
+              {section.items.map((item) => (
+                <SidebarRow
+                  key={item.key}
+                  item={item}
+                  collapsed={collapsed}
+                  activeKey={activeKey}
+                  onNavigate={onNavigate}
+                />
+              ))}
             </ul>
           </div>
         ))}
@@ -294,5 +275,147 @@ export function Sidebar({
         </button>
       )}
     </nav>
+  )
+}
+
+// ---------------------------------------------------------------------------
+// SidebarRow — one nav entry. A leaf links/navigates; a group (item.children)
+// is an expandable disclosure with indented sub-items. The group auto-opens
+// when one of its children is the active item.
+// ---------------------------------------------------------------------------
+
+function SidebarRow({
+  item,
+  collapsed,
+  activeKey,
+  onNavigate,
+}: {
+  item: SidebarItem
+  collapsed: boolean
+  activeKey?: string
+  onNavigate?: (key: string, item: SidebarItem) => void
+}) {
+  const Icon = item.icon
+  const hasChildren = !!item.children && item.children.length > 0
+  const childActive = hasChildren && item.children!.some((c) => c.key === activeKey)
+  const active = item.key === activeKey || childActive
+
+  // Group open state: default open when a child is active; user can toggle.
+  const [open, setOpen] = React.useState<boolean>(childActive)
+  React.useEffect(() => {
+    if (childActive) setOpen(true)
+  }, [childActive])
+
+  const baseRow =
+    "mx-2 flex min-h-[40px] items-center rounded-[10px] text-sm transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--orbit-focus-ring,var(--primary))]"
+
+  const rowStyle = (isActive: boolean): React.CSSProperties =>
+    isActive
+      ? {
+          background: "var(--orbit-brand-tint, var(--accent, #F5EBFA))",
+          color: "var(--orbit-brand-primary, var(--primary, #92248E))",
+          fontWeight: 600,
+        }
+      : { color: "var(--orbit-text-muted, var(--ink-mid, #5b6470))" }
+
+  const hoverOn = (e: React.MouseEvent<HTMLElement>, isActive: boolean) => {
+    if (!isActive)
+      e.currentTarget.style.background =
+        "var(--orbit-surface-muted, var(--surface-alt, #f0f2f8))"
+  }
+  const hoverOff = (e: React.MouseEvent<HTMLElement>, isActive: boolean) => {
+    if (!isActive) e.currentTarget.style.background = "transparent"
+  }
+
+  // ── Leaf item ──────────────────────────────────────────────────────────────
+  if (!hasChildren) {
+    return (
+      <li>
+        <a
+          href={item.href ?? "#"}
+          aria-current={active ? "page" : undefined}
+          title={collapsed && typeof item.label === "string" ? item.label : undefined}
+          onClick={(e) => {
+            if (!item.href) e.preventDefault()
+            onNavigate?.(item.key, item)
+          }}
+          className={cn(baseRow, collapsed ? "justify-center px-0" : "gap-3 px-3")}
+          style={rowStyle(active)}
+          onMouseEnter={(e) => hoverOn(e, active)}
+          onMouseLeave={(e) => hoverOff(e, active)}
+        >
+          {Icon && <Icon className="h-[18px] w-[18px] shrink-0" aria-hidden />}
+          {!collapsed && <span className="flex-1 truncate">{item.label}</span>}
+        </a>
+      </li>
+    )
+  }
+
+  // ── Expandable group ─────────────────────────────────────────────────────────
+  // Collapsed rail: render the group like a leaf (icon only). Clicking signals
+  // the host (which can expand the rail); we don't show a flyout here.
+  if (collapsed) {
+    return (
+      <li>
+        <button
+          type="button"
+          title={typeof item.label === "string" ? item.label : undefined}
+          onClick={() => onNavigate?.(item.key, item)}
+          className={cn(baseRow, "w-[calc(100%-16px)] justify-center border-0 bg-transparent px-0 cursor-pointer")}
+          style={rowStyle(active)}
+          onMouseEnter={(e) => hoverOn(e, active)}
+          onMouseLeave={(e) => hoverOff(e, active)}
+        >
+          {Icon && <Icon className="h-[18px] w-[18px] shrink-0" aria-hidden />}
+        </button>
+      </li>
+    )
+  }
+
+  return (
+    <li>
+      <button
+        type="button"
+        aria-expanded={open}
+        onClick={() => setOpen((o) => !o)}
+        className={cn(baseRow, "w-[calc(100%-16px)] gap-3 px-3 border-0 bg-transparent cursor-pointer text-left")}
+        style={rowStyle(active && !open ? true : childActive)}
+        onMouseEnter={(e) => hoverOn(e, childActive)}
+        onMouseLeave={(e) => hoverOff(e, childActive)}
+      >
+        {Icon && <Icon className="h-[18px] w-[18px] shrink-0" aria-hidden />}
+        <span className="flex-1 truncate">{item.label}</span>
+        <ChevronRight
+          className={cn("h-[15px] w-[15px] shrink-0 transition-transform", open ? "rotate-90" : "")}
+          aria-hidden
+        />
+      </button>
+
+      {open && (
+        <ul className="list-none">
+          {item.children!.map((child) => {
+            const cActive = child.key === activeKey
+            return (
+              <li key={child.key}>
+                <a
+                  href={child.href ?? "#"}
+                  aria-current={cActive ? "page" : undefined}
+                  onClick={(e) => {
+                    if (!child.href) e.preventDefault()
+                    onNavigate?.(child.key, { key: child.key, label: child.label, href: child.href })
+                  }}
+                  className={cn(baseRow, "gap-3 pl-[42px] pr-3")}
+                  style={rowStyle(cActive)}
+                  onMouseEnter={(e) => hoverOn(e, cActive)}
+                  onMouseLeave={(e) => hoverOff(e, cActive)}
+                >
+                  <span className="flex-1 truncate">{child.label}</span>
+                </a>
+              </li>
+            )
+          })}
+        </ul>
+      )}
+    </li>
   )
 }
