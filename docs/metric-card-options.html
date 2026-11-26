@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Minimal metric card options</title>
+<style>
+  :root{
+    --purple:#92248E; --orange:#FE4A00;
+    --ink:#242D38; --mid:#5b6470; --muted:#707885; --faint:#A0A8B4;
+    --surface:#F8F9FB; --border:#E2E4E9; --line:#EEF1F5;
+    --success:#16a34a; --error:#dc2626;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:'Segoe UI',system-ui,Arial,sans-serif;color:var(--ink);background:var(--surface);padding:40px;}
+  h1{font-size:26px;font-weight:800;}
+  .sub{color:var(--muted);font-size:15px;margin:8px 0 32px;max-width:720px;line-height:1.5;}
+  .opt{margin-bottom:40px;}
+  .opt h2{font-size:17px;font-weight:800;color:var(--purple);margin-bottom:4px;}
+  .opt p{font-size:14px;color:var(--mid);margin-bottom:16px;max-width:680px;}
+  .row{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;max-width:1000px;}
+  /* base card */
+  .card{background:#fff;border:1px solid var(--border);border-radius:14px;padding:22px;}
+  .lbl{font-size:13px;font-weight:600;color:var(--muted);letter-spacing:.2px;}
+  .val{font-size:34px;font-weight:800;color:var(--ink);line-height:1.05;margin-top:8px;letter-spacing:-0.5px;}
+  .delta{font-size:13px;font-weight:700;margin-top:8px;}
+  .up{color:var(--success);} .down{color:var(--error);}
+  .deltatxt{color:var(--muted);font-weight:500;}
+
+  /* A: label + number only, hairline left accent */
+  .a .card{border-left:3px solid var(--purple);}
+  /* B: label + number + tiny text delta (no colour block, just a small sign) */
+  /* C: ultra-minimal: no border, just a bottom rule, number-led */
+  .c .card{border:none;border-radius:0;border-bottom:1px solid var(--border);background:transparent;padding:4px 0 18px;}
+  .c .val{font-size:38px;}
+  /* D note row */
+  .foot{margin-top:28px;font-size:13px;color:var(--faint);max-width:900px;line-height:1.5;}
+  code{background:#fff;border:1px solid var(--border);border-radius:5px;padding:1px 6px;font-size:12px;color:var(--purple);}
+</style>
+</head>
+<body>
+  <h1>Minimal metric card: three options</h1>
+  <div class="sub">You didn't like the prototype card (status dot) or the live Orbit card (coloured icon badge plus trend line). These are three more minimal directions: label plus number led, no icon, with progressively less chrome. Pick one (or mix), and tell me if you want the small change indicator in or out.</div>
+
+  <div class="opt a">
+    <h2>Option A, hairline accent</h2>
+    <p>Label, big number, a thin brand-coloured rule on the left edge. The accent gives it just enough identity without an icon. Change shown as a small coloured delta.</p>
+    <div class="row">
+      <div class="card"><div class="lbl">Active members</div><div class="val">12,480</div><div class="delta up">+3.2% <span class="deltatxt">vs last month</span></div></div>
+      <div class="card"><div class="lbl">Open invoices</div><div class="val">317</div><div class="delta down">-1.4% <span class="deltatxt">vs last month</span></div></div>
+      <div class="card"><div class="lbl">Avg handle time</div><div class="val">4m 12s</div><div class="delta up">-6s <span class="deltatxt">vs last week</span></div></div>
+      <div class="card"><div class="lbl">Overdue amount</div><div class="val">$84.2k</div><div class="delta down">+$5.1k <span class="deltatxt">vs last month</span></div></div>
+    </div>
+  </div>
+
+  <div class="opt b">
+    <h2>Option B, clean card, number first</h2>
+    <p>No accent, no icon. Just the number as the hero, label beneath, and an optional small change line. The calmest "card" version. Works in a grid of four.</p>
+    <div class="row">
+      <div class="card"><div class="val">12,480</div><div class="lbl" style="margin-top:6px;">Active members</div><div class="delta up" style="margin-top:10px;">+3.2% <span class="deltatxt">MoM</span></div></div>
+      <div class="card"><div class="val">317</div><div class="lbl" style="margin-top:6px;">Open invoices</div><div class="delta down" style="margin-top:10px;">-1.4% <span class="deltatxt">MoM</span></div></div>
+      <div class="card"><div class="val">4m 12s</div><div class="lbl" style="margin-top:6px;">Avg handle time</div><div class="delta up" style="margin-top:10px;">-6s <span class="deltatxt">WoW</span></div></div>
+      <div class="card"><div class="val">$84.2k</div><div class="lbl" style="margin-top:6px;">Overdue amount</div><div class="delta down" style="margin-top:10px;">+$5.1k <span class="deltatxt">MoM</span></div></div>
+    </div>
+  </div>
+
+  <div class="opt c">
+    <h2>Option C, borderless, rule only</h2>
+    <p>The most minimal. No card fill or border, just a hairline rule under each metric. Reads as data, not boxes. Best when the dashboard already has a lot of surfaces and you want the numbers to breathe. Change indicator optional (shown here off for two to show both).</p>
+    <div class="row">
+      <div class="card"><div class="lbl">Active members</div><div class="val">12,480</div><div class="delta up">+3.2% <span class="deltatxt">vs last month</span></div></div>
+      <div class="card"><div class="lbl">Open invoices</div><div class="val">317</div></div>
+      <div class="card"><div class="lbl">Avg handle time</div><div class="val">4m 12s</div></div>
+      <div class="card"><div class="lbl">Overdue amount</div><div class="val">$84.2k</div><div class="delta down">+$5.1k <span class="deltatxt">vs last month</span></div></div>
+    </div>
+  </div>
+
+  <div class="foot">
+    All three use the Orbit tokens (ink for the number, muted for the label, brand purple only as a hairline accent in A). The green/red change indicator is a single optional element, in or out per your call. Say which option, and whether the change line stays, and I'll build it as the canonical metric card in the library.
+  </div>
+</body>
+</html>

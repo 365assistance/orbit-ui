@@ -4,9 +4,17 @@ import {
 } from './select'
 
 const meta = {
-  title: 'Primitives/Select',
+  title: 'Deprecated/Select (use PortalSelect)',
   component: Select,
   tags: ['autodocs'],
+  parameters: {
+    docs: {
+      description: {
+        component:
+          'DEPRECATED (Sofia 2026-11-26). The plain Radix Select is being consolidated into PortalSelect (the single on-brand styled dropdown). Use PortalSelect instead, or NativeSelect only when native <select> form semantics are required. Kept until migrations land.',
+      },
+    },
+  },
 } satisfies Meta<typeof Select>
 
 export default meta

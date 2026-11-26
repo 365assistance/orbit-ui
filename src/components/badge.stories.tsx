@@ -2,9 +2,17 @@ import type { Meta, StoryObj } from '@storybook/react-vite'
 import { Badge } from './badge'
 
 const meta = {
-  title: 'Primitives/Badge',
+  title: 'Deprecated/Badge (use Pill)',
   component: Badge,
   tags: ['autodocs'],
+  parameters: {
+    docs: {
+      description: {
+        component:
+          'DEPRECATED (Sofia 2026-11-26). Badge is being retired in favour of Pill with appearance="outline" as the single labelled-chip component. Do not use Badge in new code. Kept until orbit-core-ui (~5 files) migrates to Pill.',
+      },
+    },
+  },
   argTypes: {
     variant: {
       control: 'select',
