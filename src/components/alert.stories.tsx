@@ -23,7 +23,8 @@ export const Default: Story = {
   ),
 }
 
-export const Info: Story = {
+export const InfoVariant: Story = {
+  name: 'Info',
   render: () => (
     <Alert variant="info" style={{ maxWidth: 520 }}>
       <Info />
