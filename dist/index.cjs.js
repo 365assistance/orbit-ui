@@ -12543,7 +12543,7 @@ function PageHeader({ title, subtitle, actions, className }) {
     return (jsxRuntime.jsxs("div", { "data-slot": "page-header", className: cn("mb-8 flex items-start justify-between gap-4", className), children: [jsxRuntime.jsxs("div", { className: "min-w-0", children: [title != null && title !== "" && (jsxRuntime.jsx("h1", { className: "text-[28px] font-bold leading-tight tracking-tight", style: { color: "var(--orbit-text, var(--ink-primary, #242d38))" }, children: title })), subtitle && (jsxRuntime.jsx("p", { className: "mt-1 max-w-2xl text-sm leading-relaxed", style: { color: "var(--orbit-text-muted, var(--ink-muted, #707885))" }, children: subtitle }))] }), actions && jsxRuntime.jsx("div", { className: "flex shrink-0 items-center gap-2", children: actions })] }));
 }
 
-function SettingsMenu({ sections, onSelect, searchable = true, triggerLabel = "Settings", active = false, onSignOut, signOutLabel = "Sign out", className, }) {
+function SettingsMenu({ sections, onSelect, searchable = true, triggerLabel = "Settings", active = false, activeKey, onSignOut, signOutLabel = "Sign out", className, }) {
     const [open, setOpen] = React__namespace.useState(false);
     return (jsxRuntime.jsxs(Root2$1, { open: open, onOpenChange: setOpen, children: [jsxRuntime.jsx(Trigger$2, { asChild: true, children: jsxRuntime.jsx("button", { type: "button", "aria-label": triggerLabel, "data-slot": "settings-menu-trigger", "data-active": active || undefined, className: cn("grid min-h-[36px] min-w-[36px] place-items-center rounded-lg transition-colors", "hover:bg-[var(--orbit-surface-muted,var(--surface-alt,#f0f2f8))]", "aria-expanded:bg-[var(--orbit-surface-muted,var(--surface-alt,#f0f2f8))]", 
                     // Active (on a settings page): brand-purple cog on a brand tint.
@@ -12562,13 +12562,24 @@ function SettingsMenu({ sections, onSelect, searchable = true, triggerLabel = "S
                                 color: "var(--orbit-text-muted, var(--ink-muted, #707885))",
                             }, children: [jsxRuntime.jsx(Search, { className: "h-[15px] w-[15px]", "aria-hidden": true }), "Search settings"] })), sections.map((section, si) => (jsxRuntime.jsxs("div", { children: [jsxRuntime.jsx("div", { className: "px-3 pb-1.5 pt-3 text-[11px] font-extrabold uppercase tracking-[0.05em]", style: { color: "var(--orbit-text-muted, var(--ink-muted, #707885))" }, children: section.label }), section.items.map((item) => {
                                     const Icon = item.icon;
-                                    return (jsxRuntime.jsxs("a", { href: item.href ?? "#", role: "menuitem", onClick: (e) => {
+                                    const isActive = activeKey != null && item.key === activeKey;
+                                    return (jsxRuntime.jsxs("a", { href: item.href ?? "#", role: "menuitem", "aria-current": isActive ? "page" : undefined, "data-active": isActive || undefined, onClick: (e) => {
                                             if (!item.href)
                                                 e.preventDefault();
                                             onSelect?.(item.key, item);
                                             setOpen(false);
-                                        }, className: "flex items-start gap-3 rounded-[9px] px-3 py-2.5 no-underline", style: { color: "var(--orbit-text, var(--ink-primary, #242d38))" }, onMouseEnter: (e) => (e.currentTarget.style.background =
-                                            "var(--orbit-brand-tint, var(--accent, #F6E9F6))"), onMouseLeave: (e) => (e.currentTarget.style.background = "transparent"), children: [jsxRuntime.jsx("span", { className: "grid h-[34px] w-[34px] shrink-0 place-items-center rounded-[9px]", style: {
+                                        }, className: "flex items-start gap-3 rounded-[9px] px-3 py-2.5 no-underline", style: {
+                                            color: isActive
+                                                ? "var(--orbit-brand-primary, var(--primary, #92248E))"
+                                                : "var(--orbit-text, var(--ink-primary, #242d38))",
+                                            background: isActive
+                                                ? "var(--orbit-brand-tint, var(--accent, #F6E9F6))"
+                                                : "transparent",
+                                            fontWeight: isActive ? 600 : undefined,
+                                        }, onMouseEnter: (e) => (e.currentTarget.style.background =
+                                            "var(--orbit-brand-tint, var(--accent, #F6E9F6))"), onMouseLeave: (e) => (e.currentTarget.style.background = isActive
+                                            ? "var(--orbit-brand-tint, var(--accent, #F6E9F6))"
+                                            : "transparent"), children: [jsxRuntime.jsx("span", { className: "grid h-[34px] w-[34px] shrink-0 place-items-center rounded-[9px]", style: {
                                                     background: "var(--orbit-brand-tint, var(--accent, #F6E9F6))",
                                                     color: "var(--orbit-brand-primary, var(--primary, #92248E))",
                                                 }, children: Icon && jsxRuntime.jsx(Icon, { className: "h-[18px] w-[18px]", "aria-hidden": true }) }), jsxRuntime.jsxs("span", { className: "flex flex-col", children: [jsxRuntime.jsx("span", { className: "text-sm font-semibold leading-tight", children: item.title }), item.description && (jsxRuntime.jsx("span", { className: "mt-0.5 text-xs leading-snug", style: { color: "var(--orbit-text-muted, var(--ink-muted, #707885))" }, children: item.description }))] })] }, item.key));

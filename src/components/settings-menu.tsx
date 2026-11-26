@@ -40,6 +40,12 @@ export interface SettingsMenuProps {
    */
   active?: boolean
   /**
+   * Key of the settings item the user is currently on. The matching menu item
+   * is highlighted (brand tint + purple text) so the open menu shows which
+   * settings page is active, mirroring the side nav's active state.
+   */
+  activeKey?: string
+  /**
    * When provided, renders a "Sign out" row at the bottom of the menu. Called
    * when it is clicked (the menu closes automatically).
    */
@@ -55,6 +61,7 @@ export function SettingsMenu({
   searchable = true,
   triggerLabel = "Settings",
   active = false,
+  activeKey,
   onSignOut,
   signOutLabel = "Sign out",
   className,
@@ -123,23 +130,38 @@ export function SettingsMenu({
               </div>
               {section.items.map((item) => {
                 const Icon = item.icon
+                const isActive = activeKey != null && item.key === activeKey
                 return (
                   <a
                     key={item.key}
                     href={item.href ?? "#"}
                     role="menuitem"
+                    aria-current={isActive ? "page" : undefined}
+                    data-active={isActive || undefined}
                     onClick={(e) => {
                       if (!item.href) e.preventDefault()
                       onSelect?.(item.key, item)
                       setOpen(false)
                     }}
                     className="flex items-start gap-3 rounded-[9px] px-3 py-2.5 no-underline"
-                    style={{ color: "var(--orbit-text, var(--ink-primary, #242d38))" }}
+                    style={{
+                      color: isActive
+                        ? "var(--orbit-brand-primary, var(--primary, #92248E))"
+                        : "var(--orbit-text, var(--ink-primary, #242d38))",
+                      background: isActive
+                        ? "var(--orbit-brand-tint, var(--accent, #F6E9F6))"
+                        : "transparent",
+                      fontWeight: isActive ? 600 : undefined,
+                    }}
                     onMouseEnter={(e) =>
                       (e.currentTarget.style.background =
                         "var(--orbit-brand-tint, var(--accent, #F6E9F6))")
                     }
-                    onMouseLeave={(e) => (e.currentTarget.style.background = "transparent")}
+                    onMouseLeave={(e) =>
+                      (e.currentTarget.style.background = isActive
+                        ? "var(--orbit-brand-tint, var(--accent, #F6E9F6))"
+                        : "transparent")
+                    }
                   >
                     <span
                       className="grid h-[34px] w-[34px] shrink-0 place-items-center rounded-[9px]"

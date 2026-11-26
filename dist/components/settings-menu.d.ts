@@ -27,6 +27,12 @@ export interface SettingsMenuProps {
      */
     active?: boolean;
     /**
+     * Key of the settings item the user is currently on. The matching menu item
+     * is highlighted (brand tint + purple text) so the open menu shows which
+     * settings page is active, mirroring the side nav's active state.
+     */
+    activeKey?: string;
+    /**
      * When provided, renders a "Sign out" row at the bottom of the menu. Called
      * when it is clicked (the menu closes automatically).
      */
@@ -35,4 +41,4 @@ export interface SettingsMenuProps {
     signOutLabel?: React.ReactNode;
     className?: string;
 }
-export declare function SettingsMenu({ sections, onSelect, searchable, triggerLabel, active, onSignOut, signOutLabel, className, }: SettingsMenuProps): React.JSX.Element;
+export declare function SettingsMenu({ sections, onSelect, searchable, triggerLabel, active, activeKey, onSignOut, signOutLabel, className, }: SettingsMenuProps): React.JSX.Element;
