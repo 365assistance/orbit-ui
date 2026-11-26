@@ -15,6 +15,8 @@ export * from "./components/button";
 export * from "./components/card";
 export * from "./components/date-time-picker";
 export * from "./components/dialog";
+export * from "./components/modal";
+export * from "./components/metric-card";
 export * from "./components/drawer";
 export * from "./components/empty-state";
 export * from "./components/entity-drawer";

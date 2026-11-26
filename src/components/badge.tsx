@@ -1,3 +1,12 @@
+// ---------------------------------------------------------------------------
+// DEPRECATED (Sofia 2026-11-26): Badge is being retired in favour of Pill
+// (outlined appearance) as the single labelled-chip component. The drift audit
+// found badge and pill doing near-identical label work. Do NOT reach for Badge
+// in new code: use <Pill appearance="outline" variant="..."> instead. Badge is
+// kept temporarily so existing consumers do not break; it will be removed once
+// the app (orbit-core-ui, ~5 files) has migrated to Pill.
+// ---------------------------------------------------------------------------
+
 import * as React from "react"
 import { cva, type VariantProps } from "class-variance-authority"
 import { Slot } from "radix-ui"

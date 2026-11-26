@@ -1,5 +1,15 @@
 "use client"
 
+// ---------------------------------------------------------------------------
+// DEPRECATED (Sofia 2026-11-26): the plain Radix Select is being consolidated
+// into PortalSelect (portal-select.tsx), which is the single styled dropdown
+// with an on-brand portalled option list. The drift audit found select and
+// portal-select overlapping. Do NOT reach for this Select in new code: use
+// <PortalSelect> instead, or NativeSelect only when genuine native <select>
+// form semantics are required. Kept temporarily so existing consumers do not
+// break; to be removed once migrations land.
+// ---------------------------------------------------------------------------
+
 import * as React from "react"
 import { Select as SelectPrimitive } from "radix-ui"
 
