@@ -75,15 +75,18 @@ function TableHead({ className, style, ...props }: React.ComponentProps<"th">) {
     <th
       data-slot="table-head"
       className={cn(
-        "h-10 bg-gray-100 px-4 text-left align-middle text-xs font-semibold uppercase tracking-wide text-gray-600 [&:has([role=checkbox])]:pr-0",
+        "h-10 px-4 text-left align-middle text-xs font-semibold uppercase tracking-wide text-gray-600 [&:has([role=checkbox])]:pr-0",
         className
       )}
-      // Grey header band: 8px white gap below so the bar floats above the rows,
-      // and backgroundClip:padding-box so the grey fill respects the OUTER
-      // corner radius (set on first/last th by TableHeader) under the bottom
-      // border. No per-th borderRadius here — that made every column a separate
-      // pill (Sofia 2026-10-07); the bar must be continuous.
+      // Softer grey header band (Sofia 2026-11-26): use the light --surface
+      // token (#f8f9fb) instead of the heavier gray-100. 8px white gap below so
+      // the bar floats above the rows, and backgroundClip:padding-box so the
+      // grey fill respects the OUTER corner radius (set on first/last th by
+      // TableHeader) under the bottom border. No per-th borderRadius here — that
+      // made every column a separate pill (Sofia 2026-10-07); the bar must be
+      // continuous.
       style={{
+        background: "var(--surface, #f8f9fb)",
         borderBottom: "8px solid #fff",
         backgroundClip: "padding-box",
         ...style,
