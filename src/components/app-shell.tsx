@@ -65,7 +65,9 @@ export function AppShell({ sidebar, topBar, children, className }: AppShellProps
   return (
     <div
       data-slot="app-shell"
-      className={cn("flex h-screen w-full overflow-hidden", className)}
+      // No overflow-hidden here so an edge-straddling collapse toggle can sit on
+      // the sidebar border; the scroll region (<main>) clips its own overflow.
+      className={cn("flex h-screen w-full", className)}
       style={{ background: "var(--orbit-bg, var(--surface, #f8f9fb))" }}
     >
       {sidebar}

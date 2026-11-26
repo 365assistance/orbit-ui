@@ -36,6 +36,14 @@ export interface SidebarProps {
     collapsed?: boolean;
     /** Called when the collapse toggle is clicked (with the next collapsed value). */
     onToggleCollapsed?: (collapsed: boolean) => void;
+    /**
+     * Where the collapse toggle sits:
+     * - "floating": a small circular button on the sidebar's right edge (does not
+     *   crowd the logo in the narrow rail). Default.
+     * - "bottom": a full-width toggle row at the bottom of the sidebar.
+     * - "bottom-dot": a small circular toggle on the bottom-right edge of the nav.
+     */
+    collapseToggle?: "floating" | "bottom" | "bottom-dot";
     className?: string;
 }
-export declare function Sidebar({ brand, brandCollapsed, sections, activeKey, onNavigate, footer, footerCollapsed, collapsible, collapsed: collapsedProp, onToggleCollapsed, className, }: SidebarProps): React.JSX.Element;
+export declare function Sidebar({ brand, brandCollapsed, sections, activeKey, onNavigate, footer, footerCollapsed, collapsible, collapsed: collapsedProp, onToggleCollapsed, collapseToggle, className, }: SidebarProps): React.JSX.Element;

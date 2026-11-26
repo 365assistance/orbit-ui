@@ -55,6 +55,14 @@ export interface SidebarProps {
   collapsed?: boolean
   /** Called when the collapse toggle is clicked (with the next collapsed value). */
   onToggleCollapsed?: (collapsed: boolean) => void
+  /**
+   * Where the collapse toggle sits:
+   * - "floating": a small circular button on the sidebar's right edge (does not
+   *   crowd the logo in the narrow rail). Default.
+   * - "bottom": a full-width toggle row at the bottom of the sidebar.
+   * - "bottom-dot": a small circular toggle on the bottom-right edge of the nav.
+   */
+  collapseToggle?: "floating" | "bottom" | "bottom-dot"
   className?: string
 }
 
@@ -69,6 +77,7 @@ export function Sidebar({
   collapsible = false,
   collapsed: collapsedProp,
   onToggleCollapsed,
+  collapseToggle = "floating",
   className,
 }: SidebarProps) {
   const [internalCollapsed, setInternalCollapsed] = React.useState(false)
@@ -92,6 +101,7 @@ export function Sidebar({
         className
       )}
       style={{
+        position: "relative",
         background: "var(--orbit-surface, var(--card, #fff))",
         borderRight: "1px solid var(--orbit-border, var(--border-default, #e2e4e9))",
         fontFamily: "var(--font-sans)",
@@ -104,27 +114,53 @@ export function Sidebar({
         )}
       >
         {(brand != null || brandCollapsed != null) && (
-          <div className="min-w-0 flex-1 overflow-hidden">
+          <div className={cn("min-w-0 overflow-hidden", collapsed ? "" : "flex-1")}>
             {collapsed ? (brandCollapsed ?? null) : brand}
           </div>
         )}
-        {collapsible && (
+        {/* Inline toggle only when expanded AND not using the floating edge
+            circle (floating shows its own always-visible control). */}
+        {collapsible && !collapsed && collapseToggle !== "floating" && (
           <button
             type="button"
             onClick={toggle}
-            aria-label={collapsed ? "Expand navigation" : "Collapse navigation"}
-            aria-expanded={!collapsed}
+            aria-label="Collapse navigation"
+            aria-expanded
             className="grid h-8 w-8 shrink-0 place-items-center rounded-lg hover:bg-[var(--orbit-surface-muted,var(--surface-alt,#f0f2f8))] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--orbit-focus-ring,var(--primary))]"
             style={{ color: "var(--orbit-text-muted, var(--ink-muted, #707885))" }}
           >
-            {collapsed ? (
-              <PanelLeftOpen className="h-[18px] w-[18px]" aria-hidden />
-            ) : (
-              <PanelLeftClose className="h-[18px] w-[18px]" aria-hidden />
-            )}
+            <PanelLeftClose className="h-[18px] w-[18px]" aria-hidden />
           </button>
         )}
       </div>
+
+      {/* FLOATING toggle: a circle that straddles the sidebar's right edge at the
+          top (Dribbble-style). Always visible, in both expanded and collapsed
+          states, so it is the single consistent collapse control. */}
+      {collapsible && collapseToggle === "floating" && (
+        <button
+          type="button"
+          onClick={toggle}
+          aria-label={collapsed ? "Expand navigation" : "Collapse navigation"}
+          aria-expanded={!collapsed}
+          className="absolute grid h-8 w-8 place-items-center rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--orbit-focus-ring,var(--primary))]"
+          style={{
+            top: 14,
+            right: -16,
+            background: "var(--orbit-surface, var(--card, #fff))",
+            border: "1px solid var(--orbit-border, var(--border-default, #e2e4e9))",
+            boxShadow: "0 2px 8px rgba(16,24,40,.12)",
+            color: "var(--orbit-text-muted, var(--ink-muted, #707885))",
+            zIndex: 20,
+          }}
+        >
+          {collapsed ? (
+            <PanelLeftOpen className="h-[15px] w-[15px]" aria-hidden />
+          ) : (
+            <PanelLeftClose className="h-[15px] w-[15px]" aria-hidden />
+          )}
+        </button>
+      )}
 
       <div className="orbit-thin-scrollbar flex-1 overflow-y-auto py-2">
         {sections.map((section, si) => (
@@ -195,11 +231,67 @@ export function Sidebar({
 
       {(footer != null || footerCollapsed != null) && (
         <div
-          className={collapsed ? "p-2" : "p-2"}
+          className="p-2"
           style={{ borderTop: "1px solid var(--orbit-border, var(--border-default, #e2e4e9))" }}
         >
-          {collapsed ? (footerCollapsed ?? null) : footer}
+          {/* Footer never disappears on collapse: use footerCollapsed if given,
+              otherwise fall back to the expanded footer. */}
+          {collapsed ? (footerCollapsed ?? footer) : footer}
         </div>
+      )}
+
+      {/* BOTTOM-DOT toggle option: a circular button on the bottom-right edge. */}
+      {collapsible && collapseToggle === "bottom-dot" && (
+        <button
+          type="button"
+          onClick={toggle}
+          aria-label={collapsed ? "Expand navigation" : "Collapse navigation"}
+          aria-expanded={!collapsed}
+          className="absolute grid h-7 w-7 place-items-center rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--orbit-focus-ring,var(--primary))]"
+          style={{
+            bottom: 18,
+            right: 6,
+            background: "var(--orbit-surface, var(--card, #fff))",
+            border: "1px solid var(--orbit-border, var(--border-default, #e2e4e9))",
+            boxShadow: "0 2px 6px rgba(16,24,40,.10)",
+            color: "var(--orbit-text-muted, var(--ink-muted, #707885))",
+            zIndex: 10,
+          }}
+        >
+          {collapsed ? (
+            <PanelLeftOpen className="h-[15px] w-[15px]" aria-hidden />
+          ) : (
+            <PanelLeftClose className="h-[15px] w-[15px]" aria-hidden />
+          )}
+        </button>
+      )}
+
+      {/* BOTTOM toggle option: a full-width row at the very bottom. */}
+      {collapsible && collapseToggle === "bottom" && (
+        <button
+          type="button"
+          onClick={toggle}
+          aria-label={collapsed ? "Expand navigation" : "Collapse navigation"}
+          aria-expanded={!collapsed}
+          className={cn(
+            "m-2 flex min-h-[40px] items-center rounded-[10px] text-sm transition-colors",
+            collapsed ? "justify-center px-0" : "gap-3 px-3",
+            "hover:bg-[var(--orbit-surface-muted,var(--surface-alt,#f0f2f8))] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--orbit-focus-ring,var(--primary))]"
+          )}
+          style={{
+            borderTop: "1px solid var(--orbit-border, var(--border-default, #e2e4e9))",
+            color: "var(--orbit-text-muted, var(--ink-muted, #707885))",
+          }}
+        >
+          {collapsed ? (
+            <PanelLeftOpen className="h-[18px] w-[18px] shrink-0" aria-hidden />
+          ) : (
+            <>
+              <PanelLeftClose className="h-[18px] w-[18px] shrink-0" aria-hidden />
+              <span className="flex-1 truncate text-left">Collapse</span>
+            </>
+          )}
+        </button>
       )}
     </nav>
   )
