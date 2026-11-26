@@ -11163,6 +11163,34 @@ const LoaderCircle = createLucideIcon("LoaderCircle", [
  */
 
 
+const PanelLeftClose = createLucideIcon("PanelLeftClose", [
+  ["rect", { width: "18", height: "18", x: "3", y: "3", rx: "2", key: "afitv7" }],
+  ["path", { d: "M9 3v18", key: "fh3hqa" }],
+  ["path", { d: "m16 15-3-3 3-3", key: "14y99z" }]
+]);
+
+/**
+ * @license lucide-react v0.469.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+
+
+const PanelLeftOpen = createLucideIcon("PanelLeftOpen", [
+  ["rect", { width: "18", height: "18", x: "3", y: "3", rx: "2", key: "afitv7" }],
+  ["path", { d: "M9 3v18", key: "fh3hqa" }],
+  ["path", { d: "m14 9 3 3-3 3", key: "8010ee" }]
+]);
+
+/**
+ * @license lucide-react v0.469.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+
+
 const Search = createLucideIcon("Search", [
   ["circle", { cx: "11", cy: "11", r: "8", key: "4ej97u" }],
   ["path", { d: "m21 21-4.3-4.3", key: "1qie3q" }]
@@ -12065,19 +12093,28 @@ function ActiveFilterChips({ groups, value, onChange, className, }) {
             }), jsxRuntime.jsx("button", { type: "button", onClick: clearAll, className: "text-xs font-semibold underline", style: { color: "var(--ink-muted)" }, children: "Clear all" })] }));
 }
 
-function Sidebar({ brand, sections, activeKey, onNavigate, footer, className, }) {
-    return (jsxRuntime.jsxs("nav", { "data-slot": "sidebar", "aria-label": "Primary", className: cn("flex h-full w-[248px] shrink-0 flex-col", className), style: {
+function Sidebar({ brand, brandCollapsed, sections, activeKey, onNavigate, footer, footerCollapsed, collapsible = false, collapsed: collapsedProp, onToggleCollapsed, className, }) {
+    const [internalCollapsed, setInternalCollapsed] = React__namespace.useState(false);
+    const isControlled = collapsedProp !== undefined;
+    const collapsed = collapsible && (isControlled ? collapsedProp : internalCollapsed);
+    const toggle = () => {
+        const next = !collapsed;
+        if (!isControlled)
+            setInternalCollapsed(next);
+        onToggleCollapsed?.(next);
+    };
+    return (jsxRuntime.jsxs("nav", { "data-slot": "sidebar", "data-collapsed": collapsed ? "" : undefined, "aria-label": "Primary", className: cn("flex h-full shrink-0 flex-col transition-[width] duration-150", collapsed ? "w-[68px]" : "w-[248px]", className), style: {
             background: "var(--orbit-surface, var(--card, #fff))",
             borderRight: "1px solid var(--orbit-border, var(--border-default, #e2e4e9))",
             fontFamily: "var(--font-sans)",
-        }, children: [brand != null && (jsxRuntime.jsx("div", { className: "flex min-h-[56px] items-center px-4", children: brand })), jsxRuntime.jsx("div", { className: "orbit-thin-scrollbar flex-1 overflow-y-auto py-2", children: sections.map((section, si) => (jsxRuntime.jsxs("div", { className: "mb-2", children: [section.label != null && (jsxRuntime.jsx("div", { className: "px-5 pb-1 pt-3 text-[11px] font-bold uppercase tracking-[0.06em]", style: { color: "var(--orbit-text-muted, var(--ink-muted, #707885))" }, children: section.label })), jsxRuntime.jsx("ul", { className: "list-none", children: section.items.map((item) => {
+        }, children: [jsxRuntime.jsxs("div", { className: cn("flex min-h-[56px] items-center gap-2", collapsed ? "justify-center px-2" : "px-4"), children: [(brand != null || brandCollapsed != null) && (jsxRuntime.jsx("div", { className: "min-w-0 flex-1 overflow-hidden", children: collapsed ? (brandCollapsed ?? null) : brand })), collapsible && (jsxRuntime.jsx("button", { type: "button", onClick: toggle, "aria-label": collapsed ? "Expand navigation" : "Collapse navigation", "aria-expanded": !collapsed, className: "grid h-8 w-8 shrink-0 place-items-center rounded-lg hover:bg-[var(--orbit-surface-muted,var(--surface-alt,#f0f2f8))] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--orbit-focus-ring,var(--primary))]", style: { color: "var(--orbit-text-muted, var(--ink-muted, #707885))" }, children: collapsed ? (jsxRuntime.jsx(PanelLeftOpen, { className: "h-[18px] w-[18px]", "aria-hidden": true })) : (jsxRuntime.jsx(PanelLeftClose, { className: "h-[18px] w-[18px]", "aria-hidden": true })) }))] }), jsxRuntime.jsx("div", { className: "orbit-thin-scrollbar flex-1 overflow-y-auto py-2", children: sections.map((section, si) => (jsxRuntime.jsxs("div", { className: "mb-2", children: [section.label != null && !collapsed && (jsxRuntime.jsx("div", { className: "px-5 pb-1 pt-3 text-[11px] font-bold uppercase tracking-[0.06em]", style: { color: "var(--orbit-text-muted, var(--ink-muted, #707885))" }, children: section.label })), section.label != null && collapsed && si > 0 && (jsxRuntime.jsx("div", { className: "mx-3 my-2", style: { borderTop: "1px solid var(--orbit-border, var(--border-default, #e2e4e9))" } })), jsxRuntime.jsx("ul", { className: "list-none", children: section.items.map((item) => {
                                 const active = item.key === activeKey;
                                 const Icon = item.icon;
-                                return (jsxRuntime.jsx("li", { children: jsxRuntime.jsxs("a", { href: item.href ?? "#", "aria-current": active ? "page" : undefined, onClick: (e) => {
+                                return (jsxRuntime.jsx("li", { children: jsxRuntime.jsxs("a", { href: item.href ?? "#", "aria-current": active ? "page" : undefined, title: collapsed && typeof item.label === "string" ? item.label : undefined, onClick: (e) => {
                                             if (!item.href)
                                                 e.preventDefault();
                                             onNavigate?.(item.key, item);
-                                        }, className: cn("mx-2 flex min-h-[40px] items-center gap-3 rounded-[10px] px-3 text-sm transition-colors", "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--orbit-focus-ring,var(--primary))]"), style: active
+                                        }, className: cn("mx-2 flex min-h-[40px] items-center rounded-[10px] text-sm transition-colors", collapsed ? "justify-center px-0" : "gap-3 px-3", "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--orbit-focus-ring,var(--primary))]"), style: active
                                             ? {
                                                 background: "var(--orbit-brand-tint, var(--accent, #F5EBFA))",
                                                 color: "var(--orbit-brand-primary, var(--primary, #92248E))",
@@ -12092,8 +12129,8 @@ function Sidebar({ brand, sections, activeKey, onNavigate, footer, className, })
                                         }, onMouseLeave: (e) => {
                                             if (!active)
                                                 e.currentTarget.style.background = "transparent";
-                                        }, children: [Icon && jsxRuntime.jsx(Icon, { className: "h-[18px] w-[18px] shrink-0", "aria-hidden": true }), jsxRuntime.jsx("span", { className: "flex-1 truncate", children: item.label })] }) }, item.key));
-                            }) })] }, si))) }), footer != null && (jsxRuntime.jsx("div", { className: "p-2", style: { borderTop: "1px solid var(--orbit-border, var(--border-default, #e2e4e9))" }, children: footer }))] }));
+                                        }, children: [Icon && jsxRuntime.jsx(Icon, { className: "h-[18px] w-[18px] shrink-0", "aria-hidden": true }), !collapsed && jsxRuntime.jsx("span", { className: "flex-1 truncate", children: item.label })] }) }, item.key));
+                            }) })] }, si))) }), (footer != null || footerCollapsed != null) && (jsxRuntime.jsx("div", { className: collapsed ? "p-2" : "p-2", style: { borderTop: "1px solid var(--orbit-border, var(--border-default, #e2e4e9))" }, children: collapsed ? (footerCollapsed ?? null) : footer }))] }));
 }
 
 function TopBar({ title, leading, actions, className }) {
