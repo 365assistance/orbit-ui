@@ -126,7 +126,7 @@ export const FinanceNav: Story = {
         />
       }
       topBar={
-        <TopBar actions={<SettingsMenu sections={settingsSections} />} />
+        <TopBar actions={<SettingsMenu sections={settingsSections} searchable={false} />} />
       }
     >
       <PageContainer>
