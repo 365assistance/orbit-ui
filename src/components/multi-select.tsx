@@ -88,7 +88,13 @@ export function MultiSelect({
       if (fieldRef.current?.contains(t) || menuRef.current?.contains(t)) return
       setOpen(false)
     }
-    const onReflow = () => place()
+    const onReflow = (e?: Event) => {
+      // Ignore scroll events that originate INSIDE the menu's own overflow
+      // container. Re-placing the menu on every internal scroll tick fights the
+      // user's wheel/drag and makes the option list feel unscrollable.
+      if (e && e.target instanceof Node && menuRef.current?.contains(e.target)) return
+      place()
+    }
     document.addEventListener("mousedown", onDoc)
     window.addEventListener("resize", onReflow)
     window.addEventListener("scroll", onReflow, true)
@@ -177,9 +183,10 @@ export function MultiSelect({
             width: rect.width,
             maxHeight: rect.maxHeight,
             pointerEvents: "auto",
+            overscrollBehavior: "contain",
             zIndex: 1001,
           }}
-          className="overflow-auto rounded-lg border border-border bg-popover p-1 shadow-[0_18px_50px_rgba(16,24,40,0.14)]"
+          className="overflow-y-auto rounded-lg border border-border bg-popover p-1 shadow-[0_18px_50px_rgba(16,24,40,0.14)]"
         >
           {available.length === 0 ? (
             <p className="px-2 py-3 text-center text-xs text-muted-foreground">

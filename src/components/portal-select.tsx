@@ -41,9 +41,14 @@ export function PortalSelect({ value, options, onChange, minWidth = 200, disable
     placement: 'down' | 'up';
   } | null>(null);
 
+  const menuRef = useRef<HTMLDivElement>(null);
+
   useLayoutEffect(() => {
     if (!open || !btnRef.current) return;
-    const update = () => {
+    const update = (e?: Event) => {
+      // Ignore scroll events from inside the menu's own overflow container so
+      // scrolling the option list doesn't re-place (and fight) the menu.
+      if (e && e.target instanceof Node && menuRef.current?.contains(e.target)) return;
       const r = btnRef.current!.getBoundingClientRect();
       const GAP = 4;
       const MARGIN = 8; // keep the list off the viewport edges
@@ -117,10 +122,12 @@ export function PortalSelect({ value, options, onChange, minWidth = 200, disable
              Radix Dialog/Modal (which sets body pointer-events:none). */}
           <div onClick={() => setOpen(false)} style={{ position: 'fixed', inset: 0, zIndex: 1000, pointerEvents: 'auto' }} />
           <div
+            ref={menuRef}
             role="listbox"
             style={{
               position: 'fixed',
               pointerEvents: 'auto',
+              overscrollBehavior: 'contain',
               left: rect.left,
               // When flipping up, anchor the list's bottom to just above the
               // trigger via translateY(-100%).

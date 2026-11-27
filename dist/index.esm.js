@@ -13267,10 +13267,15 @@ function PortalSelect({ value, options, onChange, minWidth = 200, disabled = fal
     // maxHeight is clamped to the available space so the list always scrolls within
     // the viewport instead of being clipped off-screen.
     const [rect, setRect] = useState(null);
+    const menuRef = useRef(null);
     useLayoutEffect(() => {
         if (!open || !btnRef.current)
             return;
-        const update = () => {
+        const update = (e) => {
+            // Ignore scroll events from inside the menu's own overflow container so
+            // scrolling the option list doesn't re-place (and fight) the menu.
+            if (e && e.target instanceof Node && menuRef.current?.contains(e.target))
+                return;
             const r = btnRef.current.getBoundingClientRect();
             const GAP = 4;
             const MARGIN = 8; // keep the list off the viewport edges
@@ -13318,9 +13323,10 @@ function PortalSelect({ value, options, onChange, minWidth = 200, disabled = fal
                     alignItems: 'center',
                     justifyContent: 'space-between',
                     gap: 8,
-                }, children: [jsx("span", { style: { overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', color: current ? 'var(--ink-primary)' : 'var(--ink-muted)' }, children: current?.label ?? placeholder ?? '' }), jsx(ChevronDown, { className: "h-4 w-4", style: { color: 'var(--ink-muted)', flexShrink: 0, transform: open ? 'rotate(180deg)' : 'none', transition: 'transform .15s' } })] }), open && rect && createPortal(jsxs(Fragment, { children: [jsx("div", { onClick: () => setOpen(false), style: { position: 'fixed', inset: 0, zIndex: 1000, pointerEvents: 'auto' } }), jsx("div", { role: "listbox", style: {
+                }, children: [jsx("span", { style: { overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', color: current ? 'var(--ink-primary)' : 'var(--ink-muted)' }, children: current?.label ?? placeholder ?? '' }), jsx(ChevronDown, { className: "h-4 w-4", style: { color: 'var(--ink-muted)', flexShrink: 0, transform: open ? 'rotate(180deg)' : 'none', transition: 'transform .15s' } })] }), open && rect && createPortal(jsxs(Fragment, { children: [jsx("div", { onClick: () => setOpen(false), style: { position: 'fixed', inset: 0, zIndex: 1000, pointerEvents: 'auto' } }), jsx("div", { ref: menuRef, role: "listbox", style: {
                             position: 'fixed',
                             pointerEvents: 'auto',
+                            overscrollBehavior: 'contain',
                             left: rect.left,
                             // When flipping up, anchor the list's bottom to just above the
                             // trigger via translateY(-100%).
@@ -13402,7 +13408,14 @@ function MultiSelect({ value, options, onChange, placeholder = "Select…", sear
                 return;
             setOpen(false);
         };
-        const onReflow = () => place();
+        const onReflow = (e) => {
+            // Ignore scroll events that originate INSIDE the menu's own overflow
+            // container. Re-placing the menu on every internal scroll tick fights the
+            // user's wheel/drag and makes the option list feel unscrollable.
+            if (e && e.target instanceof Node && menuRef.current?.contains(e.target))
+                return;
+            place();
+        };
         document.addEventListener("mousedown", onDoc);
         window.addEventListener("resize", onReflow);
         window.addEventListener("scroll", onReflow, true);
@@ -13442,8 +13455,9 @@ function MultiSelect({ value, options, onChange, placeholder = "Select…", sear
                     width: rect.width,
                     maxHeight: rect.maxHeight,
                     pointerEvents: "auto",
+                    overscrollBehavior: "contain",
                     zIndex: 1001,
-                }, className: "overflow-auto rounded-lg border border-border bg-popover p-1 shadow-[0_18px_50px_rgba(16,24,40,0.14)]", children: available.length === 0 ? (jsx("p", { className: "px-2 py-3 text-center text-xs text-muted-foreground", children: query ? "No matches." : "Nothing to add." })) : (available.map((o) => (jsxs("button", { type: "button", role: "option", "aria-selected": false, onClick: () => add(o.value), className: "flex w-full items-start gap-2.5 rounded-md px-2.5 py-2 text-left text-sm text-foreground outline-none hover:bg-muted focus-visible:bg-muted", children: [jsx(Check, { className: "mt-0.5 size-4 shrink-0 opacity-0", "aria-hidden": true }), jsxs("span", { className: "min-w-0", children: [jsx("span", { className: "block truncate font-medium", children: o.label }), o.description && jsx("span", { className: "block truncate text-xs text-muted-foreground", children: o.description })] })] }, o.value)))) }), document.body)] }));
+                }, className: "overflow-y-auto rounded-lg border border-border bg-popover p-1 shadow-[0_18px_50px_rgba(16,24,40,0.14)]", children: available.length === 0 ? (jsx("p", { className: "px-2 py-3 text-center text-xs text-muted-foreground", children: query ? "No matches." : "Nothing to add." })) : (available.map((o) => (jsxs("button", { type: "button", role: "option", "aria-selected": false, onClick: () => add(o.value), className: "flex w-full items-start gap-2.5 rounded-md px-2.5 py-2 text-left text-sm text-foreground outline-none hover:bg-muted focus-visible:bg-muted", children: [jsx(Check, { className: "mt-0.5 size-4 shrink-0 opacity-0", "aria-hidden": true }), jsxs("span", { className: "min-w-0", children: [jsx("span", { className: "block truncate font-medium", children: o.label }), o.description && jsx("span", { className: "block truncate text-xs text-muted-foreground", children: o.description })] })] }, o.value)))) }), document.body)] }));
 }
 
 /**
