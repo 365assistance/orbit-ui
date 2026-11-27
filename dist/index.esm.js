@@ -12771,8 +12771,18 @@ function Modal({ open, onOpenChange, title, description, size = "md", dismissibl
                 if (!dismissible)
                     e.preventDefault();
             }, onInteractOutside: (e) => {
-                if (!dismissible)
+                if (!dismissible) {
                     e.preventDefault();
+                    return;
+                }
+                // Don't dismiss when the interaction is with a portalled popup that
+                // logically belongs to the modal's content (e.g. PortalSelect's
+                // listbox, tooltips, menus). These render under document.body so
+                // Radix treats them as "outside", which would wrongly close the modal.
+                const target = e.target;
+                if (target?.closest('[role="listbox"],[data-slot="row-actions-content"],[data-radix-popper-content-wrapper],[role="menu"],[role="tooltip"]')) {
+                    e.preventDefault();
+                }
             }, children: [jsxs(DialogHeader, { className: cn("px-6 pt-6", headerDivider ? "pb-4 border-b" : "pb-2"), style: headerDivider
                         ? { borderColor: "var(--border-default)" }
                         : undefined, children: [jsx(DialogTitle, { children: title }), description && jsx(DialogDescription, { children: description })] }), jsx("div", { className: "px-6 py-4 overflow-y-auto", children: children }), footer && (jsx(DialogFooter, { className: cn("px-6 py-4", greyFooter && "border-t"), style: greyFooter
@@ -13292,8 +13302,9 @@ function PortalSelect({ value, options, onChange, minWidth = 200, disabled = fal
                     alignItems: 'center',
                     justifyContent: 'space-between',
                     gap: 8,
-                }, children: [jsx("span", { style: { overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', color: current ? 'var(--ink-primary)' : 'var(--ink-muted)' }, children: current?.label ?? placeholder ?? '' }), jsx(ChevronDown, { className: "h-4 w-4", style: { color: 'var(--ink-muted)', flexShrink: 0, transform: open ? 'rotate(180deg)' : 'none', transition: 'transform .15s' } })] }), open && rect && createPortal(jsxs(Fragment, { children: [jsx("div", { onClick: () => setOpen(false), style: { position: 'fixed', inset: 0, zIndex: 1000 } }), jsx("div", { role: "listbox", style: {
+                }, children: [jsx("span", { style: { overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', color: current ? 'var(--ink-primary)' : 'var(--ink-muted)' }, children: current?.label ?? placeholder ?? '' }), jsx(ChevronDown, { className: "h-4 w-4", style: { color: 'var(--ink-muted)', flexShrink: 0, transform: open ? 'rotate(180deg)' : 'none', transition: 'transform .15s' } })] }), open && rect && createPortal(jsxs(Fragment, { children: [jsx("div", { onClick: () => setOpen(false), style: { position: 'fixed', inset: 0, zIndex: 1000, pointerEvents: 'auto' } }), jsx("div", { role: "listbox", style: {
                             position: 'fixed',
+                            pointerEvents: 'auto',
                             left: rect.left,
                             // When flipping up, anchor the list's bottom to just above the
                             // trigger via translateY(-100%).

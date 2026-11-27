@@ -114,7 +114,22 @@ export function Modal({
           if (!dismissible) e.preventDefault()
         }}
         onInteractOutside={(e) => {
-          if (!dismissible) e.preventDefault()
+          if (!dismissible) {
+            e.preventDefault()
+            return
+          }
+          // Don't dismiss when the interaction is with a portalled popup that
+          // logically belongs to the modal's content (e.g. PortalSelect's
+          // listbox, tooltips, menus). These render under document.body so
+          // Radix treats them as "outside", which would wrongly close the modal.
+          const target = e.target as HTMLElement | null
+          if (
+            target?.closest(
+              '[role="listbox"],[data-slot="row-actions-content"],[data-radix-popper-content-wrapper],[role="menu"],[role="tooltip"]'
+            )
+          ) {
+            e.preventDefault()
+          }
         }}
       >
         <DialogHeader

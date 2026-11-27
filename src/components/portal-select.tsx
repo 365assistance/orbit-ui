@@ -113,11 +113,14 @@ export function PortalSelect({ value, options, onChange, minWidth = 200, disable
       </button>
       {open && rect && createPortal(
         <>
-          <div onClick={() => setOpen(false)} style={{ position: 'fixed', inset: 0, zIndex: 1000 }} />
+          {/* pointerEvents:'auto' so the dropdown works when portalled under a
+             Radix Dialog/Modal (which sets body pointer-events:none). */}
+          <div onClick={() => setOpen(false)} style={{ position: 'fixed', inset: 0, zIndex: 1000, pointerEvents: 'auto' }} />
           <div
             role="listbox"
             style={{
               position: 'fixed',
+              pointerEvents: 'auto',
               left: rect.left,
               // When flipping up, anchor the list's bottom to just above the
               // trigger via translateY(-100%).

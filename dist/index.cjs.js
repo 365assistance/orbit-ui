@@ -12791,8 +12791,18 @@ function Modal({ open, onOpenChange, title, description, size = "md", dismissibl
                 if (!dismissible)
                     e.preventDefault();
             }, onInteractOutside: (e) => {
-                if (!dismissible)
+                if (!dismissible) {
                     e.preventDefault();
+                    return;
+                }
+                // Don't dismiss when the interaction is with a portalled popup that
+                // logically belongs to the modal's content (e.g. PortalSelect's
+                // listbox, tooltips, menus). These render under document.body so
+                // Radix treats them as "outside", which would wrongly close the modal.
+                const target = e.target;
+                if (target?.closest('[role="listbox"],[data-slot="row-actions-content"],[data-radix-popper-content-wrapper],[role="menu"],[role="tooltip"]')) {
+                    e.preventDefault();
+                }
             }, children: [jsxRuntime.jsxs(DialogHeader, { className: cn("px-6 pt-6", headerDivider ? "pb-4 border-b" : "pb-2"), style: headerDivider
                         ? { borderColor: "var(--border-default)" }
                         : undefined, children: [jsxRuntime.jsx(DialogTitle, { children: title }), description && jsxRuntime.jsx(DialogDescription, { children: description })] }), jsxRuntime.jsx("div", { className: "px-6 py-4 overflow-y-auto", children: children }), footer && (jsxRuntime.jsx(DialogFooter, { className: cn("px-6 py-4", greyFooter && "border-t"), style: greyFooter
@@ -13312,8 +13322,9 @@ function PortalSelect({ value, options, onChange, minWidth = 200, disabled = fal
                     alignItems: 'center',
                     justifyContent: 'space-between',
                     gap: 8,
-                }, children: [jsxRuntime.jsx("span", { style: { overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', color: current ? 'var(--ink-primary)' : 'var(--ink-muted)' }, children: current?.label ?? placeholder ?? '' }), jsxRuntime.jsx(ChevronDown, { className: "h-4 w-4", style: { color: 'var(--ink-muted)', flexShrink: 0, transform: open ? 'rotate(180deg)' : 'none', transition: 'transform .15s' } })] }), open && rect && ReactDOM.createPortal(jsxRuntime.jsxs(jsxRuntime.Fragment, { children: [jsxRuntime.jsx("div", { onClick: () => setOpen(false), style: { position: 'fixed', inset: 0, zIndex: 1000 } }), jsxRuntime.jsx("div", { role: "listbox", style: {
+                }, children: [jsxRuntime.jsx("span", { style: { overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', color: current ? 'var(--ink-primary)' : 'var(--ink-muted)' }, children: current?.label ?? placeholder ?? '' }), jsxRuntime.jsx(ChevronDown, { className: "h-4 w-4", style: { color: 'var(--ink-muted)', flexShrink: 0, transform: open ? 'rotate(180deg)' : 'none', transition: 'transform .15s' } })] }), open && rect && ReactDOM.createPortal(jsxRuntime.jsxs(jsxRuntime.Fragment, { children: [jsxRuntime.jsx("div", { onClick: () => setOpen(false), style: { position: 'fixed', inset: 0, zIndex: 1000, pointerEvents: 'auto' } }), jsxRuntime.jsx("div", { role: "listbox", style: {
                             position: 'fixed',
+                            pointerEvents: 'auto',
                             left: rect.left,
                             // When flipping up, anchor the list's bottom to just above the
                             // trigger via translateY(-100%).
