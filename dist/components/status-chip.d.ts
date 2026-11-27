@@ -20,7 +20,7 @@ import * as React from "react";
  *    not-started = grey
  *    opted-in = green, opted-out = grey
  */
-export type StatusVariant = "in-process" | "completed" | "draft" | "failed" | "scheduled" | "ready" | "live" | "in-progress" | "not-started" | "opted-in" | "opted-out";
+export type StatusVariant = "in-process" | "completed" | "draft" | "failed" | "scheduled" | "ready" | "live" | "in-progress" | "not-started" | "opted-in" | "opted-out" | "active" | "pending" | "inactive";
 declare function StatusChip({ variant, children, className, style, ...props }: React.ComponentProps<"span"> & {
     variant: StatusVariant;
 }): React.JSX.Element;

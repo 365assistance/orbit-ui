@@ -12619,6 +12619,46 @@ function AlertAction({ className, ...props }) {
     return (jsx("div", { "data-slot": "alert-action", className: cn("absolute top-2 right-2", className), ...props }));
 }
 
+const SIZE$1 = {
+    xs: { box: "size-6", text: "text-[10px]" },
+    sm: { box: "size-8", text: "text-xs" },
+    md: { box: "size-9", text: "text-[13px]" },
+    lg: { box: "size-11", text: "text-sm" },
+    xl: { box: "size-14", text: "text-base" },
+};
+function initialsFrom(name) {
+    if (!name)
+        return "";
+    const parts = name.trim().split(/\s+/).filter(Boolean);
+    if (parts.length === 0)
+        return "";
+    if (parts.length === 1)
+        return parts[0].slice(0, 2).toUpperCase();
+    return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase();
+}
+// Deterministic on-brand-ish colour from a string, so the same name always maps
+// to the same circle colour without storing one.
+const PALETTE = [
+    "#92248E", "#2563eb", "#0891b2", "#16a34a", "#d97706",
+    "#dc2626", "#7c3aed", "#db2777", "#4f46e5", "#0d9488",
+];
+function avatarColorFromName(name) {
+    if (!name)
+        return PALETTE[0];
+    let h = 0;
+    for (let i = 0; i < name.length; i++)
+        h = (h * 31 + name.charCodeAt(i)) >>> 0;
+    return PALETTE[h % PALETTE.length];
+}
+function Avatar({ name, src, color, size = "md", children, className, style, ...rest }) {
+    const [imgOk, setImgOk] = React.useState(true);
+    const s = SIZE$1[size];
+    const initials = initialsFrom(name);
+    const bg = color ?? avatarColorFromName(name);
+    const showImage = src && imgOk;
+    return (jsx("span", { className: cn("relative grid shrink-0 place-items-center overflow-hidden rounded-full font-medium text-white", s.box, s.text, className), style: { backgroundColor: showImage ? undefined : initials ? bg : "var(--muted)", color: initials ? "#fff" : "var(--muted-foreground)", ...style }, "aria-label": name || undefined, ...rest, children: showImage ? (jsx("img", { src: src, alt: name || "", className: "size-full object-cover", onError: () => setImgOk(false) })) : initials ? (jsx("span", { "aria-hidden": true, children: initials })) : (jsx("span", { "aria-hidden": true, className: "grid place-items-center", children: children })) }));
+}
+
 const badgeVariants = cva("group/badge inline-flex h-5 w-fit shrink-0 items-center justify-center gap-1 overflow-hidden rounded-4xl border border-transparent px-2 py-0.5 text-xs font-medium whitespace-nowrap transition-all focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 has-data-[icon=inline-end]:pr-1.5 has-data-[icon=inline-start]:pl-1.5 aria-invalid:border-destructive aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 [&>svg]:pointer-events-none [&>svg]:size-3!", {
     variants: {
         variant: {
@@ -13237,6 +13277,9 @@ const DOT = {
     "not-started": "var(--ink-faint, #8b8798)",
     "opted-in": "var(--orbit-success, #16a34a)",
     "opted-out": "var(--ink-faint, #8b8798)",
+    active: "var(--orbit-success, #16a34a)",
+    pending: "var(--orbit-warning, #d97706)",
+    inactive: "var(--ink-faint, #8b8798)",
 };
 const DEFAULT_LABEL = {
     "in-process": "In process",
@@ -13250,6 +13293,9 @@ const DEFAULT_LABEL = {
     "not-started": "Not started",
     "opted-in": "Opted in",
     "opted-out": "Opted out",
+    active: "Active",
+    pending: "Pending",
+    inactive: "Inactive",
 };
 function StatusChip({ variant, children, className, style, ...props }) {
     return (jsxs("span", { "data-slot": "status-chip", "data-variant": variant, className: cn("inline-flex w-fit items-center gap-[7px] whitespace-nowrap rounded-[var(--radius-pill,9999px)] border px-3 py-[5px] text-xs font-semibold", className), style: {
@@ -13935,14 +13981,22 @@ function SettingsMenu({ sections, onSelect, searchable = true, triggerLabel = "S
                                             }, children: jsx(LogOut, { className: "h-[18px] w-[18px]", "aria-hidden": true }) }), jsx("span", { className: "text-sm font-semibold leading-tight", children: signOutLabel })] })] }))] }) })] }));
 }
 
-function Tabs({ className, ...props }) {
-    return (jsx(Root2$1, { "data-slot": "tabs", className: cn("flex flex-col gap-4", className), ...props }));
+const TabsVariantContext = React.createContext("segmented");
+function Tabs({ className, variant = "segmented", ...props }) {
+    return (jsx(TabsVariantContext.Provider, { value: variant, children: jsx(Root2$1, { "data-slot": "tabs", "data-variant": variant, className: cn("flex flex-col gap-4", className), ...props }) }));
 }
 function TabsList({ className, ...props }) {
-    return (jsx(List, { "data-slot": "tabs-list", className: cn("inline-flex h-9 w-fit items-center justify-center rounded-lg bg-muted p-1 text-muted-foreground", className), ...props }));
+    const variant = React.useContext(TabsVariantContext);
+    return (jsx(List, { "data-slot": "tabs-list", "data-variant": variant, className: cn(variant === "underline"
+            ? "inline-flex w-full items-center gap-6 border-b border-border text-muted-foreground"
+            : "inline-flex h-9 w-fit items-center justify-center rounded-lg bg-muted p-1 text-muted-foreground", className), ...props }));
 }
-function TabsTrigger({ className, ...props }) {
-    return (jsx(Trigger$1, { "data-slot": "tabs-trigger", className: cn("inline-flex items-center justify-center whitespace-nowrap rounded-md px-3 py-1 text-sm font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 data-[state=active]:bg-background data-[state=active]:text-foreground data-[state=active]:shadow", className), ...props }));
+function TabsTrigger({ className, count, children, ...props }) {
+    const variant = React.useContext(TabsVariantContext);
+    if (variant === "underline") {
+        return (jsxs(Trigger$1, { "data-slot": "tabs-trigger", "data-variant": "underline", className: cn("group/tab -mb-px inline-flex items-center gap-2 border-0 border-b-2 border-transparent bg-transparent pb-2.5 text-sm font-medium text-muted-foreground transition-colors", "cursor-pointer focus-visible:outline-none", "data-[state=active]:border-primary data-[state=active]:text-primary", className), ...props, children: [children, count != null && (jsx("span", { className: cn("inline-flex h-5 min-w-5 items-center justify-center rounded-full border px-1.5 text-xs", "border-border text-muted-foreground", "group-data-[state=active]/tab:border-primary group-data-[state=active]/tab:text-primary"), children: count }))] }));
+    }
+    return (jsxs(Trigger$1, { "data-slot": "tabs-trigger", className: cn("inline-flex items-center justify-center whitespace-nowrap rounded-md px-3 py-1 text-sm font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 data-[state=active]:bg-background data-[state=active]:text-foreground data-[state=active]:shadow", className), ...props, children: [children, count != null && (jsx("span", { className: "ml-1.5 inline-flex h-5 min-w-5 items-center justify-center rounded-full bg-muted px-1.5 text-xs", children: count }))] }));
 }
 function TabsContent({ className, ...props }) {
     return (jsx(Content, { "data-slot": "tabs-content", className: cn("mt-2 ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2", className), ...props }));
@@ -14068,5 +14122,5 @@ function ConfirmDestroyDialog({ open, onOpenChange, title, description, confirmL
     return (jsx(Dialog, { open: open, onOpenChange: (next) => !next && !loading && onOpenChange(false), children: jsxs(DialogContent, { className: "sm:max-w-md", children: [jsx(DialogHeader, { children: jsx(DialogTitle, { children: title }) }), jsx("p", { className: "text-sm text-[var(--ink-muted,var(--muted-foreground))]", children: description }), jsxs(DialogFooter, { children: [jsx(Button, { variant: "ghost", onClick: () => onOpenChange(false), disabled: loading, children: cancelLabel }), jsxs(Button, { variant: "destructive", onClick: onConfirm, disabled: loading, children: [loading && jsx(Spinner, { size: "sm" }), resolvedConfirm] })] })] }) }));
 }
 
-export { Accordion, AccordionContent, AccordionItem, AccordionTrigger, ActiveFilterChips, Alert, AlertAction, AlertDescription, AlertTitle, AppShell, Badge, Button, Card, CardAction, CardContent, CardDescription, CardFooter, CardHeader, CardTitle, Checkbox, CollapsibleSection, ConfirmDestroyDialog, Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogOverlay, DialogTitle, DialogTrigger, Drawer, DrawerBody, DrawerClose, DrawerContent, DrawerDescription, DrawerFooter, DrawerHeader, DrawerOverlay, DrawerTitle, DrawerTrigger, EmptyState, EntityDrawer, EntityDrawerSection, ErrorState, FieldHelp, FilterBar, FilterSelect, FormField, FormFieldRow, FormSection, HeroStatCard, HeroStatHeadline, Input, Label, MetricCard, Modal, MultiSelect, Toaster as OrbitToaster, PageContainer, PageHeader, Pagination, Pill, PortalSelect, RowActions, RowAvatar, RowItem, RowKebab, RowList, RowNumber, RowPill, RowPrimary, SearchInput, Separator, SettingsMenu, SetupWizard, Sidebar, Spinner, StatCard, StatusChip, Table, TableBody, TableCard, TableCell, TableFilter, TableHead, TableHeader, TableRow, TableToolbar, Tabs, TabsContent, TabsList, TabsTrigger, Textarea, ToastAction, ToastClose, ToastDescription, ToastIcon, ToastProvider, ToastRoot, ToastTitle, ToastViewport, Toaster, Tooltip, TooltipContent, TooltipProvider, TooltipTrigger, TopBar, badgeVariants, buttonVariants, cn, toast, useToast };
+export { Accordion, AccordionContent, AccordionItem, AccordionTrigger, ActiveFilterChips, Alert, AlertAction, AlertDescription, AlertTitle, AppShell, Avatar, Badge, Button, Card, CardAction, CardContent, CardDescription, CardFooter, CardHeader, CardTitle, Checkbox, CollapsibleSection, ConfirmDestroyDialog, Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogOverlay, DialogTitle, DialogTrigger, Drawer, DrawerBody, DrawerClose, DrawerContent, DrawerDescription, DrawerFooter, DrawerHeader, DrawerOverlay, DrawerTitle, DrawerTrigger, EmptyState, EntityDrawer, EntityDrawerSection, ErrorState, FieldHelp, FilterBar, FilterSelect, FormField, FormFieldRow, FormSection, HeroStatCard, HeroStatHeadline, Input, Label, MetricCard, Modal, MultiSelect, Toaster as OrbitToaster, PageContainer, PageHeader, Pagination, Pill, PortalSelect, RowActions, RowAvatar, RowItem, RowKebab, RowList, RowNumber, RowPill, RowPrimary, SearchInput, Separator, SettingsMenu, SetupWizard, Sidebar, Spinner, StatCard, StatusChip, Table, TableBody, TableCard, TableCell, TableFilter, TableHead, TableHeader, TableRow, TableToolbar, Tabs, TabsContent, TabsList, TabsTrigger, Textarea, ToastAction, ToastClose, ToastDescription, ToastIcon, ToastProvider, ToastRoot, ToastTitle, ToastViewport, Toaster, Tooltip, TooltipContent, TooltipProvider, TooltipTrigger, TopBar, avatarColorFromName, badgeVariants, buttonVariants, cn, initialsFrom, toast, useToast };
 //# sourceMappingURL=index.esm.js.map

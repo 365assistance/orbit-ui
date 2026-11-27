@@ -35,6 +35,11 @@ export type StatusVariant =
   | "not-started"
   | "opted-in"
   | "opted-out"
+  // Account / user lifecycle (Sofia 2026-11-27): the one status language for
+  // user accounts, so user rows use StatusChip (not a bespoke Pill).
+  | "active"
+  | "pending"
+  | "inactive"
 
 const DOT: Record<StatusVariant, string> = {
   "in-process": "var(--orbit-orange, #fe4a00)",
@@ -48,6 +53,9 @@ const DOT: Record<StatusVariant, string> = {
   "not-started": "var(--ink-faint, #8b8798)",
   "opted-in": "var(--orbit-success, #16a34a)",
   "opted-out": "var(--ink-faint, #8b8798)",
+  active: "var(--orbit-success, #16a34a)",
+  pending: "var(--orbit-warning, #d97706)",
+  inactive: "var(--ink-faint, #8b8798)",
 }
 
 const DEFAULT_LABEL: Record<StatusVariant, string> = {
@@ -62,6 +70,9 @@ const DEFAULT_LABEL: Record<StatusVariant, string> = {
   "not-started": "Not started",
   "opted-in": "Opted in",
   "opted-out": "Opted out",
+  active: "Active",
+  pending: "Pending",
+  inactive: "Inactive",
 }
 
 function StatusChip({
