@@ -13368,6 +13368,81 @@ function PortalSelect({ value, options, onChange, minWidth = 200, disabled = fal
                         }) })] }), document.body)] }));
 }
 
+function MultiSelect({ value, options, onChange, placeholder = "Select…", searchPlaceholder = "Search…", disabled = false, className, ...rest }) {
+    const [open, setOpen] = React__namespace.useState(false);
+    const [query, setQuery] = React__namespace.useState("");
+    const fieldRef = React__namespace.useRef(null);
+    const inputRef = React__namespace.useRef(null);
+    const menuRef = React__namespace.useRef(null);
+    const [rect, setRect] = React__namespace.useState(null);
+    const byValue = React__namespace.useMemo(() => new Map(options.map((o) => [o.value, o])), [options]);
+    const selectedOptions = value.map((v) => byValue.get(v)).filter(Boolean);
+    const available = options.filter((o) => !value.includes(o.value) && o.label.toLowerCase().includes(query.trim().toLowerCase()));
+    const place = React__namespace.useCallback(() => {
+        const el = fieldRef.current;
+        if (!el)
+            return;
+        const r = el.getBoundingClientRect();
+        const GAP = 4;
+        const below = window.innerHeight - r.bottom - GAP - 8;
+        setRect({ left: r.left, top: r.bottom + GAP, width: r.width, maxHeight: Math.max(140, Math.min(300, below)) });
+    }, []);
+    React__namespace.useLayoutEffect(() => {
+        if (open)
+            place();
+    }, [open, place, value.length]);
+    React__namespace.useEffect(() => {
+        if (!open)
+            return;
+        const onDoc = (e) => {
+            const t = e.target;
+            if (fieldRef.current?.contains(t) || menuRef.current?.contains(t))
+                return;
+            setOpen(false);
+        };
+        const onReflow = () => place();
+        document.addEventListener("mousedown", onDoc);
+        window.addEventListener("resize", onReflow);
+        window.addEventListener("scroll", onReflow, true);
+        return () => {
+            document.removeEventListener("mousedown", onDoc);
+            window.removeEventListener("resize", onReflow);
+            window.removeEventListener("scroll", onReflow, true);
+        };
+    }, [open, place]);
+    const add = (v) => {
+        onChange([...value, v]);
+        setQuery("");
+        inputRef.current?.focus();
+    };
+    const remove = (v) => onChange(value.filter((x) => x !== v));
+    return (jsxRuntime.jsxs("div", { className: cn("relative", className), children: [jsxRuntime.jsxs("div", { ref: fieldRef, role: "button", tabIndex: disabled ? -1 : 0, "aria-label": rest["aria-label"], "aria-expanded": open, onClick: () => {
+                    if (disabled)
+                        return;
+                    setOpen(true);
+                    inputRef.current?.focus();
+                }, className: cn("flex min-h-9 w-full flex-wrap items-center gap-1.5 rounded-lg border border-input bg-card px-2 py-1.5 text-sm transition-colors", "focus-within:border-ring focus-within:ring-3 focus-within:ring-ring/50", disabled && "pointer-events-none cursor-not-allowed bg-muted opacity-100"), children: [selectedOptions.map((o) => (jsxRuntime.jsxs("span", { className: "inline-flex items-center gap-1 rounded-md border border-border bg-muted px-1.5 py-0.5 text-xs font-medium text-foreground", children: [o.label, jsxRuntime.jsx("button", { type: "button", onClick: (e) => {
+                                    e.stopPropagation();
+                                    remove(o.value);
+                                }, "aria-label": `Remove ${o.label}`, className: "grid size-3.5 place-items-center rounded-sm text-muted-foreground hover:text-foreground", children: jsxRuntime.jsx(X, { className: "size-3", "aria-hidden": true }) })] }, o.value))), jsxRuntime.jsx("input", { ref: inputRef, type: "text", value: query, disabled: disabled, onChange: (e) => {
+                            setQuery(e.target.value);
+                            if (!open)
+                                setOpen(true);
+                        }, onFocus: () => setOpen(true), onKeyDown: (e) => {
+                            if (e.key === "Backspace" && query === "" && value.length > 0) {
+                                remove(value[value.length - 1]);
+                            }
+                        }, placeholder: selectedOptions.length === 0 ? placeholder : searchPlaceholder, className: "min-w-[80px] flex-1 border-0 bg-transparent p-0.5 text-sm outline-none placeholder:text-muted-foreground" }), jsxRuntime.jsx(ChevronDown, { className: cn("size-4 shrink-0 text-muted-foreground transition-transform", open && "rotate-180"), "aria-hidden": true })] }), open && rect != null && ReactDOM.createPortal(jsxRuntime.jsx("div", { ref: menuRef, role: "listbox", style: {
+                    position: "fixed",
+                    left: rect.left,
+                    top: rect.top,
+                    width: rect.width,
+                    maxHeight: rect.maxHeight,
+                    pointerEvents: "auto",
+                    zIndex: 1001,
+                }, className: "overflow-auto rounded-lg border border-border bg-popover p-1 shadow-[0_18px_50px_rgba(16,24,40,0.14)]", children: available.length === 0 ? (jsxRuntime.jsx("p", { className: "px-2 py-3 text-center text-xs text-muted-foreground", children: query ? "No matches." : "Nothing to add." })) : (available.map((o) => (jsxRuntime.jsxs("button", { type: "button", role: "option", "aria-selected": false, onClick: () => add(o.value), className: "flex w-full items-start gap-2.5 rounded-md px-2.5 py-2 text-left text-sm text-foreground outline-none hover:bg-muted focus-visible:bg-muted", children: [jsxRuntime.jsx(Check, { className: "mt-0.5 size-4 shrink-0 opacity-0", "aria-hidden": true }), jsxRuntime.jsxs("span", { className: "min-w-0", children: [jsxRuntime.jsx("span", { className: "block truncate font-medium", children: o.label }), o.description && jsxRuntime.jsx("span", { className: "block truncate text-xs text-muted-foreground", children: o.description })] })] }, o.value)))) }), document.body)] }));
+}
+
 /**
  * SearchInput — the ONE shared search field across Orbit (admin lists, pickers,
  * modals: clients, members, tenants, permissions, etc.).
@@ -13989,6 +14064,7 @@ exports.Input = Input;
 exports.Label = Label;
 exports.MetricCard = MetricCard;
 exports.Modal = Modal;
+exports.MultiSelect = MultiSelect;
 exports.OrbitToaster = Toaster;
 exports.PageContainer = PageContainer;
 exports.PageHeader = PageHeader;

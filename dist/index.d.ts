@@ -28,6 +28,7 @@ export * from "./components/row-actions";
 export * from "./components/stat-card";
 export * from "./components/status-chip";
 export * from "./components/portal-select";
+export * from "./components/multi-select";
 export * from "./components/search-input";
 export * from "./components/separator";
 export * from "./components/spinner";
