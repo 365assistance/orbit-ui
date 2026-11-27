@@ -10382,6 +10382,20 @@ var [ItemIndicatorProvider, useItemIndicatorContext] = createMenuContext(
   ITEM_INDICATOR_NAME,
   { checked: false }
 );
+var MenuSeparator = /* @__PURE__ */ React.forwardRef(
+  /* @__PURE__ */ __name$7(function MenuSeparator2(props, forwardedRef) {
+    const { __scopeMenu, ...separatorProps } = props;
+    return /* @__PURE__ */ jsx(
+      Primitive.div,
+      {
+        role: "separator",
+        "aria-orientation": "horizontal",
+        ...separatorProps,
+        ref: forwardedRef
+      }
+    );
+  }, "MenuSeparator")
+);
 var SUB_NAME = "MenuSub";
 var [MenuSubProvider, useMenuSubContext] = createMenuContext(SUB_NAME);
 function getOpenState(open) {
@@ -10453,6 +10467,7 @@ var Anchor2 = MenuAnchor;
 var Portal$2 = MenuPortal;
 var Content2$3 = MenuContent;
 var Item2$1 = MenuItem;
+var Separator$2 = MenuSeparator;
 
 var __defProp$6 = Object.defineProperty;
 var __name$6 = (target, value) => __defProp$6(target, "name", { value, configurable: true });
@@ -10588,11 +10603,17 @@ var DropdownMenuItem = /* @__PURE__ */ React.forwardRef(
     return /* @__PURE__ */ jsx(Item2$1, { ...menuScope, ...itemProps, ref: forwardedRef });
   }, "DropdownMenuItem")
 );
+var DropdownMenuSeparator = /* @__PURE__ */ React.forwardRef(/* @__PURE__ */ __name$6(function DropdownMenuSeparator2(props, forwardedRef) {
+  const { __scopeDropdownMenu, ...separatorProps } = props;
+  const menuScope = useMenuScope(__scopeDropdownMenu);
+  return /* @__PURE__ */ jsx(Separator$2, { ...menuScope, ...separatorProps, ref: forwardedRef });
+}, "DropdownMenuSeparator"));
 var Root2$3 = DropdownMenu;
 var Trigger$3 = DropdownMenuTrigger;
 var Portal2 = DropdownMenuPortal;
 var Content2$2 = DropdownMenuContent;
 var Item2 = DropdownMenuItem;
+var Separator2 = DropdownMenuSeparator;
 
 var __defProp$5 = Object.defineProperty;
 var __name$5 = (target, value) => __defProp$5(target, "name", { value, configurable: true });
@@ -12348,6 +12369,20 @@ const CircleHelp = createLucideIcon("CircleHelp", [
  */
 
 
+const Ellipsis = createLucideIcon("Ellipsis", [
+  ["circle", { cx: "12", cy: "12", r: "1", key: "41hilf" }],
+  ["circle", { cx: "19", cy: "12", r: "1", key: "1wjl8i" }],
+  ["circle", { cx: "5", cy: "12", r: "1", key: "1pcz8c" }]
+]);
+
+/**
+ * @license lucide-react v0.469.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+
+
 const Filter = createLucideIcon("Filter", [
   ["polygon", { points: "22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3", key: "1yg77f" }]
 ]);
@@ -13107,6 +13142,22 @@ function RowKebab({ className, children, style, ...props }) {
     return (jsx("button", { type: "button", "data-slot": "row-kebab", className: cn("cursor-pointer text-right font-bold text-[var(--ink-subtle,#8b8798)] hover:text-[var(--ink-muted,#5b5670)]", className), style: { background: "none", border: "none", ...style }, ...props, children: children ?? "\u22ef" }));
 }
 
+function RowActions({ label, items, className }) {
+    return (jsxs(Root2$3, { children: [jsx(Trigger$3, { asChild: true, children: jsx("button", { type: "button", "aria-label": label, "data-slot": "row-actions-trigger", className: cn("grid h-9 w-9 place-items-center rounded-lg text-muted-foreground transition-colors", "hover:bg-[var(--orbit-surface-muted,var(--muted))] hover:text-foreground", "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring", "data-[state=open]:bg-[var(--orbit-surface-muted,var(--muted))] data-[state=open]:text-foreground", className), children: jsx(Ellipsis, { className: "h-[18px] w-[18px]", "aria-hidden": true }) }) }), jsx(Portal2, { children: jsx(Content2$2, { align: "end", sideOffset: 6, collisionPadding: 8, "data-slot": "row-actions-content", className: "z-[70] min-w-[11rem] rounded-xl border border-border bg-popover p-1 shadow-[0_18px_50px_rgba(16,24,40,0.14)]", children: items.map((item, i) => {
+                        if (item.separator) {
+                            return (jsx(Separator2, { className: "my-1 h-px bg-border" }, `sep-${i}`));
+                        }
+                        const Icon = item.icon;
+                        const danger = item.tone === "danger";
+                        return (jsxs(Item2, { disabled: item.disabled, onSelect: (e) => {
+                                e.preventDefault();
+                                item.onSelect();
+                            }, className: cn("flex min-h-9 cursor-pointer items-center gap-2.5 rounded-lg px-3 text-sm outline-none", "data-[disabled]:pointer-events-none data-[disabled]:opacity-50", danger
+                                ? "text-[var(--orbit-error,var(--destructive))] data-[highlighted]:bg-[var(--orbit-error-bg,var(--destructive)/0.1)]"
+                                : "text-foreground data-[highlighted]:bg-muted"), children: [Icon && jsx(Icon, { className: "h-4 w-4 shrink-0", "aria-hidden": true }), item.label] }, item.label));
+                    }) }) })] }));
+}
+
 /**
  * HeroStatCard + StatCard — the two stat surfaces from the vibe direction.
  *
@@ -13844,5 +13895,5 @@ function ConfirmDestroyDialog({ open, onOpenChange, title, description, confirmL
     return (jsx(Dialog, { open: open, onOpenChange: (next) => !next && !loading && onOpenChange(false), children: jsxs(DialogContent, { className: "sm:max-w-md", children: [jsx(DialogHeader, { children: jsx(DialogTitle, { children: title }) }), jsx("p", { className: "text-sm text-[var(--ink-muted,var(--muted-foreground))]", children: description }), jsxs(DialogFooter, { children: [jsx(Button, { variant: "ghost", onClick: () => onOpenChange(false), disabled: loading, children: cancelLabel }), jsxs(Button, { variant: "destructive", onClick: onConfirm, disabled: loading, children: [loading && jsx(Spinner, { size: "sm" }), resolvedConfirm] })] })] }) }));
 }
 
-export { Accordion, AccordionContent, AccordionItem, AccordionTrigger, ActiveFilterChips, Alert, AlertAction, AlertDescription, AlertTitle, AppShell, Badge, Button, Card, CardAction, CardContent, CardDescription, CardFooter, CardHeader, CardTitle, Checkbox, CollapsibleSection, ConfirmDestroyDialog, Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogOverlay, DialogTitle, DialogTrigger, Drawer, DrawerBody, DrawerClose, DrawerContent, DrawerDescription, DrawerFooter, DrawerHeader, DrawerOverlay, DrawerTitle, DrawerTrigger, EmptyState, EntityDrawer, EntityDrawerSection, ErrorState, FieldHelp, FilterBar, FilterSelect, FormField, FormFieldRow, FormSection, HeroStatCard, HeroStatHeadline, Input, Label, MetricCard, Modal, Toaster as OrbitToaster, PageContainer, PageHeader, Pagination, Pill, PortalSelect, RowAvatar, RowItem, RowKebab, RowList, RowNumber, RowPill, RowPrimary, SearchInput, Separator, SettingsMenu, SetupWizard, Sidebar, Spinner, StatCard, StatusChip, Table, TableBody, TableCard, TableCell, TableFilter, TableHead, TableHeader, TableRow, TableToolbar, Tabs, TabsContent, TabsList, TabsTrigger, Textarea, ToastAction, ToastClose, ToastDescription, ToastIcon, ToastProvider, ToastRoot, ToastTitle, ToastViewport, Toaster, Tooltip, TooltipContent, TooltipProvider, TooltipTrigger, TopBar, badgeVariants, buttonVariants, cn, toast, useToast };
+export { Accordion, AccordionContent, AccordionItem, AccordionTrigger, ActiveFilterChips, Alert, AlertAction, AlertDescription, AlertTitle, AppShell, Badge, Button, Card, CardAction, CardContent, CardDescription, CardFooter, CardHeader, CardTitle, Checkbox, CollapsibleSection, ConfirmDestroyDialog, Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogOverlay, DialogTitle, DialogTrigger, Drawer, DrawerBody, DrawerClose, DrawerContent, DrawerDescription, DrawerFooter, DrawerHeader, DrawerOverlay, DrawerTitle, DrawerTrigger, EmptyState, EntityDrawer, EntityDrawerSection, ErrorState, FieldHelp, FilterBar, FilterSelect, FormField, FormFieldRow, FormSection, HeroStatCard, HeroStatHeadline, Input, Label, MetricCard, Modal, Toaster as OrbitToaster, PageContainer, PageHeader, Pagination, Pill, PortalSelect, RowActions, RowAvatar, RowItem, RowKebab, RowList, RowNumber, RowPill, RowPrimary, SearchInput, Separator, SettingsMenu, SetupWizard, Sidebar, Spinner, StatCard, StatusChip, Table, TableBody, TableCard, TableCell, TableFilter, TableHead, TableHeader, TableRow, TableToolbar, Tabs, TabsContent, TabsList, TabsTrigger, Textarea, ToastAction, ToastClose, ToastDescription, ToastIcon, ToastProvider, ToastRoot, ToastTitle, ToastViewport, Toaster, Tooltip, TooltipContent, TooltipProvider, TooltipTrigger, TopBar, badgeVariants, buttonVariants, cn, toast, useToast };
 //# sourceMappingURL=index.esm.js.map

@@ -35,6 +35,7 @@ export * from "./components/label";
 export * from "./components/pagination";
 export * from "./components/pill";
 export * from "./components/row-list";
+export * from "./components/row-actions";
 export * from "./components/stat-card";
 export * from "./components/status-chip";
 export * from "./components/portal-select";
