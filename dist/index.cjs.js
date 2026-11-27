@@ -3309,81 +3309,8 @@ function cn(...inputs) {
     return twMerge(clsx(inputs));
 }
 
-const falsyToString = (value)=>typeof value === "boolean" ? `${value}` : value === 0 ? "0" : value;
-const cx = clsx;
-const cva = (base, config)=>(props)=>{
-        var _config_compoundVariants;
-        if ((config === null || config === void 0 ? void 0 : config.variants) == null) return cx(base, props === null || props === void 0 ? void 0 : props.class, props === null || props === void 0 ? void 0 : props.className);
-        const { variants, defaultVariants } = config;
-        const getVariantClassNames = Object.keys(variants).map((variant)=>{
-            const variantProp = props === null || props === void 0 ? void 0 : props[variant];
-            const defaultVariantProp = defaultVariants === null || defaultVariants === void 0 ? void 0 : defaultVariants[variant];
-            if (variantProp === null) return null;
-            const variantKey = falsyToString(variantProp) || falsyToString(defaultVariantProp);
-            return variants[variant][variantKey];
-        });
-        const propsWithoutUndefined = props && Object.entries(props).reduce((acc, param)=>{
-            let [key, value] = param;
-            if (value === undefined) {
-                return acc;
-            }
-            acc[key] = value;
-            return acc;
-        }, {});
-        const getCompoundVariantClassNames = config === null || config === void 0 ? void 0 : (_config_compoundVariants = config.compoundVariants) === null || _config_compoundVariants === void 0 ? void 0 : _config_compoundVariants.reduce((acc, param)=>{
-            let { class: cvClass, className: cvClassName, ...compoundVariantOptions } = param;
-            return Object.entries(compoundVariantOptions).every((param)=>{
-                let [key, value] = param;
-                return Array.isArray(value) ? value.includes({
-                    ...defaultVariants,
-                    ...propsWithoutUndefined
-                }[key]) : ({
-                    ...defaultVariants,
-                    ...propsWithoutUndefined
-                })[key] === value;
-            }) ? [
-                ...acc,
-                cvClass,
-                cvClassName
-            ] : acc;
-        }, []);
-        return cx(base, getVariantClassNames, getCompoundVariantClassNames, props === null || props === void 0 ? void 0 : props.class, props === null || props === void 0 ? void 0 : props.className);
-    };
-
-const alertVariants = cva("group/alert relative grid w-full gap-0.5 rounded-lg border px-3 py-2.5 text-left text-sm has-data-[slot=alert-action]:relative has-data-[slot=alert-action]:pr-18 has-[>svg]:grid-cols-[auto_1fr] has-[>svg]:gap-x-2.5 *:[svg]:row-span-2 *:[svg]:translate-y-0.5 *:[svg]:text-current *:[svg:not([class*='size-'])]:size-4", {
-    variants: {
-        variant: {
-            // Neutral card alert (quiet). Border softened to the subtle token so it
-            // no longer reads as a heavy wireframe outline.
-            default: "border-border bg-card text-card-foreground",
-            // Soft-tinted semantic variants: tinted bg + matching border + accent
-            // icon/title, body stays readable. Icon colour comes from the variant
-            // (pass a lucide icon as the first child).
-            info: "border-[var(--orbit-info)]/25 bg-[var(--orbit-info-bg)] text-foreground *:[svg]:text-[var(--orbit-info)] *:data-[slot=alert-title]:text-[var(--orbit-info)]",
-            success: "border-[var(--orbit-success)]/25 bg-[var(--orbit-success-bg)] text-foreground *:[svg]:text-[var(--orbit-success)] *:data-[slot=alert-title]:text-[var(--orbit-success)]",
-            warning: "border-[var(--orbit-warning)]/30 bg-[var(--orbit-warning-bg)] text-foreground *:[svg]:text-[var(--orbit-warning)] *:data-[slot=alert-title]:text-[var(--orbit-warning)]",
-            destructive: "border-destructive/25 bg-destructive/5 text-destructive *:data-[slot=alert-description]:text-destructive/90 *:[svg]:text-current",
-        },
-    },
-    defaultVariants: {
-        variant: "default",
-    },
-});
-function Alert({ className, variant, ...props }) {
-    return (jsxRuntime.jsx("div", { "data-slot": "alert", role: "alert", className: cn(alertVariants({ variant }), className), ...props }));
-}
-function AlertTitle({ className, ...props }) {
-    return (jsxRuntime.jsx("div", { "data-slot": "alert-title", className: cn("font-medium group-has-[>svg]/alert:col-start-2 [&_a]:underline [&_a]:underline-offset-3 [&_a]:hover:text-foreground", className), ...props }));
-}
-function AlertDescription({ className, ...props }) {
-    return (jsxRuntime.jsx("div", { "data-slot": "alert-description", className: cn("text-sm text-balance text-muted-foreground md:text-pretty [&_a]:underline [&_a]:underline-offset-3 [&_a]:hover:text-foreground [&_p:not(:last-child)]:mb-4", className), ...props }));
-}
-function AlertAction({ className, ...props }) {
-    return (jsxRuntime.jsx("div", { "data-slot": "alert-action", className: cn("absolute top-2 right-2", className), ...props }));
-}
-
-var __defProp$u = Object.defineProperty;
-var __name$u = (target, value) => __defProp$u(target, "name", { value, configurable: true });
+var __defProp$w = Object.defineProperty;
+var __name$w = (target, value) => __defProp$w(target, "name", { value, configurable: true });
 function setRef$1(ref, value) {
   if (typeof ref === "function") {
     return ref(value);
@@ -3391,7 +3318,7 @@ function setRef$1(ref, value) {
     ref.current = value;
   }
 }
-__name$u(setRef$1, "setRef");
+__name$w(setRef$1, "setRef");
 function composeRefs(...refs) {
   return (node) => {
     let hasCleanup = false;
@@ -3416,14 +3343,14 @@ function composeRefs(...refs) {
     }
   };
 }
-__name$u(composeRefs, "composeRefs");
+__name$w(composeRefs, "composeRefs");
 function useComposedRefs(...refs) {
   return React__namespace.useCallback(composeRefs(...refs), refs);
 }
-__name$u(useComposedRefs, "useComposedRefs");
+__name$w(useComposedRefs, "useComposedRefs");
 
-var __defProp$t = Object.defineProperty;
-var __name$t = (target, value) => __defProp$t(target, "name", { value, configurable: true });
+var __defProp$v = Object.defineProperty;
+var __name$v = (target, value) => __defProp$v(target, "name", { value, configurable: true });
 // @__NO_SIDE_EFFECTS__
 function createSlot(ownerName) {
   const Slot2 = React__namespace.forwardRef((props, forwardedRef) => {
@@ -3478,18 +3405,18 @@ function createSlot(ownerName) {
   Slot2.displayName = `${ownerName}.Slot`;
   return Slot2;
 }
-__name$t(createSlot, "createSlot");
+__name$v(createSlot, "createSlot");
 var Slot$3 = /* @__PURE__ */ createSlot("Slot");
 var SLOTTABLE_IDENTIFIER = Symbol.for("radix.slottable");
 // @__NO_SIDE_EFFECTS__
 function createSlottable(ownerName) {
-  const Slottable2 = /* @__PURE__ */ __name$t((props) => "child" in props ? props.children(props.child) : props.children, "Slottable");
+  const Slottable2 = /* @__PURE__ */ __name$v((props) => "child" in props ? props.children(props.child) : props.children, "Slottable");
   Slottable2.displayName = `${ownerName}.Slottable`;
   Slottable2.__radixId = SLOTTABLE_IDENTIFIER;
   return Slottable2;
 }
-__name$t(createSlottable, "createSlottable");
-var getSlottableElementFromSlottable = /* @__PURE__ */ __name$t((slottable, child) => {
+__name$v(createSlottable, "createSlottable");
+var getSlottableElementFromSlottable = /* @__PURE__ */ __name$v((slottable, child) => {
   if ("child" in slottable.props) {
     const child2 = slottable.props.child;
     if (!React__namespace.isValidElement(child2)) return null;
@@ -3521,7 +3448,7 @@ function mergeProps(slotProps, childProps) {
   }
   return { ...slotProps, ...overrideProps };
 }
-__name$t(mergeProps, "mergeProps");
+__name$v(mergeProps, "mergeProps");
 function getElementRef$1(element) {
   let getter = Object.getOwnPropertyDescriptor(element.props, "ref")?.get;
   let mayWarn = getter && "isReactWarning" in getter && getter.isReactWarning;
@@ -3535,30 +3462,30 @@ function getElementRef$1(element) {
   }
   return element.props.ref || element.ref;
 }
-__name$t(getElementRef$1, "getElementRef");
+__name$v(getElementRef$1, "getElementRef");
 function isSlottable(child) {
   return React__namespace.isValidElement(child) && typeof child.type === "function" && "__radixId" in child.type && child.type.__radixId === SLOTTABLE_IDENTIFIER;
 }
-__name$t(isSlottable, "isSlottable");
+__name$v(isSlottable, "isSlottable");
 var REACT_LAZY_TYPE = Symbol.for("react.lazy");
 function isLazyComponent(element) {
   return element != null && typeof element === "object" && "$$typeof" in element && element.$$typeof === REACT_LAZY_TYPE && "_payload" in element && isPromiseLike(element._payload);
 }
-__name$t(isLazyComponent, "isLazyComponent");
+__name$v(isLazyComponent, "isLazyComponent");
 function isPromiseLike(value) {
   return typeof value === "object" && value !== null && "then" in value;
 }
-__name$t(isPromiseLike, "isPromiseLike");
-var createSlotError = /* @__PURE__ */ __name$t((ownerName) => {
+__name$v(isPromiseLike, "isPromiseLike");
+var createSlotError = /* @__PURE__ */ __name$v((ownerName) => {
   return `${ownerName} failed to slot onto its children. Expected a single React element child or \`Slottable\`.`;
 }, "createSlotError");
-var createSlottableError = /* @__PURE__ */ __name$t((ownerName) => {
+var createSlottableError = /* @__PURE__ */ __name$v((ownerName) => {
   return `${ownerName} failed to slot onto its \`Slottable\`. Expected \`Slottable\` to receive a single React element child.`;
 }, "createSlottableError");
 var use = React__namespace[" use ".trim().toString()];
 
-var __defProp$s = Object.defineProperty;
-var __name$s = (target, value) => __defProp$s(target, "name", { value, configurable: true });
+var __defProp$u = Object.defineProperty;
+var __name$u = (target, value) => __defProp$u(target, "name", { value, configurable: true });
 var NODES = [
   "a",
   "button",
@@ -3594,10 +3521,10 @@ var Primitive = NODES.reduce((primitive, node) => {
 function dispatchDiscreteCustomEvent(target, event) {
   if (target) ReactDOM__namespace.flushSync(() => target.dispatchEvent(event));
 }
-__name$s(dispatchDiscreteCustomEvent, "dispatchDiscreteCustomEvent");
+__name$u(dispatchDiscreteCustomEvent, "dispatchDiscreteCustomEvent");
 
-var __defProp$r = Object.defineProperty;
-var __name$r = (target, value) => __defProp$r(target, "name", { value, configurable: true });
+var __defProp$t = Object.defineProperty;
+var __name$t = (target, value) => __defProp$t(target, "name", { value, configurable: true });
 var VISUALLY_HIDDEN_STYLES = Object.freeze({
   // See: https://github.com/twbs/bootstrap/blob/main/scss/mixins/_visually-hidden.scss
   position: "absolute",
@@ -3612,7 +3539,7 @@ var VISUALLY_HIDDEN_STYLES = Object.freeze({
   wordWrap: "normal"
 });
 var VisuallyHidden = /* @__PURE__ */ React__namespace.forwardRef(
-  /* @__PURE__ */ __name$r(function VisuallyHidden2(props, forwardedRef) {
+  /* @__PURE__ */ __name$t(function VisuallyHidden2(props, forwardedRef) {
     return /* @__PURE__ */ jsxRuntime.jsx(
       Primitive.span,
       {
@@ -3623,15 +3550,15 @@ var VisuallyHidden = /* @__PURE__ */ React__namespace.forwardRef(
     );
   }, "VisuallyHidden")
 );
-var Root$4 = VisuallyHidden;
+var Root$5 = VisuallyHidden;
 
-var __defProp$q = Object.defineProperty;
-var __name$q = (target, value) => __defProp$q(target, "name", { value, configurable: true });
+var __defProp$s = Object.defineProperty;
+var __name$s = (target, value) => __defProp$s(target, "name", { value, configurable: true });
 // @__NO_SIDE_EFFECTS__
 function createContext2(rootComponentName, defaultContext) {
   const Context = React__namespace.createContext(defaultContext);
   Context.displayName = rootComponentName + "Context";
-  const Provider = /* @__PURE__ */ __name$q((props) => {
+  const Provider = /* @__PURE__ */ __name$s((props) => {
     const { children, ...context } = props;
     const value = React__namespace.useMemo(() => context, Object.values(context));
     return /* @__PURE__ */ jsxRuntime.jsx(Context.Provider, { value, children });
@@ -3645,10 +3572,10 @@ function createContext2(rootComponentName, defaultContext) {
     if (optional) return void 0;
     throw new Error(`\`${consumerName}\` must be used within \`${rootComponentName}\``);
   }
-  __name$q(useContext2, "useContext");
+  __name$s(useContext2, "useContext");
   return [Provider, useContext2];
 }
-__name$q(createContext2, "createContext");
+__name$s(createContext2, "createContext");
 // @__NO_SIDE_EFFECTS__
 function createContextScope(scopeName, createContextScopeDeps = []) {
   let defaultContexts = [];
@@ -3657,7 +3584,7 @@ function createContextScope(scopeName, createContextScopeDeps = []) {
     BaseContext.displayName = rootComponentName + "Context";
     const index = defaultContexts.length;
     defaultContexts = [...defaultContexts, defaultContext];
-    const Provider = /* @__PURE__ */ __name$q((props) => {
+    const Provider = /* @__PURE__ */ __name$s((props) => {
       const { scope, children, ...context } = props;
       const Context = scope?.[scopeName]?.[index] || BaseContext;
       const value = React__namespace.useMemo(() => context, Object.values(context));
@@ -3673,15 +3600,15 @@ function createContextScope(scopeName, createContextScopeDeps = []) {
       if (optional) return void 0;
       throw new Error(`\`${consumerName}\` must be used within \`${rootComponentName}\``);
     }
-    __name$q(useContext2, "useContext");
+    __name$s(useContext2, "useContext");
     return [Provider, useContext2];
   }
-  __name$q(createContext3, "createContext");
-  const createScope = /* @__PURE__ */ __name$q(() => {
+  __name$s(createContext3, "createContext");
+  const createScope = /* @__PURE__ */ __name$s(() => {
     const scopeContexts = defaultContexts.map((defaultContext) => {
       return React__namespace.createContext(defaultContext);
     });
-    return /* @__PURE__ */ __name$q(function useScope(scope) {
+    return /* @__PURE__ */ __name$s(function useScope(scope) {
       const contexts = scope?.[scopeName] || scopeContexts;
       return React__namespace.useMemo(
         () => ({ [`__scope${scopeName}`]: { ...scope, [scopeName]: contexts } }),
@@ -3692,16 +3619,16 @@ function createContextScope(scopeName, createContextScopeDeps = []) {
   createScope.scopeName = scopeName;
   return [createContext3, composeContextScopes(createScope, ...createContextScopeDeps)];
 }
-__name$q(createContextScope, "createContextScope");
+__name$s(createContextScope, "createContextScope");
 function composeContextScopes(...scopes) {
   const baseScope = scopes[0];
   if (scopes.length === 1) return baseScope;
-  const createScope = /* @__PURE__ */ __name$q(() => {
+  const createScope = /* @__PURE__ */ __name$s(() => {
     const scopeHooks = scopes.map((createScope2) => ({
       useScope: createScope2(),
       scopeName: createScope2.scopeName
     }));
-    return /* @__PURE__ */ __name$q(function useComposedScopes(overrideScopes) {
+    return /* @__PURE__ */ __name$s(function useComposedScopes(overrideScopes) {
       const nextScopes = scopeHooks.reduce((nextScopes2, { useScope, scopeName }) => {
         const scopeProps = useScope(overrideScopes);
         const currentScope = scopeProps[`__scope${scopeName}`];
@@ -3713,10 +3640,10 @@ function composeContextScopes(...scopes) {
   createScope.scopeName = baseScope.scopeName;
   return createScope;
 }
-__name$q(composeContextScopes, "composeContextScopes");
+__name$s(composeContextScopes, "composeContextScopes");
 
-var __defProp$p = Object.defineProperty;
-var __name$p = (target, value) => __defProp$p(target, "name", { value, configurable: true });
+var __defProp$r = Object.defineProperty;
+var __name$r = (target, value) => __defProp$r(target, "name", { value, configurable: true });
 // @__NO_SIDE_EFFECTS__
 function createCollection(name) {
   const PROVIDER_NAME = name + "CollectionProvider";
@@ -3725,7 +3652,7 @@ function createCollection(name) {
     PROVIDER_NAME,
     { collectionRef: { current: null }, itemMap: /* @__PURE__ */ new Map() }
   );
-  const CollectionProvider = /* @__PURE__ */ __name$p((props) => {
+  const CollectionProvider = /* @__PURE__ */ __name$r((props) => {
     const { scope, children } = props;
     const ref = React__namespace.useRef(null);
     const itemMap = React__namespace.useRef(/* @__PURE__ */ new Map()).current;
@@ -3774,20 +3701,20 @@ function createCollection(name) {
     }, [context.collectionRef, context.itemMap]);
     return getItems;
   }
-  __name$p(useCollection, "useCollection");
+  __name$r(useCollection, "useCollection");
   return [
     { Provider: CollectionProvider, Slot: CollectionSlot, ItemSlot: CollectionItemSlot },
     useCollection,
     createCollectionScope
   ];
 }
-__name$p(createCollection, "createCollection");
+__name$r(createCollection, "createCollection");
 
 // src/ordered-dictionary.ts
 var __instanciated = /* @__PURE__ */ new WeakMap();
 var OrderedDict = class _OrderedDict extends Map {
   static {
-    __name$p(this, "OrderedDict");
+    __name$r(this, "OrderedDict");
   }
   #keys;
   constructor(entries) {
@@ -4081,18 +4008,18 @@ function at(array, index) {
   const actualIndex = toSafeIndex(array, index);
   return actualIndex === -1 ? void 0 : array[actualIndex];
 }
-__name$p(at, "at");
+__name$r(at, "at");
 function toSafeIndex(array, index) {
   const length = array.length;
   const relativeIndex = toSafeInteger(index);
   const actualIndex = relativeIndex >= 0 ? relativeIndex : length + relativeIndex;
   return actualIndex < 0 || actualIndex >= length ? -1 : actualIndex;
 }
-__name$p(toSafeIndex, "toSafeIndex");
+__name$r(toSafeIndex, "toSafeIndex");
 function toSafeInteger(number) {
   return number !== number || number === 0 ? 0 : Math.trunc(number);
 }
-__name$p(toSafeInteger, "toSafeInteger");
+__name$r(toSafeInteger, "toSafeInteger");
 // @__NO_SIDE_EFFECTS__
 function createCollection2(name) {
   const PROVIDER_NAME = name + "CollectionProvider";
@@ -4104,19 +4031,19 @@ function createCollection2(name) {
       collectionRef: { current: null },
       collectionRefObject: { current: null },
       itemMap: new OrderedDict(),
-      setItemMap: /* @__PURE__ */ __name$p(() => void 0, "setItemMap")
+      setItemMap: /* @__PURE__ */ __name$r(() => void 0, "setItemMap")
     }
   );
-  const CollectionProvider = /* @__PURE__ */ __name$p(({ state, ...props }) => {
+  const CollectionProvider = /* @__PURE__ */ __name$r(({ state, ...props }) => {
     return state ? /* @__PURE__ */ jsxRuntime.jsx(CollectionProviderImpl, { ...props, state }) : /* @__PURE__ */ jsxRuntime.jsx(CollectionInit, { ...props });
   }, "CollectionProvider");
   CollectionProvider.displayName = PROVIDER_NAME;
-  const CollectionInit = /* @__PURE__ */ __name$p((props) => {
+  const CollectionInit = /* @__PURE__ */ __name$r((props) => {
     const state = useInitCollection();
     return /* @__PURE__ */ jsxRuntime.jsx(CollectionProviderImpl, { ...props, state });
   }, "CollectionInit");
   CollectionInit.displayName = PROVIDER_NAME + "Init";
-  const CollectionProviderImpl = /* @__PURE__ */ __name$p((props) => {
+  const CollectionProviderImpl = /* @__PURE__ */ __name$r((props) => {
     const { scope, children, state } = props;
     const ref = React__namespace.useRef(null);
     const [collectionElement, setCollectionElement] = React__namespace.useState(
@@ -4206,12 +4133,12 @@ function createCollection2(name) {
   function useInitCollection() {
     return React__namespace.useState(new OrderedDict());
   }
-  __name$p(useInitCollection, "useInitCollection");
+  __name$r(useInitCollection, "useInitCollection");
   function useCollection(scope) {
     const { itemMap } = useCollectionContext(name + "CollectionConsumer", scope);
     return itemMap;
   }
-  __name$p(useCollection, "useCollection");
+  __name$r(useCollection, "useCollection");
   const functions = {
     createCollectionScope,
     useCollection,
@@ -4222,7 +4149,7 @@ function createCollection2(name) {
     functions
   ];
 }
-__name$p(createCollection2, "createCollection");
+__name$r(createCollection2, "createCollection");
 function shallowEqual(a, b) {
   if (a === b) return true;
   if (typeof a !== "object" || typeof b !== "object") return false;
@@ -4236,15 +4163,15 @@ function shallowEqual(a, b) {
   }
   return true;
 }
-__name$p(shallowEqual, "shallowEqual");
+__name$r(shallowEqual, "shallowEqual");
 function isElementPreceding(a, b) {
   return !!(b.compareDocumentPosition(a) & Node.DOCUMENT_POSITION_PRECEDING);
 }
-__name$p(isElementPreceding, "isElementPreceding");
+__name$r(isElementPreceding, "isElementPreceding");
 function sortByDocumentPosition(a, b) {
   return !a[1].element || !b[1].element ? 0 : isElementPreceding(a[1].element, b[1].element) ? -1 : 1;
 }
-__name$p(sortByDocumentPosition, "sortByDocumentPosition");
+__name$r(sortByDocumentPosition, "sortByDocumentPosition");
 function getChildListObserver(callback) {
   const observer = new MutationObserver((mutationsList) => {
     for (const mutation of mutationsList) {
@@ -4256,36 +4183,36 @@ function getChildListObserver(callback) {
   });
   return observer;
 }
-__name$p(getChildListObserver, "getChildListObserver");
+__name$r(getChildListObserver, "getChildListObserver");
 
-var __defProp$o = Object.defineProperty;
-var __name$o = (target, value) => __defProp$o(target, "name", { value, configurable: true });
+var __defProp$q = Object.defineProperty;
+var __name$q = (target, value) => __defProp$q(target, "name", { value, configurable: true });
 
 // src/primitive.tsx
 var canUseDOM = !!(typeof window !== "undefined" && window.document && window.document.createElement);
 function composeEventHandlers(originalEventHandler, ourEventHandler, { checkForDefaultPrevented = true } = {}) {
-  return /* @__PURE__ */ __name$o(function handleEvent(event) {
+  return /* @__PURE__ */ __name$q(function handleEvent(event) {
     originalEventHandler?.(event);
     if (checkForDefaultPrevented === false || !event || !event.defaultPrevented) {
       return ourEventHandler?.(event);
     }
   }, "handleEvent");
 }
-__name$o(composeEventHandlers, "composeEventHandlers");
+__name$q(composeEventHandlers, "composeEventHandlers");
 function getOwnerWindow(element) {
   if (!canUseDOM) {
     throw new Error("Cannot access window outside of the DOM");
   }
   return element?.ownerDocument?.defaultView ?? window;
 }
-__name$o(getOwnerWindow, "getOwnerWindow");
+__name$q(getOwnerWindow, "getOwnerWindow");
 function getOwnerDocument(element) {
   if (!canUseDOM) {
     throw new Error("Cannot access document outside of the DOM");
   }
   return element?.ownerDocument ?? document;
 }
-__name$o(getOwnerDocument, "getOwnerDocument");
+__name$q(getOwnerDocument, "getOwnerDocument");
 function getActiveElement(node, activeDescendant = false) {
   const { activeElement } = getOwnerDocument(node);
   if (!activeElement?.nodeName) {
@@ -4305,18 +4232,18 @@ function getActiveElement(node, activeDescendant = false) {
   }
   return activeElement;
 }
-__name$o(getActiveElement, "getActiveElement");
+__name$q(getActiveElement, "getActiveElement");
 function isFrame(element) {
   return element.tagName === "IFRAME";
 }
-__name$o(isFrame, "isFrame");
+__name$q(isFrame, "isFrame");
 
 // src/use-layout-effect.tsx
 var useLayoutEffect2 = globalThis?.document ? React__namespace.useLayoutEffect : () => {
 };
 
-var __defProp$n = Object.defineProperty;
-var __name$n = (target, value) => __defProp$n(target, "name", { value, configurable: true });
+var __defProp$p = Object.defineProperty;
+var __name$p = (target, value) => __defProp$p(target, "name", { value, configurable: true });
 var useReactEffectEvent = React__namespace[" useEffectEvent ".trim().toString()];
 var useReactInsertionEffect = React__namespace[" useInsertionEffect ".trim().toString()];
 function useEffectEvent(callback) {
@@ -4337,15 +4264,15 @@ function useEffectEvent(callback) {
   }
   return React__namespace.useMemo(() => ((...args) => ref.current?.(...args)), []);
 }
-__name$n(useEffectEvent, "useEffectEvent");
+__name$p(useEffectEvent, "useEffectEvent");
 
-var __defProp$m = Object.defineProperty;
-var __name$m = (target, value) => __defProp$m(target, "name", { value, configurable: true });
+var __defProp$o = Object.defineProperty;
+var __name$o = (target, value) => __defProp$o(target, "name", { value, configurable: true });
 var useInsertionEffect = React__namespace[" useInsertionEffect ".trim().toString()] || useLayoutEffect2;
 function useControllableState({
   prop,
   defaultProp,
-  onChange = /* @__PURE__ */ __name$m(() => {
+  onChange = /* @__PURE__ */ __name$o(() => {
   }, "onChange"),
   caller
 }) {
@@ -4370,7 +4297,7 @@ function useControllableState({
   );
   return [value, setValue];
 }
-__name$m(useControllableState, "useControllableState");
+__name$o(useControllableState, "useControllableState");
 function useUncontrolledState({
   defaultProp,
   onChange
@@ -4389,11 +4316,11 @@ function useUncontrolledState({
   }, [value, prevValueRef]);
   return [value, setValue, onChangeRef];
 }
-__name$m(useUncontrolledState, "useUncontrolledState");
+__name$o(useUncontrolledState, "useUncontrolledState");
 function isFunction$1(value) {
   return typeof value === "function";
 }
-__name$m(isFunction$1, "isFunction");
+__name$o(isFunction$1, "isFunction");
 var SYNC_STATE = Symbol("RADIX:SYNC_STATE");
 function useControllableStateReducer(reducer, userArgs, initialArg, init) {
   const { prop: controlledState, defaultProp, onChange: onChangeProp, caller } = userArgs;
@@ -4440,20 +4367,20 @@ function useControllableStateReducer(reducer, userArgs, initialArg, init) {
   }, [controlledState, internalState.state, isControlled]);
   return [state, dispatch];
 }
-__name$m(useControllableStateReducer, "useControllableStateReducer");
+__name$o(useControllableStateReducer, "useControllableStateReducer");
 
-var __defProp$l = Object.defineProperty;
-var __name$l = (target, value) => __defProp$l(target, "name", { value, configurable: true });
+var __defProp$n = Object.defineProperty;
+var __name$n = (target, value) => __defProp$n(target, "name", { value, configurable: true });
 function useStateMachine(initialState, machine) {
   return React__namespace.useReducer((state, event) => {
     const nextState = machine[state][event];
     return nextState ?? state;
   }, initialState);
 }
-__name$l(useStateMachine, "useStateMachine");
+__name$n(useStateMachine, "useStateMachine");
 
 // src/presence.tsx
-var Presence = /* @__PURE__ */ __name$l((props) => {
+var Presence = /* @__PURE__ */ __name$n((props) => {
   const { present, children } = props;
   const presence = usePresence(present);
   const child = typeof children === "function" ? children({ present: presence.isPresent }) : React__namespace.Children.only(children);
@@ -4516,7 +4443,7 @@ function usePresence(present) {
     if (node) {
       let timeoutId;
       const ownerWindow = node.ownerDocument.defaultView ?? window;
-      const handleAnimationEnd = /* @__PURE__ */ __name$l((event) => {
+      const handleAnimationEnd = /* @__PURE__ */ __name$n((event) => {
         const currentAnimationName = getAnimationName(stylesRef.current);
         const isCurrentAnimation = currentAnimationName.includes(CSS.escape(event.animationName));
         if (event.target === node && isCurrentAnimation) {
@@ -4532,7 +4459,7 @@ function usePresence(present) {
           }
         }
       }, "handleAnimationEnd");
-      const handleAnimationStart = /* @__PURE__ */ __name$l((event) => {
+      const handleAnimationStart = /* @__PURE__ */ __name$n((event) => {
         if (event.target === node) {
           prevAnimationNameRef.current = getAnimationName(stylesRef.current);
         }
@@ -4564,7 +4491,7 @@ function usePresence(present) {
     }, [])
   };
 }
-__name$l(usePresence, "usePresence");
+__name$n(usePresence, "usePresence");
 function setRef(ref, value) {
   if (typeof ref === "function") {
     return ref(value);
@@ -4572,7 +4499,7 @@ function setRef(ref, value) {
     ref.current = value;
   }
 }
-__name$l(setRef, "setRef");
+__name$n(setRef, "setRef");
 function useStableComposedRefs(...refs) {
   const refsRef = React__namespace.useRef(refs);
   refsRef.current = refs;
@@ -4600,11 +4527,11 @@ function useStableComposedRefs(...refs) {
     }
   }, []);
 }
-__name$l(useStableComposedRefs, "useStableComposedRefs");
+__name$n(useStableComposedRefs, "useStableComposedRefs");
 function getAnimationName(styles) {
   return styles?.animationName || "none";
 }
-__name$l(getAnimationName, "getAnimationName");
+__name$n(getAnimationName, "getAnimationName");
 function getElementRef(element) {
   let getter = Object.getOwnPropertyDescriptor(element.props, "ref")?.get;
   let mayWarn = getter && "isReactWarning" in getter && getter.isReactWarning;
@@ -4618,10 +4545,10 @@ function getElementRef(element) {
   }
   return element.props.ref || element.ref;
 }
-__name$l(getElementRef, "getElementRef");
+__name$n(getElementRef, "getElementRef");
 
-var __defProp$k = Object.defineProperty;
-var __name$k = (target, value) => __defProp$k(target, "name", { value, configurable: true });
+var __defProp$m = Object.defineProperty;
+var __name$m = (target, value) => __defProp$m(target, "name", { value, configurable: true });
 var useReactId = React__namespace[" useId ".trim().toString()] || (() => void 0);
 var count$1 = 0;
 function useId(deterministicId) {
@@ -4631,16 +4558,446 @@ function useId(deterministicId) {
   }, [deterministicId]);
   return deterministicId || (id ? `radix-${id}` : "");
 }
-__name$k(useId, "useId");
+__name$m(useId, "useId");
 
-var __defProp$j = Object.defineProperty;
-var __name$j = (target, value) => __defProp$j(target, "name", { value, configurable: true });
+var __defProp$l = Object.defineProperty;
+var __name$l = (target, value) => __defProp$l(target, "name", { value, configurable: true });
+var COLLAPSIBLE_NAME = "Collapsible";
+var [createCollapsibleContext, createCollapsibleScope] = createContextScope(COLLAPSIBLE_NAME);
+var [CollapsibleProvider, useCollapsibleContext] = createCollapsibleContext(COLLAPSIBLE_NAME);
+var Collapsible = /* @__PURE__ */ React__namespace.forwardRef(
+  /* @__PURE__ */ __name$l(function Collapsible2(props, forwardedRef) {
+    const {
+      __scopeCollapsible,
+      open: openProp,
+      defaultOpen,
+      disabled,
+      onOpenChange,
+      ...collapsibleProps
+    } = props;
+    const [open, setOpen] = useControllableState({
+      prop: openProp,
+      defaultProp: defaultOpen ?? false,
+      onChange: onOpenChange,
+      caller: COLLAPSIBLE_NAME
+    });
+    return /* @__PURE__ */ jsxRuntime.jsx(
+      CollapsibleProvider,
+      {
+        scope: __scopeCollapsible,
+        disabled,
+        contentId: useId(),
+        open,
+        onOpenToggle: React__namespace.useCallback(() => setOpen((prevOpen) => !prevOpen), [setOpen]),
+        children: /* @__PURE__ */ jsxRuntime.jsx(
+          Primitive.div,
+          {
+            "data-state": getState$4(open),
+            "data-disabled": disabled ? "" : void 0,
+            ...collapsibleProps,
+            ref: forwardedRef
+          }
+        )
+      }
+    );
+  }, "Collapsible")
+);
+var TRIGGER_NAME$7 = "CollapsibleTrigger";
+var CollapsibleTrigger = /* @__PURE__ */ React__namespace.forwardRef(
+  // blank line to reduce diff noise
+  /* @__PURE__ */ __name$l(function CollapsibleTrigger2(props, forwardedRef) {
+    const { __scopeCollapsible, ...triggerProps } = props;
+    const context = useCollapsibleContext(TRIGGER_NAME$7, __scopeCollapsible);
+    return /* @__PURE__ */ jsxRuntime.jsx(
+      Primitive.button,
+      {
+        type: "button",
+        "aria-controls": context.open ? context.contentId : void 0,
+        "aria-expanded": context.open || false,
+        "data-state": getState$4(context.open),
+        "data-disabled": context.disabled ? "" : void 0,
+        disabled: context.disabled,
+        ...triggerProps,
+        ref: forwardedRef,
+        onClick: composeEventHandlers(props.onClick, context.onOpenToggle)
+      }
+    );
+  }, "CollapsibleTrigger")
+);
+var CONTENT_NAME$8 = "CollapsibleContent";
+var CollapsibleContent = /* @__PURE__ */ React__namespace.forwardRef(
+  // blank line to reduce diff noise
+  /* @__PURE__ */ __name$l(function CollapsibleContent2(props, forwardedRef) {
+    const { forceMount, ...contentProps } = props;
+    const context = useCollapsibleContext(CONTENT_NAME$8, props.__scopeCollapsible);
+    return /* @__PURE__ */ jsxRuntime.jsx(Presence, { present: forceMount || context.open, children: ({ present }) => /* @__PURE__ */ jsxRuntime.jsx(CollapsibleContentImpl, { ...contentProps, ref: forwardedRef, present }) });
+  }, "CollapsibleContent")
+);
+var CollapsibleContentImpl = /* @__PURE__ */ React__namespace.forwardRef(/* @__PURE__ */ __name$l(function CollapsibleContentImpl2(props, forwardedRef) {
+  const { __scopeCollapsible, present, children, ...contentProps } = props;
+  const context = useCollapsibleContext(CONTENT_NAME$8, __scopeCollapsible);
+  const [isPresent, setIsPresent] = React__namespace.useState(present);
+  const ref = React__namespace.useRef(null);
+  const composedRefs = useComposedRefs(forwardedRef, ref);
+  const heightRef = React__namespace.useRef(0);
+  const height = heightRef.current;
+  const widthRef = React__namespace.useRef(0);
+  const width = widthRef.current;
+  const isOpen = context.open || isPresent;
+  const isMountAnimationPreventedRef = React__namespace.useRef(isOpen);
+  const originalStylesRef = React__namespace.useRef(void 0);
+  React__namespace.useEffect(() => {
+    const rAF = requestAnimationFrame(() => isMountAnimationPreventedRef.current = false);
+    return () => cancelAnimationFrame(rAF);
+  }, []);
+  useLayoutEffect2(() => {
+    const node = ref.current;
+    if (node) {
+      originalStylesRef.current = originalStylesRef.current || {
+        transitionDuration: node.style.transitionDuration,
+        animationName: node.style.animationName
+      };
+      node.style.transitionDuration = "0s";
+      node.style.animationName = "none";
+      const rect = node.getBoundingClientRect();
+      heightRef.current = rect.height;
+      widthRef.current = rect.width;
+      if (!isMountAnimationPreventedRef.current) {
+        node.style.transitionDuration = originalStylesRef.current.transitionDuration;
+        node.style.animationName = originalStylesRef.current.animationName;
+      }
+      setIsPresent(present);
+    }
+  }, [context.open, present]);
+  return /* @__PURE__ */ jsxRuntime.jsx(
+    Primitive.div,
+    {
+      "data-state": getState$4(context.open),
+      "data-disabled": context.disabled ? "" : void 0,
+      id: context.contentId,
+      hidden: !isOpen,
+      ...contentProps,
+      ref: composedRefs,
+      style: {
+        [`--radix-collapsible-content-height`]: height ? `${height}px` : void 0,
+        [`--radix-collapsible-content-width`]: width ? `${width}px` : void 0,
+        ...props.style
+      },
+      children: isOpen && children
+    }
+  );
+}, "CollapsibleContentImpl"));
+function getState$4(open) {
+  return open ? "open" : "closed";
+}
+__name$l(getState$4, "getState");
+var Root$4 = Collapsible;
+var Trigger$4 = CollapsibleTrigger;
+var Content$2 = CollapsibleContent;
+
+var __defProp$k = Object.defineProperty;
+var __name$k = (target, value) => __defProp$k(target, "name", { value, configurable: true });
 var DirectionContext = React__namespace.createContext(void 0);
 function useDirection(localDir) {
   const globalDir = React__namespace.useContext(DirectionContext);
   return localDir || globalDir || "ltr";
 }
-__name$j(useDirection, "useDirection");
+__name$k(useDirection, "useDirection");
+
+var __defProp$j = Object.defineProperty;
+var __name$j = (target, value) => __defProp$j(target, "name", { value, configurable: true });
+var ACCORDION_NAME = "Accordion";
+var ACCORDION_KEYS = ["Home", "End", "ArrowDown", "ArrowUp", "ArrowLeft", "ArrowRight"];
+var [Collection$2, useCollection$2, createCollectionScope$2] = createCollection(ACCORDION_NAME);
+var [createAccordionContext, createAccordionScope] = createContextScope(ACCORDION_NAME, [
+  createCollectionScope$2,
+  createCollapsibleScope
+]);
+var useCollapsibleScope = createCollapsibleScope();
+var Accordion$1 = /* @__PURE__ */ React__namespace.forwardRef(
+  // blank line to reduce diff noise
+  /* @__PURE__ */ __name$j(function Accordion2(props, forwardedRef) {
+    const { type, ...accordionProps } = props;
+    const singleProps = accordionProps;
+    const multipleProps = accordionProps;
+    return /* @__PURE__ */ jsxRuntime.jsx(Collection$2.Provider, { scope: props.__scopeAccordion, children: type === "multiple" ? /* @__PURE__ */ jsxRuntime.jsx(AccordionImplMultiple, { ...multipleProps, ref: forwardedRef }) : /* @__PURE__ */ jsxRuntime.jsx(AccordionImplSingle, { ...singleProps, ref: forwardedRef }) });
+  }, "Accordion")
+);
+var [AccordionValueProvider, useAccordionValueContext] = createAccordionContext(ACCORDION_NAME);
+var [AccordionCollapsibleProvider, useAccordionCollapsibleContext] = createAccordionContext(
+  ACCORDION_NAME,
+  { collapsible: false }
+);
+var AccordionImplSingle = /* @__PURE__ */ React__namespace.forwardRef(
+  // blank line to reduce diff noise
+  /* @__PURE__ */ __name$j(function AccordionImplSingle2(props, forwardedRef) {
+    const {
+      value: valueProp,
+      defaultValue,
+      onValueChange = /* @__PURE__ */ __name$j(() => {
+      }, "onValueChange"),
+      collapsible = false,
+      ...accordionSingleProps
+    } = props;
+    const [value, setValue] = useControllableState({
+      prop: valueProp,
+      defaultProp: defaultValue ?? "",
+      onChange: onValueChange,
+      caller: ACCORDION_NAME
+    });
+    return /* @__PURE__ */ jsxRuntime.jsx(
+      AccordionValueProvider,
+      {
+        scope: props.__scopeAccordion,
+        value: React__namespace.useMemo(() => value ? [value] : [], [value]),
+        onItemOpen: setValue,
+        onItemClose: React__namespace.useCallback(() => collapsible && setValue(""), [collapsible, setValue]),
+        children: /* @__PURE__ */ jsxRuntime.jsx(AccordionCollapsibleProvider, { scope: props.__scopeAccordion, collapsible, children: /* @__PURE__ */ jsxRuntime.jsx(AccordionImpl, { ...accordionSingleProps, ref: forwardedRef }) })
+      }
+    );
+  }, "AccordionImplSingle")
+);
+var AccordionImplMultiple = /* @__PURE__ */ React__namespace.forwardRef(/* @__PURE__ */ __name$j(function AccordionImplMultiple2(props, forwardedRef) {
+  const {
+    value: valueProp,
+    defaultValue,
+    onValueChange = /* @__PURE__ */ __name$j(() => {
+    }, "onValueChange"),
+    ...accordionMultipleProps
+  } = props;
+  const [value, setValue] = useControllableState({
+    prop: valueProp,
+    defaultProp: defaultValue ?? [],
+    onChange: onValueChange,
+    caller: ACCORDION_NAME
+  });
+  const handleItemOpen = React__namespace.useCallback(
+    (itemValue) => setValue((prevValue = []) => [...prevValue, itemValue]),
+    [setValue]
+  );
+  const handleItemClose = React__namespace.useCallback(
+    (itemValue) => setValue((prevValue = []) => prevValue.filter((value2) => value2 !== itemValue)),
+    [setValue]
+  );
+  return /* @__PURE__ */ jsxRuntime.jsx(
+    AccordionValueProvider,
+    {
+      scope: props.__scopeAccordion,
+      value,
+      onItemOpen: handleItemOpen,
+      onItemClose: handleItemClose,
+      children: /* @__PURE__ */ jsxRuntime.jsx(AccordionCollapsibleProvider, { scope: props.__scopeAccordion, collapsible: true, children: /* @__PURE__ */ jsxRuntime.jsx(AccordionImpl, { ...accordionMultipleProps, ref: forwardedRef }) })
+    }
+  );
+}, "AccordionImplMultiple"));
+var [AccordionImplProvider, useAccordionContext] = createAccordionContext(ACCORDION_NAME);
+var AccordionImpl = /* @__PURE__ */ React__namespace.forwardRef(
+  /* @__PURE__ */ __name$j(function AccordionImpl2(props, forwardedRef) {
+    const { __scopeAccordion, disabled, dir, orientation = "vertical", ...accordionProps } = props;
+    const accordionRef = React__namespace.useRef(null);
+    const composedRefs = useComposedRefs(accordionRef, forwardedRef);
+    const getItems = useCollection$2(__scopeAccordion);
+    const direction = useDirection(dir);
+    const isDirectionLTR = direction === "ltr";
+    const handleKeyDown = composeEventHandlers(props.onKeyDown, (event) => {
+      if (!ACCORDION_KEYS.includes(event.key)) return;
+      const target = event.target;
+      const triggerCollection = getItems().filter((item) => !item.ref.current?.disabled);
+      const triggerIndex = triggerCollection.findIndex((item) => item.ref.current === target);
+      const triggerCount = triggerCollection.length;
+      if (triggerIndex === -1) return;
+      event.preventDefault();
+      let nextIndex = triggerIndex;
+      const homeIndex = 0;
+      const endIndex = triggerCount - 1;
+      const moveNext = /* @__PURE__ */ __name$j(() => {
+        nextIndex = triggerIndex + 1;
+        if (nextIndex > endIndex) {
+          nextIndex = homeIndex;
+        }
+      }, "moveNext");
+      const movePrev = /* @__PURE__ */ __name$j(() => {
+        nextIndex = triggerIndex - 1;
+        if (nextIndex < homeIndex) {
+          nextIndex = endIndex;
+        }
+      }, "movePrev");
+      switch (event.key) {
+        case "Home":
+          nextIndex = homeIndex;
+          break;
+        case "End":
+          nextIndex = endIndex;
+          break;
+        case "ArrowRight":
+          if (orientation === "horizontal") {
+            if (isDirectionLTR) {
+              moveNext();
+            } else {
+              movePrev();
+            }
+          }
+          break;
+        case "ArrowDown":
+          if (orientation === "vertical") {
+            moveNext();
+          }
+          break;
+        case "ArrowLeft":
+          if (orientation === "horizontal") {
+            if (isDirectionLTR) {
+              movePrev();
+            } else {
+              moveNext();
+            }
+          }
+          break;
+        case "ArrowUp":
+          if (orientation === "vertical") {
+            movePrev();
+          }
+          break;
+      }
+      const clampedIndex = nextIndex % triggerCount;
+      triggerCollection[clampedIndex].ref.current?.focus();
+    });
+    return /* @__PURE__ */ jsxRuntime.jsx(
+      AccordionImplProvider,
+      {
+        scope: __scopeAccordion,
+        disabled,
+        direction: dir,
+        orientation,
+        children: /* @__PURE__ */ jsxRuntime.jsx(Collection$2.Slot, { scope: __scopeAccordion, children: /* @__PURE__ */ jsxRuntime.jsx(
+          Primitive.div,
+          {
+            ...accordionProps,
+            "data-orientation": orientation,
+            ref: composedRefs,
+            onKeyDown: disabled ? void 0 : handleKeyDown
+          }
+        ) })
+      }
+    );
+  }, "AccordionImpl")
+);
+var ITEM_NAME$2 = "AccordionItem";
+var [AccordionItemProvider, useAccordionItemContext] = createAccordionContext(ITEM_NAME$2);
+var AccordionItem$1 = /* @__PURE__ */ React__namespace.forwardRef(
+  /* @__PURE__ */ __name$j(function AccordionItem2(props, forwardedRef) {
+    const { __scopeAccordion, value, ...accordionItemProps } = props;
+    const accordionContext = useAccordionContext(ITEM_NAME$2, __scopeAccordion);
+    const valueContext = useAccordionValueContext(ITEM_NAME$2, __scopeAccordion);
+    const collapsibleScope = useCollapsibleScope(__scopeAccordion);
+    const triggerId = useId();
+    const open = value && valueContext.value.includes(value) || false;
+    const disabled = accordionContext.disabled || props.disabled;
+    return /* @__PURE__ */ jsxRuntime.jsx(
+      AccordionItemProvider,
+      {
+        scope: __scopeAccordion,
+        open,
+        disabled,
+        triggerId,
+        children: /* @__PURE__ */ jsxRuntime.jsx(
+          Root$4,
+          {
+            "data-orientation": accordionContext.orientation,
+            "data-state": getState$3(open),
+            ...collapsibleScope,
+            ...accordionItemProps,
+            ref: forwardedRef,
+            disabled,
+            open,
+            onOpenChange: (open2) => {
+              if (open2) {
+                valueContext.onItemOpen(value);
+              } else {
+                valueContext.onItemClose(value);
+              }
+            }
+          }
+        )
+      }
+    );
+  }, "AccordionItem")
+);
+var HEADER_NAME = "AccordionHeader";
+var AccordionHeader = /* @__PURE__ */ React__namespace.forwardRef(
+  // blank line to reduce diff noise
+  /* @__PURE__ */ __name$j(function AccordionHeader2(props, forwardedRef) {
+    const { __scopeAccordion, ...headerProps } = props;
+    const accordionContext = useAccordionContext(ACCORDION_NAME, __scopeAccordion);
+    const itemContext = useAccordionItemContext(HEADER_NAME, __scopeAccordion);
+    return /* @__PURE__ */ jsxRuntime.jsx(
+      Primitive.h3,
+      {
+        "data-orientation": accordionContext.orientation,
+        "data-state": getState$3(itemContext.open),
+        "data-disabled": itemContext.disabled ? "" : void 0,
+        ...headerProps,
+        ref: forwardedRef
+      }
+    );
+  }, "AccordionHeader")
+);
+var TRIGGER_NAME$6 = "AccordionTrigger";
+var AccordionTrigger$1 = /* @__PURE__ */ React__namespace.forwardRef(
+  // blank line to reduce diff noise
+  /* @__PURE__ */ __name$j(function AccordionTrigger2(props, forwardedRef) {
+    const { __scopeAccordion, ...triggerProps } = props;
+    const accordionContext = useAccordionContext(ACCORDION_NAME, __scopeAccordion);
+    const itemContext = useAccordionItemContext(TRIGGER_NAME$6, __scopeAccordion);
+    const collapsibleContext = useAccordionCollapsibleContext(TRIGGER_NAME$6, __scopeAccordion);
+    const collapsibleScope = useCollapsibleScope(__scopeAccordion);
+    return /* @__PURE__ */ jsxRuntime.jsx(Collection$2.ItemSlot, { scope: __scopeAccordion, children: /* @__PURE__ */ jsxRuntime.jsx(
+      Trigger$4,
+      {
+        "aria-disabled": itemContext.open && !collapsibleContext.collapsible || void 0,
+        "data-orientation": accordionContext.orientation,
+        id: itemContext.triggerId,
+        ...collapsibleScope,
+        ...triggerProps,
+        ref: forwardedRef
+      }
+    ) });
+  }, "AccordionTrigger")
+);
+var CONTENT_NAME$7 = "AccordionContent";
+var AccordionContent$1 = /* @__PURE__ */ React__namespace.forwardRef(
+  // blank line to reduce diff noise
+  /* @__PURE__ */ __name$j(function AccordionContent2(props, forwardedRef) {
+    const { __scopeAccordion, ...contentProps } = props;
+    const accordionContext = useAccordionContext(ACCORDION_NAME, __scopeAccordion);
+    const itemContext = useAccordionItemContext(CONTENT_NAME$7, __scopeAccordion);
+    const collapsibleScope = useCollapsibleScope(__scopeAccordion);
+    return /* @__PURE__ */ jsxRuntime.jsx(
+      Content$2,
+      {
+        role: "region",
+        "aria-labelledby": itemContext.triggerId,
+        "data-orientation": accordionContext.orientation,
+        ...collapsibleScope,
+        ...contentProps,
+        ref: forwardedRef,
+        style: {
+          "--radix-accordion-content-height": "var(--radix-collapsible-content-height)",
+          "--radix-accordion-content-width": "var(--radix-collapsible-content-width)",
+          ...props.style
+        }
+      }
+    );
+  }, "AccordionContent")
+);
+function getState$3(open) {
+  return open ? "open" : "closed";
+}
+__name$j(getState$3, "getState");
+var Root2$4 = Accordion$1;
+var Item$1 = AccordionItem$1;
+var Header = AccordionHeader;
+var Trigger2 = AccordionTrigger$1;
+var Content2$4 = AccordionContent$1;
 
 var __defProp$i = Object.defineProperty;
 var __name$i = (target, value) => __defProp$i(target, "name", { value, configurable: true });
@@ -11057,7 +11414,7 @@ var TooltipContentImpl = /* @__PURE__ */ React__namespace.forwardRef(
             },
             children: [
               /* @__PURE__ */ jsxRuntime.jsx(Slottable, { children }),
-              ariaLabel ? /* @__PURE__ */ jsxRuntime.jsx(Root$4, { id: context.contentId, role: "tooltip", children: ariaLabel }) : null
+              ariaLabel ? /* @__PURE__ */ jsxRuntime.jsx(Root$5, { id: context.contentId, role: "tooltip", children: ariaLabel }) : null
             ]
           }
         )
@@ -11200,91 +11557,6 @@ var Portal = TooltipPortal;
 var Content2 = TooltipContent$1;
 var Arrow2 = TooltipArrow;
 
-const badgeVariants = cva("group/badge inline-flex h-5 w-fit shrink-0 items-center justify-center gap-1 overflow-hidden rounded-4xl border border-transparent px-2 py-0.5 text-xs font-medium whitespace-nowrap transition-all focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 has-data-[icon=inline-end]:pr-1.5 has-data-[icon=inline-start]:pl-1.5 aria-invalid:border-destructive aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 [&>svg]:pointer-events-none [&>svg]:size-3!", {
-    variants: {
-        variant: {
-            default: "bg-primary text-primary-foreground [a]:hover:bg-primary/80",
-            secondary: "bg-secondary text-secondary-foreground [a]:hover:bg-secondary/80",
-            destructive: "bg-destructive/10 text-destructive focus-visible:ring-destructive/20 dark:bg-destructive/20 dark:focus-visible:ring-destructive/40 [a]:hover:bg-destructive/20",
-            outline: "border-border text-foreground [a]:hover:bg-muted [a]:hover:text-muted-foreground",
-            ghost: "hover:bg-muted hover:text-muted-foreground dark:hover:bg-muted/50",
-            link: "text-primary underline-offset-4 hover:underline",
-        },
-    },
-    defaultVariants: {
-        variant: "default",
-    },
-});
-function Badge({ className, variant = "default", asChild = false, ...props }) {
-    const Comp = asChild ? Slot$3 : "span";
-    return (jsxRuntime.jsx(Comp, { "data-slot": "badge", "data-variant": variant, className: cn(badgeVariants({ variant }), className), ...props }));
-}
-
-const buttonVariants = cva("group/button inline-flex shrink-0 items-center justify-center rounded-lg border border-transparent bg-clip-padding text-sm font-medium whitespace-nowrap transition-all outline-none select-none focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 active:not-aria-[haspopup]:translate-y-px disabled:pointer-events-none disabled:opacity-50 aria-invalid:border-destructive aria-invalid:ring-3 aria-invalid:ring-destructive/20 dark:aria-invalid:border-destructive/50 dark:aria-invalid:ring-destructive/40 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4", {
-    variants: {
-        variant: {
-            default: "bg-primary text-primary-foreground [a]:hover:bg-primary/80",
-            outline: "border-border bg-background hover:bg-muted hover:text-foreground aria-expanded:bg-muted aria-expanded:text-foreground dark:border-input dark:bg-input/30 dark:hover:bg-input/50",
-            secondary: "bg-secondary text-secondary-foreground hover:bg-secondary/80 aria-expanded:bg-secondary aria-expanded:text-secondary-foreground",
-            ghost: "hover:bg-muted hover:text-foreground aria-expanded:bg-muted aria-expanded:text-foreground dark:hover:bg-muted/50",
-            destructive: "bg-destructive/10 text-destructive hover:bg-destructive/20 focus-visible:border-destructive/40 focus-visible:ring-destructive/20 dark:bg-destructive/20 dark:hover:bg-destructive/30 dark:focus-visible:ring-destructive/40",
-            link: "text-primary underline-offset-4 hover:underline",
-            // Phase 2: pill = the canonical fully-rounded primary CTA. Retires the
-            // 6 inline `borderRadius:9999` + const PURPLE overrides and the legacy
-            // pill-shaped .d2-btn class (POLISH-AUDIT §3 "Button"). rounded-full
-            // wins over the base rounded-lg via twMerge.
-            pill: "rounded-full bg-primary text-primary-foreground [a]:hover:bg-primary/80",
-            // subtle = ghost-with-muted-text; the low-emphasis affordance the audit
-            // found hand-rolled as transparent + --ink-muted.
-            subtle: "text-muted-foreground hover:bg-muted hover:text-foreground aria-expanded:bg-muted",
-        },
-        size: {
-            default: "h-8 gap-1.5 px-2.5 has-data-[icon=inline-end]:pr-2 has-data-[icon=inline-start]:pl-2",
-            xs: "h-6 gap-1 rounded-[min(var(--radius-md),10px)] px-2 text-xs in-data-[slot=button-group]:rounded-lg has-data-[icon=inline-end]:pr-1.5 has-data-[icon=inline-start]:pl-1.5 [&_svg:not([class*='size-'])]:size-3",
-            sm: "h-7 gap-1 rounded-[min(var(--radius-md),12px)] px-2.5 text-[0.8rem] in-data-[slot=button-group]:rounded-lg has-data-[icon=inline-end]:pr-1.5 has-data-[icon=inline-start]:pl-1.5 [&_svg:not([class*='size-'])]:size-3.5",
-            lg: "h-9 gap-1.5 px-2.5 has-data-[icon=inline-end]:pr-2 has-data-[icon=inline-start]:pl-2",
-            icon: "size-8",
-            "icon-xs": "size-6 rounded-[min(var(--radius-md),10px)] in-data-[slot=button-group]:rounded-lg [&_svg:not([class*='size-'])]:size-3",
-            "icon-sm": "size-7 rounded-[min(var(--radius-md),12px)] in-data-[slot=button-group]:rounded-lg",
-            "icon-lg": "size-9",
-        },
-    },
-    defaultVariants: {
-        variant: "default",
-        size: "default",
-    },
-});
-// forwardRef so parents that inject a ref via `asChild` (e.g. TooltipTrigger,
-// DialogTrigger, DropdownMenuTrigger) can anchor to the real element. Without
-// this, Radix Popper can't measure the trigger and positions poppers/tooltips
-// off-screen at (0,0).
-const Button = React__namespace.forwardRef(function Button({ className, variant = "default", size = "default", asChild = false, ...props }, ref) {
-    const Comp = asChild ? Slot$3 : "button";
-    return (jsxRuntime.jsx(Comp, { ref: ref, "data-slot": "button", "data-variant": variant, "data-size": size, className: cn(buttonVariants({ variant, size, className })), ...props }));
-});
-
-function Card({ className, size = "default", ...props }) {
-    return (jsxRuntime.jsx("div", { "data-slot": "card", "data-size": size, className: cn("group/card flex flex-col gap-4 overflow-hidden rounded-xl bg-card py-4 text-sm text-card-foreground ring-1 ring-foreground/10 has-data-[slot=card-footer]:pb-0 has-[>img:first-child]:pt-0 data-[size=sm]:gap-3 data-[size=sm]:py-3 data-[size=sm]:has-data-[slot=card-footer]:pb-0 *:[img:first-child]:rounded-t-xl *:[img:last-child]:rounded-b-xl", className), ...props }));
-}
-function CardHeader({ className, ...props }) {
-    return (jsxRuntime.jsx("div", { "data-slot": "card-header", className: cn("group/card-header @container/card-header grid auto-rows-min items-start gap-1 rounded-t-xl px-4 group-data-[size=sm]/card:px-3 has-data-[slot=card-action]:grid-cols-[1fr_auto] has-data-[slot=card-description]:grid-rows-[auto_auto] [.border-b]:pb-4 group-data-[size=sm]/card:[.border-b]:pb-3", className), ...props }));
-}
-function CardTitle({ className, ...props }) {
-    return (jsxRuntime.jsx("div", { "data-slot": "card-title", className: cn("font-heading text-base leading-snug font-medium group-data-[size=sm]/card:text-sm", className), ...props }));
-}
-function CardDescription({ className, ...props }) {
-    return (jsxRuntime.jsx("div", { "data-slot": "card-description", className: cn("text-sm text-muted-foreground", className), ...props }));
-}
-function CardAction({ className, ...props }) {
-    return (jsxRuntime.jsx("div", { "data-slot": "card-action", className: cn("col-start-2 row-span-2 row-start-1 self-start justify-self-end", className), ...props }));
-}
-function CardContent({ className, ...props }) {
-    return (jsxRuntime.jsx("div", { "data-slot": "card-content", className: cn("px-4 group-data-[size=sm]/card:px-3", className), ...props }));
-}
-function CardFooter({ className, ...props }) {
-    return (jsxRuntime.jsx("div", { "data-slot": "card-footer", className: cn("flex items-center rounded-b-xl border-t bg-muted/50 p-4 group-data-[size=sm]/card:p-3", className), ...props }));
-}
-
 /**
  * @license lucide-react v0.469.0 - ISC
  *
@@ -11418,6 +11690,19 @@ const ChevronRight = createLucideIcon("ChevronRight", [
  */
 
 
+const CircleCheck = createLucideIcon("CircleCheck", [
+  ["circle", { cx: "12", cy: "12", r: "10", key: "1mglay" }],
+  ["path", { d: "m9 12 2 2 4-4", key: "dzmm74" }]
+]);
+
+/**
+ * @license lucide-react v0.469.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+
+
 const CircleHelp = createLucideIcon("CircleHelp", [
   ["circle", { cx: "12", cy: "12", r: "10", key: "1mglay" }],
   ["path", { d: "M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3", key: "1u773s" }],
@@ -11432,8 +11717,36 @@ const CircleHelp = createLucideIcon("CircleHelp", [
  */
 
 
+const CircleX = createLucideIcon("CircleX", [
+  ["circle", { cx: "12", cy: "12", r: "10", key: "1mglay" }],
+  ["path", { d: "m15 9-6 6", key: "1uzhvr" }],
+  ["path", { d: "m9 9 6 6", key: "z0biqf" }]
+]);
+
+/**
+ * @license lucide-react v0.469.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+
+
 const Filter = createLucideIcon("Filter", [
   ["polygon", { points: "22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3", key: "1yg77f" }]
+]);
+
+/**
+ * @license lucide-react v0.469.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+
+
+const Info = createLucideIcon("Info", [
+  ["circle", { cx: "12", cy: "12", r: "10", key: "1mglay" }],
+  ["path", { d: "M12 16v-4", key: "1dtifu" }],
+  ["path", { d: "M12 8h.01", key: "e9boi3" }]
 ]);
 
 /**
@@ -11564,6 +11877,180 @@ const X = createLucideIcon("X", [
   ["path", { d: "M18 6 6 18", key: "1bl5f8" }],
   ["path", { d: "m6 6 12 12", key: "d8bk6v" }]
 ]);
+
+function Accordion({ ...props }) {
+    return jsxRuntime.jsx(Root2$4, { "data-slot": "accordion", ...props });
+}
+function AccordionItem({ className, ...props }) {
+    return (jsxRuntime.jsx(Item$1, { "data-slot": "accordion-item", className: cn("border-b border-border last:border-b-0", className), ...props }));
+}
+function AccordionTrigger({ className, children, ...props }) {
+    return (jsxRuntime.jsx(Header, { className: "flex", "data-slot": "accordion-header", children: jsxRuntime.jsxs(Trigger2, { "data-slot": "accordion-trigger", className: cn("group flex flex-1 items-center justify-between gap-2 py-3 text-left text-sm font-medium text-foreground outline-none transition-all", "hover:underline focus-visible:ring-2 focus-visible:ring-ring", "disabled:pointer-events-none disabled:opacity-50", className), ...props, children: [children, jsxRuntime.jsx(ChevronDown, { className: "size-4 shrink-0 text-muted-foreground transition-transform duration-200 group-data-[state=open]:rotate-180", "aria-hidden": true })] }) }));
+}
+function AccordionContent({ className, children, ...props }) {
+    return (jsxRuntime.jsx(Content2$4, { "data-slot": "accordion-content", className: cn("overflow-hidden text-sm text-muted-foreground", "data-[state=open]:animate-accordion-down data-[state=closed]:animate-accordion-up", className), ...props, children: jsxRuntime.jsx("div", { className: cn("pb-3 pt-0", className), children: children }) }));
+}
+function CollapsibleSection({ title, defaultOpen = false, children, className, }) {
+    return (jsxRuntime.jsx(Root2$4, { type: "single", collapsible: true, defaultValue: defaultOpen ? "section" : undefined, "data-slot": "collapsible-section", className: cn("rounded-lg border border-border bg-card text-card-foreground", className), children: jsxRuntime.jsxs(Item$1, { value: "section", className: "border-none", children: [jsxRuntime.jsx(Header, { className: "flex", children: jsxRuntime.jsxs(Trigger2, { "data-slot": "collapsible-section-trigger", className: cn("group flex flex-1 items-center justify-between gap-2 px-4 py-3 text-left text-sm font-medium text-foreground outline-none transition-all", "hover:bg-muted/40 focus-visible:ring-2 focus-visible:ring-ring", "data-[state=open]:border-b data-[state=open]:border-border rounded-lg data-[state=open]:rounded-b-none"), children: [title, jsxRuntime.jsx(ChevronDown, { className: "size-4 shrink-0 text-muted-foreground transition-transform duration-200 group-data-[state=open]:rotate-180", "aria-hidden": true })] }) }), jsxRuntime.jsx(Content2$4, { "data-slot": "collapsible-section-content", className: cn("overflow-hidden text-sm text-muted-foreground", "data-[state=open]:animate-accordion-down data-[state=closed]:animate-accordion-up"), children: jsxRuntime.jsx("div", { className: "px-4 py-3", children: children }) })] }) }));
+}
+
+const falsyToString = (value)=>typeof value === "boolean" ? `${value}` : value === 0 ? "0" : value;
+const cx = clsx;
+const cva = (base, config)=>(props)=>{
+        var _config_compoundVariants;
+        if ((config === null || config === void 0 ? void 0 : config.variants) == null) return cx(base, props === null || props === void 0 ? void 0 : props.class, props === null || props === void 0 ? void 0 : props.className);
+        const { variants, defaultVariants } = config;
+        const getVariantClassNames = Object.keys(variants).map((variant)=>{
+            const variantProp = props === null || props === void 0 ? void 0 : props[variant];
+            const defaultVariantProp = defaultVariants === null || defaultVariants === void 0 ? void 0 : defaultVariants[variant];
+            if (variantProp === null) return null;
+            const variantKey = falsyToString(variantProp) || falsyToString(defaultVariantProp);
+            return variants[variant][variantKey];
+        });
+        const propsWithoutUndefined = props && Object.entries(props).reduce((acc, param)=>{
+            let [key, value] = param;
+            if (value === undefined) {
+                return acc;
+            }
+            acc[key] = value;
+            return acc;
+        }, {});
+        const getCompoundVariantClassNames = config === null || config === void 0 ? void 0 : (_config_compoundVariants = config.compoundVariants) === null || _config_compoundVariants === void 0 ? void 0 : _config_compoundVariants.reduce((acc, param)=>{
+            let { class: cvClass, className: cvClassName, ...compoundVariantOptions } = param;
+            return Object.entries(compoundVariantOptions).every((param)=>{
+                let [key, value] = param;
+                return Array.isArray(value) ? value.includes({
+                    ...defaultVariants,
+                    ...propsWithoutUndefined
+                }[key]) : ({
+                    ...defaultVariants,
+                    ...propsWithoutUndefined
+                })[key] === value;
+            }) ? [
+                ...acc,
+                cvClass,
+                cvClassName
+            ] : acc;
+        }, []);
+        return cx(base, getVariantClassNames, getCompoundVariantClassNames, props === null || props === void 0 ? void 0 : props.class, props === null || props === void 0 ? void 0 : props.className);
+    };
+
+const alertVariants = cva("group/alert relative grid w-full gap-0.5 rounded-lg border px-3 py-2.5 text-left text-sm has-data-[slot=alert-action]:relative has-data-[slot=alert-action]:pr-18 has-[>svg]:grid-cols-[auto_1fr] has-[>svg]:gap-x-2.5 *:[svg]:row-span-2 *:[svg]:translate-y-0.5 *:[svg]:text-current *:[svg:not([class*='size-'])]:size-4", {
+    variants: {
+        variant: {
+            // Neutral card alert (quiet). Border softened to the subtle token so it
+            // no longer reads as a heavy wireframe outline.
+            default: "border-border bg-card text-card-foreground",
+            // Soft-tinted semantic variants: tinted bg + matching border + accent
+            // icon/title, body stays readable. Icon colour comes from the variant
+            // (pass a lucide icon as the first child).
+            info: "border-[var(--orbit-info)]/25 bg-[var(--orbit-info-bg)] text-foreground *:[svg]:text-[var(--orbit-info)] *:data-[slot=alert-title]:text-[var(--orbit-info)]",
+            success: "border-[var(--orbit-success)]/25 bg-[var(--orbit-success-bg)] text-foreground *:[svg]:text-[var(--orbit-success)] *:data-[slot=alert-title]:text-[var(--orbit-success)]",
+            warning: "border-[var(--orbit-warning)]/30 bg-[var(--orbit-warning-bg)] text-foreground *:[svg]:text-[var(--orbit-warning)] *:data-[slot=alert-title]:text-[var(--orbit-warning)]",
+            destructive: "border-destructive/25 bg-destructive/5 text-destructive *:data-[slot=alert-description]:text-destructive/90 *:[svg]:text-current",
+        },
+    },
+    defaultVariants: {
+        variant: "default",
+    },
+});
+function Alert({ className, variant, ...props }) {
+    return (jsxRuntime.jsx("div", { "data-slot": "alert", role: "alert", className: cn(alertVariants({ variant }), className), ...props }));
+}
+function AlertTitle({ className, ...props }) {
+    return (jsxRuntime.jsx("div", { "data-slot": "alert-title", className: cn("font-medium group-has-[>svg]/alert:col-start-2 [&_a]:underline [&_a]:underline-offset-3 [&_a]:hover:text-foreground", className), ...props }));
+}
+function AlertDescription({ className, ...props }) {
+    return (jsxRuntime.jsx("div", { "data-slot": "alert-description", className: cn("text-sm text-balance text-muted-foreground md:text-pretty [&_a]:underline [&_a]:underline-offset-3 [&_a]:hover:text-foreground [&_p:not(:last-child)]:mb-4", className), ...props }));
+}
+function AlertAction({ className, ...props }) {
+    return (jsxRuntime.jsx("div", { "data-slot": "alert-action", className: cn("absolute top-2 right-2", className), ...props }));
+}
+
+const badgeVariants = cva("group/badge inline-flex h-5 w-fit shrink-0 items-center justify-center gap-1 overflow-hidden rounded-4xl border border-transparent px-2 py-0.5 text-xs font-medium whitespace-nowrap transition-all focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 has-data-[icon=inline-end]:pr-1.5 has-data-[icon=inline-start]:pl-1.5 aria-invalid:border-destructive aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 [&>svg]:pointer-events-none [&>svg]:size-3!", {
+    variants: {
+        variant: {
+            default: "bg-primary text-primary-foreground [a]:hover:bg-primary/80",
+            secondary: "bg-secondary text-secondary-foreground [a]:hover:bg-secondary/80",
+            destructive: "bg-destructive/10 text-destructive focus-visible:ring-destructive/20 dark:bg-destructive/20 dark:focus-visible:ring-destructive/40 [a]:hover:bg-destructive/20",
+            outline: "border-border text-foreground [a]:hover:bg-muted [a]:hover:text-muted-foreground",
+            ghost: "hover:bg-muted hover:text-muted-foreground dark:hover:bg-muted/50",
+            link: "text-primary underline-offset-4 hover:underline",
+        },
+    },
+    defaultVariants: {
+        variant: "default",
+    },
+});
+function Badge({ className, variant = "default", asChild = false, ...props }) {
+    const Comp = asChild ? Slot$3 : "span";
+    return (jsxRuntime.jsx(Comp, { "data-slot": "badge", "data-variant": variant, className: cn(badgeVariants({ variant }), className), ...props }));
+}
+
+const buttonVariants = cva("group/button inline-flex shrink-0 items-center justify-center rounded-lg border border-transparent bg-clip-padding text-sm font-medium whitespace-nowrap transition-all outline-none select-none focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 active:not-aria-[haspopup]:translate-y-px disabled:pointer-events-none disabled:opacity-50 aria-invalid:border-destructive aria-invalid:ring-3 aria-invalid:ring-destructive/20 dark:aria-invalid:border-destructive/50 dark:aria-invalid:ring-destructive/40 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4", {
+    variants: {
+        variant: {
+            default: "bg-primary text-primary-foreground [a]:hover:bg-primary/80",
+            outline: "border-border bg-background hover:bg-muted hover:text-foreground aria-expanded:bg-muted aria-expanded:text-foreground dark:border-input dark:bg-input/30 dark:hover:bg-input/50",
+            secondary: "bg-secondary text-secondary-foreground hover:bg-secondary/80 aria-expanded:bg-secondary aria-expanded:text-secondary-foreground",
+            ghost: "hover:bg-muted hover:text-foreground aria-expanded:bg-muted aria-expanded:text-foreground dark:hover:bg-muted/50",
+            destructive: "bg-destructive/10 text-destructive hover:bg-destructive/20 focus-visible:border-destructive/40 focus-visible:ring-destructive/20 dark:bg-destructive/20 dark:hover:bg-destructive/30 dark:focus-visible:ring-destructive/40",
+            link: "text-primary underline-offset-4 hover:underline",
+            // Phase 2: pill = the canonical fully-rounded primary CTA. Retires the
+            // 6 inline `borderRadius:9999` + const PURPLE overrides and the legacy
+            // pill-shaped .d2-btn class (POLISH-AUDIT §3 "Button"). rounded-full
+            // wins over the base rounded-lg via twMerge.
+            pill: "rounded-full bg-primary text-primary-foreground [a]:hover:bg-primary/80",
+            // subtle = ghost-with-muted-text; the low-emphasis affordance the audit
+            // found hand-rolled as transparent + --ink-muted.
+            subtle: "text-muted-foreground hover:bg-muted hover:text-foreground aria-expanded:bg-muted",
+        },
+        size: {
+            default: "h-8 gap-1.5 px-2.5 has-data-[icon=inline-end]:pr-2 has-data-[icon=inline-start]:pl-2",
+            xs: "h-6 gap-1 rounded-[min(var(--radius-md),10px)] px-2 text-xs in-data-[slot=button-group]:rounded-lg has-data-[icon=inline-end]:pr-1.5 has-data-[icon=inline-start]:pl-1.5 [&_svg:not([class*='size-'])]:size-3",
+            sm: "h-7 gap-1 rounded-[min(var(--radius-md),12px)] px-2.5 text-[0.8rem] in-data-[slot=button-group]:rounded-lg has-data-[icon=inline-end]:pr-1.5 has-data-[icon=inline-start]:pl-1.5 [&_svg:not([class*='size-'])]:size-3.5",
+            lg: "h-9 gap-1.5 px-2.5 has-data-[icon=inline-end]:pr-2 has-data-[icon=inline-start]:pl-2",
+            icon: "size-8",
+            "icon-xs": "size-6 rounded-[min(var(--radius-md),10px)] in-data-[slot=button-group]:rounded-lg [&_svg:not([class*='size-'])]:size-3",
+            "icon-sm": "size-7 rounded-[min(var(--radius-md),12px)] in-data-[slot=button-group]:rounded-lg",
+            "icon-lg": "size-9",
+        },
+    },
+    defaultVariants: {
+        variant: "default",
+        size: "default",
+    },
+});
+// forwardRef so parents that inject a ref via `asChild` (e.g. TooltipTrigger,
+// DialogTrigger, DropdownMenuTrigger) can anchor to the real element. Without
+// this, Radix Popper can't measure the trigger and positions poppers/tooltips
+// off-screen at (0,0).
+const Button = React__namespace.forwardRef(function Button({ className, variant = "default", size = "default", asChild = false, ...props }, ref) {
+    const Comp = asChild ? Slot$3 : "button";
+    return (jsxRuntime.jsx(Comp, { ref: ref, "data-slot": "button", "data-variant": variant, "data-size": size, className: cn(buttonVariants({ variant, size, className })), ...props }));
+});
+
+function Card({ className, size = "default", ...props }) {
+    return (jsxRuntime.jsx("div", { "data-slot": "card", "data-size": size, className: cn("group/card flex flex-col gap-4 overflow-hidden rounded-xl bg-card py-4 text-sm text-card-foreground ring-1 ring-foreground/10 has-data-[slot=card-footer]:pb-0 has-[>img:first-child]:pt-0 data-[size=sm]:gap-3 data-[size=sm]:py-3 data-[size=sm]:has-data-[slot=card-footer]:pb-0 *:[img:first-child]:rounded-t-xl *:[img:last-child]:rounded-b-xl", className), ...props }));
+}
+function CardHeader({ className, ...props }) {
+    return (jsxRuntime.jsx("div", { "data-slot": "card-header", className: cn("group/card-header @container/card-header grid auto-rows-min items-start gap-1 rounded-t-xl px-4 group-data-[size=sm]/card:px-3 has-data-[slot=card-action]:grid-cols-[1fr_auto] has-data-[slot=card-description]:grid-rows-[auto_auto] [.border-b]:pb-4 group-data-[size=sm]/card:[.border-b]:pb-3", className), ...props }));
+}
+function CardTitle({ className, ...props }) {
+    return (jsxRuntime.jsx("div", { "data-slot": "card-title", className: cn("font-heading text-base leading-snug font-medium group-data-[size=sm]/card:text-sm", className), ...props }));
+}
+function CardDescription({ className, ...props }) {
+    return (jsxRuntime.jsx("div", { "data-slot": "card-description", className: cn("text-sm text-muted-foreground", className), ...props }));
+}
+function CardAction({ className, ...props }) {
+    return (jsxRuntime.jsx("div", { "data-slot": "card-action", className: cn("col-start-2 row-span-2 row-start-1 self-start justify-self-end", className), ...props }));
+}
+function CardContent({ className, ...props }) {
+    return (jsxRuntime.jsx("div", { "data-slot": "card-content", className: cn("px-4 group-data-[size=sm]/card:px-3", className), ...props }));
+}
+function CardFooter({ className, ...props }) {
+    return (jsxRuntime.jsx("div", { "data-slot": "card-footer", className: cn("flex items-center rounded-b-xl border-t bg-muted/50 p-4 group-data-[size=sm]/card:p-3", className), ...props }));
+}
 
 function Dialog(props) {
     return jsxRuntime.jsx(Dialog$1, { "data-slot": "dialog", ...props });
@@ -12620,11 +13107,95 @@ function TabsContent({ className, ...props }) {
     return (jsxRuntime.jsx(Content, { "data-slot": "tabs-content", className: cn("mt-2 ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2", className), ...props }));
 }
 
+const ToastContext = React__namespace.createContext(null);
+/**
+ * useToast — returns `{ toast, dismiss }`. `toast(opts)` queues a notification
+ * and returns its id; `dismiss(id)` removes it early.
+ */
+function useToast() {
+    const ctx = React__namespace.useContext(ToastContext);
+    if (!ctx) {
+        throw new Error("useToast must be used within a <ToastProvider>");
+    }
+    return ctx;
+}
+const variantIcon = {
+    default: Info,
+    success: CircleCheck,
+    warning: TriangleAlert,
+    destructive: CircleX,
+};
+// Accent colour per variant, pulled from the shared Orbit tokens.
+const variantAccent = {
+    default: "var(--orbit-info)",
+    success: "var(--orbit-success)",
+    warning: "var(--orbit-warning)",
+    destructive: "var(--destructive)",
+};
+function ToastCard({ toast, onDismiss, }) {
+    const Icon = variantIcon[toast.variant];
+    const accent = variantAccent[toast.variant];
+    const [visible, setVisible] = React__namespace.useState(false);
+    // Fade/slide in on mount.
+    React__namespace.useEffect(() => {
+        const raf = requestAnimationFrame(() => setVisible(true));
+        return () => cancelAnimationFrame(raf);
+    }, []);
+    return (jsxRuntime.jsxs("div", { "data-slot": "toast", "data-variant": toast.variant, role: "status", "aria-live": "polite", className: cn("pointer-events-auto flex w-full items-start gap-3 rounded-lg border bg-card p-3 pr-9 text-card-foreground shadow-md", "relative transition-all duration-200 ease-out", visible ? "translate-y-0 opacity-100" : "translate-y-2 opacity-0"), children: [jsxRuntime.jsx(Icon, { className: "mt-0.5 size-5 shrink-0", style: { color: accent } }), jsxRuntime.jsxs("div", { className: "grid gap-0.5", children: [jsxRuntime.jsx("div", { "data-slot": "toast-title", className: "text-sm font-semibold leading-tight", children: toast.title }), toast.description ? (jsxRuntime.jsx("div", { "data-slot": "toast-description", className: "text-sm text-muted-foreground", children: toast.description })) : null] }), jsxRuntime.jsx("button", { type: "button", "aria-label": "Dismiss notification", onClick: () => onDismiss(toast.id), className: "absolute top-2.5 right-2.5 rounded-sm text-muted-foreground opacity-70 transition-opacity outline-none hover:opacity-100 focus-visible:ring-2 focus-visible:ring-ring", children: jsxRuntime.jsx(X, { className: "size-4" }) })] }));
+}
+/**
+ * ToastProvider — wrap your app. Renders a fixed bottom-right viewport and
+ * provides the toast() / dismiss() API via context.
+ */
+function ToastProvider({ children }) {
+    const [toasts, setToasts] = React__namespace.useState([]);
+    const timers = React__namespace.useRef({});
+    const dismiss = React__namespace.useCallback((id) => {
+        setToasts((prev) => prev.filter((t) => t.id !== id));
+        const timer = timers.current[id];
+        if (timer) {
+            clearTimeout(timer);
+            delete timers.current[id];
+        }
+    }, []);
+    const toast = React__namespace.useCallback((opts) => {
+        const id = typeof crypto !== "undefined" && "randomUUID" in crypto
+            ? crypto.randomUUID()
+            : `toast-${Date.now()}-${Math.random().toString(36).slice(2)}`;
+        const duration = opts.duration ?? 5000;
+        const record = {
+            id,
+            title: opts.title,
+            description: opts.description,
+            variant: opts.variant ?? "default",
+            duration,
+        };
+        setToasts((prev) => [...prev, record]);
+        if (duration > 0) {
+            timers.current[id] = setTimeout(() => dismiss(id), duration);
+        }
+        return id;
+    }, [dismiss]);
+    // Clear any pending timers on unmount.
+    React__namespace.useEffect(() => {
+        const current = timers.current;
+        return () => {
+            Object.values(current).forEach(clearTimeout);
+        };
+    }, []);
+    const value = React__namespace.useMemo(() => ({ toast, dismiss }), [toast, dismiss]);
+    return (jsxRuntime.jsxs(ToastContext.Provider, { value: value, children: [children, jsxRuntime.jsx("div", { "data-slot": "toast-viewport", className: "pointer-events-none fixed bottom-4 right-4 z-[100] flex w-full max-w-sm flex-col gap-2", children: toasts.map((t) => (jsxRuntime.jsx(ToastCard, { toast: t, onDismiss: dismiss }, t.id))) })] }));
+}
+
 function ConfirmDestroyDialog({ open, onOpenChange, title, description, confirmLabel, cancelLabel = "Cancel", onConfirm, loading = false, }) {
     const resolvedConfirm = confirmLabel ?? title.replace(/\?\s*$/, "");
     return (jsxRuntime.jsx(Dialog, { open: open, onOpenChange: (next) => !next && !loading && onOpenChange(false), children: jsxRuntime.jsxs(DialogContent, { className: "sm:max-w-md", children: [jsxRuntime.jsx(DialogHeader, { children: jsxRuntime.jsx(DialogTitle, { children: title }) }), jsxRuntime.jsx("p", { className: "text-sm text-[var(--ink-muted,var(--muted-foreground))]", children: description }), jsxRuntime.jsxs(DialogFooter, { children: [jsxRuntime.jsx(Button, { variant: "ghost", onClick: () => onOpenChange(false), disabled: loading, children: cancelLabel }), jsxRuntime.jsxs(Button, { variant: "destructive", onClick: onConfirm, disabled: loading, children: [loading && jsxRuntime.jsx(Spinner, { size: "sm" }), resolvedConfirm] })] })] }) }));
 }
 
+exports.Accordion = Accordion;
+exports.AccordionContent = AccordionContent;
+exports.AccordionItem = AccordionItem;
+exports.AccordionTrigger = AccordionTrigger;
 exports.ActiveFilterChips = ActiveFilterChips;
 exports.Alert = Alert;
 exports.AlertAction = AlertAction;
@@ -12641,6 +13212,7 @@ exports.CardFooter = CardFooter;
 exports.CardHeader = CardHeader;
 exports.CardTitle = CardTitle;
 exports.Checkbox = Checkbox;
+exports.CollapsibleSection = CollapsibleSection;
 exports.ConfirmDestroyDialog = ConfirmDestroyDialog;
 exports.Dialog = Dialog;
 exports.DialogClose = DialogClose;
@@ -12711,6 +13283,7 @@ exports.TabsContent = TabsContent;
 exports.TabsList = TabsList;
 exports.TabsTrigger = TabsTrigger;
 exports.Textarea = Textarea;
+exports.ToastProvider = ToastProvider;
 exports.Tooltip = Tooltip;
 exports.TooltipContent = TooltipContent;
 exports.TooltipProvider = TooltipProvider;
@@ -12719,4 +13292,5 @@ exports.TopBar = TopBar;
 exports.badgeVariants = badgeVariants;
 exports.buttonVariants = buttonVariants;
 exports.cn = cn;
+exports.useToast = useToast;
 //# sourceMappingURL=index.cjs.js.map

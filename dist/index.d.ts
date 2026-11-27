@@ -1,4 +1,5 @@
 export { cn } from "./lib/utils";
+export * from "./components/accordion";
 export * from "./components/alert";
 export * from "./components/badge";
 export * from "./components/button";
@@ -39,4 +40,5 @@ export * from "./components/page-header";
 export * from "./components/settings-menu";
 export * from "./components/tabs";
 export * from "./components/tooltip";
+export * from "./components/toast";
 export * from "./components/confirm-destroy-dialog";
