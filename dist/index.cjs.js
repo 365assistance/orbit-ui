@@ -3309,8 +3309,8 @@ function cn(...inputs) {
     return twMerge(clsx(inputs));
 }
 
-var __defProp$w = Object.defineProperty;
-var __name$w = (target, value) => __defProp$w(target, "name", { value, configurable: true });
+var __defProp$x = Object.defineProperty;
+var __name$x = (target, value) => __defProp$x(target, "name", { value, configurable: true });
 function setRef$1(ref, value) {
   if (typeof ref === "function") {
     return ref(value);
@@ -3318,7 +3318,7 @@ function setRef$1(ref, value) {
     ref.current = value;
   }
 }
-__name$w(setRef$1, "setRef");
+__name$x(setRef$1, "setRef");
 function composeRefs(...refs) {
   return (node) => {
     let hasCleanup = false;
@@ -3343,14 +3343,14 @@ function composeRefs(...refs) {
     }
   };
 }
-__name$w(composeRefs, "composeRefs");
+__name$x(composeRefs, "composeRefs");
 function useComposedRefs(...refs) {
   return React__namespace.useCallback(composeRefs(...refs), refs);
 }
-__name$w(useComposedRefs, "useComposedRefs");
+__name$x(useComposedRefs, "useComposedRefs");
 
-var __defProp$v = Object.defineProperty;
-var __name$v = (target, value) => __defProp$v(target, "name", { value, configurable: true });
+var __defProp$w = Object.defineProperty;
+var __name$w = (target, value) => __defProp$w(target, "name", { value, configurable: true });
 // @__NO_SIDE_EFFECTS__
 function createSlot(ownerName) {
   const Slot2 = React__namespace.forwardRef((props, forwardedRef) => {
@@ -3405,18 +3405,18 @@ function createSlot(ownerName) {
   Slot2.displayName = `${ownerName}.Slot`;
   return Slot2;
 }
-__name$v(createSlot, "createSlot");
+__name$w(createSlot, "createSlot");
 var Slot$3 = /* @__PURE__ */ createSlot("Slot");
 var SLOTTABLE_IDENTIFIER = Symbol.for("radix.slottable");
 // @__NO_SIDE_EFFECTS__
 function createSlottable(ownerName) {
-  const Slottable2 = /* @__PURE__ */ __name$v((props) => "child" in props ? props.children(props.child) : props.children, "Slottable");
+  const Slottable2 = /* @__PURE__ */ __name$w((props) => "child" in props ? props.children(props.child) : props.children, "Slottable");
   Slottable2.displayName = `${ownerName}.Slottable`;
   Slottable2.__radixId = SLOTTABLE_IDENTIFIER;
   return Slottable2;
 }
-__name$v(createSlottable, "createSlottable");
-var getSlottableElementFromSlottable = /* @__PURE__ */ __name$v((slottable, child) => {
+__name$w(createSlottable, "createSlottable");
+var getSlottableElementFromSlottable = /* @__PURE__ */ __name$w((slottable, child) => {
   if ("child" in slottable.props) {
     const child2 = slottable.props.child;
     if (!React__namespace.isValidElement(child2)) return null;
@@ -3448,7 +3448,7 @@ function mergeProps(slotProps, childProps) {
   }
   return { ...slotProps, ...overrideProps };
 }
-__name$v(mergeProps, "mergeProps");
+__name$w(mergeProps, "mergeProps");
 function getElementRef$1(element) {
   let getter = Object.getOwnPropertyDescriptor(element.props, "ref")?.get;
   let mayWarn = getter && "isReactWarning" in getter && getter.isReactWarning;
@@ -3462,30 +3462,30 @@ function getElementRef$1(element) {
   }
   return element.props.ref || element.ref;
 }
-__name$v(getElementRef$1, "getElementRef");
+__name$w(getElementRef$1, "getElementRef");
 function isSlottable(child) {
   return React__namespace.isValidElement(child) && typeof child.type === "function" && "__radixId" in child.type && child.type.__radixId === SLOTTABLE_IDENTIFIER;
 }
-__name$v(isSlottable, "isSlottable");
+__name$w(isSlottable, "isSlottable");
 var REACT_LAZY_TYPE = Symbol.for("react.lazy");
 function isLazyComponent(element) {
   return element != null && typeof element === "object" && "$$typeof" in element && element.$$typeof === REACT_LAZY_TYPE && "_payload" in element && isPromiseLike(element._payload);
 }
-__name$v(isLazyComponent, "isLazyComponent");
+__name$w(isLazyComponent, "isLazyComponent");
 function isPromiseLike(value) {
   return typeof value === "object" && value !== null && "then" in value;
 }
-__name$v(isPromiseLike, "isPromiseLike");
-var createSlotError = /* @__PURE__ */ __name$v((ownerName) => {
+__name$w(isPromiseLike, "isPromiseLike");
+var createSlotError = /* @__PURE__ */ __name$w((ownerName) => {
   return `${ownerName} failed to slot onto its children. Expected a single React element child or \`Slottable\`.`;
 }, "createSlotError");
-var createSlottableError = /* @__PURE__ */ __name$v((ownerName) => {
+var createSlottableError = /* @__PURE__ */ __name$w((ownerName) => {
   return `${ownerName} failed to slot onto its \`Slottable\`. Expected \`Slottable\` to receive a single React element child.`;
 }, "createSlottableError");
 var use = React__namespace[" use ".trim().toString()];
 
-var __defProp$u = Object.defineProperty;
-var __name$u = (target, value) => __defProp$u(target, "name", { value, configurable: true });
+var __defProp$v = Object.defineProperty;
+var __name$v = (target, value) => __defProp$v(target, "name", { value, configurable: true });
 var NODES = [
   "a",
   "button",
@@ -3521,10 +3521,10 @@ var Primitive = NODES.reduce((primitive, node) => {
 function dispatchDiscreteCustomEvent(target, event) {
   if (target) ReactDOM__namespace.flushSync(() => target.dispatchEvent(event));
 }
-__name$u(dispatchDiscreteCustomEvent, "dispatchDiscreteCustomEvent");
+__name$v(dispatchDiscreteCustomEvent, "dispatchDiscreteCustomEvent");
 
-var __defProp$t = Object.defineProperty;
-var __name$t = (target, value) => __defProp$t(target, "name", { value, configurable: true });
+var __defProp$u = Object.defineProperty;
+var __name$u = (target, value) => __defProp$u(target, "name", { value, configurable: true });
 var VISUALLY_HIDDEN_STYLES = Object.freeze({
   // See: https://github.com/twbs/bootstrap/blob/main/scss/mixins/_visually-hidden.scss
   position: "absolute",
@@ -3539,7 +3539,7 @@ var VISUALLY_HIDDEN_STYLES = Object.freeze({
   wordWrap: "normal"
 });
 var VisuallyHidden = /* @__PURE__ */ React__namespace.forwardRef(
-  /* @__PURE__ */ __name$t(function VisuallyHidden2(props, forwardedRef) {
+  /* @__PURE__ */ __name$u(function VisuallyHidden2(props, forwardedRef) {
     return /* @__PURE__ */ jsxRuntime.jsx(
       Primitive.span,
       {
@@ -3550,15 +3550,15 @@ var VisuallyHidden = /* @__PURE__ */ React__namespace.forwardRef(
     );
   }, "VisuallyHidden")
 );
-var Root$5 = VisuallyHidden;
+var Root$6 = VisuallyHidden;
 
-var __defProp$s = Object.defineProperty;
-var __name$s = (target, value) => __defProp$s(target, "name", { value, configurable: true });
+var __defProp$t = Object.defineProperty;
+var __name$t = (target, value) => __defProp$t(target, "name", { value, configurable: true });
 // @__NO_SIDE_EFFECTS__
 function createContext2(rootComponentName, defaultContext) {
   const Context = React__namespace.createContext(defaultContext);
   Context.displayName = rootComponentName + "Context";
-  const Provider = /* @__PURE__ */ __name$s((props) => {
+  const Provider = /* @__PURE__ */ __name$t((props) => {
     const { children, ...context } = props;
     const value = React__namespace.useMemo(() => context, Object.values(context));
     return /* @__PURE__ */ jsxRuntime.jsx(Context.Provider, { value, children });
@@ -3572,10 +3572,10 @@ function createContext2(rootComponentName, defaultContext) {
     if (optional) return void 0;
     throw new Error(`\`${consumerName}\` must be used within \`${rootComponentName}\``);
   }
-  __name$s(useContext2, "useContext");
+  __name$t(useContext2, "useContext");
   return [Provider, useContext2];
 }
-__name$s(createContext2, "createContext");
+__name$t(createContext2, "createContext");
 // @__NO_SIDE_EFFECTS__
 function createContextScope(scopeName, createContextScopeDeps = []) {
   let defaultContexts = [];
@@ -3584,7 +3584,7 @@ function createContextScope(scopeName, createContextScopeDeps = []) {
     BaseContext.displayName = rootComponentName + "Context";
     const index = defaultContexts.length;
     defaultContexts = [...defaultContexts, defaultContext];
-    const Provider = /* @__PURE__ */ __name$s((props) => {
+    const Provider = /* @__PURE__ */ __name$t((props) => {
       const { scope, children, ...context } = props;
       const Context = scope?.[scopeName]?.[index] || BaseContext;
       const value = React__namespace.useMemo(() => context, Object.values(context));
@@ -3600,15 +3600,15 @@ function createContextScope(scopeName, createContextScopeDeps = []) {
       if (optional) return void 0;
       throw new Error(`\`${consumerName}\` must be used within \`${rootComponentName}\``);
     }
-    __name$s(useContext2, "useContext");
+    __name$t(useContext2, "useContext");
     return [Provider, useContext2];
   }
-  __name$s(createContext3, "createContext");
-  const createScope = /* @__PURE__ */ __name$s(() => {
+  __name$t(createContext3, "createContext");
+  const createScope = /* @__PURE__ */ __name$t(() => {
     const scopeContexts = defaultContexts.map((defaultContext) => {
       return React__namespace.createContext(defaultContext);
     });
-    return /* @__PURE__ */ __name$s(function useScope(scope) {
+    return /* @__PURE__ */ __name$t(function useScope(scope) {
       const contexts = scope?.[scopeName] || scopeContexts;
       return React__namespace.useMemo(
         () => ({ [`__scope${scopeName}`]: { ...scope, [scopeName]: contexts } }),
@@ -3619,16 +3619,16 @@ function createContextScope(scopeName, createContextScopeDeps = []) {
   createScope.scopeName = scopeName;
   return [createContext3, composeContextScopes(createScope, ...createContextScopeDeps)];
 }
-__name$s(createContextScope, "createContextScope");
+__name$t(createContextScope, "createContextScope");
 function composeContextScopes(...scopes) {
   const baseScope = scopes[0];
   if (scopes.length === 1) return baseScope;
-  const createScope = /* @__PURE__ */ __name$s(() => {
+  const createScope = /* @__PURE__ */ __name$t(() => {
     const scopeHooks = scopes.map((createScope2) => ({
       useScope: createScope2(),
       scopeName: createScope2.scopeName
     }));
-    return /* @__PURE__ */ __name$s(function useComposedScopes(overrideScopes) {
+    return /* @__PURE__ */ __name$t(function useComposedScopes(overrideScopes) {
       const nextScopes = scopeHooks.reduce((nextScopes2, { useScope, scopeName }) => {
         const scopeProps = useScope(overrideScopes);
         const currentScope = scopeProps[`__scope${scopeName}`];
@@ -3640,10 +3640,10 @@ function composeContextScopes(...scopes) {
   createScope.scopeName = baseScope.scopeName;
   return createScope;
 }
-__name$s(composeContextScopes, "composeContextScopes");
+__name$t(composeContextScopes, "composeContextScopes");
 
-var __defProp$r = Object.defineProperty;
-var __name$r = (target, value) => __defProp$r(target, "name", { value, configurable: true });
+var __defProp$s = Object.defineProperty;
+var __name$s = (target, value) => __defProp$s(target, "name", { value, configurable: true });
 // @__NO_SIDE_EFFECTS__
 function createCollection(name) {
   const PROVIDER_NAME = name + "CollectionProvider";
@@ -3652,7 +3652,7 @@ function createCollection(name) {
     PROVIDER_NAME,
     { collectionRef: { current: null }, itemMap: /* @__PURE__ */ new Map() }
   );
-  const CollectionProvider = /* @__PURE__ */ __name$r((props) => {
+  const CollectionProvider = /* @__PURE__ */ __name$s((props) => {
     const { scope, children } = props;
     const ref = React__namespace.useRef(null);
     const itemMap = React__namespace.useRef(/* @__PURE__ */ new Map()).current;
@@ -3701,20 +3701,20 @@ function createCollection(name) {
     }, [context.collectionRef, context.itemMap]);
     return getItems;
   }
-  __name$r(useCollection, "useCollection");
+  __name$s(useCollection, "useCollection");
   return [
     { Provider: CollectionProvider, Slot: CollectionSlot, ItemSlot: CollectionItemSlot },
     useCollection,
     createCollectionScope
   ];
 }
-__name$r(createCollection, "createCollection");
+__name$s(createCollection, "createCollection");
 
 // src/ordered-dictionary.ts
 var __instanciated = /* @__PURE__ */ new WeakMap();
 var OrderedDict = class _OrderedDict extends Map {
   static {
-    __name$r(this, "OrderedDict");
+    __name$s(this, "OrderedDict");
   }
   #keys;
   constructor(entries) {
@@ -4008,18 +4008,18 @@ function at(array, index) {
   const actualIndex = toSafeIndex(array, index);
   return actualIndex === -1 ? void 0 : array[actualIndex];
 }
-__name$r(at, "at");
+__name$s(at, "at");
 function toSafeIndex(array, index) {
   const length = array.length;
   const relativeIndex = toSafeInteger(index);
   const actualIndex = relativeIndex >= 0 ? relativeIndex : length + relativeIndex;
   return actualIndex < 0 || actualIndex >= length ? -1 : actualIndex;
 }
-__name$r(toSafeIndex, "toSafeIndex");
+__name$s(toSafeIndex, "toSafeIndex");
 function toSafeInteger(number) {
   return number !== number || number === 0 ? 0 : Math.trunc(number);
 }
-__name$r(toSafeInteger, "toSafeInteger");
+__name$s(toSafeInteger, "toSafeInteger");
 // @__NO_SIDE_EFFECTS__
 function createCollection2(name) {
   const PROVIDER_NAME = name + "CollectionProvider";
@@ -4031,19 +4031,19 @@ function createCollection2(name) {
       collectionRef: { current: null },
       collectionRefObject: { current: null },
       itemMap: new OrderedDict(),
-      setItemMap: /* @__PURE__ */ __name$r(() => void 0, "setItemMap")
+      setItemMap: /* @__PURE__ */ __name$s(() => void 0, "setItemMap")
     }
   );
-  const CollectionProvider = /* @__PURE__ */ __name$r(({ state, ...props }) => {
+  const CollectionProvider = /* @__PURE__ */ __name$s(({ state, ...props }) => {
     return state ? /* @__PURE__ */ jsxRuntime.jsx(CollectionProviderImpl, { ...props, state }) : /* @__PURE__ */ jsxRuntime.jsx(CollectionInit, { ...props });
   }, "CollectionProvider");
   CollectionProvider.displayName = PROVIDER_NAME;
-  const CollectionInit = /* @__PURE__ */ __name$r((props) => {
+  const CollectionInit = /* @__PURE__ */ __name$s((props) => {
     const state = useInitCollection();
     return /* @__PURE__ */ jsxRuntime.jsx(CollectionProviderImpl, { ...props, state });
   }, "CollectionInit");
   CollectionInit.displayName = PROVIDER_NAME + "Init";
-  const CollectionProviderImpl = /* @__PURE__ */ __name$r((props) => {
+  const CollectionProviderImpl = /* @__PURE__ */ __name$s((props) => {
     const { scope, children, state } = props;
     const ref = React__namespace.useRef(null);
     const [collectionElement, setCollectionElement] = React__namespace.useState(
@@ -4133,12 +4133,12 @@ function createCollection2(name) {
   function useInitCollection() {
     return React__namespace.useState(new OrderedDict());
   }
-  __name$r(useInitCollection, "useInitCollection");
+  __name$s(useInitCollection, "useInitCollection");
   function useCollection(scope) {
     const { itemMap } = useCollectionContext(name + "CollectionConsumer", scope);
     return itemMap;
   }
-  __name$r(useCollection, "useCollection");
+  __name$s(useCollection, "useCollection");
   const functions = {
     createCollectionScope,
     useCollection,
@@ -4149,7 +4149,7 @@ function createCollection2(name) {
     functions
   ];
 }
-__name$r(createCollection2, "createCollection");
+__name$s(createCollection2, "createCollection");
 function shallowEqual(a, b) {
   if (a === b) return true;
   if (typeof a !== "object" || typeof b !== "object") return false;
@@ -4163,15 +4163,15 @@ function shallowEqual(a, b) {
   }
   return true;
 }
-__name$r(shallowEqual, "shallowEqual");
+__name$s(shallowEqual, "shallowEqual");
 function isElementPreceding(a, b) {
   return !!(b.compareDocumentPosition(a) & Node.DOCUMENT_POSITION_PRECEDING);
 }
-__name$r(isElementPreceding, "isElementPreceding");
+__name$s(isElementPreceding, "isElementPreceding");
 function sortByDocumentPosition(a, b) {
   return !a[1].element || !b[1].element ? 0 : isElementPreceding(a[1].element, b[1].element) ? -1 : 1;
 }
-__name$r(sortByDocumentPosition, "sortByDocumentPosition");
+__name$s(sortByDocumentPosition, "sortByDocumentPosition");
 function getChildListObserver(callback) {
   const observer = new MutationObserver((mutationsList) => {
     for (const mutation of mutationsList) {
@@ -4183,36 +4183,36 @@ function getChildListObserver(callback) {
   });
   return observer;
 }
-__name$r(getChildListObserver, "getChildListObserver");
+__name$s(getChildListObserver, "getChildListObserver");
 
-var __defProp$q = Object.defineProperty;
-var __name$q = (target, value) => __defProp$q(target, "name", { value, configurable: true });
+var __defProp$r = Object.defineProperty;
+var __name$r = (target, value) => __defProp$r(target, "name", { value, configurable: true });
 
 // src/primitive.tsx
 var canUseDOM = !!(typeof window !== "undefined" && window.document && window.document.createElement);
 function composeEventHandlers(originalEventHandler, ourEventHandler, { checkForDefaultPrevented = true } = {}) {
-  return /* @__PURE__ */ __name$q(function handleEvent(event) {
+  return /* @__PURE__ */ __name$r(function handleEvent(event) {
     originalEventHandler?.(event);
     if (checkForDefaultPrevented === false || !event || !event.defaultPrevented) {
       return ourEventHandler?.(event);
     }
   }, "handleEvent");
 }
-__name$q(composeEventHandlers, "composeEventHandlers");
+__name$r(composeEventHandlers, "composeEventHandlers");
 function getOwnerWindow(element) {
   if (!canUseDOM) {
     throw new Error("Cannot access window outside of the DOM");
   }
   return element?.ownerDocument?.defaultView ?? window;
 }
-__name$q(getOwnerWindow, "getOwnerWindow");
+__name$r(getOwnerWindow, "getOwnerWindow");
 function getOwnerDocument(element) {
   if (!canUseDOM) {
     throw new Error("Cannot access document outside of the DOM");
   }
   return element?.ownerDocument ?? document;
 }
-__name$q(getOwnerDocument, "getOwnerDocument");
+__name$r(getOwnerDocument, "getOwnerDocument");
 function getActiveElement(node, activeDescendant = false) {
   const { activeElement } = getOwnerDocument(node);
   if (!activeElement?.nodeName) {
@@ -4232,18 +4232,18 @@ function getActiveElement(node, activeDescendant = false) {
   }
   return activeElement;
 }
-__name$q(getActiveElement, "getActiveElement");
+__name$r(getActiveElement, "getActiveElement");
 function isFrame(element) {
   return element.tagName === "IFRAME";
 }
-__name$q(isFrame, "isFrame");
+__name$r(isFrame, "isFrame");
 
 // src/use-layout-effect.tsx
 var useLayoutEffect2 = globalThis?.document ? React__namespace.useLayoutEffect : () => {
 };
 
-var __defProp$p = Object.defineProperty;
-var __name$p = (target, value) => __defProp$p(target, "name", { value, configurable: true });
+var __defProp$q = Object.defineProperty;
+var __name$q = (target, value) => __defProp$q(target, "name", { value, configurable: true });
 var useReactEffectEvent = React__namespace[" useEffectEvent ".trim().toString()];
 var useReactInsertionEffect = React__namespace[" useInsertionEffect ".trim().toString()];
 function useEffectEvent(callback) {
@@ -4264,15 +4264,15 @@ function useEffectEvent(callback) {
   }
   return React__namespace.useMemo(() => ((...args) => ref.current?.(...args)), []);
 }
-__name$p(useEffectEvent, "useEffectEvent");
+__name$q(useEffectEvent, "useEffectEvent");
 
-var __defProp$o = Object.defineProperty;
-var __name$o = (target, value) => __defProp$o(target, "name", { value, configurable: true });
+var __defProp$p = Object.defineProperty;
+var __name$p = (target, value) => __defProp$p(target, "name", { value, configurable: true });
 var useInsertionEffect = React__namespace[" useInsertionEffect ".trim().toString()] || useLayoutEffect2;
 function useControllableState({
   prop,
   defaultProp,
-  onChange = /* @__PURE__ */ __name$o(() => {
+  onChange = /* @__PURE__ */ __name$p(() => {
   }, "onChange"),
   caller
 }) {
@@ -4297,7 +4297,7 @@ function useControllableState({
   );
   return [value, setValue];
 }
-__name$o(useControllableState, "useControllableState");
+__name$p(useControllableState, "useControllableState");
 function useUncontrolledState({
   defaultProp,
   onChange
@@ -4316,11 +4316,11 @@ function useUncontrolledState({
   }, [value, prevValueRef]);
   return [value, setValue, onChangeRef];
 }
-__name$o(useUncontrolledState, "useUncontrolledState");
+__name$p(useUncontrolledState, "useUncontrolledState");
 function isFunction$1(value) {
   return typeof value === "function";
 }
-__name$o(isFunction$1, "isFunction");
+__name$p(isFunction$1, "isFunction");
 var SYNC_STATE = Symbol("RADIX:SYNC_STATE");
 function useControllableStateReducer(reducer, userArgs, initialArg, init) {
   const { prop: controlledState, defaultProp, onChange: onChangeProp, caller } = userArgs;
@@ -4367,20 +4367,20 @@ function useControllableStateReducer(reducer, userArgs, initialArg, init) {
   }, [controlledState, internalState.state, isControlled]);
   return [state, dispatch];
 }
-__name$o(useControllableStateReducer, "useControllableStateReducer");
+__name$p(useControllableStateReducer, "useControllableStateReducer");
 
-var __defProp$n = Object.defineProperty;
-var __name$n = (target, value) => __defProp$n(target, "name", { value, configurable: true });
+var __defProp$o = Object.defineProperty;
+var __name$o = (target, value) => __defProp$o(target, "name", { value, configurable: true });
 function useStateMachine(initialState, machine) {
   return React__namespace.useReducer((state, event) => {
     const nextState = machine[state][event];
     return nextState ?? state;
   }, initialState);
 }
-__name$n(useStateMachine, "useStateMachine");
+__name$o(useStateMachine, "useStateMachine");
 
 // src/presence.tsx
-var Presence = /* @__PURE__ */ __name$n((props) => {
+var Presence = /* @__PURE__ */ __name$o((props) => {
   const { present, children } = props;
   const presence = usePresence(present);
   const child = typeof children === "function" ? children({ present: presence.isPresent }) : React__namespace.Children.only(children);
@@ -4443,7 +4443,7 @@ function usePresence(present) {
     if (node) {
       let timeoutId;
       const ownerWindow = node.ownerDocument.defaultView ?? window;
-      const handleAnimationEnd = /* @__PURE__ */ __name$n((event) => {
+      const handleAnimationEnd = /* @__PURE__ */ __name$o((event) => {
         const currentAnimationName = getAnimationName(stylesRef.current);
         const isCurrentAnimation = currentAnimationName.includes(CSS.escape(event.animationName));
         if (event.target === node && isCurrentAnimation) {
@@ -4459,7 +4459,7 @@ function usePresence(present) {
           }
         }
       }, "handleAnimationEnd");
-      const handleAnimationStart = /* @__PURE__ */ __name$n((event) => {
+      const handleAnimationStart = /* @__PURE__ */ __name$o((event) => {
         if (event.target === node) {
           prevAnimationNameRef.current = getAnimationName(stylesRef.current);
         }
@@ -4491,7 +4491,7 @@ function usePresence(present) {
     }, [])
   };
 }
-__name$n(usePresence, "usePresence");
+__name$o(usePresence, "usePresence");
 function setRef(ref, value) {
   if (typeof ref === "function") {
     return ref(value);
@@ -4499,7 +4499,7 @@ function setRef(ref, value) {
     ref.current = value;
   }
 }
-__name$n(setRef, "setRef");
+__name$o(setRef, "setRef");
 function useStableComposedRefs(...refs) {
   const refsRef = React__namespace.useRef(refs);
   refsRef.current = refs;
@@ -4527,11 +4527,11 @@ function useStableComposedRefs(...refs) {
     }
   }, []);
 }
-__name$n(useStableComposedRefs, "useStableComposedRefs");
+__name$o(useStableComposedRefs, "useStableComposedRefs");
 function getAnimationName(styles) {
   return styles?.animationName || "none";
 }
-__name$n(getAnimationName, "getAnimationName");
+__name$o(getAnimationName, "getAnimationName");
 function getElementRef(element) {
   let getter = Object.getOwnPropertyDescriptor(element.props, "ref")?.get;
   let mayWarn = getter && "isReactWarning" in getter && getter.isReactWarning;
@@ -4545,10 +4545,10 @@ function getElementRef(element) {
   }
   return element.props.ref || element.ref;
 }
-__name$n(getElementRef, "getElementRef");
+__name$o(getElementRef, "getElementRef");
 
-var __defProp$m = Object.defineProperty;
-var __name$m = (target, value) => __defProp$m(target, "name", { value, configurable: true });
+var __defProp$n = Object.defineProperty;
+var __name$n = (target, value) => __defProp$n(target, "name", { value, configurable: true });
 var useReactId = React__namespace[" useId ".trim().toString()] || (() => void 0);
 var count$1 = 0;
 function useId(deterministicId) {
@@ -4558,15 +4558,15 @@ function useId(deterministicId) {
   }, [deterministicId]);
   return deterministicId || (id ? `radix-${id}` : "");
 }
-__name$m(useId, "useId");
+__name$n(useId, "useId");
 
-var __defProp$l = Object.defineProperty;
-var __name$l = (target, value) => __defProp$l(target, "name", { value, configurable: true });
+var __defProp$m = Object.defineProperty;
+var __name$m = (target, value) => __defProp$m(target, "name", { value, configurable: true });
 var COLLAPSIBLE_NAME = "Collapsible";
 var [createCollapsibleContext, createCollapsibleScope] = createContextScope(COLLAPSIBLE_NAME);
 var [CollapsibleProvider, useCollapsibleContext] = createCollapsibleContext(COLLAPSIBLE_NAME);
 var Collapsible = /* @__PURE__ */ React__namespace.forwardRef(
-  /* @__PURE__ */ __name$l(function Collapsible2(props, forwardedRef) {
+  /* @__PURE__ */ __name$m(function Collapsible2(props, forwardedRef) {
     const {
       __scopeCollapsible,
       open: openProp,
@@ -4605,7 +4605,7 @@ var Collapsible = /* @__PURE__ */ React__namespace.forwardRef(
 var TRIGGER_NAME$7 = "CollapsibleTrigger";
 var CollapsibleTrigger = /* @__PURE__ */ React__namespace.forwardRef(
   // blank line to reduce diff noise
-  /* @__PURE__ */ __name$l(function CollapsibleTrigger2(props, forwardedRef) {
+  /* @__PURE__ */ __name$m(function CollapsibleTrigger2(props, forwardedRef) {
     const { __scopeCollapsible, ...triggerProps } = props;
     const context = useCollapsibleContext(TRIGGER_NAME$7, __scopeCollapsible);
     return /* @__PURE__ */ jsxRuntime.jsx(
@@ -4627,13 +4627,13 @@ var CollapsibleTrigger = /* @__PURE__ */ React__namespace.forwardRef(
 var CONTENT_NAME$8 = "CollapsibleContent";
 var CollapsibleContent = /* @__PURE__ */ React__namespace.forwardRef(
   // blank line to reduce diff noise
-  /* @__PURE__ */ __name$l(function CollapsibleContent2(props, forwardedRef) {
+  /* @__PURE__ */ __name$m(function CollapsibleContent2(props, forwardedRef) {
     const { forceMount, ...contentProps } = props;
     const context = useCollapsibleContext(CONTENT_NAME$8, props.__scopeCollapsible);
     return /* @__PURE__ */ jsxRuntime.jsx(Presence, { present: forceMount || context.open, children: ({ present }) => /* @__PURE__ */ jsxRuntime.jsx(CollapsibleContentImpl, { ...contentProps, ref: forwardedRef, present }) });
   }, "CollapsibleContent")
 );
-var CollapsibleContentImpl = /* @__PURE__ */ React__namespace.forwardRef(/* @__PURE__ */ __name$l(function CollapsibleContentImpl2(props, forwardedRef) {
+var CollapsibleContentImpl = /* @__PURE__ */ React__namespace.forwardRef(/* @__PURE__ */ __name$m(function CollapsibleContentImpl2(props, forwardedRef) {
   const { __scopeCollapsible, present, children, ...contentProps } = props;
   const context = useCollapsibleContext(CONTENT_NAME$8, __scopeCollapsible);
   const [isPresent, setIsPresent] = React__namespace.useState(present);
@@ -4690,37 +4690,37 @@ var CollapsibleContentImpl = /* @__PURE__ */ React__namespace.forwardRef(/* @__P
 function getState$4(open) {
   return open ? "open" : "closed";
 }
-__name$l(getState$4, "getState");
-var Root$4 = Collapsible;
+__name$m(getState$4, "getState");
+var Root$5 = Collapsible;
 var Trigger$4 = CollapsibleTrigger;
 var Content$2 = CollapsibleContent;
 
-var __defProp$k = Object.defineProperty;
-var __name$k = (target, value) => __defProp$k(target, "name", { value, configurable: true });
+var __defProp$l = Object.defineProperty;
+var __name$l = (target, value) => __defProp$l(target, "name", { value, configurable: true });
 var DirectionContext = React__namespace.createContext(void 0);
 function useDirection(localDir) {
   const globalDir = React__namespace.useContext(DirectionContext);
   return localDir || globalDir || "ltr";
 }
-__name$k(useDirection, "useDirection");
+__name$l(useDirection, "useDirection");
 
-var __defProp$j = Object.defineProperty;
-var __name$j = (target, value) => __defProp$j(target, "name", { value, configurable: true });
+var __defProp$k = Object.defineProperty;
+var __name$k = (target, value) => __defProp$k(target, "name", { value, configurable: true });
 var ACCORDION_NAME = "Accordion";
 var ACCORDION_KEYS = ["Home", "End", "ArrowDown", "ArrowUp", "ArrowLeft", "ArrowRight"];
-var [Collection$2, useCollection$2, createCollectionScope$2] = createCollection(ACCORDION_NAME);
+var [Collection$3, useCollection$3, createCollectionScope$3] = createCollection(ACCORDION_NAME);
 var [createAccordionContext, createAccordionScope] = createContextScope(ACCORDION_NAME, [
-  createCollectionScope$2,
+  createCollectionScope$3,
   createCollapsibleScope
 ]);
 var useCollapsibleScope = createCollapsibleScope();
 var Accordion$1 = /* @__PURE__ */ React__namespace.forwardRef(
   // blank line to reduce diff noise
-  /* @__PURE__ */ __name$j(function Accordion2(props, forwardedRef) {
+  /* @__PURE__ */ __name$k(function Accordion2(props, forwardedRef) {
     const { type, ...accordionProps } = props;
     const singleProps = accordionProps;
     const multipleProps = accordionProps;
-    return /* @__PURE__ */ jsxRuntime.jsx(Collection$2.Provider, { scope: props.__scopeAccordion, children: type === "multiple" ? /* @__PURE__ */ jsxRuntime.jsx(AccordionImplMultiple, { ...multipleProps, ref: forwardedRef }) : /* @__PURE__ */ jsxRuntime.jsx(AccordionImplSingle, { ...singleProps, ref: forwardedRef }) });
+    return /* @__PURE__ */ jsxRuntime.jsx(Collection$3.Provider, { scope: props.__scopeAccordion, children: type === "multiple" ? /* @__PURE__ */ jsxRuntime.jsx(AccordionImplMultiple, { ...multipleProps, ref: forwardedRef }) : /* @__PURE__ */ jsxRuntime.jsx(AccordionImplSingle, { ...singleProps, ref: forwardedRef }) });
   }, "Accordion")
 );
 var [AccordionValueProvider, useAccordionValueContext] = createAccordionContext(ACCORDION_NAME);
@@ -4730,11 +4730,11 @@ var [AccordionCollapsibleProvider, useAccordionCollapsibleContext] = createAccor
 );
 var AccordionImplSingle = /* @__PURE__ */ React__namespace.forwardRef(
   // blank line to reduce diff noise
-  /* @__PURE__ */ __name$j(function AccordionImplSingle2(props, forwardedRef) {
+  /* @__PURE__ */ __name$k(function AccordionImplSingle2(props, forwardedRef) {
     const {
       value: valueProp,
       defaultValue,
-      onValueChange = /* @__PURE__ */ __name$j(() => {
+      onValueChange = /* @__PURE__ */ __name$k(() => {
       }, "onValueChange"),
       collapsible = false,
       ...accordionSingleProps
@@ -4757,11 +4757,11 @@ var AccordionImplSingle = /* @__PURE__ */ React__namespace.forwardRef(
     );
   }, "AccordionImplSingle")
 );
-var AccordionImplMultiple = /* @__PURE__ */ React__namespace.forwardRef(/* @__PURE__ */ __name$j(function AccordionImplMultiple2(props, forwardedRef) {
+var AccordionImplMultiple = /* @__PURE__ */ React__namespace.forwardRef(/* @__PURE__ */ __name$k(function AccordionImplMultiple2(props, forwardedRef) {
   const {
     value: valueProp,
     defaultValue,
-    onValueChange = /* @__PURE__ */ __name$j(() => {
+    onValueChange = /* @__PURE__ */ __name$k(() => {
     }, "onValueChange"),
     ...accordionMultipleProps
   } = props;
@@ -4792,11 +4792,11 @@ var AccordionImplMultiple = /* @__PURE__ */ React__namespace.forwardRef(/* @__PU
 }, "AccordionImplMultiple"));
 var [AccordionImplProvider, useAccordionContext] = createAccordionContext(ACCORDION_NAME);
 var AccordionImpl = /* @__PURE__ */ React__namespace.forwardRef(
-  /* @__PURE__ */ __name$j(function AccordionImpl2(props, forwardedRef) {
+  /* @__PURE__ */ __name$k(function AccordionImpl2(props, forwardedRef) {
     const { __scopeAccordion, disabled, dir, orientation = "vertical", ...accordionProps } = props;
     const accordionRef = React__namespace.useRef(null);
     const composedRefs = useComposedRefs(accordionRef, forwardedRef);
-    const getItems = useCollection$2(__scopeAccordion);
+    const getItems = useCollection$3(__scopeAccordion);
     const direction = useDirection(dir);
     const isDirectionLTR = direction === "ltr";
     const handleKeyDown = composeEventHandlers(props.onKeyDown, (event) => {
@@ -4810,13 +4810,13 @@ var AccordionImpl = /* @__PURE__ */ React__namespace.forwardRef(
       let nextIndex = triggerIndex;
       const homeIndex = 0;
       const endIndex = triggerCount - 1;
-      const moveNext = /* @__PURE__ */ __name$j(() => {
+      const moveNext = /* @__PURE__ */ __name$k(() => {
         nextIndex = triggerIndex + 1;
         if (nextIndex > endIndex) {
           nextIndex = homeIndex;
         }
       }, "moveNext");
-      const movePrev = /* @__PURE__ */ __name$j(() => {
+      const movePrev = /* @__PURE__ */ __name$k(() => {
         nextIndex = triggerIndex - 1;
         if (nextIndex < homeIndex) {
           nextIndex = endIndex;
@@ -4868,7 +4868,7 @@ var AccordionImpl = /* @__PURE__ */ React__namespace.forwardRef(
         disabled,
         direction: dir,
         orientation,
-        children: /* @__PURE__ */ jsxRuntime.jsx(Collection$2.Slot, { scope: __scopeAccordion, children: /* @__PURE__ */ jsxRuntime.jsx(
+        children: /* @__PURE__ */ jsxRuntime.jsx(Collection$3.Slot, { scope: __scopeAccordion, children: /* @__PURE__ */ jsxRuntime.jsx(
           Primitive.div,
           {
             ...accordionProps,
@@ -4884,7 +4884,7 @@ var AccordionImpl = /* @__PURE__ */ React__namespace.forwardRef(
 var ITEM_NAME$2 = "AccordionItem";
 var [AccordionItemProvider, useAccordionItemContext] = createAccordionContext(ITEM_NAME$2);
 var AccordionItem$1 = /* @__PURE__ */ React__namespace.forwardRef(
-  /* @__PURE__ */ __name$j(function AccordionItem2(props, forwardedRef) {
+  /* @__PURE__ */ __name$k(function AccordionItem2(props, forwardedRef) {
     const { __scopeAccordion, value, ...accordionItemProps } = props;
     const accordionContext = useAccordionContext(ITEM_NAME$2, __scopeAccordion);
     const valueContext = useAccordionValueContext(ITEM_NAME$2, __scopeAccordion);
@@ -4900,7 +4900,7 @@ var AccordionItem$1 = /* @__PURE__ */ React__namespace.forwardRef(
         disabled,
         triggerId,
         children: /* @__PURE__ */ jsxRuntime.jsx(
-          Root$4,
+          Root$5,
           {
             "data-orientation": accordionContext.orientation,
             "data-state": getState$3(open),
@@ -4925,7 +4925,7 @@ var AccordionItem$1 = /* @__PURE__ */ React__namespace.forwardRef(
 var HEADER_NAME = "AccordionHeader";
 var AccordionHeader = /* @__PURE__ */ React__namespace.forwardRef(
   // blank line to reduce diff noise
-  /* @__PURE__ */ __name$j(function AccordionHeader2(props, forwardedRef) {
+  /* @__PURE__ */ __name$k(function AccordionHeader2(props, forwardedRef) {
     const { __scopeAccordion, ...headerProps } = props;
     const accordionContext = useAccordionContext(ACCORDION_NAME, __scopeAccordion);
     const itemContext = useAccordionItemContext(HEADER_NAME, __scopeAccordion);
@@ -4944,13 +4944,13 @@ var AccordionHeader = /* @__PURE__ */ React__namespace.forwardRef(
 var TRIGGER_NAME$6 = "AccordionTrigger";
 var AccordionTrigger$1 = /* @__PURE__ */ React__namespace.forwardRef(
   // blank line to reduce diff noise
-  /* @__PURE__ */ __name$j(function AccordionTrigger2(props, forwardedRef) {
+  /* @__PURE__ */ __name$k(function AccordionTrigger2(props, forwardedRef) {
     const { __scopeAccordion, ...triggerProps } = props;
     const accordionContext = useAccordionContext(ACCORDION_NAME, __scopeAccordion);
     const itemContext = useAccordionItemContext(TRIGGER_NAME$6, __scopeAccordion);
     const collapsibleContext = useAccordionCollapsibleContext(TRIGGER_NAME$6, __scopeAccordion);
     const collapsibleScope = useCollapsibleScope(__scopeAccordion);
-    return /* @__PURE__ */ jsxRuntime.jsx(Collection$2.ItemSlot, { scope: __scopeAccordion, children: /* @__PURE__ */ jsxRuntime.jsx(
+    return /* @__PURE__ */ jsxRuntime.jsx(Collection$3.ItemSlot, { scope: __scopeAccordion, children: /* @__PURE__ */ jsxRuntime.jsx(
       Trigger$4,
       {
         "aria-disabled": itemContext.open && !collapsibleContext.collapsible || void 0,
@@ -4966,7 +4966,7 @@ var AccordionTrigger$1 = /* @__PURE__ */ React__namespace.forwardRef(
 var CONTENT_NAME$7 = "AccordionContent";
 var AccordionContent$1 = /* @__PURE__ */ React__namespace.forwardRef(
   // blank line to reduce diff noise
-  /* @__PURE__ */ __name$j(function AccordionContent2(props, forwardedRef) {
+  /* @__PURE__ */ __name$k(function AccordionContent2(props, forwardedRef) {
     const { __scopeAccordion, ...contentProps } = props;
     const accordionContext = useAccordionContext(ACCORDION_NAME, __scopeAccordion);
     const itemContext = useAccordionItemContext(CONTENT_NAME$7, __scopeAccordion);
@@ -4992,15 +4992,15 @@ var AccordionContent$1 = /* @__PURE__ */ React__namespace.forwardRef(
 function getState$3(open) {
   return open ? "open" : "closed";
 }
-__name$j(getState$3, "getState");
-var Root2$4 = Accordion$1;
+__name$k(getState$3, "getState");
+var Root2$5 = Accordion$1;
 var Item$1 = AccordionItem$1;
 var Header = AccordionHeader;
 var Trigger2 = AccordionTrigger$1;
 var Content2$4 = AccordionContent$1;
 
-var __defProp$i = Object.defineProperty;
-var __name$i = (target, value) => __defProp$i(target, "name", { value, configurable: true });
+var __defProp$j = Object.defineProperty;
+var __name$j = (target, value) => __defProp$j(target, "name", { value, configurable: true });
 function useCallbackRef$1(callback) {
   const callbackRef = React__namespace.useRef(callback);
   React__namespace.useEffect(() => {
@@ -5008,10 +5008,10 @@ function useCallbackRef$1(callback) {
   });
   return React__namespace.useMemo(() => ((...args) => callbackRef.current?.(...args)), []);
 }
-__name$i(useCallbackRef$1, "useCallbackRef");
+__name$j(useCallbackRef$1, "useCallbackRef");
 
-var __defProp$h = Object.defineProperty;
-var __name$h = (target, value) => __defProp$h(target, "name", { value, configurable: true });
+var __defProp$i = Object.defineProperty;
+var __name$i = (target, value) => __defProp$i(target, "name", { value, configurable: true });
 var CONTEXT_UPDATE = "dismissableLayer.update";
 var POINTER_DOWN_OUTSIDE = "dismissableLayer.pointerDownOutside";
 var FOCUS_OUTSIDE = "dismissableLayer.focusOutside";
@@ -5029,7 +5029,7 @@ var DismissableLayerContext = React__namespace.createContext({
 });
 var DismissableLayer = /* @__PURE__ */ React__namespace.forwardRef(
   // blank line to reduce diff noise
-  /* @__PURE__ */ __name$h(function DismissableLayer2(props, forwardedRef) {
+  /* @__PURE__ */ __name$i(function DismissableLayer2(props, forwardedRef) {
     const {
       disableOutsidePointerEvents = false,
       deferPointerDownOutside = false,
@@ -5137,7 +5137,7 @@ var DismissableLayer = /* @__PURE__ */ React__namespace.forwardRef(
       };
     }, [node, context]);
     React__namespace.useEffect(() => {
-      const handleUpdate = /* @__PURE__ */ __name$h(() => force({}), "handleUpdate");
+      const handleUpdate = /* @__PURE__ */ __name$i(() => force({}), "handleUpdate");
       document.addEventListener(CONTEXT_UPDATE, handleUpdate);
       return () => document.removeEventListener(CONTEXT_UPDATE, handleUpdate);
     }, []);
@@ -5160,6 +5160,21 @@ var DismissableLayer = /* @__PURE__ */ React__namespace.forwardRef(
     );
   }, "DismissableLayer")
 );
+var DismissableLayerBranch = /* @__PURE__ */ React__namespace.forwardRef(/* @__PURE__ */ __name$i(function DismissableLayerBranch2(props, forwardedRef) {
+  const context = React__namespace.useContext(DismissableLayerContext);
+  const ref = React__namespace.useRef(null);
+  const composedRefs = useComposedRefs(forwardedRef, ref);
+  React__namespace.useEffect(() => {
+    const node = ref.current;
+    if (node) {
+      context.branches.add(node);
+      return () => {
+        context.branches.delete(node);
+      };
+    }
+  }, [context.branches]);
+  return /* @__PURE__ */ jsxRuntime.jsx(Primitive.div, { ...props, ref: composedRefs });
+}, "DismissableLayerBranch"));
 function useDismissableLayerSurface() {
   const context = React__namespace.useContext(DismissableLayerContext);
   const [node, setNode] = React__namespace.useState(null);
@@ -5174,8 +5189,8 @@ function useDismissableLayerSurface() {
   }, [node, context.dismissableSurfaces]);
   return setNode;
 }
-__name$h(useDismissableLayerSurface, "useDismissableLayerSurface");
-var IS_TRUE = /* @__PURE__ */ __name$h(() => true, "IS_TRUE");
+__name$i(useDismissableLayerSurface, "useDismissableLayerSurface");
+var IS_TRUE = /* @__PURE__ */ __name$i(() => true, "IS_TRUE");
 function usePointerDownOutside(onPointerDownOutside, args) {
   const {
     ownerDocument = globalThis?.document,
@@ -5196,11 +5211,11 @@ function usePointerDownOutside(onPointerDownOutside, args) {
       isDeferredPointerDownOutsideRef.current = false;
       interceptedOutsideInteractionEventsRef.current.clear();
     }
-    __name$h(resetOutsideInteraction, "resetOutsideInteraction");
+    __name$i(resetOutsideInteraction, "resetOutsideInteraction");
     function isOutsideInteractionIntercepted() {
       return Array.from(interceptedOutsideInteractionEventsRef.current.values()).some(Boolean);
     }
-    __name$h(isOutsideInteractionIntercepted, "isOutsideInteractionIntercepted");
+    __name$i(isOutsideInteractionIntercepted, "isOutsideInteractionIntercepted");
     function handleInteractionCapture(event) {
       if (!isPointerDownOutsideRef.current) {
         return;
@@ -5218,21 +5233,21 @@ function usePointerDownOutside(onPointerDownOutside, args) {
         }, 0);
       }
     }
-    __name$h(handleInteractionCapture, "handleInteractionCapture");
+    __name$i(handleInteractionCapture, "handleInteractionCapture");
     function handleInteractionBubble(event) {
       if (isPointerDownOutsideRef.current) {
         interceptedOutsideInteractionEventsRef.current.set(event.type, false);
       }
     }
-    __name$h(handleInteractionBubble, "handleInteractionBubble");
-    const handlePointerDown = /* @__PURE__ */ __name$h((event) => {
+    __name$i(handleInteractionBubble, "handleInteractionBubble");
+    const handlePointerDown = /* @__PURE__ */ __name$i((event) => {
       if (event.target && !isPointerInsideReactTreeRef.current) {
         let handleAndDispatchPointerDownOutsideEvent2 = function() {
           ownerDocument.removeEventListener("click", handleClickRef.current);
           const wasOutsideInteractionIntercepted = isOutsideInteractionIntercepted();
           resetOutsideInteraction();
           if (!wasOutsideInteractionIntercepted) {
-            handleAndDispatchCustomEvent(
+            handleAndDispatchCustomEvent$1(
               POINTER_DOWN_OUTSIDE,
               handlePointerDownOutside,
               eventDetail,
@@ -5240,7 +5255,7 @@ function usePointerDownOutside(onPointerDownOutside, args) {
             );
           }
         };
-        __name$h(handleAndDispatchPointerDownOutsideEvent2, "handleAndDispatchPointerDownOutsideEvent");
+        __name$i(handleAndDispatchPointerDownOutsideEvent2, "handleAndDispatchPointerDownOutsideEvent");
         if (!shouldHandlePointerDownOutside(event.target)) {
           ownerDocument.removeEventListener("click", handleClickRef.current);
           resetOutsideInteraction();
@@ -5298,18 +5313,18 @@ function usePointerDownOutside(onPointerDownOutside, args) {
   ]);
   return {
     // ensures we check React component tree (not just DOM tree)
-    onPointerDownCapture: /* @__PURE__ */ __name$h(() => isPointerInsideReactTreeRef.current = true, "onPointerDownCapture")
+    onPointerDownCapture: /* @__PURE__ */ __name$i(() => isPointerInsideReactTreeRef.current = true, "onPointerDownCapture")
   };
 }
-__name$h(usePointerDownOutside, "usePointerDownOutside");
+__name$i(usePointerDownOutside, "usePointerDownOutside");
 function useFocusOutside(onFocusOutside, ownerDocument = globalThis?.document) {
   const handleFocusOutside = useCallbackRef$1(onFocusOutside);
   const isFocusInsideReactTreeRef = React__namespace.useRef(false);
   React__namespace.useEffect(() => {
-    const handleFocus = /* @__PURE__ */ __name$h((event) => {
+    const handleFocus = /* @__PURE__ */ __name$i((event) => {
       if (event.target && !isFocusInsideReactTreeRef.current) {
         const eventDetail = { originalEvent: event };
-        handleAndDispatchCustomEvent(FOCUS_OUTSIDE, handleFocusOutside, eventDetail, {
+        handleAndDispatchCustomEvent$1(FOCUS_OUTSIDE, handleFocusOutside, eventDetail, {
           discrete: false
         });
       }
@@ -5318,17 +5333,17 @@ function useFocusOutside(onFocusOutside, ownerDocument = globalThis?.document) {
     return () => ownerDocument.removeEventListener("focusin", handleFocus);
   }, [ownerDocument, handleFocusOutside]);
   return {
-    onFocusCapture: /* @__PURE__ */ __name$h(() => isFocusInsideReactTreeRef.current = true, "onFocusCapture"),
-    onBlurCapture: /* @__PURE__ */ __name$h(() => isFocusInsideReactTreeRef.current = false, "onBlurCapture")
+    onFocusCapture: /* @__PURE__ */ __name$i(() => isFocusInsideReactTreeRef.current = true, "onFocusCapture"),
+    onBlurCapture: /* @__PURE__ */ __name$i(() => isFocusInsideReactTreeRef.current = false, "onBlurCapture")
   };
 }
-__name$h(useFocusOutside, "useFocusOutside");
+__name$i(useFocusOutside, "useFocusOutside");
 function dispatchUpdate() {
   const event = new CustomEvent(CONTEXT_UPDATE);
   document.dispatchEvent(event);
 }
-__name$h(dispatchUpdate, "dispatchUpdate");
-function handleAndDispatchCustomEvent(name, handler, detail, { discrete }) {
+__name$i(dispatchUpdate, "dispatchUpdate");
+function handleAndDispatchCustomEvent$1(name, handler, detail, { discrete }) {
   const target = detail.originalEvent.target;
   const event = new CustomEvent(name, { bubbles: false, cancelable: true, detail });
   if (handler) target.addEventListener(name, handler, { once: true });
@@ -5338,15 +5353,17 @@ function handleAndDispatchCustomEvent(name, handler, detail, { discrete }) {
     target.dispatchEvent(event);
   }
 }
-__name$h(handleAndDispatchCustomEvent, "handleAndDispatchCustomEvent");
+__name$i(handleAndDispatchCustomEvent$1, "handleAndDispatchCustomEvent");
+var Root$4 = DismissableLayer;
+var Branch = DismissableLayerBranch;
 
-var __defProp$g = Object.defineProperty;
-var __name$g = (target, value) => __defProp$g(target, "name", { value, configurable: true });
+var __defProp$h = Object.defineProperty;
+var __name$h = (target, value) => __defProp$h(target, "name", { value, configurable: true });
 var AUTOFOCUS_ON_MOUNT = "focusScope.autoFocusOnMount";
 var AUTOFOCUS_ON_UNMOUNT = "focusScope.autoFocusOnUnmount";
 var EVENT_OPTIONS$1 = { bubbles: false, cancelable: true };
 var FocusScope = /* @__PURE__ */ React__namespace.forwardRef(
-  /* @__PURE__ */ __name$g(function FocusScope2(props, forwardedRef) {
+  /* @__PURE__ */ __name$h(function FocusScope2(props, forwardedRef) {
     const {
       loop = false,
       trapped = false,
@@ -5392,9 +5409,9 @@ var FocusScope = /* @__PURE__ */ React__namespace.forwardRef(
             if (mutation.removedNodes.length > 0) focus(container);
           }
         };
-        __name$g(handleFocusIn2, "handleFocusIn");
-        __name$g(handleFocusOut2, "handleFocusOut");
-        __name$g(handleMutations2, "handleMutations");
+        __name$h(handleFocusIn2, "handleFocusIn");
+        __name$h(handleFocusOut2, "handleFocusOut");
+        __name$h(handleMutations2, "handleMutations");
         document.addEventListener("focusin", handleFocusIn2);
         document.addEventListener("focusout", handleFocusOut2);
         const mutationObserver = new MutationObserver(handleMutations2);
@@ -5416,7 +5433,7 @@ var FocusScope = /* @__PURE__ */ React__namespace.forwardRef(
           container.addEventListener(AUTOFOCUS_ON_MOUNT, onMountAutoFocus);
           container.dispatchEvent(mountEvent);
           if (!mountEvent.defaultPrevented) {
-            focusFirst$2(removeLinks(getTabbableCandidates(container)), { select: true });
+            focusFirst$3(removeLinks(getTabbableCandidates$1(container)), { select: true });
             if (document.activeElement === previouslyFocusedElement) {
               focus(container);
             }
@@ -5465,25 +5482,25 @@ var FocusScope = /* @__PURE__ */ React__namespace.forwardRef(
     return /* @__PURE__ */ jsxRuntime.jsx(Primitive.div, { tabIndex: -1, ...scopeProps, ref: composedRefs, onKeyDown: handleKeyDown });
   }, "FocusScope")
 );
-function focusFirst$2(candidates, { select = false } = {}) {
+function focusFirst$3(candidates, { select = false } = {}) {
   const previouslyFocusedElement = document.activeElement;
   for (const candidate of candidates) {
     focus(candidate, { select });
     if (document.activeElement !== previouslyFocusedElement) return;
   }
 }
-__name$g(focusFirst$2, "focusFirst");
+__name$h(focusFirst$3, "focusFirst");
 function getTabbableEdges(container) {
-  const candidates = getTabbableCandidates(container);
+  const candidates = getTabbableCandidates$1(container);
   const first = findVisible(candidates, container);
   const last = findVisible(candidates.reverse(), container);
   return [first, last];
 }
-__name$g(getTabbableEdges, "getTabbableEdges");
-function getTabbableCandidates(container) {
+__name$h(getTabbableEdges, "getTabbableEdges");
+function getTabbableCandidates$1(container) {
   const nodes = [];
   const walker = document.createTreeWalker(container, NodeFilter.SHOW_ELEMENT, {
-    acceptNode: /* @__PURE__ */ __name$g((node) => {
+    acceptNode: /* @__PURE__ */ __name$h((node) => {
       const isHiddenInput = node.tagName === "INPUT" && node.type === "hidden";
       if (node.disabled || node.hidden || isHiddenInput) return NodeFilter.FILTER_SKIP;
       return node.tabIndex >= 0 ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_SKIP;
@@ -5492,7 +5509,7 @@ function getTabbableCandidates(container) {
   while (walker.nextNode()) nodes.push(walker.currentNode);
   return nodes;
 }
-__name$g(getTabbableCandidates, "getTabbableCandidates");
+__name$h(getTabbableCandidates$1, "getTabbableCandidates");
 function findVisible(elements, container) {
   const canUseCheckVisibility = typeof container.checkVisibility === "function" && container.checkVisibility({ checkVisibilityCSS: true });
   for (const element of elements) {
@@ -5502,7 +5519,7 @@ function findVisible(elements, container) {
     }
   }
 }
-__name$g(findVisible, "findVisible");
+__name$h(findVisible, "findVisible");
 function isHidden(node, { upTo }) {
   if (getComputedStyle(node).visibility === "hidden") return true;
   while (node) {
@@ -5512,11 +5529,11 @@ function isHidden(node, { upTo }) {
   }
   return false;
 }
-__name$g(isHidden, "isHidden");
+__name$h(isHidden, "isHidden");
 function isSelectableInput(element) {
   return element instanceof HTMLInputElement && "select" in element;
 }
-__name$g(isSelectableInput, "isSelectableInput");
+__name$h(isSelectableInput, "isSelectableInput");
 function focus(element, { select = false } = {}) {
   if (element && element.focus) {
     const previouslyFocusedElement = document.activeElement;
@@ -5525,7 +5542,7 @@ function focus(element, { select = false } = {}) {
       element.select();
   }
 }
-__name$g(focus, "focus");
+__name$h(focus, "focus");
 var focusScopesStack = createFocusScopesStack();
 function createFocusScopesStack() {
   let stack = [];
@@ -5544,7 +5561,7 @@ function createFocusScopesStack() {
     }
   };
 }
-__name$g(createFocusScopesStack, "createFocusScopesStack");
+__name$h(createFocusScopesStack, "createFocusScopesStack");
 function arrayRemove(array, item) {
   const updatedArray = [...array];
   const index = updatedArray.indexOf(item);
@@ -5553,16 +5570,16 @@ function arrayRemove(array, item) {
   }
   return updatedArray;
 }
-__name$g(arrayRemove, "arrayRemove");
+__name$h(arrayRemove, "arrayRemove");
 function removeLinks(items) {
   return items.filter((item) => item.tagName !== "A");
 }
-__name$g(removeLinks, "removeLinks");
+__name$h(removeLinks, "removeLinks");
 
-var __defProp$f = Object.defineProperty;
-var __name$f = (target, value) => __defProp$f(target, "name", { value, configurable: true });
+var __defProp$g = Object.defineProperty;
+var __name$g = (target, value) => __defProp$g(target, "name", { value, configurable: true });
 var Portal$3 = /* @__PURE__ */ React__namespace.forwardRef(
-  /* @__PURE__ */ __name$f(function Portal2(props, forwardedRef) {
+  /* @__PURE__ */ __name$g(function Portal2(props, forwardedRef) {
     const { container: containerProp, ...portalProps } = props;
     const [mounted, setMounted] = React__namespace.useState(false);
     useLayoutEffect2(() => setMounted(true), []);
@@ -5571,15 +5588,15 @@ var Portal$3 = /* @__PURE__ */ React__namespace.forwardRef(
   }, "Portal")
 );
 
-var __defProp$e = Object.defineProperty;
-var __name$e = (target, value) => __defProp$e(target, "name", { value, configurable: true });
+var __defProp$f = Object.defineProperty;
+var __name$f = (target, value) => __defProp$f(target, "name", { value, configurable: true });
 var count = 0;
 var guards = null;
 function FocusGuards(props) {
   useFocusGuards();
   return props.children;
 }
-__name$e(FocusGuards, "FocusGuards");
+__name$f(FocusGuards, "FocusGuards");
 function useFocusGuards() {
   React__namespace.useEffect(() => {
     if (!guards) {
@@ -5603,7 +5620,7 @@ function useFocusGuards() {
     };
   }, []);
 }
-__name$e(useFocusGuards, "useFocusGuards");
+__name$f(useFocusGuards, "useFocusGuards");
 function createFocusGuard() {
   const element = document.createElement("span");
   element.setAttribute("data-radix-focus-guard", "");
@@ -5614,7 +5631,7 @@ function createFocusGuard() {
   element.style.pointerEvents = "none";
   return element;
 }
-__name$e(createFocusGuard, "createFocusGuard");
+__name$f(createFocusGuard, "createFocusGuard");
 
 /******************************************************************************
 Copyright (c) Microsoft Corporation.
@@ -6510,12 +6527,12 @@ var hideOthers = function (originalTarget, parentNode, markerName) {
     return applyAttributeToOthers(targets, activeParentNode, markerName, 'aria-hidden');
 };
 
-var __defProp$d = Object.defineProperty;
-var __name$d = (target, value) => __defProp$d(target, "name", { value, configurable: true });
+var __defProp$e = Object.defineProperty;
+var __name$e = (target, value) => __defProp$e(target, "name", { value, configurable: true });
 var DIALOG_NAME = "Dialog";
 var [createDialogContext, createDialogScope] = createContextScope(DIALOG_NAME);
 var [DialogProvider, useDialogContext] = createDialogContext(DIALOG_NAME);
-var Dialog$1 = /* @__PURE__ */ __name$d((props) => {
+var Dialog$1 = /* @__PURE__ */ __name$e((props) => {
   const {
     __scopeDialog,
     children,
@@ -6557,7 +6574,7 @@ var Dialog$1 = /* @__PURE__ */ __name$d((props) => {
 }, "Dialog");
 var TRIGGER_NAME$5 = "DialogTrigger";
 var DialogTrigger$1 = /* @__PURE__ */ React__namespace.forwardRef(
-  /* @__PURE__ */ __name$d(function DialogTrigger2(props, forwardedRef) {
+  /* @__PURE__ */ __name$e(function DialogTrigger2(props, forwardedRef) {
     const { __scopeDialog, ...triggerProps } = props;
     const context = useDialogContext(TRIGGER_NAME$5, __scopeDialog);
     const composedTriggerRef = useComposedRefs(forwardedRef, context.triggerRef);
@@ -6580,14 +6597,14 @@ var PORTAL_NAME$3 = "DialogPortal";
 var [PortalProvider$3, usePortalContext$3] = createDialogContext(PORTAL_NAME$3, {
   forceMount: void 0
 });
-var DialogPortal = /* @__PURE__ */ __name$d((props) => {
+var DialogPortal = /* @__PURE__ */ __name$e((props) => {
   const { __scopeDialog, forceMount, children, container } = props;
   const context = useDialogContext(PORTAL_NAME$3, __scopeDialog);
   return /* @__PURE__ */ jsxRuntime.jsx(PortalProvider$3, { scope: __scopeDialog, forceMount, children: React__namespace.Children.map(children, (child) => /* @__PURE__ */ jsxRuntime.jsx(Presence, { present: forceMount || context.open, children: /* @__PURE__ */ jsxRuntime.jsx(Portal$3, { asChild: true, container, children: child }) })) });
 }, "DialogPortal");
 var OVERLAY_NAME = "DialogOverlay";
 var DialogOverlay$1 = /* @__PURE__ */ React__namespace.forwardRef(
-  /* @__PURE__ */ __name$d(function DialogOverlay2(props, forwardedRef) {
+  /* @__PURE__ */ __name$e(function DialogOverlay2(props, forwardedRef) {
     const portalContext = usePortalContext$3(OVERLAY_NAME, props.__scopeDialog);
     const { forceMount = portalContext.forceMount, ...overlayProps } = props;
     const context = useDialogContext(OVERLAY_NAME, props.__scopeDialog);
@@ -6597,7 +6614,7 @@ var DialogOverlay$1 = /* @__PURE__ */ React__namespace.forwardRef(
 var Slot$2 = createSlot("DialogOverlay.RemoveScroll");
 var DialogOverlayImpl = /* @__PURE__ */ React__namespace.forwardRef(
   // blank line to reduce diff noise
-  /* @__PURE__ */ __name$d(function DialogOverlayImpl2(props, forwardedRef) {
+  /* @__PURE__ */ __name$e(function DialogOverlayImpl2(props, forwardedRef) {
     const { __scopeDialog, ...overlayProps } = props;
     const context = useDialogContext(OVERLAY_NAME, __scopeDialog);
     const registerDismissableSurface = useDismissableLayerSurface();
@@ -6619,7 +6636,7 @@ var DialogOverlayImpl = /* @__PURE__ */ React__namespace.forwardRef(
 );
 var CONTENT_NAME$6 = "DialogContent";
 var DialogContent$1 = /* @__PURE__ */ React__namespace.forwardRef(
-  /* @__PURE__ */ __name$d(function DialogContent2(props, forwardedRef) {
+  /* @__PURE__ */ __name$e(function DialogContent2(props, forwardedRef) {
     const portalContext = usePortalContext$3(CONTENT_NAME$6, props.__scopeDialog);
     const { forceMount = portalContext.forceMount, ...contentProps } = props;
     const context = useDialogContext(CONTENT_NAME$6, props.__scopeDialog);
@@ -6628,7 +6645,7 @@ var DialogContent$1 = /* @__PURE__ */ React__namespace.forwardRef(
 );
 var DialogContentModal = /* @__PURE__ */ React__namespace.forwardRef(
   // blank line to reduce diff noise
-  /* @__PURE__ */ __name$d(function DialogContentModal2(props, forwardedRef) {
+  /* @__PURE__ */ __name$e(function DialogContentModal2(props, forwardedRef) {
     const context = useDialogContext(CONTENT_NAME$6, props.__scopeDialog);
     const contentRef = React__namespace.useRef(null);
     const composedRefs = useComposedRefs(forwardedRef, context.contentRef, contentRef);
@@ -6663,7 +6680,7 @@ var DialogContentModal = /* @__PURE__ */ React__namespace.forwardRef(
 );
 var DialogContentNonModal = /* @__PURE__ */ React__namespace.forwardRef(
   // blank line to reduce diff noise
-  /* @__PURE__ */ __name$d(function DialogContentNonModal2(props, forwardedRef) {
+  /* @__PURE__ */ __name$e(function DialogContentNonModal2(props, forwardedRef) {
     const context = useDialogContext(CONTENT_NAME$6, props.__scopeDialog);
     const hasInteractedOutsideRef = React__namespace.useRef(false);
     const hasPointerDownOutsideRef = React__namespace.useRef(false);
@@ -6704,7 +6721,7 @@ var DialogContentNonModal = /* @__PURE__ */ React__namespace.forwardRef(
 );
 var DialogContentImpl = /* @__PURE__ */ React__namespace.forwardRef(
   // blank line to reduce diff noise
-  /* @__PURE__ */ __name$d(function DialogContentImpl2(props, forwardedRef) {
+  /* @__PURE__ */ __name$e(function DialogContentImpl2(props, forwardedRef) {
     const { __scopeDialog, trapFocus, onOpenAutoFocus, onCloseAutoFocus, ...contentProps } = props;
     const context = useDialogContext(CONTENT_NAME$6, __scopeDialog);
     useFocusGuards();
@@ -6736,7 +6753,7 @@ var DialogContentImpl = /* @__PURE__ */ React__namespace.forwardRef(
 );
 var TITLE_NAME = "DialogTitle";
 var DialogTitle$1 = /* @__PURE__ */ React__namespace.forwardRef(
-  /* @__PURE__ */ __name$d(function DialogTitle2(props, forwardedRef) {
+  /* @__PURE__ */ __name$e(function DialogTitle2(props, forwardedRef) {
     const { __scopeDialog, ...titleProps } = props;
     const context = useDialogContext(TITLE_NAME, __scopeDialog);
     const { setTitleCount } = context;
@@ -6750,7 +6767,7 @@ var DialogTitle$1 = /* @__PURE__ */ React__namespace.forwardRef(
 var DESCRIPTION_NAME = "DialogDescription";
 var DialogDescription$1 = /* @__PURE__ */ React__namespace.forwardRef(
   // blank line to reduce diff noise
-  /* @__PURE__ */ __name$d(function DialogDescription2(props, forwardedRef) {
+  /* @__PURE__ */ __name$e(function DialogDescription2(props, forwardedRef) {
     const { __scopeDialog, ...descriptionProps } = props;
     const context = useDialogContext(DESCRIPTION_NAME, __scopeDialog);
     const { setDescriptionCount } = context;
@@ -6761,11 +6778,11 @@ var DialogDescription$1 = /* @__PURE__ */ React__namespace.forwardRef(
     return /* @__PURE__ */ jsxRuntime.jsx(Primitive.p, { id: context.descriptionId, ...descriptionProps, ref: forwardedRef });
   }, "DialogDescription")
 );
-var CLOSE_NAME = "DialogClose";
+var CLOSE_NAME$1 = "DialogClose";
 var DialogClose$1 = /* @__PURE__ */ React__namespace.forwardRef(
-  /* @__PURE__ */ __name$d(function DialogClose2(props, forwardedRef) {
+  /* @__PURE__ */ __name$e(function DialogClose2(props, forwardedRef) {
     const { __scopeDialog, ...closeProps } = props;
-    const context = useDialogContext(CLOSE_NAME, __scopeDialog);
+    const context = useDialogContext(CLOSE_NAME$1, __scopeDialog);
     return /* @__PURE__ */ jsxRuntime.jsx(
       Primitive.button,
       {
@@ -6780,10 +6797,10 @@ var DialogClose$1 = /* @__PURE__ */ React__namespace.forwardRef(
 function getState$2(open) {
   return open ? "open" : "closed";
 }
-__name$d(getState$2, "getState");
+__name$e(getState$2, "getState");
 
-var __defProp$c = Object.defineProperty;
-var __name$c = (target, value) => __defProp$c(target, "name", { value, configurable: true });
+var __defProp$d = Object.defineProperty;
+var __name$d = (target, value) => __defProp$d(target, "name", { value, configurable: true });
 function useSize(element) {
   const [size, setSize] = React__namespace.useState(void 0);
   useLayoutEffect2(() => {
@@ -6818,10 +6835,10 @@ function useSize(element) {
   }, [element]);
   return size;
 }
-__name$c(useSize, "useSize");
+__name$d(useSize, "useSize");
 
-var __defProp$b = Object.defineProperty;
-var __name$b = (target, value) => __defProp$b(target, "name", { value, configurable: true });
+var __defProp$c = Object.defineProperty;
+var __name$c = (target, value) => __defProp$c(target, "name", { value, configurable: true });
 var CHECKBOX_NAME = "Checkbox";
 var [createCheckboxContext, createCheckboxScope] = createContextScope(CHECKBOX_NAME);
 var [CheckboxProviderImpl, useCheckboxContext] = createCheckboxContext(CHECKBOX_NAME);
@@ -6884,10 +6901,10 @@ function CheckboxProvider(props) {
     }
   );
 }
-__name$b(CheckboxProvider, "CheckboxProvider");
+__name$c(CheckboxProvider, "CheckboxProvider");
 var TRIGGER_NAME$4 = "CheckboxTrigger";
 var CheckboxTrigger = /* @__PURE__ */ React__namespace.forwardRef(
-  /* @__PURE__ */ __name$b(function CheckboxTrigger2({ __scopeCheckbox, onKeyDown, onClick, ...checkboxProps }, forwardedRef) {
+  /* @__PURE__ */ __name$c(function CheckboxTrigger2({ __scopeCheckbox, onKeyDown, onClick, ...checkboxProps }, forwardedRef) {
     const {
       control,
       value,
@@ -6906,7 +6923,7 @@ var CheckboxTrigger = /* @__PURE__ */ React__namespace.forwardRef(
     React__namespace.useEffect(() => {
       const form = control?.form;
       if (form) {
-        const reset = /* @__PURE__ */ __name$b(() => setChecked(initialCheckedStateRef.current), "reset");
+        const reset = /* @__PURE__ */ __name$c(() => setChecked(initialCheckedStateRef.current), "reset");
         form.addEventListener("reset", reset);
         return () => form.removeEventListener("reset", reset);
       }
@@ -6941,7 +6958,7 @@ var CheckboxTrigger = /* @__PURE__ */ React__namespace.forwardRef(
 );
 var Checkbox$1 = /* @__PURE__ */ React__namespace.forwardRef(
   // blank line to reduce diff noise
-  /* @__PURE__ */ __name$b(function Checkbox2(props, forwardedRef) {
+  /* @__PURE__ */ __name$c(function Checkbox2(props, forwardedRef) {
     const {
       __scopeCheckbox,
       name,
@@ -6989,7 +7006,7 @@ var Checkbox$1 = /* @__PURE__ */ React__namespace.forwardRef(
 var INDICATOR_NAME = "CheckboxIndicator";
 var CheckboxIndicator = /* @__PURE__ */ React__namespace.forwardRef(
   // blank line to reduce diff noise
-  /* @__PURE__ */ __name$b(function CheckboxIndicator2(props, forwardedRef) {
+  /* @__PURE__ */ __name$c(function CheckboxIndicator2(props, forwardedRef) {
     const { __scopeCheckbox, forceMount, ...indicatorProps } = props;
     const context = useCheckboxContext(INDICATOR_NAME, __scopeCheckbox);
     return /* @__PURE__ */ jsxRuntime.jsx(
@@ -7013,7 +7030,7 @@ var CheckboxIndicator = /* @__PURE__ */ React__namespace.forwardRef(
 var BUBBLE_INPUT_NAME = "CheckboxBubbleInput";
 var CheckboxBubbleInput = /* @__PURE__ */ React__namespace.forwardRef(
   // blank line to reduce diff noise
-  /* @__PURE__ */ __name$b(function CheckboxBubbleInput2({ __scopeCheckbox, onClick, ...props }, forwardedRef) {
+  /* @__PURE__ */ __name$c(function CheckboxBubbleInput2({ __scopeCheckbox, onClick, ...props }, forwardedRef) {
     const {
       control,
       hasConsumerStoppedPropagationRef,
@@ -7095,15 +7112,15 @@ var CheckboxBubbleInput = /* @__PURE__ */ React__namespace.forwardRef(
 function isFunction(value) {
   return typeof value === "function";
 }
-__name$b(isFunction, "isFunction");
+__name$c(isFunction, "isFunction");
 function isIndeterminate$1(checked) {
   return checked === "indeterminate";
 }
-__name$b(isIndeterminate$1, "isIndeterminate");
+__name$c(isIndeterminate$1, "isIndeterminate");
 function getState$1(checked) {
   return isIndeterminate$1(checked) ? "indeterminate" : checked ? "checked" : "unchecked";
 }
-__name$b(getState$1, "getState");
+__name$c(getState$1, "getState");
 
 /**
  * Custom positioning reference element.
@@ -8077,7 +8094,7 @@ function isElement(value) {
   }
   return value instanceof Element || value instanceof getWindow(value).Element;
 }
-function isHTMLElement(value) {
+function isHTMLElement$1(value) {
   if (!hasWindow()) {
     return false;
   }
@@ -8128,7 +8145,7 @@ function isContainingBlock(elementOrCss) {
 }
 function getContainingBlock(element) {
   let currentNode = getParentNode(element);
-  while (isHTMLElement(currentNode) && !isLastTraversableNode(currentNode)) {
+  while (isHTMLElement$1(currentNode) && !isLastTraversableNode(currentNode)) {
     if (isContainingBlock(currentNode)) {
       return currentNode;
     } else if (isTopLayer(currentNode)) {
@@ -8182,7 +8199,7 @@ function getNearestOverflowAncestor(node) {
   if (isLastTraversableNode(parentNode)) {
     return (node.ownerDocument || node).body;
   }
-  if (isHTMLElement(parentNode) && isOverflowElement(parentNode)) {
+  if (isHTMLElement$1(parentNode) && isOverflowElement(parentNode)) {
     return parentNode;
   }
   return getNearestOverflowAncestor(parentNode);
@@ -8215,7 +8232,7 @@ function getCssDimensions(element) {
   // strings for SVG elements, returning NaN. Fallback to `0` in this case.
   let width = parseFloat(css.width) || 0;
   let height = parseFloat(css.height) || 0;
-  const hasOffset = isHTMLElement(element);
+  const hasOffset = isHTMLElement$1(element);
   const offsetWidth = hasOffset ? element.offsetWidth : width;
   const offsetHeight = hasOffset ? element.offsetHeight : height;
   const shouldFallback = round(width) !== offsetWidth || round(height) !== offsetHeight;
@@ -8236,7 +8253,7 @@ function unwrapElement(element) {
 
 function getScale(element) {
   const domElement = unwrapElement(element);
-  if (!isHTMLElement(domElement)) {
+  if (!isHTMLElement$1(domElement)) {
     return createCoords(1);
   }
   const rect = domElement.getBoundingClientRect();
@@ -8372,7 +8389,7 @@ function convertOffsetParentRelativeRectToViewportRelativeRect(_ref) {
   };
   let scale = createCoords(1);
   const offsets = createCoords(0);
-  const isOffsetParentAnElement = isHTMLElement(offsetParent);
+  const isOffsetParentAnElement = isHTMLElement$1(offsetParent);
   if (isOffsetParentAnElement || !isFixed) {
     if (getNodeName(offsetParent) !== 'body' || isOverflowElement(documentElement)) {
       scroll = getNodeScroll(offsetParent);
@@ -8597,7 +8614,7 @@ function getDimensions(element) {
 }
 
 function getRectRelativeToOffsetParent(element, offsetParent, strategy) {
-  const isOffsetParentAnElement = isHTMLElement(offsetParent);
+  const isOffsetParentAnElement = isHTMLElement$1(offsetParent);
   const documentElement = getDocumentElement(offsetParent);
   const isFixed = strategy === 'fixed';
   const rect = getBoundingClientRect(element, true, isFixed, offsetParent);
@@ -8638,7 +8655,7 @@ function isStaticPositioned(element) {
 }
 
 function getTrueOffsetParent(element, polyfill) {
-  if (!isHTMLElement(element) || getComputedStyle$1(element).position === 'fixed') {
+  if (!isHTMLElement$1(element) || getComputedStyle$1(element).position === 'fixed') {
     return null;
   }
   if (polyfill) {
@@ -8663,7 +8680,7 @@ function getOffsetParent(element, polyfill) {
   if (isTopLayer(element)) {
     return win;
   }
-  if (!isHTMLElement(element)) {
+  if (!isHTMLElement$1(element)) {
     let svgOffsetParent = getParentNode(element);
     while (svgOffsetParent && !isLastTraversableNode(svgOffsetParent)) {
       if (isElement(svgOffsetParent) && !isStaticPositioned(svgOffsetParent)) {
@@ -9337,10 +9354,10 @@ const arrow = (options, deps) => {
   };
 };
 
-var __defProp$a = Object.defineProperty;
-var __name$a = (target, value) => __defProp$a(target, "name", { value, configurable: true });
+var __defProp$b = Object.defineProperty;
+var __name$b = (target, value) => __defProp$b(target, "name", { value, configurable: true });
 var Arrow$1 = /* @__PURE__ */ React__namespace.forwardRef(
-  /* @__PURE__ */ __name$a(function Arrow2(props, forwardedRef) {
+  /* @__PURE__ */ __name$b(function Arrow2(props, forwardedRef) {
     const { children, width = 10, height = 5, ...arrowProps } = props;
     return /* @__PURE__ */ jsxRuntime.jsx(
       Primitive.svg,
@@ -9358,12 +9375,12 @@ var Arrow$1 = /* @__PURE__ */ React__namespace.forwardRef(
 );
 var Root$3 = Arrow$1;
 
-var __defProp$9 = Object.defineProperty;
-var __name$9 = (target, value) => __defProp$9(target, "name", { value, configurable: true });
+var __defProp$a = Object.defineProperty;
+var __name$a = (target, value) => __defProp$a(target, "name", { value, configurable: true });
 var POPPER_NAME = "Popper";
 var [createPopperContext, createPopperScope] = createContextScope(POPPER_NAME);
 var [PopperProvider, usePopperContext] = createPopperContext(POPPER_NAME);
-var Popper = /* @__PURE__ */ __name$9((props) => {
+var Popper = /* @__PURE__ */ __name$a((props) => {
   const { __scopePopper, children } = props;
   const [anchor, setAnchor] = React__namespace.useState(null);
   const [placementState, setPlacementState] = React__namespace.useState(void 0);
@@ -9381,7 +9398,7 @@ var Popper = /* @__PURE__ */ __name$9((props) => {
 }, "Popper");
 var ANCHOR_NAME = "PopperAnchor";
 var PopperAnchor = /* @__PURE__ */ React__namespace.forwardRef(
-  /* @__PURE__ */ __name$9(function PopperAnchor2(props, forwardedRef) {
+  /* @__PURE__ */ __name$a(function PopperAnchor2(props, forwardedRef) {
     const { __scopePopper, virtualRef, ...anchorProps } = props;
     const context = usePopperContext(ANCHOR_NAME, __scopePopper);
     const ref = React__namespace.useRef(null);
@@ -9424,7 +9441,7 @@ var PopperAnchor = /* @__PURE__ */ React__namespace.forwardRef(
 var CONTENT_NAME$5 = "PopperContent";
 var [PopperContentProvider, useContentContext] = createPopperContext(CONTENT_NAME$5);
 var PopperContent = /* @__PURE__ */ React__namespace.forwardRef(
-  /* @__PURE__ */ __name$9(function PopperContent2(props, forwardedRef) {
+  /* @__PURE__ */ __name$a(function PopperContent2(props, forwardedRef) {
     const {
       __scopePopper,
       side = "bottom",
@@ -9462,7 +9479,7 @@ var PopperContent = /* @__PURE__ */ React__namespace.forwardRef(
       // default to `fixed` strategy so users don't have to pick and we also avoid focus scroll issues
       strategy: "fixed",
       placement: desiredPlacement,
-      whileElementsMounted: /* @__PURE__ */ __name$9((...args) => {
+      whileElementsMounted: /* @__PURE__ */ __name$a((...args) => {
         const cleanup = autoUpdate(...args, {
           animationFrame: updatePositionStrategy === "always"
         });
@@ -9482,7 +9499,7 @@ var PopperContent = /* @__PURE__ */ React__namespace.forwardRef(
         avoidCollisions && flip({ ...detectOverflowOptions }),
         size({
           ...detectOverflowOptions,
-          apply: /* @__PURE__ */ __name$9(({ elements, rects, availableWidth, availableHeight }) => {
+          apply: /* @__PURE__ */ __name$a(({ elements, rects, availableWidth, availableHeight }) => {
             const { width: anchorWidth, height: anchorHeight } = rects.reference;
             const contentStyle = elements.floating.style;
             contentStyle.setProperty("--radix-popper-available-width", `${availableWidth}px`);
@@ -9592,7 +9609,7 @@ var OPPOSITE_SIDE = {
   left: "right"
 };
 var PopperArrow = /* @__PURE__ */ React__namespace.forwardRef(
-  /* @__PURE__ */ __name$9(function PopperArrow2(props, forwardedRef) {
+  /* @__PURE__ */ __name$a(function PopperArrow2(props, forwardedRef) {
     const { __scopePopper, ...arrowProps } = props;
     const contentContext = useContentContext(ARROW_NAME, __scopePopper);
     const baseSide = OPPOSITE_SIDE[contentContext.placedSide];
@@ -9643,8 +9660,8 @@ var PopperArrow = /* @__PURE__ */ React__namespace.forwardRef(
 function isNotNull(value) {
   return value !== null;
 }
-__name$9(isNotNull, "isNotNull");
-var transformOrigin = /* @__PURE__ */ __name$9((options) => ({
+__name$a(isNotNull, "isNotNull");
+var transformOrigin = /* @__PURE__ */ __name$a((options) => ({
   name: "transformOrigin",
   options,
   fn(data) {
@@ -9679,14 +9696,14 @@ function getSideAndAlignFromPlacement(placement) {
   const [side, align = "center"] = placement.split("-");
   return [side, align];
 }
-__name$9(getSideAndAlignFromPlacement, "getSideAndAlignFromPlacement");
-var Root2$3 = Popper;
+__name$a(getSideAndAlignFromPlacement, "getSideAndAlignFromPlacement");
+var Root2$4 = Popper;
 var Anchor = PopperAnchor;
 var Content$1 = PopperContent;
 var Arrow = PopperArrow;
 
-var __defProp$8 = Object.defineProperty;
-var __name$8 = (target, value) => __defProp$8(target, "name", { value, configurable: true });
+var __defProp$9 = Object.defineProperty;
+var __name$9 = (target, value) => __defProp$9(target, "name", { value, configurable: true });
 var _isHydrated = false;
 function useIsHydrated() {
   const [isHydrated, setIsHydrated] = React__namespace.useState(_isHydrated);
@@ -9698,7 +9715,7 @@ function useIsHydrated() {
   }, []);
   return isHydrated;
 }
-__name$8(useIsHydrated, "useIsHydrated");
+__name$9(useIsHydrated, "useIsHydrated");
 
 // src/use-is-hydrated.tsx
 var useReactSyncExternalStore = React__namespace[" useSyncExternalStore ".trim().toString()];
@@ -9706,7 +9723,7 @@ function subscribe() {
   return () => {
   };
 }
-__name$8(subscribe, "subscribe");
+__name$9(subscribe, "subscribe");
 function useIsHydratedModern() {
   return useReactSyncExternalStore(
     subscribe,
@@ -9714,27 +9731,27 @@ function useIsHydratedModern() {
     () => false
   );
 }
-__name$8(useIsHydratedModern, "useIsHydratedModern");
+__name$9(useIsHydratedModern, "useIsHydratedModern");
 var useIsHydrated2 = typeof useReactSyncExternalStore === "function" ? useIsHydratedModern : useIsHydrated;
 
-var __defProp$7 = Object.defineProperty;
-var __name$7 = (target, value) => __defProp$7(target, "name", { value, configurable: true });
+var __defProp$8 = Object.defineProperty;
+var __name$8 = (target, value) => __defProp$8(target, "name", { value, configurable: true });
 var ENTRY_FOCUS = "rovingFocusGroup.onEntryFocus";
 var EVENT_OPTIONS = { bubbles: false, cancelable: true };
 var GROUP_NAME = "RovingFocusGroup";
-var [Collection$1, useCollection$1, createCollectionScope$1] = createCollection(GROUP_NAME);
+var [Collection$2, useCollection$2, createCollectionScope$2] = createCollection(GROUP_NAME);
 var [createRovingFocusGroupContext, createRovingFocusGroupScope] = createContextScope(
   GROUP_NAME,
-  [createCollectionScope$1]
+  [createCollectionScope$2]
 );
 var [RovingFocusProvider, useRovingFocusContext] = createRovingFocusGroupContext(GROUP_NAME);
 var RovingFocusGroup = /* @__PURE__ */ React__namespace.forwardRef(
   // blank line to reduce diff noise
-  /* @__PURE__ */ __name$7(function RovingFocusGroup2(props, forwardedRef) {
-    return /* @__PURE__ */ jsxRuntime.jsx(Collection$1.Provider, { scope: props.__scopeRovingFocusGroup, children: /* @__PURE__ */ jsxRuntime.jsx(Collection$1.Slot, { scope: props.__scopeRovingFocusGroup, children: /* @__PURE__ */ jsxRuntime.jsx(RovingFocusGroupImpl, { ...props, ref: forwardedRef }) }) });
+  /* @__PURE__ */ __name$8(function RovingFocusGroup2(props, forwardedRef) {
+    return /* @__PURE__ */ jsxRuntime.jsx(Collection$2.Provider, { scope: props.__scopeRovingFocusGroup, children: /* @__PURE__ */ jsxRuntime.jsx(Collection$2.Slot, { scope: props.__scopeRovingFocusGroup, children: /* @__PURE__ */ jsxRuntime.jsx(RovingFocusGroupImpl, { ...props, ref: forwardedRef }) }) });
   }, "RovingFocusGroup")
 );
-var RovingFocusGroupImpl = /* @__PURE__ */ React__namespace.forwardRef(/* @__PURE__ */ __name$7(function RovingFocusGroupImpl2(props, forwardedRef) {
+var RovingFocusGroupImpl = /* @__PURE__ */ React__namespace.forwardRef(/* @__PURE__ */ __name$8(function RovingFocusGroupImpl2(props, forwardedRef) {
   const {
     __scopeRovingFocusGroup,
     orientation,
@@ -9758,7 +9775,7 @@ var RovingFocusGroupImpl = /* @__PURE__ */ React__namespace.forwardRef(/* @__PUR
   });
   const [isTabbingBackOut, setIsTabbingBackOut] = React__namespace.useState(false);
   const handleEntryFocus = useCallbackRef$1(onEntryFocus);
-  const getItems = useCollection$1(__scopeRovingFocusGroup);
+  const getItems = useCollection$2(__scopeRovingFocusGroup);
   const isClickFocusRef = React__namespace.useRef(false);
   const [focusableItemsCount, setFocusableItemsCount] = React__namespace.useState(0);
   React__namespace.useEffect(() => {
@@ -9813,7 +9830,7 @@ var RovingFocusGroupImpl = /* @__PURE__ */ React__namespace.forwardRef(/* @__PUR
                   Boolean
                 );
                 const candidateNodes = candidateItems.map((item) => item.ref.current);
-                focusFirst$1(candidateNodes, preventScrollOnEntryFocus);
+                focusFirst$2(candidateNodes, preventScrollOnEntryFocus);
               }
             }
             isClickFocusRef.current = false;
@@ -9827,7 +9844,7 @@ var RovingFocusGroupImpl = /* @__PURE__ */ React__namespace.forwardRef(/* @__PUR
 var ITEM_NAME$1 = "RovingFocusGroupItem";
 var RovingFocusGroupItem = /* @__PURE__ */ React__namespace.forwardRef(
   // blank line to reduce diff noise
-  /* @__PURE__ */ __name$7(function RovingFocusGroupItem2(props, forwardedRef) {
+  /* @__PURE__ */ __name$8(function RovingFocusGroupItem2(props, forwardedRef) {
     const {
       __scopeRovingFocusGroup,
       focusable = true,
@@ -9840,7 +9857,7 @@ var RovingFocusGroupItem = /* @__PURE__ */ React__namespace.forwardRef(
     const id = tabStopId || autoId;
     const context = useRovingFocusContext(ITEM_NAME$1, __scopeRovingFocusGroup);
     const isCurrentTabStop = context.currentTabStopId === id;
-    const getItems = useCollection$1(__scopeRovingFocusGroup);
+    const getItems = useCollection$2(__scopeRovingFocusGroup);
     const { onFocusableItemAdd, onFocusableItemRemove, currentTabStopId } = context;
     const isHydrated = useIsHydrated2();
     useLayoutEffect2(() => {
@@ -9858,7 +9875,7 @@ var RovingFocusGroupItem = /* @__PURE__ */ React__namespace.forwardRef(
       return () => onFocusableItemRemove();
     }, [isHydrated, focusable, onFocusableItemAdd, onFocusableItemRemove]);
     return /* @__PURE__ */ jsxRuntime.jsx(
-      Collection$1.ItemSlot,
+      Collection$2.ItemSlot,
       {
         scope: __scopeRovingFocusGroup,
         id,
@@ -9894,7 +9911,7 @@ var RovingFocusGroupItem = /* @__PURE__ */ React__namespace.forwardRef(
                   const currentIndex = candidateNodes.indexOf(event.currentTarget);
                   candidateNodes = context.loop ? wrapArray$1(candidateNodes, currentIndex + 1) : candidateNodes.slice(currentIndex + 1);
                 }
-                setTimeout(() => focusFirst$1(candidateNodes));
+                setTimeout(() => focusFirst$2(candidateNodes));
               }
             }),
             children: typeof children === "function" ? children({ isCurrentTabStop, hasTabStop: currentTabStopId != null }) : children
@@ -9918,15 +9935,15 @@ function getDirectionAwareKey(key, dir) {
   if (dir !== "rtl") return key;
   return key === "ArrowLeft" ? "ArrowRight" : key === "ArrowRight" ? "ArrowLeft" : key;
 }
-__name$7(getDirectionAwareKey, "getDirectionAwareKey");
+__name$8(getDirectionAwareKey, "getDirectionAwareKey");
 function getFocusIntent(event, orientation, dir) {
   const key = getDirectionAwareKey(event.key, dir);
   if (orientation === "vertical" && ["ArrowLeft", "ArrowRight"].includes(key)) return void 0;
   if (orientation === "horizontal" && ["ArrowUp", "ArrowDown"].includes(key)) return void 0;
   return MAP_KEY_TO_FOCUS_INTENT[key];
 }
-__name$7(getFocusIntent, "getFocusIntent");
-function focusFirst$1(candidates, preventScroll = false) {
+__name$8(getFocusIntent, "getFocusIntent");
+function focusFirst$2(candidates, preventScroll = false) {
   const PREVIOUSLY_FOCUSED_ELEMENT = document.activeElement;
   for (const candidate of candidates) {
     if (candidate === PREVIOUSLY_FOCUSED_ELEMENT) return;
@@ -9934,24 +9951,24 @@ function focusFirst$1(candidates, preventScroll = false) {
     if (document.activeElement !== PREVIOUSLY_FOCUSED_ELEMENT) return;
   }
 }
-__name$7(focusFirst$1, "focusFirst");
+__name$8(focusFirst$2, "focusFirst");
 function wrapArray$1(array, startIndex) {
   return array.map((_, index) => array[(startIndex + index) % array.length]);
 }
-__name$7(wrapArray$1, "wrapArray");
+__name$8(wrapArray$1, "wrapArray");
 var Root$2 = RovingFocusGroup;
 var Item = RovingFocusGroupItem;
 
-var __defProp$6 = Object.defineProperty;
-var __name$6 = (target, value) => __defProp$6(target, "name", { value, configurable: true });
+var __defProp$7 = Object.defineProperty;
+var __name$7 = (target, value) => __defProp$7(target, "name", { value, configurable: true });
 var SELECTION_KEYS = ["Enter", " "];
 var FIRST_KEYS = ["ArrowDown", "PageUp", "Home"];
 var LAST_KEYS = ["ArrowUp", "PageDown", "End"];
 var FIRST_LAST_KEYS = [...FIRST_KEYS, ...LAST_KEYS];
 var MENU_NAME = "Menu";
-var [Collection, useCollection, createCollectionScope] = createCollection(MENU_NAME);
+var [Collection$1, useCollection$1, createCollectionScope$1] = createCollection(MENU_NAME);
 var [createMenuContext, createMenuScope] = createContextScope(MENU_NAME, [
-  createCollectionScope,
+  createCollectionScope$1,
   createPopperScope,
   createRovingFocusGroupScope
 ]);
@@ -9959,7 +9976,7 @@ var usePopperScope$2 = createPopperScope();
 var useRovingFocusGroupScope$1 = createRovingFocusGroupScope();
 var [MenuProvider, useMenuContext] = createMenuContext(MENU_NAME);
 var [MenuRootProvider, useMenuRootContext] = createMenuContext(MENU_NAME);
-var Menu = /* @__PURE__ */ __name$6((props) => {
+var Menu = /* @__PURE__ */ __name$7((props) => {
   const { __scopeMenu, open = false, children, dir, onOpenChange, modal = true } = props;
   const popperScope = usePopperScope$2(__scopeMenu);
   const [content, setContent] = React__namespace.useState(null);
@@ -9967,12 +9984,12 @@ var Menu = /* @__PURE__ */ __name$6((props) => {
   const handleOpenChange = useCallbackRef$1(onOpenChange);
   const direction = useDirection(dir);
   React__namespace.useEffect(() => {
-    const handleKeyDown = /* @__PURE__ */ __name$6(() => {
+    const handleKeyDown = /* @__PURE__ */ __name$7(() => {
       isUsingKeyboardRef.current = true;
       document.addEventListener("pointerdown", handlePointer, { capture: true, once: true });
       document.addEventListener("pointermove", handlePointer, { capture: true, once: true });
     }, "handleKeyDown");
-    const handlePointer = /* @__PURE__ */ __name$6(() => isUsingKeyboardRef.current = false, "handlePointer");
+    const handlePointer = /* @__PURE__ */ __name$7(() => isUsingKeyboardRef.current = false, "handlePointer");
     document.addEventListener("keydown", handleKeyDown, { capture: true });
     return () => {
       document.removeEventListener("keydown", handleKeyDown, { capture: true });
@@ -9984,11 +10001,11 @@ var Menu = /* @__PURE__ */ __name$6((props) => {
     if (!open) {
       return;
     }
-    const handleBlur = /* @__PURE__ */ __name$6(() => handleOpenChange(false), "handleBlur");
+    const handleBlur = /* @__PURE__ */ __name$7(() => handleOpenChange(false), "handleBlur");
     window.addEventListener("blur", handleBlur);
     return () => window.removeEventListener("blur", handleBlur);
   }, [open, handleOpenChange]);
-  return /* @__PURE__ */ jsxRuntime.jsx(Root2$3, { ...popperScope, children: /* @__PURE__ */ jsxRuntime.jsx(
+  return /* @__PURE__ */ jsxRuntime.jsx(Root2$4, { ...popperScope, children: /* @__PURE__ */ jsxRuntime.jsx(
     MenuProvider,
     {
       scope: __scopeMenu,
@@ -10011,7 +10028,7 @@ var Menu = /* @__PURE__ */ __name$6((props) => {
   ) });
 }, "Menu");
 var MenuAnchor = /* @__PURE__ */ React__namespace.forwardRef(
-  /* @__PURE__ */ __name$6(function MenuAnchor2(props, forwardedRef) {
+  /* @__PURE__ */ __name$7(function MenuAnchor2(props, forwardedRef) {
     const { __scopeMenu, ...anchorProps } = props;
     const popperScope = usePopperScope$2(__scopeMenu);
     return /* @__PURE__ */ jsxRuntime.jsx(Anchor, { ...popperScope, ...anchorProps, ref: forwardedRef });
@@ -10021,7 +10038,7 @@ var PORTAL_NAME$2 = "MenuPortal";
 var [PortalProvider$2, usePortalContext$2] = createMenuContext(PORTAL_NAME$2, {
   forceMount: void 0
 });
-var MenuPortal = /* @__PURE__ */ __name$6((props) => {
+var MenuPortal = /* @__PURE__ */ __name$7((props) => {
   const { __scopeMenu, forceMount, children, container } = props;
   const context = useMenuContext(PORTAL_NAME$2, __scopeMenu);
   return /* @__PURE__ */ jsxRuntime.jsx(PortalProvider$2, { scope: __scopeMenu, forceMount, children: /* @__PURE__ */ jsxRuntime.jsx(Presence, { present: forceMount || context.open, children: /* @__PURE__ */ jsxRuntime.jsx(Portal$3, { asChild: true, container, children }) }) });
@@ -10029,17 +10046,17 @@ var MenuPortal = /* @__PURE__ */ __name$6((props) => {
 var CONTENT_NAME$4 = "MenuContent";
 var [MenuContentProvider, useMenuContentContext] = createMenuContext(CONTENT_NAME$4);
 var MenuContent = /* @__PURE__ */ React__namespace.forwardRef(
-  /* @__PURE__ */ __name$6(function MenuContent2(props, forwardedRef) {
+  /* @__PURE__ */ __name$7(function MenuContent2(props, forwardedRef) {
     const portalContext = usePortalContext$2(CONTENT_NAME$4, props.__scopeMenu);
     const { forceMount = portalContext.forceMount, ...contentProps } = props;
     const context = useMenuContext(CONTENT_NAME$4, props.__scopeMenu);
     const rootContext = useMenuRootContext(CONTENT_NAME$4, props.__scopeMenu);
-    return /* @__PURE__ */ jsxRuntime.jsx(Collection.Provider, { scope: props.__scopeMenu, children: /* @__PURE__ */ jsxRuntime.jsx(Presence, { present: forceMount || context.open, children: /* @__PURE__ */ jsxRuntime.jsx(Collection.Slot, { scope: props.__scopeMenu, children: rootContext.modal ? /* @__PURE__ */ jsxRuntime.jsx(MenuRootContentModal, { ...contentProps, ref: forwardedRef }) : /* @__PURE__ */ jsxRuntime.jsx(MenuRootContentNonModal, { ...contentProps, ref: forwardedRef }) }) }) });
+    return /* @__PURE__ */ jsxRuntime.jsx(Collection$1.Provider, { scope: props.__scopeMenu, children: /* @__PURE__ */ jsxRuntime.jsx(Presence, { present: forceMount || context.open, children: /* @__PURE__ */ jsxRuntime.jsx(Collection$1.Slot, { scope: props.__scopeMenu, children: rootContext.modal ? /* @__PURE__ */ jsxRuntime.jsx(MenuRootContentModal, { ...contentProps, ref: forwardedRef }) : /* @__PURE__ */ jsxRuntime.jsx(MenuRootContentNonModal, { ...contentProps, ref: forwardedRef }) }) }) });
   }, "MenuContent")
 );
 var MenuRootContentModal = /* @__PURE__ */ React__namespace.forwardRef(
   // blank line to reduce diff noise
-  /* @__PURE__ */ __name$6(function MenuRootContentModal2(props, forwardedRef) {
+  /* @__PURE__ */ __name$7(function MenuRootContentModal2(props, forwardedRef) {
     const context = useMenuContext(CONTENT_NAME$4, props.__scopeMenu);
     const ref = React__namespace.useRef(null);
     const composedRefs = useComposedRefs(forwardedRef, ref);
@@ -10065,7 +10082,7 @@ var MenuRootContentModal = /* @__PURE__ */ React__namespace.forwardRef(
     );
   }, "MenuRootContentModal")
 );
-var MenuRootContentNonModal = /* @__PURE__ */ React__namespace.forwardRef(/* @__PURE__ */ __name$6(function MenuRootContentNonModal2(props, forwardedRef) {
+var MenuRootContentNonModal = /* @__PURE__ */ React__namespace.forwardRef(/* @__PURE__ */ __name$7(function MenuRootContentNonModal2(props, forwardedRef) {
   const context = useMenuContext(CONTENT_NAME$4, props.__scopeMenu);
   return /* @__PURE__ */ jsxRuntime.jsx(
     MenuContentImpl,
@@ -10082,7 +10099,7 @@ var MenuRootContentNonModal = /* @__PURE__ */ React__namespace.forwardRef(/* @__
 var Slot$1 = createSlot("MenuContent.ScrollLock");
 var MenuContentImpl = /* @__PURE__ */ React__namespace.forwardRef(
   // blank line to reduce diff noise
-  /* @__PURE__ */ __name$6(function MenuContentImpl2(props, forwardedRef) {
+  /* @__PURE__ */ __name$7(function MenuContentImpl2(props, forwardedRef) {
     const {
       __scopeMenu,
       loop = false,
@@ -10103,7 +10120,7 @@ var MenuContentImpl = /* @__PURE__ */ React__namespace.forwardRef(
     const rootContext = useMenuRootContext(CONTENT_NAME$4, __scopeMenu);
     const popperScope = usePopperScope$2(__scopeMenu);
     const rovingFocusGroupScope = useRovingFocusGroupScope$1(__scopeMenu);
-    const getItems = useCollection(__scopeMenu);
+    const getItems = useCollection$1(__scopeMenu);
     const [currentItemId, setCurrentItemId] = React__namespace.useState(null);
     const contentRef = React__namespace.useRef(null);
     const composedRefs = useComposedRefs(forwardedRef, contentRef, context.onContentChange);
@@ -10115,7 +10132,7 @@ var MenuContentImpl = /* @__PURE__ */ React__namespace.forwardRef(
     const lastPointerXRef = React__namespace.useRef(0);
     const ScrollLockWrapper = disableOutsideScroll ? ReactRemoveScroll : React__namespace.Fragment;
     const scrollLockWrapperProps = disableOutsideScroll ? { as: Slot$1, allowPinchZoom: true } : void 0;
-    const handleTypeaheadSearch = /* @__PURE__ */ __name$6((key) => {
+    const handleTypeaheadSearch = /* @__PURE__ */ __name$7((key) => {
       const search = searchRef.current + key;
       const items = getItems().filter((item) => !item.disabled);
       const currentItem = document.activeElement;
@@ -10123,7 +10140,7 @@ var MenuContentImpl = /* @__PURE__ */ React__namespace.forwardRef(
       const values = items.map((item) => item.textValue);
       const nextMatch = getNextMatch(values, search, currentMatch);
       const newItem = items.find((item) => item.textValue === nextMatch)?.ref.current;
-      (/* @__PURE__ */ __name$6((function updateSearch(value) {
+      (/* @__PURE__ */ __name$7((function updateSearch(value) {
         searchRef.current = value;
         window.clearTimeout(timerRef.current);
         if (value !== "") timerRef.current = window.setTimeout(() => updateSearch(""), 1e3);
@@ -10231,7 +10248,7 @@ var MenuContentImpl = /* @__PURE__ */ React__namespace.forwardRef(
                           const items = getItems().filter((item) => !item.disabled);
                           const candidateNodes = items.map((item) => item.ref.current);
                           if (LAST_KEYS.includes(event.key)) candidateNodes.reverse();
-                          focusFirst(candidateNodes);
+                          focusFirst$1(candidateNodes);
                         }),
                         onBlur: composeEventHandlers(props.onBlur, (event) => {
                           if (!event.currentTarget.contains(event.target)) {
@@ -10267,14 +10284,14 @@ var ITEM_NAME = "MenuItem";
 var ITEM_SELECT = "menu.itemSelect";
 var MenuItem = /* @__PURE__ */ React__namespace.forwardRef(
   // blank line to reduce diff noise
-  /* @__PURE__ */ __name$6(function MenuItem2(props, forwardedRef) {
+  /* @__PURE__ */ __name$7(function MenuItem2(props, forwardedRef) {
     const { disabled = false, onSelect, ...itemProps } = props;
     const ref = React__namespace.useRef(null);
     const rootContext = useMenuRootContext(ITEM_NAME, props.__scopeMenu);
     const contentContext = useMenuContentContext(ITEM_NAME, props.__scopeMenu);
     const composedRefs = useComposedRefs(forwardedRef, ref);
     const isPointerDownRef = React__namespace.useRef(false);
-    const handleSelect = /* @__PURE__ */ __name$6(() => {
+    const handleSelect = /* @__PURE__ */ __name$7(() => {
       const menuItem = ref.current;
       if (!disabled && menuItem) {
         const itemSelectEvent = new CustomEvent(ITEM_SELECT, { bubbles: true, cancelable: true });
@@ -10319,7 +10336,7 @@ var MenuItem = /* @__PURE__ */ React__namespace.forwardRef(
   }, "MenuItem")
 );
 var MenuItemImpl = /* @__PURE__ */ React__namespace.forwardRef(
-  /* @__PURE__ */ __name$6(function MenuItemImpl2(props, forwardedRef) {
+  /* @__PURE__ */ __name$7(function MenuItemImpl2(props, forwardedRef) {
     const { __scopeMenu, disabled = false, textValue, ...itemProps } = props;
     const contentContext = useMenuContentContext(ITEM_NAME, __scopeMenu);
     const rovingFocusGroupScope = useRovingFocusGroupScope$1(__scopeMenu);
@@ -10334,7 +10351,7 @@ var MenuItemImpl = /* @__PURE__ */ React__namespace.forwardRef(
       }
     }, [itemProps.children]);
     return /* @__PURE__ */ jsxRuntime.jsx(
-      Collection.ItemSlot,
+      Collection$1.ItemSlot,
       {
         scope: __scopeMenu,
         disabled,
@@ -10377,7 +10394,7 @@ var MenuItemImpl = /* @__PURE__ */ React__namespace.forwardRef(
 var RADIO_GROUP_NAME = "MenuRadioGroup";
 var [RadioGroupProvider, useRadioGroupContext] = createMenuContext(
   RADIO_GROUP_NAME,
-  { value: void 0, onValueChange: /* @__PURE__ */ __name$6(() => {
+  { value: void 0, onValueChange: /* @__PURE__ */ __name$7(() => {
   }, "onValueChange") }
 );
 var ITEM_INDICATOR_NAME = "MenuItemIndicator";
@@ -10390,16 +10407,16 @@ var [MenuSubProvider, useMenuSubContext] = createMenuContext(SUB_NAME);
 function getOpenState(open) {
   return open ? "open" : "closed";
 }
-__name$6(getOpenState, "getOpenState");
+__name$7(getOpenState, "getOpenState");
 function isIndeterminate(checked) {
   return checked === "indeterminate";
 }
-__name$6(isIndeterminate, "isIndeterminate");
+__name$7(isIndeterminate, "isIndeterminate");
 function getCheckedState(checked) {
   return isIndeterminate(checked) ? "indeterminate" : checked ? "checked" : "unchecked";
 }
-__name$6(getCheckedState, "getCheckedState");
-function focusFirst(candidates) {
+__name$7(getCheckedState, "getCheckedState");
+function focusFirst$1(candidates) {
   const PREVIOUSLY_FOCUSED_ELEMENT = document.activeElement;
   for (const candidate of candidates) {
     if (candidate === PREVIOUSLY_FOCUSED_ELEMENT) return;
@@ -10407,11 +10424,11 @@ function focusFirst(candidates) {
     if (document.activeElement !== PREVIOUSLY_FOCUSED_ELEMENT) return;
   }
 }
-__name$6(focusFirst, "focusFirst");
+__name$7(focusFirst$1, "focusFirst");
 function wrapArray(array, startIndex) {
   return array.map((_, index) => array[(startIndex + index) % array.length]);
 }
-__name$6(wrapArray, "wrapArray");
+__name$7(wrapArray, "wrapArray");
 function getNextMatch(values, search, currentMatch) {
   const isRepeated = search.length > 1 && Array.from(search).every((char) => char === search[0]);
   const normalizedSearch = isRepeated ? search[0] : search;
@@ -10424,7 +10441,7 @@ function getNextMatch(values, search, currentMatch) {
   );
   return nextMatch !== currentMatch ? nextMatch : void 0;
 }
-__name$6(getNextMatch, "getNextMatch");
+__name$7(getNextMatch, "getNextMatch");
 function isPointInPolygon$1(point, polygon) {
   const { x, y } = point;
   let inside = false;
@@ -10440,25 +10457,25 @@ function isPointInPolygon$1(point, polygon) {
   }
   return inside;
 }
-__name$6(isPointInPolygon$1, "isPointInPolygon");
+__name$7(isPointInPolygon$1, "isPointInPolygon");
 function isPointerInGraceArea(event, area) {
   if (!area) return false;
   const cursorPos = { x: event.clientX, y: event.clientY };
   return isPointInPolygon$1(cursorPos, area);
 }
-__name$6(isPointerInGraceArea, "isPointerInGraceArea");
+__name$7(isPointerInGraceArea, "isPointerInGraceArea");
 function whenMouse(handler) {
   return (event) => event.pointerType === "mouse" ? handler(event) : void 0;
 }
-__name$6(whenMouse, "whenMouse");
+__name$7(whenMouse, "whenMouse");
 var Root3$1 = Menu;
 var Anchor2 = MenuAnchor;
 var Portal$2 = MenuPortal;
 var Content2$3 = MenuContent;
 var Item2$1 = MenuItem;
 
-var __defProp$5 = Object.defineProperty;
-var __name$5 = (target, value) => __defProp$5(target, "name", { value, configurable: true });
+var __defProp$6 = Object.defineProperty;
+var __name$6 = (target, value) => __defProp$6(target, "name", { value, configurable: true });
 var DROPDOWN_MENU_NAME = "DropdownMenu";
 var [createDropdownMenuContext, createDropdownMenuScope] = createContextScope(
   DROPDOWN_MENU_NAME,
@@ -10466,7 +10483,7 @@ var [createDropdownMenuContext, createDropdownMenuScope] = createContextScope(
 );
 var useMenuScope = createMenuScope();
 var [DropdownMenuProvider, useDropdownMenuContext] = createDropdownMenuContext(DROPDOWN_MENU_NAME);
-var DropdownMenu = /* @__PURE__ */ __name$5((props) => {
+var DropdownMenu = /* @__PURE__ */ __name$6((props) => {
   const {
     __scopeDropdownMenu,
     children,
@@ -10502,7 +10519,7 @@ var DropdownMenu = /* @__PURE__ */ __name$5((props) => {
 var TRIGGER_NAME$3 = "DropdownMenuTrigger";
 var DropdownMenuTrigger = /* @__PURE__ */ React__namespace.forwardRef(
   // blank line to reduce diff noise
-  /* @__PURE__ */ __name$5(function DropdownMenuTrigger2(props, forwardedRef) {
+  /* @__PURE__ */ __name$6(function DropdownMenuTrigger2(props, forwardedRef) {
     const { __scopeDropdownMenu, disabled = false, ...triggerProps } = props;
     const context = useDropdownMenuContext(TRIGGER_NAME$3, __scopeDropdownMenu);
     const menuScope = useMenuScope(__scopeDropdownMenu);
@@ -10536,7 +10553,7 @@ var DropdownMenuTrigger = /* @__PURE__ */ React__namespace.forwardRef(
     ) });
   }, "DropdownMenuTrigger")
 );
-var DropdownMenuPortal = /* @__PURE__ */ __name$5((props) => {
+var DropdownMenuPortal = /* @__PURE__ */ __name$6((props) => {
   const { __scopeDropdownMenu, ...portalProps } = props;
   const menuScope = useMenuScope(__scopeDropdownMenu);
   return /* @__PURE__ */ jsxRuntime.jsx(Portal$2, { ...menuScope, ...portalProps });
@@ -10544,7 +10561,7 @@ var DropdownMenuPortal = /* @__PURE__ */ __name$5((props) => {
 var CONTENT_NAME$3 = "DropdownMenuContent";
 var DropdownMenuContent = /* @__PURE__ */ React__namespace.forwardRef(
   // blank line to reduce diff noise
-  /* @__PURE__ */ __name$5(function DropdownMenuContent2(props, forwardedRef) {
+  /* @__PURE__ */ __name$6(function DropdownMenuContent2(props, forwardedRef) {
     const { __scopeDropdownMenu, ...contentProps } = props;
     const context = useDropdownMenuContext(CONTENT_NAME$3, __scopeDropdownMenu);
     const menuScope = useMenuScope(__scopeDropdownMenu);
@@ -10585,22 +10602,22 @@ var DropdownMenuContent = /* @__PURE__ */ React__namespace.forwardRef(
 );
 var DropdownMenuItem = /* @__PURE__ */ React__namespace.forwardRef(
   // blank line to reduce diff noise
-  /* @__PURE__ */ __name$5(function DropdownMenuItem2(props, forwardedRef) {
+  /* @__PURE__ */ __name$6(function DropdownMenuItem2(props, forwardedRef) {
     const { __scopeDropdownMenu, ...itemProps } = props;
     const menuScope = useMenuScope(__scopeDropdownMenu);
     return /* @__PURE__ */ jsxRuntime.jsx(Item2$1, { ...menuScope, ...itemProps, ref: forwardedRef });
   }, "DropdownMenuItem")
 );
-var Root2$2 = DropdownMenu;
+var Root2$3 = DropdownMenu;
 var Trigger$3 = DropdownMenuTrigger;
 var Portal2 = DropdownMenuPortal;
 var Content2$2 = DropdownMenuContent;
 var Item2 = DropdownMenuItem;
 
-var __defProp$4 = Object.defineProperty;
-var __name$4 = (target, value) => __defProp$4(target, "name", { value, configurable: true });
+var __defProp$5 = Object.defineProperty;
+var __name$5 = (target, value) => __defProp$5(target, "name", { value, configurable: true });
 var Label$1 = /* @__PURE__ */ React__namespace.forwardRef(
-  /* @__PURE__ */ __name$4(function Label2(props, forwardedRef) {
+  /* @__PURE__ */ __name$5(function Label2(props, forwardedRef) {
     return /* @__PURE__ */ jsxRuntime.jsx(
       Primitive.label,
       {
@@ -10618,15 +10635,15 @@ var Label$1 = /* @__PURE__ */ React__namespace.forwardRef(
 );
 var Root$1 = Label$1;
 
-var __defProp$3 = Object.defineProperty;
-var __name$3 = (target, value) => __defProp$3(target, "name", { value, configurable: true });
+var __defProp$4 = Object.defineProperty;
+var __name$4 = (target, value) => __defProp$4(target, "name", { value, configurable: true });
 var POPOVER_NAME = "Popover";
 var [createPopoverContext, createPopoverScope] = createContextScope(POPOVER_NAME, [
   createPopperScope
 ]);
 var usePopperScope$1 = createPopperScope();
 var [PopoverProvider, usePopoverContext] = createPopoverContext(POPOVER_NAME);
-var Popover = /* @__PURE__ */ __name$3((props) => {
+var Popover = /* @__PURE__ */ __name$4((props) => {
   const {
     __scopePopover,
     children,
@@ -10644,7 +10661,7 @@ var Popover = /* @__PURE__ */ __name$3((props) => {
     onChange: onOpenChange,
     caller: POPOVER_NAME
   });
-  return /* @__PURE__ */ jsxRuntime.jsx(Root2$3, { ...popperScope, children: /* @__PURE__ */ jsxRuntime.jsx(
+  return /* @__PURE__ */ jsxRuntime.jsx(Root2$4, { ...popperScope, children: /* @__PURE__ */ jsxRuntime.jsx(
     PopoverProvider,
     {
       scope: __scopePopover,
@@ -10663,7 +10680,7 @@ var Popover = /* @__PURE__ */ __name$3((props) => {
 }, "Popover");
 var TRIGGER_NAME$2 = "PopoverTrigger";
 var PopoverTrigger = /* @__PURE__ */ React__namespace.forwardRef(
-  /* @__PURE__ */ __name$3(function PopoverTrigger2(props, forwardedRef) {
+  /* @__PURE__ */ __name$4(function PopoverTrigger2(props, forwardedRef) {
     const { __scopePopover, ...triggerProps } = props;
     const context = usePopoverContext(TRIGGER_NAME$2, __scopePopover);
     const popperScope = usePopperScope$1(__scopePopover);
@@ -10688,7 +10705,7 @@ var PORTAL_NAME$1 = "PopoverPortal";
 var [PortalProvider$1, usePortalContext$1] = createPopoverContext(PORTAL_NAME$1, {
   forceMount: void 0
 });
-var PopoverPortal = /* @__PURE__ */ __name$3((props) => {
+var PopoverPortal = /* @__PURE__ */ __name$4((props) => {
   const { __scopePopover, forceMount, children, container } = props;
   const context = usePopoverContext(PORTAL_NAME$1, __scopePopover);
   return /* @__PURE__ */ jsxRuntime.jsx(PortalProvider$1, { scope: __scopePopover, forceMount, children: /* @__PURE__ */ jsxRuntime.jsx(Presence, { present: forceMount || context.open, children: /* @__PURE__ */ jsxRuntime.jsx(Portal$3, { asChild: true, container, children }) }) });
@@ -10696,7 +10713,7 @@ var PopoverPortal = /* @__PURE__ */ __name$3((props) => {
 var CONTENT_NAME$2 = "PopoverContent";
 var PopoverContent = /* @__PURE__ */ React__namespace.forwardRef(
   // blank line to reduce diff noise
-  /* @__PURE__ */ __name$3(function PopoverContent2(props, forwardedRef) {
+  /* @__PURE__ */ __name$4(function PopoverContent2(props, forwardedRef) {
     const portalContext = usePortalContext$1(CONTENT_NAME$2, props.__scopePopover);
     const { forceMount = portalContext.forceMount, ...contentProps } = props;
     const context = usePopoverContext(CONTENT_NAME$2, props.__scopePopover);
@@ -10706,7 +10723,7 @@ var PopoverContent = /* @__PURE__ */ React__namespace.forwardRef(
 var Slot = createSlot("PopoverContent.RemoveScroll");
 var PopoverContentModal = /* @__PURE__ */ React__namespace.forwardRef(
   // blank line to reduce diff noise
-  /* @__PURE__ */ __name$3(function PopoverContentModal2(props, forwardedRef) {
+  /* @__PURE__ */ __name$4(function PopoverContentModal2(props, forwardedRef) {
     const context = usePopoverContext(CONTENT_NAME$2, props.__scopePopover);
     const contentRef = React__namespace.useRef(null);
     const composedRefs = useComposedRefs(forwardedRef, contentRef);
@@ -10747,7 +10764,7 @@ var PopoverContentModal = /* @__PURE__ */ React__namespace.forwardRef(
 );
 var PopoverContentNonModal = /* @__PURE__ */ React__namespace.forwardRef(
   // blank line to reduce diff noise
-  /* @__PURE__ */ __name$3(function PopoverContentNonModal2(props, forwardedRef) {
+  /* @__PURE__ */ __name$4(function PopoverContentNonModal2(props, forwardedRef) {
     const context = usePopoverContext(CONTENT_NAME$2, props.__scopePopover);
     const hasInteractedOutsideRef = React__namespace.useRef(false);
     const hasPointerDownOutsideRef = React__namespace.useRef(false);
@@ -10788,7 +10805,7 @@ var PopoverContentNonModal = /* @__PURE__ */ React__namespace.forwardRef(
 );
 var PopoverContentImpl = /* @__PURE__ */ React__namespace.forwardRef(
   // blank line to reduce diff noise
-  /* @__PURE__ */ __name$3(function PopoverContentImpl2(props, forwardedRef) {
+  /* @__PURE__ */ __name$4(function PopoverContentImpl2(props, forwardedRef) {
     const {
       __scopePopover,
       trapFocus,
@@ -10854,18 +10871,18 @@ var PopoverContentImpl = /* @__PURE__ */ React__namespace.forwardRef(
 function getState(open) {
   return open ? "open" : "closed";
 }
-__name$3(getState, "getState");
-var Root2$1 = Popover;
+__name$4(getState, "getState");
+var Root2$2 = Popover;
 var Trigger$2 = PopoverTrigger;
 var Portal$1 = PopoverPortal;
 var Content2$1 = PopoverContent;
 
-var __defProp$2 = Object.defineProperty;
-var __name$2 = (target, value) => __defProp$2(target, "name", { value, configurable: true });
+var __defProp$3 = Object.defineProperty;
+var __name$3 = (target, value) => __defProp$3(target, "name", { value, configurable: true });
 var DEFAULT_ORIENTATION = "horizontal";
 var ORIENTATIONS = ["horizontal", "vertical"];
 var Separator$1 = /* @__PURE__ */ React__namespace.forwardRef(
-  /* @__PURE__ */ __name$2(function Separator2(props, forwardedRef) {
+  /* @__PURE__ */ __name$3(function Separator2(props, forwardedRef) {
     const { decorative, orientation: orientationProp = DEFAULT_ORIENTATION, ...domProps } = props;
     const orientation = isValidOrientation(orientationProp) ? orientationProp : DEFAULT_ORIENTATION;
     const ariaOrientation = orientation === "vertical" ? orientation : void 0;
@@ -10884,11 +10901,11 @@ var Separator$1 = /* @__PURE__ */ React__namespace.forwardRef(
 function isValidOrientation(orientation) {
   return ORIENTATIONS.includes(orientation);
 }
-__name$2(isValidOrientation, "isValidOrientation");
+__name$3(isValidOrientation, "isValidOrientation");
 var Root = Separator$1;
 
-var __defProp$1 = Object.defineProperty;
-var __name$1 = (target, value) => __defProp$1(target, "name", { value, configurable: true });
+var __defProp$2 = Object.defineProperty;
+var __name$2 = (target, value) => __defProp$2(target, "name", { value, configurable: true });
 var TABS_NAME = "Tabs";
 var [createTabsContext, createTabsScope] = createContextScope(TABS_NAME, [
   createRovingFocusGroupScope
@@ -10897,7 +10914,7 @@ var useRovingFocusGroupScope = createRovingFocusGroupScope();
 var [TabsProvider, useTabsContext] = createTabsContext(TABS_NAME);
 var Tabs$1 = /* @__PURE__ */ React__namespace.forwardRef(
   // blank line to reduce diff noise
-  /* @__PURE__ */ __name$1(function Tabs2(props, forwardedRef) {
+  /* @__PURE__ */ __name$2(function Tabs2(props, forwardedRef) {
     const {
       __scopeTabs,
       value: valueProp,
@@ -10941,7 +10958,7 @@ var Tabs$1 = /* @__PURE__ */ React__namespace.forwardRef(
 var TAB_LIST_NAME = "TabsList";
 var TabsList$1 = /* @__PURE__ */ React__namespace.forwardRef(
   // blank line to reduce diff noise
-  /* @__PURE__ */ __name$1(function TabsList2(props, forwardedRef) {
+  /* @__PURE__ */ __name$2(function TabsList2(props, forwardedRef) {
     const { __scopeTabs, loop = true, ...listProps } = props;
     const context = useTabsContext(TAB_LIST_NAME, __scopeTabs);
     const rovingFocusGroupScope = useRovingFocusGroupScope(__scopeTabs);
@@ -10968,7 +10985,7 @@ var TabsList$1 = /* @__PURE__ */ React__namespace.forwardRef(
 );
 var TRIGGER_NAME$1 = "TabsTrigger";
 var TabsTrigger$1 = /* @__PURE__ */ React__namespace.forwardRef(
-  /* @__PURE__ */ __name$1(function TabsTrigger2(props, forwardedRef) {
+  /* @__PURE__ */ __name$2(function TabsTrigger2(props, forwardedRef) {
     const { __scopeTabs, value, disabled = false, ...triggerProps } = props;
     const context = useTabsContext(TRIGGER_NAME$1, __scopeTabs);
     const rovingFocusGroupScope = useRovingFocusGroupScope(__scopeTabs);
@@ -11024,7 +11041,7 @@ var TabsTrigger$1 = /* @__PURE__ */ React__namespace.forwardRef(
 );
 var CONTENT_NAME$1 = "TabsContent";
 var TabsContent$1 = /* @__PURE__ */ React__namespace.forwardRef(
-  /* @__PURE__ */ __name$1(function TabsContent2(props, forwardedRef) {
+  /* @__PURE__ */ __name$2(function TabsContent2(props, forwardedRef) {
     const { __scopeTabs, value, forceMount, children, ...contentProps } = props;
     const context = useTabsContext(CONTENT_NAME$1, __scopeTabs);
     const triggerId = makeTriggerId(context.baseId, value);
@@ -11059,15 +11076,635 @@ var TabsContent$1 = /* @__PURE__ */ React__namespace.forwardRef(
 function makeTriggerId(baseId, value) {
   return `${baseId}-trigger-${value}`;
 }
-__name$1(makeTriggerId, "makeTriggerId");
+__name$2(makeTriggerId, "makeTriggerId");
 function makeContentId(baseId, value) {
   return `${baseId}-content-${value}`;
 }
-__name$1(makeContentId, "makeContentId");
-var Root2 = Tabs$1;
+__name$2(makeContentId, "makeContentId");
+var Root2$1 = Tabs$1;
 var List = TabsList$1;
 var Trigger$1 = TabsTrigger$1;
 var Content = TabsContent$1;
+
+var __defProp$1 = Object.defineProperty;
+var __name$1 = (target, value) => __defProp$1(target, "name", { value, configurable: true });
+var PROVIDER_NAME$1 = "ToastProvider";
+var [Collection, useCollection, createCollectionScope] = createCollection("Toast");
+var [createToastContext, createToastScope] = createContextScope("Toast", [createCollectionScope]);
+var [ToastProviderProvider, useToastProviderContext] = createToastContext(PROVIDER_NAME$1);
+var ToastProvider$1 = /* @__PURE__ */ __name$1((props) => {
+  const {
+    __scopeToast,
+    label = "Notification",
+    duration = 5e3,
+    swipeDirection = "right",
+    swipeThreshold = 50,
+    announcerContainer,
+    children
+  } = props;
+  const [viewport, setViewport] = React__namespace.useState(null);
+  const [toastCount, setToastCount] = React__namespace.useState(0);
+  const isClosePausedRef = React__namespace.useRef(false);
+  if (!label.trim()) {
+    console.error(
+      `Invalid prop \`label\` supplied to \`${PROVIDER_NAME$1}\`. Expected non-empty \`string\`.`
+    );
+  }
+  return /* @__PURE__ */ jsxRuntime.jsx(Collection.Provider, { scope: __scopeToast, children: /* @__PURE__ */ jsxRuntime.jsx(
+    ToastProviderProvider,
+    {
+      scope: __scopeToast,
+      label,
+      duration,
+      swipeDirection,
+      swipeThreshold,
+      toastCount,
+      viewport,
+      onViewportChange: setViewport,
+      onToastAdd: React__namespace.useCallback(() => setToastCount((prevCount) => prevCount + 1), []),
+      onToastRemove: React__namespace.useCallback(() => setToastCount((prevCount) => prevCount - 1), []),
+      isClosePausedRef,
+      announcerContainer,
+      children
+    }
+  ) });
+}, "ToastProvider");
+var VIEWPORT_NAME = "ToastViewport";
+var VIEWPORT_DEFAULT_HOTKEY = ["F8"];
+var VIEWPORT_PAUSE = "toast.viewportPause";
+var VIEWPORT_RESUME = "toast.viewportResume";
+var ToastViewport$1 = /* @__PURE__ */ React__namespace.forwardRef(
+  /* @__PURE__ */ __name$1(function ToastViewport2(props, forwardedRef) {
+    const {
+      __scopeToast,
+      hotkey = VIEWPORT_DEFAULT_HOTKEY,
+      label = "Notifications ({hotkey})",
+      ...viewportProps
+    } = props;
+    const context = useToastProviderContext(VIEWPORT_NAME, __scopeToast);
+    const getItems = useCollection(__scopeToast);
+    const wrapperRef = React__namespace.useRef(null);
+    const headFocusProxyRef = React__namespace.useRef(null);
+    const tailFocusProxyRef = React__namespace.useRef(null);
+    const ref = React__namespace.useRef(null);
+    const composedRefs = useComposedRefs(forwardedRef, ref, context.onViewportChange);
+    const hotkeyLabel = hotkey.join("+").replace(/Key/g, "").replace(/Digit/g, "");
+    const hasToasts = context.toastCount > 0;
+    React__namespace.useEffect(() => {
+      const handleKeyDown = /* @__PURE__ */ __name$1((event) => {
+        const isHotkeyPressed = hotkey.length !== 0 && hotkey.every((key) => event[key] || event.code === key);
+        if (isHotkeyPressed) ref.current?.focus();
+      }, "handleKeyDown");
+      document.addEventListener("keydown", handleKeyDown);
+      return () => document.removeEventListener("keydown", handleKeyDown);
+    }, [hotkey]);
+    React__namespace.useEffect(() => {
+      const wrapper = wrapperRef.current;
+      const viewport = ref.current;
+      if (hasToasts && wrapper && viewport) {
+        const handlePause = /* @__PURE__ */ __name$1(() => {
+          if (!context.isClosePausedRef.current) {
+            const pauseEvent = new CustomEvent(VIEWPORT_PAUSE);
+            viewport.dispatchEvent(pauseEvent);
+            context.isClosePausedRef.current = true;
+          }
+        }, "handlePause");
+        const handleResume = /* @__PURE__ */ __name$1(() => {
+          if (context.isClosePausedRef.current) {
+            const resumeEvent = new CustomEvent(VIEWPORT_RESUME);
+            viewport.dispatchEvent(resumeEvent);
+            context.isClosePausedRef.current = false;
+          }
+        }, "handleResume");
+        const handleFocusOutResume = /* @__PURE__ */ __name$1((event) => {
+          const isFocusMovingOutside = !wrapper.contains(event.relatedTarget);
+          if (isFocusMovingOutside) handleResume();
+        }, "handleFocusOutResume");
+        const handlePointerLeaveResume = /* @__PURE__ */ __name$1(() => {
+          const isFocusInside = wrapper.contains(document.activeElement);
+          if (!isFocusInside) handleResume();
+        }, "handlePointerLeaveResume");
+        wrapper.addEventListener("focusin", handlePause);
+        wrapper.addEventListener("focusout", handleFocusOutResume);
+        wrapper.addEventListener("pointermove", handlePause);
+        wrapper.addEventListener("pointerleave", handlePointerLeaveResume);
+        window.addEventListener("blur", handlePause);
+        window.addEventListener("focus", handleResume);
+        return () => {
+          wrapper.removeEventListener("focusin", handlePause);
+          wrapper.removeEventListener("focusout", handleFocusOutResume);
+          wrapper.removeEventListener("pointermove", handlePause);
+          wrapper.removeEventListener("pointerleave", handlePointerLeaveResume);
+          window.removeEventListener("blur", handlePause);
+          window.removeEventListener("focus", handleResume);
+        };
+      }
+    }, [hasToasts, context.isClosePausedRef]);
+    const getSortedTabbableCandidates = React__namespace.useCallback(
+      ({ tabbingDirection }) => {
+        const toastItems = getItems();
+        const tabbableCandidates = toastItems.map((toastItem) => {
+          const toastNode = toastItem.ref.current;
+          const toastTabbableCandidates = [toastNode, ...getTabbableCandidates(toastNode)];
+          return tabbingDirection === "forwards" ? toastTabbableCandidates : toastTabbableCandidates.reverse();
+        });
+        return (tabbingDirection === "forwards" ? tabbableCandidates.reverse() : tabbableCandidates).flat();
+      },
+      [getItems]
+    );
+    React__namespace.useEffect(() => {
+      const viewport = ref.current;
+      if (viewport) {
+        const handleKeyDown = /* @__PURE__ */ __name$1((event) => {
+          const isMetaKey = event.altKey || event.ctrlKey || event.metaKey;
+          const isTabKey = event.key === "Tab" && !isMetaKey;
+          if (isTabKey) {
+            const focusedElement = document.activeElement;
+            const isTabbingBackwards = event.shiftKey;
+            const targetIsViewport = event.target === viewport;
+            if (targetIsViewport && isTabbingBackwards) {
+              headFocusProxyRef.current?.focus();
+              return;
+            }
+            const tabbingDirection = isTabbingBackwards ? "backwards" : "forwards";
+            const sortedCandidates = getSortedTabbableCandidates({ tabbingDirection });
+            const index = sortedCandidates.findIndex((candidate) => candidate === focusedElement);
+            if (focusFirst(sortedCandidates.slice(index + 1))) {
+              event.preventDefault();
+            } else {
+              isTabbingBackwards ? headFocusProxyRef.current?.focus() : tailFocusProxyRef.current?.focus();
+            }
+          }
+        }, "handleKeyDown");
+        viewport.addEventListener("keydown", handleKeyDown);
+        return () => viewport.removeEventListener("keydown", handleKeyDown);
+      }
+    }, [getItems, getSortedTabbableCandidates]);
+    return /* @__PURE__ */ jsxRuntime.jsxs(
+      Branch,
+      {
+        ref: wrapperRef,
+        role: "region",
+        "aria-label": label.replace("{hotkey}", hotkeyLabel),
+        tabIndex: -1,
+        style: { pointerEvents: hasToasts ? void 0 : "none" },
+        children: [
+          hasToasts && /* @__PURE__ */ jsxRuntime.jsx(
+            FocusProxy,
+            {
+              ref: headFocusProxyRef,
+              onFocusFromOutsideViewport: () => {
+                const tabbableCandidates = getSortedTabbableCandidates({
+                  tabbingDirection: "forwards"
+                });
+                focusFirst(tabbableCandidates);
+              }
+            }
+          ),
+          /* @__PURE__ */ jsxRuntime.jsx(Collection.Slot, { scope: __scopeToast, children: /* @__PURE__ */ jsxRuntime.jsx(Primitive.ol, { tabIndex: -1, ...viewportProps, ref: composedRefs }) }),
+          hasToasts && /* @__PURE__ */ jsxRuntime.jsx(
+            FocusProxy,
+            {
+              ref: tailFocusProxyRef,
+              onFocusFromOutsideViewport: () => {
+                const tabbableCandidates = getSortedTabbableCandidates({
+                  tabbingDirection: "backwards"
+                });
+                focusFirst(tabbableCandidates);
+              }
+            }
+          )
+        ]
+      }
+    );
+  }, "ToastViewport")
+);
+var FOCUS_PROXY_NAME = "ToastFocusProxy";
+var FocusProxy = /* @__PURE__ */ React__namespace.forwardRef(
+  // blank line to reduce diff noise
+  /* @__PURE__ */ __name$1(function ToastFocusProxy(props, forwardedRef) {
+    const { __scopeToast, onFocusFromOutsideViewport, ...proxyProps } = props;
+    const context = useToastProviderContext(FOCUS_PROXY_NAME, __scopeToast);
+    return /* @__PURE__ */ jsxRuntime.jsx(
+      VisuallyHidden,
+      {
+        tabIndex: 0,
+        ...proxyProps,
+        ref: forwardedRef,
+        style: { position: "fixed" },
+        onFocus: (event) => {
+          const prevFocusedElement = event.relatedTarget;
+          const isFocusFromOutsideViewport = !context.viewport?.contains(prevFocusedElement);
+          if (isFocusFromOutsideViewport) onFocusFromOutsideViewport();
+        }
+      }
+    );
+  }, "ToastFocusProxy")
+);
+var TOAST_NAME = "Toast";
+var TOAST_SWIPE_START = "toast.swipeStart";
+var TOAST_SWIPE_MOVE = "toast.swipeMove";
+var TOAST_SWIPE_CANCEL = "toast.swipeCancel";
+var TOAST_SWIPE_END = "toast.swipeEnd";
+var Toast = /* @__PURE__ */ React__namespace.forwardRef(
+  // blank line to reduce diff noise
+  /* @__PURE__ */ __name$1(function Toast2(props, forwardedRef) {
+    const { forceMount, open: openProp, defaultOpen, onOpenChange, ...toastProps } = props;
+    const [open, setOpen] = useControllableState({
+      prop: openProp,
+      defaultProp: defaultOpen ?? true,
+      onChange: onOpenChange,
+      caller: TOAST_NAME
+    });
+    return /* @__PURE__ */ jsxRuntime.jsx(Presence, { present: forceMount || open, children: /* @__PURE__ */ jsxRuntime.jsx(
+      ToastImpl,
+      {
+        open,
+        ...toastProps,
+        ref: forwardedRef,
+        onClose: () => setOpen(false),
+        onPause: useCallbackRef$1(props.onPause),
+        onResume: useCallbackRef$1(props.onResume),
+        onSwipeStart: composeEventHandlers(props.onSwipeStart, (event) => {
+          event.currentTarget.setAttribute("data-swipe", "start");
+        }),
+        onSwipeMove: composeEventHandlers(props.onSwipeMove, (event) => {
+          const { x, y } = event.detail.delta;
+          event.currentTarget.setAttribute("data-swipe", "move");
+          event.currentTarget.style.setProperty("--radix-toast-swipe-move-x", `${x}px`);
+          event.currentTarget.style.setProperty("--radix-toast-swipe-move-y", `${y}px`);
+        }),
+        onSwipeCancel: composeEventHandlers(props.onSwipeCancel, (event) => {
+          event.currentTarget.setAttribute("data-swipe", "cancel");
+          event.currentTarget.style.removeProperty("--radix-toast-swipe-move-x");
+          event.currentTarget.style.removeProperty("--radix-toast-swipe-move-y");
+          event.currentTarget.style.removeProperty("--radix-toast-swipe-end-x");
+          event.currentTarget.style.removeProperty("--radix-toast-swipe-end-y");
+        }),
+        onSwipeEnd: composeEventHandlers(props.onSwipeEnd, (event) => {
+          const { x, y } = event.detail.delta;
+          event.currentTarget.setAttribute("data-swipe", "end");
+          event.currentTarget.style.removeProperty("--radix-toast-swipe-move-x");
+          event.currentTarget.style.removeProperty("--radix-toast-swipe-move-y");
+          event.currentTarget.style.setProperty("--radix-toast-swipe-end-x", `${x}px`);
+          event.currentTarget.style.setProperty("--radix-toast-swipe-end-y", `${y}px`);
+          setOpen(false);
+        })
+      }
+    ) });
+  }, "Toast")
+);
+var [ToastInteractiveProvider, useToastInteractiveContext] = createToastContext(TOAST_NAME, {
+  onClose() {
+  }
+});
+var ToastImpl = /* @__PURE__ */ React__namespace.forwardRef(
+  /* @__PURE__ */ __name$1(function ToastImpl2(props, forwardedRef) {
+    const {
+      __scopeToast,
+      type = "foreground",
+      duration: durationProp,
+      open,
+      onClose,
+      onEscapeKeyDown,
+      onPause,
+      onResume,
+      onSwipeStart,
+      onSwipeMove,
+      onSwipeCancel,
+      onSwipeEnd,
+      ...toastProps
+    } = props;
+    const context = useToastProviderContext(TOAST_NAME, __scopeToast);
+    const getItems = useCollection(__scopeToast);
+    const [node, setNode] = React__namespace.useState(null);
+    const composedRefs = useComposedRefs(forwardedRef, setNode);
+    const pointerStartRef = React__namespace.useRef(null);
+    const swipeDeltaRef = React__namespace.useRef(null);
+    const duration = durationProp || context.duration;
+    const closeTimerStartTimeRef = React__namespace.useRef(0);
+    const closeTimerRemainingTimeRef = React__namespace.useRef(duration);
+    const closeTimerRef = React__namespace.useRef(0);
+    const { onToastAdd, onToastRemove } = context;
+    const handleClose = useCallbackRef$1(() => {
+      const isFocusInToast = node?.contains(document.activeElement);
+      if (isFocusInToast) context.viewport?.focus();
+      onClose();
+    });
+    const startTimer = React__namespace.useCallback(
+      (duration2) => {
+        if (!duration2 || duration2 === Infinity) return;
+        window.clearTimeout(closeTimerRef.current);
+        closeTimerStartTimeRef.current = (/* @__PURE__ */ new Date()).getTime();
+        closeTimerRef.current = window.setTimeout(handleClose, duration2);
+      },
+      [handleClose]
+    );
+    React__namespace.useEffect(() => {
+      const viewport = context.viewport;
+      if (viewport) {
+        const handleResume = /* @__PURE__ */ __name$1(() => {
+          startTimer(closeTimerRemainingTimeRef.current);
+          onResume?.();
+        }, "handleResume");
+        const handlePause = /* @__PURE__ */ __name$1(() => {
+          const elapsedTime = (/* @__PURE__ */ new Date()).getTime() - closeTimerStartTimeRef.current;
+          closeTimerRemainingTimeRef.current = closeTimerRemainingTimeRef.current - elapsedTime;
+          window.clearTimeout(closeTimerRef.current);
+          onPause?.();
+        }, "handlePause");
+        viewport.addEventListener(VIEWPORT_PAUSE, handlePause);
+        viewport.addEventListener(VIEWPORT_RESUME, handleResume);
+        return () => {
+          viewport.removeEventListener(VIEWPORT_PAUSE, handlePause);
+          viewport.removeEventListener(VIEWPORT_RESUME, handleResume);
+        };
+      }
+    }, [context.viewport, duration, onPause, onResume, startTimer]);
+    React__namespace.useEffect(() => {
+      if (open && !context.isClosePausedRef.current) startTimer(duration);
+    }, [open, duration, context.isClosePausedRef, startTimer]);
+    React__namespace.useEffect(() => {
+      return () => {
+        window.clearTimeout(closeTimerRef.current);
+      };
+    }, []);
+    React__namespace.useEffect(() => {
+      onToastAdd();
+      return () => onToastRemove();
+    }, [onToastAdd, onToastRemove]);
+    const announceTextContent = React__namespace.useMemo(() => {
+      return node ? getAnnounceTextContent(node) : null;
+    }, [node]);
+    if (!context.viewport) return null;
+    return /* @__PURE__ */ jsxRuntime.jsxs(jsxRuntime.Fragment, { children: [
+      announceTextContent && /* @__PURE__ */ jsxRuntime.jsx(
+        ToastAnnounce,
+        {
+          __scopeToast,
+          role: "status",
+          "aria-live": type === "foreground" ? "assertive" : "polite",
+          children: announceTextContent
+        }
+      ),
+      /* @__PURE__ */ jsxRuntime.jsx(ToastInteractiveProvider, { scope: __scopeToast, onClose: handleClose, children: ReactDOM__namespace.createPortal(
+        /* @__PURE__ */ jsxRuntime.jsx(Collection.ItemSlot, { scope: __scopeToast, children: /* @__PURE__ */ jsxRuntime.jsx(
+          Root$4,
+          {
+            asChild: true,
+            onEscapeKeyDown: composeEventHandlers(onEscapeKeyDown, (event) => {
+              const isFocusInToast = getItems().some(
+                (item) => item.ref.current?.contains(event.target)
+              );
+              if (!isFocusInToast) {
+                handleClose();
+              }
+            }),
+            children: /* @__PURE__ */ jsxRuntime.jsx(
+              Primitive.li,
+              {
+                tabIndex: 0,
+                "data-state": open ? "open" : "closed",
+                "data-swipe-direction": context.swipeDirection,
+                ...toastProps,
+                ref: composedRefs,
+                style: { userSelect: "none", touchAction: "none", ...props.style },
+                onKeyDown: composeEventHandlers(props.onKeyDown, (event) => {
+                  if (event.key !== "Escape") return;
+                  onEscapeKeyDown?.(event.nativeEvent);
+                  if (!event.nativeEvent.defaultPrevented) {
+                    handleClose();
+                  }
+                }),
+                onPointerDown: composeEventHandlers(props.onPointerDown, (event) => {
+                  if (event.button !== 0) return;
+                  pointerStartRef.current = { x: event.clientX, y: event.clientY };
+                }),
+                onPointerMove: composeEventHandlers(props.onPointerMove, (event) => {
+                  if (!pointerStartRef.current) return;
+                  const x = event.clientX - pointerStartRef.current.x;
+                  const y = event.clientY - pointerStartRef.current.y;
+                  const hasSwipeMoveStarted = Boolean(swipeDeltaRef.current);
+                  const isHorizontalSwipe = ["left", "right"].includes(context.swipeDirection);
+                  const clamp = ["left", "up"].includes(context.swipeDirection) ? Math.min : Math.max;
+                  const clampedX = isHorizontalSwipe ? clamp(0, x) : 0;
+                  const clampedY = !isHorizontalSwipe ? clamp(0, y) : 0;
+                  const moveStartBuffer = event.pointerType === "touch" ? 10 : 2;
+                  const delta = { x: clampedX, y: clampedY };
+                  const eventDetail = { originalEvent: event, delta };
+                  if (hasSwipeMoveStarted) {
+                    swipeDeltaRef.current = delta;
+                    handleAndDispatchCustomEvent(TOAST_SWIPE_MOVE, onSwipeMove, eventDetail, {
+                      discrete: false
+                    });
+                  } else if (isDeltaInDirection(delta, context.swipeDirection, moveStartBuffer)) {
+                    swipeDeltaRef.current = delta;
+                    handleAndDispatchCustomEvent(TOAST_SWIPE_START, onSwipeStart, eventDetail, {
+                      discrete: false
+                    });
+                    event.target.setPointerCapture(event.pointerId);
+                  } else if (Math.abs(x) > moveStartBuffer || Math.abs(y) > moveStartBuffer) {
+                    pointerStartRef.current = null;
+                  }
+                }),
+                onPointerUp: composeEventHandlers(props.onPointerUp, (event) => {
+                  const delta = swipeDeltaRef.current;
+                  const target = event.target;
+                  if (target.hasPointerCapture(event.pointerId)) {
+                    target.releasePointerCapture(event.pointerId);
+                  }
+                  swipeDeltaRef.current = null;
+                  pointerStartRef.current = null;
+                  if (delta) {
+                    const toast = event.currentTarget;
+                    const eventDetail = { originalEvent: event, delta };
+                    if (isDeltaInDirection(delta, context.swipeDirection, context.swipeThreshold)) {
+                      handleAndDispatchCustomEvent(TOAST_SWIPE_END, onSwipeEnd, eventDetail, {
+                        discrete: true
+                      });
+                    } else {
+                      handleAndDispatchCustomEvent(
+                        TOAST_SWIPE_CANCEL,
+                        onSwipeCancel,
+                        eventDetail,
+                        {
+                          discrete: true
+                        }
+                      );
+                    }
+                    toast.addEventListener("click", (event2) => event2.preventDefault(), {
+                      once: true
+                    });
+                  }
+                })
+              }
+            )
+          }
+        ) }),
+        context.viewport
+      ) })
+    ] });
+  }, "ToastImpl")
+);
+var ToastAnnounce = /* @__PURE__ */ __name$1((props) => {
+  const { __scopeToast, children, ...announceProps } = props;
+  const context = useToastProviderContext(TOAST_NAME, __scopeToast);
+  const [renderAnnounceText, setRenderAnnounceText] = React__namespace.useState(false);
+  const [isAnnounced, setIsAnnounced] = React__namespace.useState(false);
+  useNextFrame(() => setRenderAnnounceText(true));
+  React__namespace.useEffect(() => {
+    const timer = window.setTimeout(() => setIsAnnounced(true), 1e3);
+    return () => window.clearTimeout(timer);
+  }, []);
+  return isAnnounced ? null : /* @__PURE__ */ jsxRuntime.jsx(Portal$3, { asChild: true, container: context.announcerContainer || void 0, children: /* @__PURE__ */ jsxRuntime.jsx(VisuallyHidden, { ...announceProps, children: renderAnnounceText && /* @__PURE__ */ jsxRuntime.jsxs(jsxRuntime.Fragment, { children: [
+    context.label,
+    " ",
+    children
+  ] }) }) });
+}, "ToastAnnounce");
+var ToastTitle$1 = /* @__PURE__ */ React__namespace.forwardRef(
+  /* @__PURE__ */ __name$1(function ToastTitle2(props, forwardedRef) {
+    const { __scopeToast, ...titleProps } = props;
+    return /* @__PURE__ */ jsxRuntime.jsx(Primitive.div, { ...titleProps, ref: forwardedRef });
+  }, "ToastTitle")
+);
+var ToastDescription$1 = /* @__PURE__ */ React__namespace.forwardRef(
+  // blank line to reduce diff noise
+  /* @__PURE__ */ __name$1(function ToastDescription2(props, forwardedRef) {
+    const { __scopeToast, ...descriptionProps } = props;
+    return /* @__PURE__ */ jsxRuntime.jsx(Primitive.div, { ...descriptionProps, ref: forwardedRef });
+  }, "ToastDescription")
+);
+var ACTION_NAME = "ToastAction";
+var ToastAction$1 = /* @__PURE__ */ React__namespace.forwardRef(
+  /* @__PURE__ */ __name$1(function ToastAction2(props, forwardedRef) {
+    const { altText, ...actionProps } = props;
+    if (!altText.trim()) {
+      console.error(
+        `Invalid prop \`altText\` supplied to \`${ACTION_NAME}\`. Expected non-empty \`string\`.`
+      );
+      return null;
+    }
+    return /* @__PURE__ */ jsxRuntime.jsx(ToastAnnounceExclude, { altText, asChild: true, children: /* @__PURE__ */ jsxRuntime.jsx(ToastClose$1, { ...actionProps, ref: forwardedRef }) });
+  }, "ToastAction")
+);
+var CLOSE_NAME = "ToastClose";
+var ToastClose$1 = /* @__PURE__ */ React__namespace.forwardRef(
+  /* @__PURE__ */ __name$1(function ToastClose2(props, forwardedRef) {
+    const { __scopeToast, ...closeProps } = props;
+    const interactiveContext = useToastInteractiveContext(CLOSE_NAME, __scopeToast);
+    return /* @__PURE__ */ jsxRuntime.jsx(ToastAnnounceExclude, { asChild: true, children: /* @__PURE__ */ jsxRuntime.jsx(
+      Primitive.button,
+      {
+        type: "button",
+        ...closeProps,
+        ref: forwardedRef,
+        onClick: composeEventHandlers(props.onClick, interactiveContext.onClose)
+      }
+    ) });
+  }, "ToastClose")
+);
+var ToastAnnounceExclude = /* @__PURE__ */ React__namespace.forwardRef(/* @__PURE__ */ __name$1(function ToastAnnounceExclude2(props, forwardedRef) {
+  const { __scopeToast, altText, ...announceExcludeProps } = props;
+  return /* @__PURE__ */ jsxRuntime.jsx(
+    Primitive.div,
+    {
+      "data-radix-toast-announce-exclude": "",
+      "data-radix-toast-announce-alt": altText || void 0,
+      ...announceExcludeProps,
+      ref: forwardedRef
+    }
+  );
+}, "ToastAnnounceExclude"));
+function getAnnounceTextContent(container) {
+  const textContent = [];
+  const childNodes = Array.from(container.childNodes);
+  childNodes.forEach((node) => {
+    if (node.nodeType === node.TEXT_NODE && node.textContent) textContent.push(node.textContent);
+    if (isHTMLElement(node)) {
+      const isHidden = node.ariaHidden || node.hidden || node.style.display === "none";
+      const isExcluded = node.dataset.radixToastAnnounceExclude === "";
+      if (!isHidden) {
+        if (isExcluded) {
+          const altText = node.dataset.radixToastAnnounceAlt;
+          if (altText) textContent.push(altText);
+        } else {
+          textContent.push(...getAnnounceTextContent(node));
+        }
+      }
+    }
+  });
+  return textContent;
+}
+__name$1(getAnnounceTextContent, "getAnnounceTextContent");
+function handleAndDispatchCustomEvent(name, handler, detail, { discrete }) {
+  const currentTarget = detail.originalEvent.currentTarget;
+  const event = new CustomEvent(name, { bubbles: true, cancelable: true, detail });
+  if (handler) currentTarget.addEventListener(name, handler, { once: true });
+  if (discrete) {
+    dispatchDiscreteCustomEvent(currentTarget, event);
+  } else {
+    currentTarget.dispatchEvent(event);
+  }
+}
+__name$1(handleAndDispatchCustomEvent, "handleAndDispatchCustomEvent");
+var isDeltaInDirection = /* @__PURE__ */ __name$1((delta, direction, threshold = 0) => {
+  const deltaX = Math.abs(delta.x);
+  const deltaY = Math.abs(delta.y);
+  const isDeltaX = deltaX > deltaY;
+  if (direction === "left" || direction === "right") {
+    return isDeltaX && deltaX > threshold;
+  } else {
+    return !isDeltaX && deltaY > threshold;
+  }
+}, "isDeltaInDirection");
+function useNextFrame(callback = () => {
+}) {
+  const fn = useCallbackRef$1(callback);
+  useLayoutEffect2(() => {
+    let raf1 = 0;
+    let raf2 = 0;
+    raf1 = window.requestAnimationFrame(() => raf2 = window.requestAnimationFrame(fn));
+    return () => {
+      window.cancelAnimationFrame(raf1);
+      window.cancelAnimationFrame(raf2);
+    };
+  }, [fn]);
+}
+__name$1(useNextFrame, "useNextFrame");
+function isHTMLElement(node) {
+  return node.nodeType === node.ELEMENT_NODE;
+}
+__name$1(isHTMLElement, "isHTMLElement");
+function getTabbableCandidates(container) {
+  const nodes = [];
+  const walker = document.createTreeWalker(container, NodeFilter.SHOW_ELEMENT, {
+    acceptNode: /* @__PURE__ */ __name$1((node) => {
+      const isHiddenInput = node.tagName === "INPUT" && node.type === "hidden";
+      if (node.disabled || node.hidden || isHiddenInput) return NodeFilter.FILTER_SKIP;
+      return node.tabIndex >= 0 ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_SKIP;
+    }, "acceptNode")
+  });
+  while (walker.nextNode()) nodes.push(walker.currentNode);
+  return nodes;
+}
+__name$1(getTabbableCandidates, "getTabbableCandidates");
+function focusFirst(candidates) {
+  const previouslyFocusedElement = document.activeElement;
+  return candidates.some((candidate) => {
+    if (candidate === previouslyFocusedElement) return true;
+    candidate.focus();
+    return document.activeElement !== previouslyFocusedElement;
+  });
+}
+__name$1(focusFirst, "focusFirst");
+var Provider$1 = ToastProvider$1;
+var Viewport = ToastViewport$1;
+var Root2 = Toast;
+var Title = ToastTitle$1;
+var Description = ToastDescription$1;
+var Action = ToastAction$1;
+var Close = ToastClose$1;
 
 var __defProp = Object.defineProperty;
 var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
@@ -11188,7 +11825,7 @@ var Tooltip$1 = /* @__PURE__ */ __name((props) => {
     };
   }, []);
   const contentId = contentIdState ?? generatedContentId;
-  return /* @__PURE__ */ jsxRuntime.jsx(Root2$3, { ...popperScope, children: /* @__PURE__ */ jsxRuntime.jsx(
+  return /* @__PURE__ */ jsxRuntime.jsx(Root2$4, { ...popperScope, children: /* @__PURE__ */ jsxRuntime.jsx(
     TooltipContextProvider,
     {
       scope: __scopeTooltip,
@@ -11414,7 +12051,7 @@ var TooltipContentImpl = /* @__PURE__ */ React__namespace.forwardRef(
             },
             children: [
               /* @__PURE__ */ jsxRuntime.jsx(Slottable, { children }),
-              ariaLabel ? /* @__PURE__ */ jsxRuntime.jsx(Root$5, { id: context.contentId, role: "tooltip", children: ariaLabel }) : null
+              ariaLabel ? /* @__PURE__ */ jsxRuntime.jsx(Root$6, { id: context.contentId, role: "tooltip", children: ariaLabel }) : null
             ]
           }
         )
@@ -11690,6 +12327,20 @@ const ChevronRight = createLucideIcon("ChevronRight", [
  */
 
 
+const CircleAlert = createLucideIcon("CircleAlert", [
+  ["circle", { cx: "12", cy: "12", r: "10", key: "1mglay" }],
+  ["line", { x1: "12", x2: "12", y1: "8", y2: "12", key: "1pkeuh" }],
+  ["line", { x1: "12", x2: "12.01", y1: "16", y2: "16", key: "4dfq90" }]
+]);
+
+/**
+ * @license lucide-react v0.469.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+
+
 const CircleCheck = createLucideIcon("CircleCheck", [
   ["circle", { cx: "12", cy: "12", r: "10", key: "1mglay" }],
   ["path", { d: "m9 12 2 2 4-4", key: "dzmm74" }]
@@ -11707,20 +12358,6 @@ const CircleHelp = createLucideIcon("CircleHelp", [
   ["circle", { cx: "12", cy: "12", r: "10", key: "1mglay" }],
   ["path", { d: "M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3", key: "1u773s" }],
   ["path", { d: "M12 17h.01", key: "p32p05" }]
-]);
-
-/**
- * @license lucide-react v0.469.0 - ISC
- *
- * This source code is licensed under the ISC license.
- * See the LICENSE file in the root directory of this source tree.
- */
-
-
-const CircleX = createLucideIcon("CircleX", [
-  ["circle", { cx: "12", cy: "12", r: "10", key: "1mglay" }],
-  ["path", { d: "m15 9-6 6", key: "1uzhvr" }],
-  ["path", { d: "m9 9 6 6", key: "z0biqf" }]
 ]);
 
 /**
@@ -11879,7 +12516,7 @@ const X = createLucideIcon("X", [
 ]);
 
 function Accordion({ ...props }) {
-    return jsxRuntime.jsx(Root2$4, { "data-slot": "accordion", ...props });
+    return jsxRuntime.jsx(Root2$5, { "data-slot": "accordion", ...props });
 }
 function AccordionItem({ className, ...props }) {
     return (jsxRuntime.jsx(Item$1, { "data-slot": "accordion-item", className: cn("border-b border-border last:border-b-0", className), ...props }));
@@ -11891,7 +12528,7 @@ function AccordionContent({ className, children, ...props }) {
     return (jsxRuntime.jsx(Content2$4, { "data-slot": "accordion-content", className: cn("overflow-hidden text-sm text-muted-foreground", "data-[state=open]:animate-accordion-down data-[state=closed]:animate-accordion-up", className), ...props, children: jsxRuntime.jsx("div", { className: cn("pb-3 pt-0", className), children: children }) }));
 }
 function CollapsibleSection({ title, defaultOpen = false, children, className, }) {
-    return (jsxRuntime.jsx(Root2$4, { type: "single", collapsible: true, defaultValue: defaultOpen ? "section" : undefined, "data-slot": "collapsible-section", className: cn("rounded-lg border border-border bg-card text-card-foreground", className), children: jsxRuntime.jsxs(Item$1, { value: "section", className: "border-none", children: [jsxRuntime.jsx(Header, { className: "flex", children: jsxRuntime.jsxs(Trigger2, { "data-slot": "collapsible-section-trigger", className: cn("group flex flex-1 items-center justify-between gap-2 px-4 py-3 text-left text-sm font-medium text-foreground outline-none transition-all", "hover:bg-muted/40 focus-visible:ring-2 focus-visible:ring-ring", "data-[state=open]:border-b data-[state=open]:border-border rounded-lg data-[state=open]:rounded-b-none"), children: [title, jsxRuntime.jsx(ChevronDown, { className: "size-4 shrink-0 text-muted-foreground transition-transform duration-200 group-data-[state=open]:rotate-180", "aria-hidden": true })] }) }), jsxRuntime.jsx(Content2$4, { "data-slot": "collapsible-section-content", className: cn("overflow-hidden text-sm text-muted-foreground", "data-[state=open]:animate-accordion-down data-[state=closed]:animate-accordion-up"), children: jsxRuntime.jsx("div", { className: "px-4 py-3", children: children }) })] }) }));
+    return (jsxRuntime.jsx(Root2$5, { type: "single", collapsible: true, defaultValue: defaultOpen ? "section" : undefined, "data-slot": "collapsible-section", className: cn("rounded-lg border border-border bg-card text-card-foreground", className), children: jsxRuntime.jsxs(Item$1, { value: "section", className: "border-none", children: [jsxRuntime.jsx(Header, { className: "flex", children: jsxRuntime.jsxs(Trigger2, { "data-slot": "collapsible-section-trigger", className: cn("group flex flex-1 items-center justify-between gap-2 px-4 py-3 text-left text-sm font-medium text-foreground outline-none transition-all", "hover:bg-muted/40 focus-visible:ring-2 focus-visible:ring-ring", "data-[state=open]:border-b data-[state=open]:border-border rounded-lg data-[state=open]:rounded-b-none"), children: [title, jsxRuntime.jsx(ChevronDown, { className: "size-4 shrink-0 text-muted-foreground transition-transform duration-200 group-data-[state=open]:rotate-180", "aria-hidden": true })] }) }), jsxRuntime.jsx(Content2$4, { "data-slot": "collapsible-section-content", className: cn("overflow-hidden text-sm text-muted-foreground", "data-[state=open]:animate-accordion-down data-[state=closed]:animate-accordion-up"), children: jsxRuntime.jsx("div", { className: "px-4 py-3", children: children }) })] }) }));
 }
 
 const falsyToString = (value)=>typeof value === "boolean" ? `${value}` : value === 0 ? "0" : value;
@@ -12353,7 +12990,7 @@ function FilterBar({ search, actions, className }) {
 
 function FilterSelect({ value, options, onChange, ariaLabel, className, }) {
     const current = options.find((o) => o.value === value);
-    return (jsxRuntime.jsxs(Root2$2, { children: [jsxRuntime.jsx(Trigger$3, { asChild: true, children: jsxRuntime.jsxs("button", { type: "button", "aria-label": ariaLabel, "data-slot": "filter-select-trigger", className: cn("inline-flex h-8 items-center gap-1.5 rounded-lg border px-2.5 text-sm font-medium", "border-[var(--border-default,var(--border))] bg-[var(--card)]", "text-[var(--ink-primary,var(--foreground))]", "hover:bg-[var(--surface-alt,var(--muted))]", "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)]", "aria-expanded:bg-[var(--surface-alt,var(--muted))]", className), children: [current?.label ?? options[0]?.label ?? "", jsxRuntime.jsx(ChevronDown, { className: "size-4 text-[var(--ink-muted,var(--muted-foreground))]", "aria-hidden": true })] }) }), jsxRuntime.jsx(Portal2, { children: jsxRuntime.jsx(Content2$2, { align: "start", sideOffset: 4, className: cn(
+    return (jsxRuntime.jsxs(Root2$3, { children: [jsxRuntime.jsx(Trigger$3, { asChild: true, children: jsxRuntime.jsxs("button", { type: "button", "aria-label": ariaLabel, "data-slot": "filter-select-trigger", className: cn("inline-flex h-8 items-center gap-1.5 rounded-lg border px-2.5 text-sm font-medium", "border-[var(--border-default,var(--border))] bg-[var(--card)]", "text-[var(--ink-primary,var(--foreground))]", "hover:bg-[var(--surface-alt,var(--muted))]", "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)]", "aria-expanded:bg-[var(--surface-alt,var(--muted))]", className), children: [current?.label ?? options[0]?.label ?? "", jsxRuntime.jsx(ChevronDown, { className: "size-4 text-[var(--ink-muted,var(--muted-foreground))]", "aria-hidden": true })] }) }), jsxRuntime.jsx(Portal2, { children: jsxRuntime.jsx(Content2$2, { align: "start", sideOffset: 4, className: cn(
                     // z-[80]: sit above app filter popovers (~z-70) so a FilterSelect
                     // opened inside a popover surfaces in front of it, not behind.
                     "z-[80] min-w-[10rem] rounded-xl border p-1 shadow-[var(--shadow-md,0_1px_3px_rgba(16,24,40,.08))]", "border-[var(--border-default,var(--border))] bg-[var(--card)]", "data-[state=open]:animate-in data-[state=closed]:animate-out", "data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0"), children: options.map((option) => (jsxRuntime.jsx(Item2, { onSelect: () => onChange(option.value), "data-active": option.value === value || undefined, className: cn("flex h-8 cursor-pointer items-center rounded-md px-3 text-sm outline-none", "text-[var(--ink-primary,var(--foreground))]", "data-[highlighted]:bg-[var(--surface-alt,var(--muted))]", "data-[active]:font-semibold data-[active]:text-[var(--primary)]"), children: option.label }, option.value))) }) })] }));
@@ -12874,7 +13511,7 @@ function TableFilter({ groups, value, onChange, label = "Filters", className, })
         onChange(cleared);
         setOpen(false);
     };
-    return (jsxRuntime.jsxs(Root2$1, { open: open, onOpenChange: setOpen, children: [jsxRuntime.jsx(Trigger$2, { asChild: true, children: jsxRuntime.jsxs("button", { type: "button", "data-slot": "table-filter-trigger", "aria-label": label, className: cn("inline-flex h-8 items-center gap-2 rounded-lg border px-3 text-sm font-medium", "border-[var(--border-default,var(--border))] bg-[var(--card)]", "text-[var(--ink-primary,var(--foreground))]", "hover:bg-[var(--surface-alt,var(--muted))]", "aria-expanded:bg-[var(--surface-alt,var(--muted))]", "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)]", className), children: [jsxRuntime.jsx(Filter, { className: "size-4", "aria-hidden": true }), label, activeCount > 0 && (jsxRuntime.jsx("span", { "data-slot": "table-filter-count", className: "inline-grid min-w-[18px] place-items-center rounded-full px-[5px] text-[11px] font-bold leading-[18px] text-white", style: { background: "var(--primary)", height: 18 }, children: activeCount }))] }) }), jsxRuntime.jsx(Portal$1, { children: jsxRuntime.jsxs(Content2$1, { align: "end", sideOffset: 6, className: "z-[80] w-[300px] overflow-hidden rounded-xl border shadow-[var(--shadow-lg,0_16px_44px_rgba(36,45,56,.18))]", style: { background: "var(--card)", borderColor: "var(--border-default)" }, children: [jsxRuntime.jsxs("div", { className: "flex items-center justify-between px-3.5 py-3 text-sm font-bold", style: { borderBottom: "1px solid var(--border-subtle, var(--border-default))" }, children: [label, jsxRuntime.jsx("button", { type: "button", onClick: reset, className: "text-xs font-semibold underline", style: { color: "var(--ink-muted)" }, children: "Reset" })] }), jsxRuntime.jsx("div", { className: "max-h-[360px] overflow-y-auto", children: groups.map((group) => (jsxRuntime.jsxs("div", { className: "px-3.5 py-3", style: { borderBottom: "1px solid var(--border-subtle, var(--border-default))" }, children: [jsxRuntime.jsx("div", { className: "mb-2 text-xs font-bold uppercase tracking-[0.03em]", style: { color: "var(--ink-muted)" }, children: group.label }), group.options.map((opt) => {
+    return (jsxRuntime.jsxs(Root2$2, { open: open, onOpenChange: setOpen, children: [jsxRuntime.jsx(Trigger$2, { asChild: true, children: jsxRuntime.jsxs("button", { type: "button", "data-slot": "table-filter-trigger", "aria-label": label, className: cn("inline-flex h-8 items-center gap-2 rounded-lg border px-3 text-sm font-medium", "border-[var(--border-default,var(--border))] bg-[var(--card)]", "text-[var(--ink-primary,var(--foreground))]", "hover:bg-[var(--surface-alt,var(--muted))]", "aria-expanded:bg-[var(--surface-alt,var(--muted))]", "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)]", className), children: [jsxRuntime.jsx(Filter, { className: "size-4", "aria-hidden": true }), label, activeCount > 0 && (jsxRuntime.jsx("span", { "data-slot": "table-filter-count", className: "inline-grid min-w-[18px] place-items-center rounded-full px-[5px] text-[11px] font-bold leading-[18px] text-white", style: { background: "var(--primary)", height: 18 }, children: activeCount }))] }) }), jsxRuntime.jsx(Portal$1, { children: jsxRuntime.jsxs(Content2$1, { align: "end", sideOffset: 6, className: "z-[80] w-[300px] overflow-hidden rounded-xl border shadow-[var(--shadow-lg,0_16px_44px_rgba(36,45,56,.18))]", style: { background: "var(--card)", borderColor: "var(--border-default)" }, children: [jsxRuntime.jsxs("div", { className: "flex items-center justify-between px-3.5 py-3 text-sm font-bold", style: { borderBottom: "1px solid var(--border-subtle, var(--border-default))" }, children: [label, jsxRuntime.jsx("button", { type: "button", onClick: reset, className: "text-xs font-semibold underline", style: { color: "var(--ink-muted)" }, children: "Reset" })] }), jsxRuntime.jsx("div", { className: "max-h-[360px] overflow-y-auto", children: groups.map((group) => (jsxRuntime.jsxs("div", { className: "px-3.5 py-3", style: { borderBottom: "1px solid var(--border-subtle, var(--border-default))" }, children: [jsxRuntime.jsx("div", { className: "mb-2 text-xs font-bold uppercase tracking-[0.03em]", style: { color: "var(--ink-muted)" }, children: group.label }), group.options.map((opt) => {
                                         const checked = (draft[group.id] ?? []).includes(opt.value);
                                         return (jsxRuntime.jsxs("label", { className: "flex cursor-pointer items-center gap-2 py-1 text-sm", style: { color: "var(--ink-primary)" }, children: [jsxRuntime.jsx("input", { type: "checkbox", className: "sr-only", checked: checked, onChange: () => toggle(group.id, opt.value) }), jsxRuntime.jsx("span", { "aria-hidden": true, className: "grid size-4 place-items-center rounded", style: {
                                                         border: checked
@@ -13040,7 +13677,7 @@ function PageHeader({ title, subtitle, actions, className }) {
 
 function SettingsMenu({ sections, onSelect, searchable = true, triggerLabel = "Settings", active = false, activeKey, onSignOut, signOutLabel = "Sign out", className, }) {
     const [open, setOpen] = React__namespace.useState(false);
-    return (jsxRuntime.jsxs(Root2$1, { open: open, onOpenChange: setOpen, children: [jsxRuntime.jsx(Trigger$2, { asChild: true, children: jsxRuntime.jsx("button", { type: "button", "aria-label": triggerLabel, "data-slot": "settings-menu-trigger", "data-active": active || undefined, className: cn("grid min-h-[36px] min-w-[36px] place-items-center rounded-lg transition-colors", "hover:bg-[var(--orbit-surface-muted,var(--surface-alt,#f0f2f8))]", "aria-expanded:bg-[var(--orbit-surface-muted,var(--surface-alt,#f0f2f8))]", 
+    return (jsxRuntime.jsxs(Root2$2, { open: open, onOpenChange: setOpen, children: [jsxRuntime.jsx(Trigger$2, { asChild: true, children: jsxRuntime.jsx("button", { type: "button", "aria-label": triggerLabel, "data-slot": "settings-menu-trigger", "data-active": active || undefined, className: cn("grid min-h-[36px] min-w-[36px] place-items-center rounded-lg transition-colors", "hover:bg-[var(--orbit-surface-muted,var(--surface-alt,#f0f2f8))]", "aria-expanded:bg-[var(--orbit-surface-muted,var(--surface-alt,#f0f2f8))]", 
                     // Active (on a settings page): brand-purple cog on a brand tint.
                     "data-[active]:bg-[var(--orbit-brand-tint,var(--accent,#F6E9F6))]", "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--orbit-focus-ring,var(--primary))]", className), style: {
                         color: active
@@ -13095,7 +13732,7 @@ function SettingsMenu({ sections, onSelect, searchable = true, triggerLabel = "S
 }
 
 function Tabs({ className, ...props }) {
-    return (jsxRuntime.jsx(Root2, { "data-slot": "tabs", className: cn("flex flex-col gap-4", className), ...props }));
+    return (jsxRuntime.jsx(Root2$1, { "data-slot": "tabs", className: cn("flex flex-col gap-4", className), ...props }));
 }
 function TabsList({ className, ...props }) {
     return (jsxRuntime.jsx(List, { "data-slot": "tabs-list", className: cn("inline-flex h-9 w-fit items-center justify-center rounded-lg bg-muted p-1 text-muted-foreground", className), ...props }));
@@ -13107,84 +13744,119 @@ function TabsContent({ className, ...props }) {
     return (jsxRuntime.jsx(Content, { "data-slot": "tabs-content", className: cn("mt-2 ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2", className), ...props }));
 }
 
-const ToastContext = React__namespace.createContext(null);
-/**
- * useToast — returns `{ toast, dismiss }`. `toast(opts)` queues a notification
- * and returns its id; `dismiss(id)` removes it early.
- */
-function useToast() {
-    const ctx = React__namespace.useContext(ToastContext);
-    if (!ctx) {
-        throw new Error("useToast must be used within a <ToastProvider>");
-    }
-    return ctx;
+const DEFAULT_DURATION = 5000;
+let toasts = [];
+const listeners = new Set();
+function emit() {
+    for (const listener of listeners)
+        listener(toasts);
 }
-const variantIcon = {
-    default: Info,
+function dismiss(id) {
+    toasts = toasts.map((t) => (t.id === id ? { ...t, open: false } : t));
+    emit();
+    // Give the close animation a moment before removing from the DOM.
+    setTimeout(() => {
+        toasts = toasts.filter((t) => t.id !== id);
+        emit();
+    }, 200);
+}
+/** Fire a toast from anywhere. Returns { id, dismiss }. */
+function toast(options) {
+    const id = typeof crypto !== "undefined" && "randomUUID" in crypto
+        ? crypto.randomUUID()
+        : `toast-${Date.now()}-${Math.random().toString(36).slice(2)}`;
+    const variant = options.variant ?? "info";
+    const record = {
+        id,
+        open: true,
+        dismissible: true,
+        ...options,
+        variant,
+        // An error must never auto-dismiss on a timer alone. Applied after the
+        // spread so a caller-supplied duration can't defeat it.
+        duration: variant === "error" ? Infinity : options.duration ?? DEFAULT_DURATION,
+    };
+    toasts = [...toasts, record].slice(-3);
+    emit();
+    return { id, dismiss: () => dismiss(id) };
+}
+function useToast() {
+    const [state, setState] = React__namespace.useState(toasts);
+    React__namespace.useEffect(() => {
+        listeners.add(setState);
+        return () => {
+            listeners.delete(setState);
+        };
+    }, []);
+    return { toasts: state, toast, dismiss };
+}
+// ── Primitives ───────────────────────────────────────────────────────────────
+const ToastRadixProvider = Provider$1;
+const ToastViewport = React__namespace.forwardRef(({ className, ...props }, ref) => (jsxRuntime.jsx(Viewport, { ref: ref, className: cn("fixed top-0 right-0 z-[100] m-0 flex w-full max-w-[420px] list-none flex-col gap-2 p-4 outline-none sm:top-4 sm:right-4", className), ...props })));
+ToastViewport.displayName = "ToastViewport";
+const toastVariants = cva([
+    "group pointer-events-auto relative flex w-full items-start gap-3 rounded-xl border p-4",
+    "shadow-[0_18px_50px_rgba(16,24,40,0.14)]",
+    "data-[state=open]:animate-in data-[state=open]:slide-in-from-top-full data-[state=open]:sm:slide-in-from-bottom-full",
+    "data-[state=closed]:animate-out data-[state=closed]:fade-out-80",
+    "data-[swipe=move]:translate-x-[var(--radix-toast-swipe-move-x)]",
+    "data-[swipe=cancel]:translate-x-0 data-[swipe=cancel]:transition-[transform_200ms_ease-out]",
+    "data-[swipe=end]:translate-x-[var(--radix-toast-swipe-end-x)]",
+    "motion-reduce:transition-none motion-reduce:data-[state=open]:animate-none motion-reduce:data-[state=closed]:animate-none",
+].join(" "), {
+    variants: {
+        variant: {
+            info: "bg-[var(--orbit-info-bg)] border-[var(--orbit-info)]/30 text-foreground",
+            success: "bg-[var(--orbit-success-bg)] border-[var(--orbit-success)]/30 text-foreground",
+            warning: "bg-[var(--orbit-warning-bg)] border-[var(--orbit-warning)]/30 text-foreground",
+            error: "bg-[var(--orbit-error-bg)] border-[var(--orbit-error)]/30 text-foreground",
+        },
+    },
+    defaultVariants: { variant: "info" },
+});
+const iconByVariant = {
+    info: Info,
     success: CircleCheck,
     warning: TriangleAlert,
-    destructive: CircleX,
+    error: CircleAlert,
 };
-// Accent colour per variant, pulled from the shared Orbit tokens.
-const variantAccent = {
-    default: "var(--orbit-info)",
-    success: "var(--orbit-success)",
-    warning: "var(--orbit-warning)",
-    destructive: "var(--destructive)",
+const iconColorByVariant = {
+    info: "text-[var(--orbit-info)]",
+    success: "text-[var(--orbit-success)]",
+    warning: "text-[var(--orbit-warning)]",
+    error: "text-[var(--orbit-error)]",
 };
-function ToastCard({ toast, onDismiss, }) {
-    const Icon = variantIcon[toast.variant];
-    const accent = variantAccent[toast.variant];
-    const [visible, setVisible] = React__namespace.useState(false);
-    // Fade/slide in on mount.
-    React__namespace.useEffect(() => {
-        const raf = requestAnimationFrame(() => setVisible(true));
-        return () => cancelAnimationFrame(raf);
-    }, []);
-    return (jsxRuntime.jsxs("div", { "data-slot": "toast", "data-variant": toast.variant, role: "status", "aria-live": "polite", className: cn("pointer-events-auto flex w-full items-start gap-3 rounded-lg border bg-card p-3 pr-9 text-card-foreground shadow-md", "relative transition-all duration-200 ease-out", visible ? "translate-y-0 opacity-100" : "translate-y-2 opacity-0"), children: [jsxRuntime.jsx(Icon, { className: "mt-0.5 size-5 shrink-0", style: { color: accent } }), jsxRuntime.jsxs("div", { className: "grid gap-0.5", children: [jsxRuntime.jsx("div", { "data-slot": "toast-title", className: "text-sm font-semibold leading-tight", children: toast.title }), toast.description ? (jsxRuntime.jsx("div", { "data-slot": "toast-description", className: "text-sm text-muted-foreground", children: toast.description })) : null] }), jsxRuntime.jsx("button", { type: "button", "aria-label": "Dismiss notification", onClick: () => onDismiss(toast.id), className: "absolute top-2.5 right-2.5 rounded-sm text-muted-foreground opacity-70 transition-opacity outline-none hover:opacity-100 focus-visible:ring-2 focus-visible:ring-ring", children: jsxRuntime.jsx(X, { className: "size-4" }) })] }));
+const ToastRoot = React__namespace.forwardRef(({ className, variant = "info", ...props }, ref) => (jsxRuntime.jsx(Root2, { ref: ref, role: variant === "error" ? "alert" : "status", className: cn(toastVariants({ variant }), className), ...props })));
+ToastRoot.displayName = "ToastRoot";
+const ToastIcon = ({ variant }) => {
+    const Icon = iconByVariant[variant];
+    return jsxRuntime.jsx(Icon, { className: cn("mt-0.5 h-5 w-5 shrink-0", iconColorByVariant[variant]), "aria-hidden": true });
+};
+const ToastTitle = React__namespace.forwardRef(({ className, ...props }, ref) => (jsxRuntime.jsx(Title, { ref: ref, className: cn("text-sm font-semibold", className), ...props })));
+ToastTitle.displayName = "ToastTitle";
+const ToastDescription = React__namespace.forwardRef(({ className, ...props }, ref) => (jsxRuntime.jsx(Description, { ref: ref, className: cn("mt-1 text-xs text-muted-foreground", className), ...props })));
+ToastDescription.displayName = "ToastDescription";
+const ToastAction = React__namespace.forwardRef(({ className, ...props }, ref) => (jsxRuntime.jsx(Action, { ref: ref, className: cn("shrink-0 rounded-lg px-2 py-1 text-sm font-medium underline underline-offset-2", "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring", className), ...props })));
+ToastAction.displayName = "ToastAction";
+const ToastClose = React__namespace.forwardRef(({ className, ...props }, ref) => (jsxRuntime.jsx(Close, { ref: ref, "aria-label": "Dismiss", className: cn("absolute top-2.5 right-2.5 grid h-6 w-6 shrink-0 place-items-center rounded-lg text-muted-foreground", "hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring", className), ...props, children: jsxRuntime.jsx(X, { className: "h-4 w-4", "aria-hidden": true }) })));
+ToastClose.displayName = "ToastClose";
+// ── Toaster ──────────────────────────────────────────────────────────────────
+// Render once near the app root. Subscribes to the module-level toast store.
+function Toaster() {
+    const { toasts: items } = useToast();
+    return (jsxRuntime.jsxs(ToastRadixProvider, { children: [items.map(({ id, open, variant = "info", title, description, action, duration }) => (jsxRuntime.jsxs(ToastRoot, { variant: variant, open: open, duration: duration === Infinity ? undefined : duration, onOpenChange: (next) => {
+                    if (!next)
+                        dismiss(id);
+                }, children: [jsxRuntime.jsx(ToastIcon, { variant: variant }), jsxRuntime.jsxs("div", { className: "flex-1 pr-6", children: [jsxRuntime.jsx(ToastTitle, { children: title }), description && jsxRuntime.jsx(ToastDescription, { children: description })] }), action && (jsxRuntime.jsx(ToastAction, { altText: action.label, onClick: action.onClick, children: action.label })), jsxRuntime.jsx(ToastClose, {})] }, id))), jsxRuntime.jsx(ToastViewport, {})] }));
 }
 /**
- * ToastProvider — wrap your app. Renders a fixed bottom-right viewport and
- * provides the toast() / dismiss() API via context.
+ * Back-compat convenience: a provider that just renders the Toaster alongside
+ * children, so existing `<ToastProvider><App/></ToastProvider>` wiring keeps
+ * working. The module-level `toast()` store is global, so this only needs to
+ * mount the <Toaster/> once.
  */
 function ToastProvider({ children }) {
-    const [toasts, setToasts] = React__namespace.useState([]);
-    const timers = React__namespace.useRef({});
-    const dismiss = React__namespace.useCallback((id) => {
-        setToasts((prev) => prev.filter((t) => t.id !== id));
-        const timer = timers.current[id];
-        if (timer) {
-            clearTimeout(timer);
-            delete timers.current[id];
-        }
-    }, []);
-    const toast = React__namespace.useCallback((opts) => {
-        const id = typeof crypto !== "undefined" && "randomUUID" in crypto
-            ? crypto.randomUUID()
-            : `toast-${Date.now()}-${Math.random().toString(36).slice(2)}`;
-        const duration = opts.duration ?? 5000;
-        const record = {
-            id,
-            title: opts.title,
-            description: opts.description,
-            variant: opts.variant ?? "default",
-            duration,
-        };
-        setToasts((prev) => [...prev, record]);
-        if (duration > 0) {
-            timers.current[id] = setTimeout(() => dismiss(id), duration);
-        }
-        return id;
-    }, [dismiss]);
-    // Clear any pending timers on unmount.
-    React__namespace.useEffect(() => {
-        const current = timers.current;
-        return () => {
-            Object.values(current).forEach(clearTimeout);
-        };
-    }, []);
-    const value = React__namespace.useMemo(() => ({ toast, dismiss }), [toast, dismiss]);
-    return (jsxRuntime.jsxs(ToastContext.Provider, { value: value, children: [children, jsxRuntime.jsx("div", { "data-slot": "toast-viewport", className: "pointer-events-none fixed bottom-4 right-4 z-[100] flex w-full max-w-sm flex-col gap-2", children: toasts.map((t) => (jsxRuntime.jsx(ToastCard, { toast: t, onDismiss: dismiss }, t.id))) })] }));
+    return (jsxRuntime.jsxs(jsxRuntime.Fragment, { children: [children, jsxRuntime.jsx(Toaster, {})] }));
 }
 
 function ConfirmDestroyDialog({ open, onOpenChange, title, description, confirmLabel, cancelLabel = "Cancel", onConfirm, loading = false, }) {
@@ -13249,6 +13921,7 @@ exports.Input = Input;
 exports.Label = Label;
 exports.MetricCard = MetricCard;
 exports.Modal = Modal;
+exports.OrbitToaster = Toaster;
 exports.PageContainer = PageContainer;
 exports.PageHeader = PageHeader;
 exports.Pagination = Pagination;
@@ -13283,7 +13956,15 @@ exports.TabsContent = TabsContent;
 exports.TabsList = TabsList;
 exports.TabsTrigger = TabsTrigger;
 exports.Textarea = Textarea;
+exports.ToastAction = ToastAction;
+exports.ToastClose = ToastClose;
+exports.ToastDescription = ToastDescription;
+exports.ToastIcon = ToastIcon;
 exports.ToastProvider = ToastProvider;
+exports.ToastRoot = ToastRoot;
+exports.ToastTitle = ToastTitle;
+exports.ToastViewport = ToastViewport;
+exports.Toaster = Toaster;
 exports.Tooltip = Tooltip;
 exports.TooltipContent = TooltipContent;
 exports.TooltipProvider = TooltipProvider;
@@ -13292,5 +13973,6 @@ exports.TopBar = TopBar;
 exports.badgeVariants = badgeVariants;
 exports.buttonVariants = buttonVariants;
 exports.cn = cn;
+exports.toast = toast;
 exports.useToast = useToast;
 //# sourceMappingURL=index.cjs.js.map

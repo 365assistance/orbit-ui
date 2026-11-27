@@ -1,99 +1,41 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
-import { ToastProvider, useToast } from './toast'
+import { Toaster, toast } from './toast'
 import { Button } from './button'
 
 const meta = {
   title: 'Primitives/Toast',
-  component: ToastProvider,
+  component: Toaster,
   tags: ['autodocs'],
   parameters: {
     docs: {
       description: {
         component:
-          'Lightweight toast notification system. Wrap in <ToastProvider>, then call toast(opts) from useToast(). Auto-dismisses after `duration` (default 5000ms); also manually dismissible.',
+          'Canonical Orbit toast (Radix-based, top-right, swipe + hover-pause). Render <Toaster/> once near the app root, then call the module-level toast(opts) from anywhere. Variants: info | success | warning | error. Errors never auto-dismiss.',
       },
     },
   },
-} satisfies Meta<typeof ToastProvider>
+} satisfies Meta<typeof Toaster>
 
 export default meta
 type Story = StoryObj<typeof meta>
 
 function Demo() {
-  const { toast } = useToast()
   return (
     <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
-      <Button
-        variant="secondary"
-        onClick={() =>
-          toast({
-            title: 'Saved',
-            description: 'Your changes have been saved.',
-          })
-        }
-      >
-        Default
-      </Button>
-      <Button
-        onClick={() =>
-          toast({
-            variant: 'success',
-            title: 'Service created',
-            description: 'The finance service and its resources are now available.',
-          })
-        }
-      >
-        Success
-      </Button>
-      <Button
-        variant="secondary"
-        onClick={() =>
-          toast({
-            variant: 'warning',
-            title: 'Unsaved changes',
-            description: 'Leaving this page will discard them.',
-          })
-        }
-      >
-        Warning
-      </Button>
-      <Button
-        variant="destructive"
-        onClick={() =>
-          toast({
-            variant: 'destructive',
-            title: 'Payment failed',
-            description: "We couldn't process your card. Please update your payment details.",
-          })
-        }
-      >
-        Destructive
-      </Button>
+      <Button variant="outline" onClick={() => toast({ variant: 'info', title: 'Heads up', description: 'This is an info toast.' })}>Info</Button>
+      <Button onClick={() => toast({ variant: 'success', title: 'Service created' })}>Success</Button>
+      <Button variant="outline" onClick={() => toast({ variant: 'warning', title: 'Unsaved changes', description: 'Leaving will discard them.' })}>Warning</Button>
+      <Button variant="destructive" onClick={() => toast({ variant: 'error', title: 'Something went wrong', description: 'This one stays until dismissed.' })}>Error</Button>
+      <Button variant="ghost" onClick={() => toast({ variant: 'success', title: 'Saved', description: 'With an action.', action: { label: 'Undo', onClick: () => {} } })}>With action</Button>
     </div>
   )
 }
 
 export const Playground: Story = {
   render: () => (
-    <ToastProvider>
+    <>
       <Demo />
-    </ToastProvider>
+      <Toaster />
+    </>
   ),
-}
-
-export const TitleOnly: Story = {
-  render: () => (
-    <ToastProvider>
-      <TitleOnlyDemo />
-    </ToastProvider>
-  ),
-}
-
-function TitleOnlyDemo() {
-  const { toast } = useToast()
-  return (
-    <Button variant="secondary" onClick={() => toast({ title: 'Copied to clipboard' })}>
-      Fire title-only toast
-    </Button>
-  )
 }
