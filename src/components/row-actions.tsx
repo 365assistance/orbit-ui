@@ -83,9 +83,11 @@ export function RowActions({ label, items, className }: RowActionsProps) {
               <DropdownMenu.Item
                 key={item.label}
                 disabled={item.disabled}
-                onSelect={(e) => {
-                  e.preventDefault()
-                  item.onSelect()
+                onSelect={() => {
+                  // Let the menu close (do NOT preventDefault, or it persists),
+                  // then run the action on the next tick so the menu's focus
+                  // return doesn't fight an opening modal/drawer.
+                  setTimeout(() => item.onSelect(), 0)
                 }}
                 className={cn(
                   "flex min-h-9 cursor-pointer items-center gap-2.5 rounded-lg px-3 text-sm outline-none",

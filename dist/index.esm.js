@@ -12785,7 +12785,7 @@ function Modal({ open, onOpenChange, title, description, size = "md", dismissibl
                 }
             }, children: [jsxs(DialogHeader, { className: cn("px-6 pt-6", headerDivider ? "pb-4 border-b" : "pb-2"), style: headerDivider
                         ? { borderColor: "var(--border-default)" }
-                        : undefined, children: [jsx(DialogTitle, { children: title }), description && jsx(DialogDescription, { children: description })] }), jsx("div", { className: "px-6 py-4 overflow-y-auto", children: children }), footer && (jsx(DialogFooter, { className: cn("px-6 py-4", greyFooter && "border-t"), style: greyFooter
+                        : undefined, children: [jsx(DialogTitle, { className: "font-bold", children: title }), description && jsx(DialogDescription, { children: description })] }), jsx("div", { className: "px-6 py-4 overflow-y-auto", children: children }), footer && (jsx(DialogFooter, { className: cn("px-6 py-4", greyFooter && "border-t"), style: greyFooter
                         ? {
                             background: "var(--surface-alt, var(--muted))",
                             borderColor: "var(--border-default)",
@@ -13159,9 +13159,11 @@ function RowActions({ label, items, className }) {
                         }
                         const Icon = item.icon;
                         const danger = item.tone === "danger";
-                        return (jsxs(Item2, { disabled: item.disabled, onSelect: (e) => {
-                                e.preventDefault();
-                                item.onSelect();
+                        return (jsxs(Item2, { disabled: item.disabled, onSelect: () => {
+                                // Let the menu close (do NOT preventDefault, or it persists),
+                                // then run the action on the next tick so the menu's focus
+                                // return doesn't fight an opening modal/drawer.
+                                setTimeout(() => item.onSelect(), 0);
                             }, className: cn("flex min-h-9 cursor-pointer items-center gap-2.5 rounded-lg px-3 text-sm outline-none", "data-[disabled]:pointer-events-none data-[disabled]:opacity-50", danger
                                 ? "text-[var(--orbit-error,var(--destructive))] data-[highlighted]:bg-[var(--orbit-error-bg,var(--destructive)/0.1)]"
                                 : "text-foreground data-[highlighted]:bg-muted"), children: [Icon && jsx(Icon, { className: "h-4 w-4 shrink-0", "aria-hidden": true }), item.label] }, item.label));

@@ -143,7 +143,7 @@ export function Modal({
               : undefined
           }
         >
-          <DialogTitle>{title}</DialogTitle>
+          <DialogTitle className="font-bold">{title}</DialogTitle>
           {description && <DialogDescription>{description}</DialogDescription>}
         </DialogHeader>
 
