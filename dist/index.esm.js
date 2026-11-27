@@ -12733,7 +12733,7 @@ function DialogFooter({ className, ...props }) {
     return (jsx("div", { "data-slot": "dialog-footer", className: cn("flex flex-col-reverse gap-2 sm:flex-row sm:justify-end", className), ...props }));
 }
 function DialogTitle({ className, ...props }) {
-    return (jsx(DialogTitle$1, { "data-slot": "dialog-title", className: cn("text-h3", className), ...props }));
+    return (jsx(DialogTitle$1, { "data-slot": "dialog-title", className: cn("text-h3 font-bold", className), ...props }));
 }
 function DialogDescription({ className, ...props }) {
     return (jsx(DialogDescription$1, { "data-slot": "dialog-description", className: cn("text-body-sm", className), ...props }));
