@@ -4,7 +4,7 @@ declare function Drawer(props: React.ComponentProps<typeof DialogPrimitive.Root>
 declare function DrawerTrigger(props: React.ComponentProps<typeof DialogPrimitive.Trigger>): React.JSX.Element;
 declare function DrawerClose(props: React.ComponentProps<typeof DialogPrimitive.Close>): React.JSX.Element;
 declare function DrawerOverlay({ className, ...props }: React.ComponentProps<typeof DialogPrimitive.Overlay>): React.JSX.Element;
-declare function DrawerContent({ className, children, showClose, width, ...props }: React.ComponentProps<typeof DialogPrimitive.Content> & {
+declare function DrawerContent({ className, children, showClose, width, onInteractOutside, ...props }: React.ComponentProps<typeof DialogPrimitive.Content> & {
     showClose?: boolean;
     /** Panel width. Defaults to the Plans-editor width. */
     width?: string;

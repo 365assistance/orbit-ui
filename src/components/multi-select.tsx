@@ -48,7 +48,7 @@ export function MultiSelect({
   const fieldRef = React.useRef<HTMLDivElement>(null)
   const inputRef = React.useRef<HTMLInputElement>(null)
   const menuRef = React.useRef<HTMLDivElement>(null)
-  const [rect, setRect] = React.useState<{ left: number; top: number; width: number; maxHeight: number } | null>(null)
+  const [rect, setRect] = React.useState<{ left: number; top: number; width: number; maxHeight: number; placement: 'down' | 'up' } | null>(null)
 
   const byValue = React.useMemo(() => new Map(options.map((o) => [o.value, o])), [options])
   const selectedOptions = value.map((v) => byValue.get(v)).filter(Boolean) as MultiSelectOption[]
@@ -61,8 +61,20 @@ export function MultiSelect({
     if (!el) return
     const r = el.getBoundingClientRect()
     const GAP = 4
-    const below = window.innerHeight - r.bottom - GAP - 8
-    setRect({ left: r.left, top: r.bottom + GAP, width: r.width, maxHeight: Math.max(140, Math.min(300, below)) })
+    const MARGIN = 8
+    const spaceBelow = window.innerHeight - r.bottom - GAP - MARGIN
+    const spaceAbove = r.top - GAP - MARGIN
+    // Flip up when there isn't a comfortable amount of room below and there's
+    // more room above. The list always scrolls within whichever space it gets.
+    const flipUp = spaceBelow < 180 && spaceAbove > spaceBelow
+    const maxHeight = Math.max(120, Math.min(300, flipUp ? spaceAbove : spaceBelow))
+    setRect({
+      left: r.left,
+      width: r.width,
+      maxHeight,
+      placement: flipUp ? 'up' : 'down',
+      top: flipUp ? r.top - GAP : r.bottom + GAP,
+    })
   }, [])
 
   React.useLayoutEffect(() => {
@@ -161,6 +173,7 @@ export function MultiSelect({
             position: "fixed",
             left: rect.left,
             top: rect.top,
+            transform: rect.placement === "up" ? "translateY(-100%)" : undefined,
             width: rect.width,
             maxHeight: rect.maxHeight,
             pointerEvents: "auto",

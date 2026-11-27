@@ -12841,12 +12841,22 @@ function DrawerOverlay({ className, ...props }) {
         // Same canonical backdrop as Dialog.
         className: cn("fixed inset-0 z-50 data-open:animate-in data-closed:animate-out data-open:fade-in-0 data-closed:fade-out-0", className), style: { background: "rgba(15,23,42,0.68)" }, ...props }));
 }
-function DrawerContent({ className, children, showClose = true, width = "min(480px, 100%)", ...props }) {
+function DrawerContent({ className, children, showClose = true, width = "min(480px, 100%)", onInteractOutside, ...props }) {
     return (jsxs(DialogPortal, { "data-slot": "drawer-portal", children: [jsx(DrawerOverlay, {}), jsxs(DialogContent$1, { "data-slot": "drawer-content", className: cn("fixed top-0 right-0 z-50 flex h-full flex-col gap-0 overflow-y-auto border-l p-7 duration-200 data-open:animate-in data-closed:animate-out data-open:slide-in-from-right data-closed:slide-out-to-right", className), style: {
                     width,
                     background: "var(--card)",
                     borderColor: "var(--border-default)",
                     boxShadow: "var(--shadow-lg)",
+                }, onInteractOutside: (e) => {
+                    // Don't close the drawer when interacting with a portalled popup that
+                    // belongs to the drawer's content (MultiSelect/PortalSelect listbox,
+                    // menus, tooltips) — they render under <body> so Radix treats them as
+                    // "outside". Still allow the caller's own handler to run/override.
+                    const target = e.target;
+                    if (target?.closest('[role="listbox"],[data-slot="row-actions-content"],[data-radix-popper-content-wrapper],[role="menu"],[role="tooltip"]')) {
+                        e.preventDefault();
+                    }
+                    onInteractOutside?.(e);
                 }, ...props, children: [children, showClose && (jsxs(DialogClose$1, { "data-slot": "drawer-close-button", className: "absolute top-5 right-5 rounded-sm opacity-70 transition-opacity outline-none hover:opacity-100 focus-visible:ring-2 focus-visible:ring-ring disabled:pointer-events-none", style: { color: "var(--ink-muted)" }, children: [jsx(X, { className: "size-4" }), jsx("span", { className: "sr-only", children: "Close" })] }))] })] }));
 }
 function DrawerHeader({ className, ...props }) {
@@ -13364,8 +13374,20 @@ function MultiSelect({ value, options, onChange, placeholder = "Select…", sear
             return;
         const r = el.getBoundingClientRect();
         const GAP = 4;
-        const below = window.innerHeight - r.bottom - GAP - 8;
-        setRect({ left: r.left, top: r.bottom + GAP, width: r.width, maxHeight: Math.max(140, Math.min(300, below)) });
+        const MARGIN = 8;
+        const spaceBelow = window.innerHeight - r.bottom - GAP - MARGIN;
+        const spaceAbove = r.top - GAP - MARGIN;
+        // Flip up when there isn't a comfortable amount of room below and there's
+        // more room above. The list always scrolls within whichever space it gets.
+        const flipUp = spaceBelow < 180 && spaceAbove > spaceBelow;
+        const maxHeight = Math.max(120, Math.min(300, flipUp ? spaceAbove : spaceBelow));
+        setRect({
+            left: r.left,
+            width: r.width,
+            maxHeight,
+            placement: flipUp ? 'up' : 'down',
+            top: flipUp ? r.top - GAP : r.bottom + GAP,
+        });
     }, []);
     React.useLayoutEffect(() => {
         if (open)
@@ -13416,6 +13438,7 @@ function MultiSelect({ value, options, onChange, placeholder = "Select…", sear
                     position: "fixed",
                     left: rect.left,
                     top: rect.top,
+                    transform: rect.placement === "up" ? "translateY(-100%)" : undefined,
                     width: rect.width,
                     maxHeight: rect.maxHeight,
                     pointerEvents: "auto",

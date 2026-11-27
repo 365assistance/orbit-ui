@@ -58,6 +58,7 @@ function DrawerContent({
   children,
   showClose = true,
   width = "min(480px, 100%)",
+  onInteractOutside,
   ...props
 }: React.ComponentProps<typeof DialogPrimitive.Content> & {
   showClose?: boolean
@@ -78,6 +79,21 @@ function DrawerContent({
           background: "var(--card)",
           borderColor: "var(--border-default)",
           boxShadow: "var(--shadow-lg)",
+        }}
+        onInteractOutside={(e) => {
+          // Don't close the drawer when interacting with a portalled popup that
+          // belongs to the drawer's content (MultiSelect/PortalSelect listbox,
+          // menus, tooltips) — they render under <body> so Radix treats them as
+          // "outside". Still allow the caller's own handler to run/override.
+          const target = e.target as HTMLElement | null
+          if (
+            target?.closest(
+              '[role="listbox"],[data-slot="row-actions-content"],[data-radix-popper-content-wrapper],[role="menu"],[role="tooltip"]'
+            )
+          ) {
+            e.preventDefault()
+          }
+          onInteractOutside?.(e)
         }}
         {...props}
       >
