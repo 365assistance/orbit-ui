@@ -7,7 +7,7 @@
 // Self-contained: options are {value,label}; portals the menu to <body> so it
 // escapes overflow/stacking contexts and positions against the trigger.
 // ---------------------------------------------------------------------------
-import { useState, useRef, useLayoutEffect } from 'react';
+import { useState, useRef, useLayoutEffect, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import { ChevronDown } from 'lucide-react';
 
@@ -75,6 +75,25 @@ export function PortalSelect({ value, options, onChange, minWidth = 200, disable
       window.removeEventListener('resize', update);
     };
   }, [open]);
+
+  // Wheel-scroll the option list manually and bypass Radix's scroll-lock
+  // (react-remove-scroll). The menu is portalled to <body>, outside a Radix
+  // Dialog/Drawer content tree, so inside a Modal/Drawer the lock otherwise
+  // cancels wheel events over the list and it can't be scrolled. Native,
+  // non-passive listener so preventDefault works.
+  useEffect(() => {
+    if (!open) return;
+    const el = menuRef.current;
+    if (!el) return;
+    const onWheel = (e: WheelEvent) => {
+      if (el.scrollHeight <= el.clientHeight) return;
+      el.scrollTop += e.deltaY;
+      e.preventDefault();
+      e.stopPropagation();
+    };
+    el.addEventListener('wheel', onWheel, { passive: false });
+    return () => el.removeEventListener('wheel', onWheel);
+  }, [open, rect]);
 
   const current = options.find((o) => o.value === value);
 

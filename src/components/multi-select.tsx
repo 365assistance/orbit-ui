@@ -105,6 +105,27 @@ export function MultiSelect({
     }
   }, [open, place])
 
+  // Wheel-scroll the option list manually and stop the event from reaching
+  // Radix's scroll-lock (react-remove-scroll). The menu is portalled to <body>,
+  // which is OUTSIDE a Radix Dialog/Drawer content tree, so when the dropdown is
+  // opened inside a Modal/Drawer the scroll-lock cancels wheel events over it and
+  // the list can't be scrolled with the wheel. A native, non-passive listener
+  // lets us scroll the list ourselves and preventDefault so the lock is bypassed.
+  React.useEffect(() => {
+    if (!open) return
+    const el = menuRef.current
+    if (!el) return
+    const onWheel = (e: WheelEvent) => {
+      const canScroll = el.scrollHeight > el.clientHeight
+      if (!canScroll) return
+      el.scrollTop += e.deltaY
+      e.preventDefault()
+      e.stopPropagation()
+    }
+    el.addEventListener("wheel", onWheel, { passive: false })
+    return () => el.removeEventListener("wheel", onWheel)
+  }, [open, rect])
+
   const add = (v: string) => {
     onChange([...value, v])
     setQuery("")

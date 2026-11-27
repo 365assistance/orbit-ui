@@ -13322,6 +13322,27 @@ function PortalSelect({ value, options, onChange, minWidth = 200, disabled = fal
             window.removeEventListener('resize', update);
         };
     }, [open]);
+    // Wheel-scroll the option list manually and bypass Radix's scroll-lock
+    // (react-remove-scroll). The menu is portalled to <body>, outside a Radix
+    // Dialog/Drawer content tree, so inside a Modal/Drawer the lock otherwise
+    // cancels wheel events over the list and it can't be scrolled. Native,
+    // non-passive listener so preventDefault works.
+    React.useEffect(() => {
+        if (!open)
+            return;
+        const el = menuRef.current;
+        if (!el)
+            return;
+        const onWheel = (e) => {
+            if (el.scrollHeight <= el.clientHeight)
+                return;
+            el.scrollTop += e.deltaY;
+            e.preventDefault();
+            e.stopPropagation();
+        };
+        el.addEventListener('wheel', onWheel, { passive: false });
+        return () => el.removeEventListener('wheel', onWheel);
+    }, [open, rect]);
     const current = options.find((o) => o.value === value);
     return (jsxRuntime.jsxs("div", { style: { position: 'relative' }, children: [jsxRuntime.jsxs("button", { ref: btnRef, type: "button", "aria-label": rest['aria-label'], "aria-haspopup": "listbox", "aria-expanded": open, disabled: disabled, onClick: () => setOpen((o) => !o), style: {
                     minWidth: fullWidth ? undefined : minWidth,
@@ -13445,6 +13466,29 @@ function MultiSelect({ value, options, onChange, placeholder = "Select…", sear
             window.removeEventListener("scroll", onReflow, true);
         };
     }, [open, place]);
+    // Wheel-scroll the option list manually and stop the event from reaching
+    // Radix's scroll-lock (react-remove-scroll). The menu is portalled to <body>,
+    // which is OUTSIDE a Radix Dialog/Drawer content tree, so when the dropdown is
+    // opened inside a Modal/Drawer the scroll-lock cancels wheel events over it and
+    // the list can't be scrolled with the wheel. A native, non-passive listener
+    // lets us scroll the list ourselves and preventDefault so the lock is bypassed.
+    React__namespace.useEffect(() => {
+        if (!open)
+            return;
+        const el = menuRef.current;
+        if (!el)
+            return;
+        const onWheel = (e) => {
+            const canScroll = el.scrollHeight > el.clientHeight;
+            if (!canScroll)
+                return;
+            el.scrollTop += e.deltaY;
+            e.preventDefault();
+            e.stopPropagation();
+        };
+        el.addEventListener("wheel", onWheel, { passive: false });
+        return () => el.removeEventListener("wheel", onWheel);
+    }, [open, rect]);
     const add = (v) => {
         onChange([...value, v]);
         setQuery("");
